@@ -1,16 +1,36 @@
 // Loader 
-document.addEventListener("DOMContentLoaded", function() {
-    const loader = document.querySelector(".loader-container");
+$("#loader-container").addClass('visible');
 
-    setTimeout(function() {
-        loader.style.opacity = "0";
-        loader.style.visibility = "hidden";
+$("body").css("overflow", "hidden");
 
-        document.body.classList.remove("no-scroll");
-    }, 3000); 
+$(window).on('load', function() {
+    $("#loader-container").removeClass('visible');
+    $("body").css("overflow", "auto");
 });
 
+// Navbar dynamic
+let lastScrollTop = 0;
 
+$(window).scroll(function() {
+    const currentScrollTop = $(this).scrollTop();
+    const navbar = $(".navbar");
+
+    if (currentScrollTop > lastScrollTop) {
+        navbar.removeClass("slide-down").addClass("slide-up");
+    } else {
+        navbar.removeClass("slide-up").addClass("slide-down");
+    }
+
+    lastScrollTop = currentScrollTop;
+});
+
+// Show More
+$('#toggle-skills').on('click', function(e) {
+    e.preventDefault(); 
+    $('.more-skills').toggleClass('show'); 
+    $('.mobile-skills').toggleClass('show'); 
+    $('#toggle-skills i').toggleClass('bi-chevron-down bi-chevron-up'); 
+});
 
 // Skills SLider
 let currentSlide = 0;
@@ -31,7 +51,7 @@ function slideSkills(direction) {
 
 // Auto Typed Text
 var typed = new Typed(".auto-type", {
-    strings: ["Web Developer", "Determined learner", "Loving You ❤"],
+    strings: ["Web Developer", "Determined learner", "Software Engineer", "Loving You ❤"],
     typeSpeed: 100,
     backSpeed: 100,
     loop: true

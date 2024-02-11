@@ -1,929 +1,811 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AndikaDS</title>
-    <link rel="shortcut icon" href="https://svgshare.com/i/y1A.svg" type="image/x-icon">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" integrity="sha384-b6lVK+yci+bfDmaY1u0zE8YYJt0TZxLEAFyYSLHId4xoVvsrQu3INevFKo+Xir8e" crossorigin="anonymous">
-    <link rel="stylesheet" href="./assets/css/index.css">
-    <link rel="stylesheet" href="./assets/css/tablet.css">
-    <link rel="stylesheet" href="./assets/css/mobile.css">
-</head>
-<body class="no-scroll">
+    <head>
+        <title>AndikaDS</title>
+        <!-- Required meta tags -->
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <link rel="shortcut icon" href="./assets/img/Icons/github.svg" type="image/x-icon">
 
-    <div class="loader-container">
-        <div aria-label="Orange and tan hamster running in a metal wheel" role="img" class="wheel-and-hamster">
-            <div class="wheel"></div>
-            <div class="hamster">
-                <div class="hamster__body">
-                    <div class="hamster__head">
-                        <div class="hamster__ear"></div>
-                        <div class="hamster__eye"></div>
-                        <div class="hamster__nose"></div>
-                    </div>
-                    <div class="hamster__limb hamster__limb--fr"></div>
-                    <div class="hamster__limb hamster__limb--fl"></div>
-                    <div class="hamster__limb hamster__limb--br"></div>
-                    <div class="hamster__limb hamster__limb--bl"></div>
-                    <div class="hamster__tail"></div>
-                </div>
-            </div>
-            <div class="spoke"></div>
+        <!-- Bootstrap CSS v5.2.1 -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" integrity="sha384-b6lVK+yci+bfDmaY1u0zE8YYJt0TZxLEAFyYSLHId4xoVvsrQu3INevFKo+Xir8e" crossorigin="anonymous">
+
+        <link rel="stylesheet" href="./assets/css/index.css">
+        <link rel="stylesheet" href="./assets/css/global.css">
+
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    </head>
+
+    <body>
+
+        <div id="loader-container">
+            <div class="traffic-loader"></div>
         </div>
-        <h3 class="loading">Loading</h3>
-    </div>
-    
-    <div class="topbar d-none">
-        <a class="menu" href="#main" loading="lazy">Home</a>
-        <a class="menu" href="#skills" loading="lazy">Skills</a>
-        <a class="menu" href="#experience" loading="lazy">Experience</a>
-        <a class="menu" href="#portfolio" loading="lazy">Portfolio</a>
-    </div>  
 
-    <section id="main">
-        <img class="hero" src="./assets/img/main.webp" alt="main" loading="lazy">
-        <div class="front-container">
-            <div class="col-lg-6 col-sm-12 front-left">
-                <div class="front fade-left">
-                    <h1 class="name">Andika Dwi Saputra</h1>
-                    <h2 class="type text-color"><i class="bi bi-browser-chrome"></i> I'm <span class="auto-type"></span></h2>
+        <header class="navbar navbar-expand-lg navbar-dark shadow">
+            <div class="container-fluid">
+                <a class="navbar-brand center gap-2" href="https://github.com/Andikss/">
+                    <img src="./assets/img/Icons/github.svg" alt="GitHub" width="40">
+                    <span class="text-white d-none">AndikaDS</span>
+                </a>
+                <button button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarColor01">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#about">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#skills">Skills</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#portfolio">Portfolio</a>
+                        </li>
+                    </ul>
+                    <form class="d-flex gap-2">
+                        <a href="mailto:andika.dwi.saputra.7925@gmail.com" class="btn-accent">
+                            <i class="bi bi-envelope"></i>&nbsp;
+                            Email
+                        </a>
+                        <a href="https://github.com/Andikss" class="btn-outline-accent">
+                            <i class="bi bi-github"></i>&nbsp;
+                            GitHub
+                        </a>
+                    </form>
                 </div>
             </div>
-            <div class="col-lg-6 col-sm-2">
-                <div class="social-media fade-up">
-                    <a class="social" href="mailto:andika.dwi.saputra.7925@gmail.com"><i class="bi bi-envelope"></i></a>            
-                    <a class="social" href="https://www.instagram.com/andikads__"><i class="bi bi-instagram"></i></a>            
-                    <a class="social" href="https://wa.me/qr/Q5BPJDQQIUBLH1"><i class="bi bi-whatsapp"></i></a>            
-                    <a class="social" href="https://www.linkedin.com/in/andika-dwi-saputra-10877928b/"><i class="bi bi-linkedin"></i></a>
-                    <a class="social" href="https://github.com/Andikss"><i class="bi bi-github"></i></a>
-                </div>
-            </div>
-        </div>
-    </section>
+        </header>
 
-    <div class="content">
-        <section id="about">
-            <div class="vignette-top"></div>
-            <div class="aboutme" style="height: 20vh;"> 
-                <h2 class="section-title pt-4 pb-3">About <span class="text-color">Me</span></h2>
-                <p class="section-desc">
-                    Let me <span class='text-color'>introduce</span> myself and tell you about my journey to becoming a <span class="text-color">developer</span>.
-                </p>
-            </div>
-            <div class="row row justify-content-center align-items-center" style="height: auto">
-                <div class="col-lg-5 col-md-12 col-sm-12 profile-container">
-                    <div class="left-profile">
-                        <img class="profile" src="./assets/img/profile.webp" alt="">
-                        <!-- <img class="profile" src="https://th.bing.com/th/id/OIP.Uxw1lKA74ne27Yxsu3wPwAAAAA?pid=ImgDet&rs=1" alt=""> -->
-                        <div class="rectangle"></div>
-                        <div class="rectangle-mobile"></div>
+        <main>
+            <section id="hero">
+                <img src="./assets/img/main.webp" class="main-image" alt="Hero Image">
+                <img src="./assets/img/main-person.webp" class="mobile-image d-none" alt="Hero Image">
+                <div class="row">
+                    <div class="col-lg-6 col-md-12 col-sm-12 p-5 d-flex justify-content-center flex-column fade-left">
+                        <h1>Andika Dwi Saputra</h1>
+                        <h2>I'm <span class="auto-type text-accent"></span></h2>
                     </div>
-                </div>
-                <div class="col-lg-7 col-md-12 col-sm-12 right-profile" style="height: 70vh">
-                    <div class="btn-group fade-right">
-                        <button data-tab-index="0" class="tab-button">Hello</button>
-                        <button data-tab-index="1" class="tab-button">Origin</button>
-                        <button data-tab-index="2" class="tab-button">Hobbies</button>
-                        <button data-tab-index="3" class="tab-button">Social Media</button>
-                    </div>                    
-                    <div class="tabs hello active-tab flex justify-content-center fade-left">
-                        <h3 class="profile-title mb-2 text-color"><i class="bi bi-browser-chrome"></i> Junior <span class="text-color">Developer</span></h3>
-                        <p class="profile-desc">Hello there! I'm Andika Dwi Saputra, and I'm currently in an internship program at <span class="text-color">Akastra Toyota</span> as a <span class="text-color">Junior Developer</span>. Feel free to check out my portfolio!</p>
-                        <div class="buttons">
-                            <button id="btn-cv" class="btn-outline">
-                                Download CV
-                            </button>
-                            <a href="https://wa.me/qr/Q5BPJDQQIUBLH1" class="btn-fill" style="text-align: center;">
-                                <i class="bi bi-whatsapp"></i> Contact Me
-                            </a>
-                        </div>
-                    </div>
-                    <div class="tabs flex justify-content-center fade-left">
-                        <h3 class="profile-title mb-2">My <span class="text-color">Origin</span></h3>
-                        <p class="profile-desc">I was born in Banjarnegara on July 9th, 2005, and I have lived there ever since. Computers were not really my thing, I have no access to "computer" back then. My first time handling a computer was when I was in Senior High School. I couldn't even switch on a computer back then. However, for some reason, I found my passion there. I have always studied hard ever since, working on building myself to become a future-ready programmer.</p>
-                        <p style="margin-bottom: 5px !important;" class="profile-desc">
-                            <span class="text-color">
-                                Full Name:  
-                            </span> 
-                            <small>
-                                Andika Dwi Saputra
-                            </small>
-                        </p>
-                        <p style="margin-bottom: 5px !important;" class="profile-desc">
-                            <span class="text-color">
-                                Nationality:  
-                            </span> 
-                            <small>
-                                Indonesia
-                            </small>
-                        </p>
-                        <p style="margin-bottom: 5px !important;" class="profile-desc">
-                            <span class="text-color">
-                                Address:  
-                            </span> 
-                            <small>
-                                Blabar, Kecepit RT 01/RW 01, Punggelan, Banjarnegara
-                            </small>
-                        </p>
-                        <p style="margin-bottom: 5px !important;" class="profile-desc">
-                            <span class="text-color">
-                                Age:  
-                            </span> 
-                            <small id="age"></small>
-                        </p>
-                        
-                    </div>
-                    <div class="tabs flex justify-content-center fade-left">
-                        <h3 class="profile-title mb-2"><span class="text-color">Hobbies</span></h3>
-                        <p class="profile-desc">
-                            I have a lot of hobbies, actually. I love to play the <span class="text-color">guitar</span> and perform many songs during my free time (I suggest you <strong>not</strong> to listen :> ). I also enjoy <span class="text-color">watching movies</span>, reading novels, and such. And, of course, I like to <span class="text-color">level up</span> my skills!
-                        </p>
-                    </div>
-                    <div class="tabs flex justify-content-center fade-left">
-                        <h3 class="profile-title mb-2">Social <span class="text-color">Media</span></h3>
-                        <p class="profile-desc">Reach me out!!</p>
-                        <div class="contact">
+                    <div class="col-lg-6 col-md-12 col-sm-12 position-relative">
+                        <div class="social-media fade-up">
                             <a class="social" href="mailto:andika.dwi.saputra.7925@gmail.com"><i class="bi bi-envelope"></i></a>            
                             <a class="social" href="https://www.instagram.com/andikads__"><i class="bi bi-instagram"></i></a>            
-                            <a class="social" href="https://www.youtube.com/channel/UCGAoFirO5LplzI-OO9nxx8g"><i class="bi bi-youtube"></i></a>            
                             <a class="social" href="https://wa.me/qr/Q5BPJDQQIUBLH1"><i class="bi bi-whatsapp"></i></a>            
                             <a class="social" href="https://www.linkedin.com/in/andika-dwi-saputra-10877928b/"><i class="bi bi-linkedin"></i></a>
                             <a class="social" href="https://github.com/Andikss"><i class="bi bi-github"></i></a>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="vignette-bot"></div>
-            <a href="#portfolio" class="go-down">
-                <img class="arrow-1" src="https://img.icons8.com/ios/50/FFFFFF/double-down--v4.png" alt="double-down--v4"/>
-                <img class="arrow-2" src="https://img.icons8.com/ios/50/FFFFFF/double-down--v4.png" alt="double-down--v4"/>    
-            </a>
-        </section>
+            </section>
 
-        <section id="skills">
-            <h1 class="section-title mt-4">
-                <a class="prev-button slider-btn" onclick="slideSkills('prev')"><i class="bi bi-caret-left"></i></a>
-                Skills
-                <a class="next-button slider-btn" onclick="slideSkills('next')"><i class="bi bi-caret-right"></i></a>
-            </h1>
+            <div id="content">
+                <section id="about" class="p-4 shadow">
+                    <div class="vignette-top"></div>
+                    <div class="vignette-right"></div>
+                    <div class="vignette-bottom"></div>
 
-            <div class="skills-container mb-3 fade-left">
-                <div class="col-lg-2">
-                    <div class="skill">
-                        <img src="./assets/img/Icons/git.svg" alt="" class="skill-icon">
-                        <p class="skill-name">GitHub</p>
-                    </div>
-                </div>
-                <div class="col-lg-2">
-                    <div class="skill">
-                        <img src="./assets/img/Icons/laravel.svg" alt="" class="skill-icon">
-                        <p class="skill-name">Laravel</p>
-                    </div>
-                </div>
-                <div class="col-lg-2">
-                    <div class="skill">
-                        <img src="./assets/img/Icons/nodejs.svg" alt="" class="skill-icon">
-                        <p class="skill-name">NodeJs</p>
-                    </div>
-                </div>
-                <div class="col-lg-2">
-                    <div class="skill">
-                        <img src="./assets/img/Icons/jquery.svg" alt="" class="skill-icon">
-                        <p class="skill-name">JQuery</p>
-                    </div>
-                </div>
-                <div class="col-lg-2">
-                    <div class="skill">
-                        <img src="./assets/img/Icons/bootstrap.svg" alt="" class="skill-icon">
-                        <p class="skill-name">Bootsrap</p>
-                    </div>
-                </div>
-                <div class="col-lg-2">
-                    <div class="skill">
-                        <img src="./assets/img/Icons/php.svg" alt="" class="skill-icon">
-                        <p class="skill-name">PHP</p>
-                    </div>
-                </div>
-            </div>
+                    <h2 class="text-center text-white text-title">About <span class="text-accent">Me</span></h2>
+                    <p class="text-center mb-5">
+                        <small>
+                            Let me <span class="text-accent">introduce</span> myself and tell you about my journey to becoming a <span class="text-accent">developer</span>
+                        </small>
+                    </p>
 
-            <div class="skills-container mb-5 fade-right">
-                <div class="col-lg-2">
-                    <div class="skill">
-                        <img src="./assets/img/Icons/mysql.svg" alt="" class="skill-icon">
-                        <p class="skill-name">MySQL</p>
-                    </div>
-                </div>
-                <div class="col-lg-2">
-                    <div class="skill">
-                        <img src="./assets/img/Icons/react.svg" alt="" class="skill-icon">
-                        <p class="skill-name">ReactJS</p>
-                    </div>
-                </div>
-                <div class="col-lg-2">
-                    <div class="skill">
-                        <img src="./assets/img/Icons/material-ui.svg" alt="" class="skill-icon">
-                        <p class="skill-name">MaterialUI</p>
-                    </div>
-                </div>
-                <div class="col-lg-2">
-                    <div class="skill">
-                        <img src="./assets/img/Icons/csharp.svg" alt="" class="skill-icon">
-                        <p class="skill-name">C#</p>
-                    </div>
-                </div>
-                <div class="col-lg-2">
-                    <div class="skill">
-                        <img src="./assets/img/Icons/html.svg" alt="" class="skill-icon">
-                        <p class="skill-name">HTML-CSS</p>
-                    </div>
-                </div>
-                <div class="col-lg-2">
-                    <div class="skill">
-                        <img src="./assets/img/Icons/sql-server.svg" alt="" class="skill-icon">
-                        <p class="skill-name">Microsoft SQL-Server</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="slider-container d-none">
-                <div class="slider">
-                    <div class="slide">
-                        <div class="col-12">
-                            <div class="skill">
-                                <img class="skill-icon" src="./assets/img/Icons/git.svg" alt="">
-                                <p class="skill-name">GitHub</p>
+                    <div class="row px-5">
+                        <div class="col-lg-5 col-md-12 col-sm-12 p-0 m-0 center">
+                            <div class="profile-image shadow fade-right">
+                                <img src="./assets/img/profile-2.webp" alt="Profile Image" class="profile-image">
                             </div>
                         </div>
-                    </div>
-                    <div class="slide">
-                        <div class="col-12">
-                            <div class="skill">
-                                <img class="skill-icon" src="./assets/img/Icons/laravel.svg" alt="">
-                                <p class="skill-name">Laravel</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="slide">
-                        <div class="col-12">
-                            <div class="skill">
-                                <img class="skill-icon" src="./assets/img/Icons/jquery.svg" alt="">
-                                <p class="skill-name">JQuery</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="slide">
-                        <div class="col-12">
-                            <div class="skill">
-                                <img class="skill-icon" src="./assets/img/Icons/nodejs.svg" alt="">
-                                <p class="skill-name">NodeJS</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="slide">
-                        <div class="col-12">
-                            <div class="skill">
-                                <img class="skill-icon" src="./assets/img/Icons/csharp.svg" alt="">
-                                <p class="skill-name">C#</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="slide">
-                        <div class="col-12">
-                            <div class="skill">
-                                <img class="skill-icon" src="./assets/img/Icons/php.svg" alt="">
-                                <p class="skill-name">PHP</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="slide">
-                        <div class="col-12">
-                            <div class="skill">
-                                <img class="skill-icon" src="./assets/img/Icons/sql-server.svg" alt="">
-                                <p class="skill-name">SQL-Server</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="slide">
-                        <div class="col-12">
-                            <div class="skill">
-                                <img class="skill-icon" src="./assets/img/Icons/html.svg" alt="">
-                                <p class="skill-name">Html-CSS</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="slide">
-                        <div class="col-12">
-                            <div class="skill">
-                                <img class="skill-icon spin" src="./assets/img/Icons/react.svg" alt="">
-                                <p class="skill-name">ReactJS</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="slide">
-                        <div class="col-12">
-                            <div class="skill">
-                                <img class="skill-icon" src="./assets/img/Icons/material-ui.svg" alt="">
-                                <p class="skill-name">MaterialUI</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="slide">
-                        <div class="col-12">
-                            <div class="skill">
-                                <img class="skill-icon" src="./assets/img/Icons/bootstrap.svg" alt="">
-                                <p class="skill-name">Bootsrap</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="slide">
-                        <div class="col-12">
-                            <div class="skill">
-                                <img class="skill-icon" src="./assets/img/Icons/mysql.svg" alt="">
-                                <p class="skill-name">MySQL</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        
-        </section>
-        
-        <h2 class="menu-title">Experience</h2>
-        <section id="experience">
-            <div class="row">
-                <div class="col-lg-6 col-md-12 col-sm-12">
-                    <ul>
-                        <li class="list fade-up">
-                            <h3 class="experience-title">Network & Software Student</h3>
-                            <div class="li-desc">
-                                <small class="experience-sub mmb-2">SMKN 1 Punggelan | 2020 - now</small>
-                                <p class="desc">I'm a full-time student in the SIJA program, which stands for Sistem Informatika Jaringan dan Aplikasi (Network and Application Information System). This is the place that introduced me to networking and more.</p>    
-                            </div>
-                        </li>
-                        <li class="list fade-up">
-                            <h3 class="experience-title">Junior Developer</h3>
-                            <div class="li-desc">
-                                <small class="experience-sub mb-2">Akastra Toyota | 2023 - now</small>
-                                <p class="desc">I started my programming journey here at Akastra Toyota as an Intern Junior Web Developer. I've built and participated in many incredible projects here. This is the place that I prepared myself to be a future-ready programmer.</p>    
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-lg-6 col-md-12 col-sm-12">
-                    <div class="ex-illustration-container fade-right">
-                        <img class="ex-illustration" src="./assets/img/Icons/csharp.svg" alt="">
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-6 col-md-12 col-sm-12">
-                    <div class="ex-illustration-container react fade-left">
-                        <img class="ex-illustration" src="./assets/img/Icons/react.svg" alt="">
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-12 col-sm-12">
-                    <ul>
-                        <li class="list fade-up">
-                            <h3 class="experience-title">IT Software Solution For Business</h3>
-                            <div class="li-desc">
-                                <small class="experience-sub">Banjarnegara | 2023</small>
-                                <p class="desc">I participated in LKS IT Software Solution For Business and became the champion in Banjarnegara. I made my way through the provincial competition. Even though I didn't win, I'm highly proud to made it this far.</p>    
-                            </div>
-                        </li>
-                        <li class="list fade-up">
-                            <h3 class="experience-title">English Certification</h3>
-                            <div class="li-desc">
-                                <small class="experience-sub">TOEIC | 2023</small>
-                                <p class="desc">I took the TOEIC Test, which is a benchmark for assessing someone's English skills. I was able to score 800 points, which placed me in the 'advanced' level in terms of English proficiency. <a href="./assets/img/Portfolio/toeic.webp" style="text-decoration: none;">Certificate</a></p>    
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <section id="portfolio">
-            <h1 class="section-title mt-md-5">Exellent <span class="text-color">Portfolio</span></h1>
-            <p class="section-desc">Check out my wonderful <span class="text-color">projects and achievements</span> that I have built throughout my journey!</p>
-
-            <div class="row mt-4">
-                <div class="col-lg-4 col-md-4 col-sm-12">
-                    <div class="projects-card fade-up">
-                        <div class="projects-preview">
-                            <img src="/assets/img/Portfolio/attendify.webp" alt="">
-                            <div class="popup" data-bs-toggle="modal" data-bs-target="#attendify">
-                                <i class="bi bi-plus-lg"></i>
-                                <h4>Attendance Management</h4>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="modal fade" id="attendify" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="attendifyLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-xl modal-dialog-scrollable modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h1 class="modal-title fs-5 modal-title" id="attendifyLabel">Attend<span class="text-color">ify</span></h1>
-                                    <i class="bi bi-x-lg btn-x" data-bs-dismiss="modal" aria-label="Close"></i>
-                                </div>
-                            <div class="modal-body">
-                                <div class="row mb-3">
-                                    <div class="col-lg-7 col-md-12 col-sm-12" style="display: flex; align-items: center; justify-content: center;">
-                                        <div class="modal-img-container">
-                                            <a href="./assets/img/Portfolio/attendify.webp">
-                                                <img src="./assets/img/Portfolio/attendify.webp" alt="">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-5 col-md-12 col-sm-12 modal-right">
-                                        <div class="col mb-3">
-                                            <div class="modal-col">
-                                                <p class="text-color" style="font-size: 12px;"><small>Utility</small></p>
-                                                <h5 class="text-white" style="margin-top: -16px; font-size: 24px;">Attendance Management</h5>
-                                            </div>
-                                        </div>
-                                        <div class="col mb-3">
-                                            <div class="modal-col">
-                                                <p class="text-color" style="font-size: 12px;"><small>Framework</small></p>
-                                                <h5 class="text-white" style="margin-top: -16px; font-size: 24px;">Laravel</h5>
-                                            </div>
-                                        </div>
-                                        <div class="col mb-3">
-                                            <div class="modal-col">
-                                                <p class="text-color" style="font-size: 12px;"><small>Category</small></p>
-                                                <h5 class="text-white" style="margin-top: -16px; font-size: 24px;">Website</h5>
-                                            </div>
-                                        </div>
-
-                                        <div class="col mb-3">
-                                            <div class="modal-col">
-                                                <p class="text-color" style="font-size: 12px;"><small>Programming Language</small></p>
-                                                <div class="modal-row" style="margin-top: -14px;">
-                                                    <img style="height: 40px; width: 40px; margin-right: 12px; margin-top: 8px;" src="./assets/img/Icons/php.svg" alt="">
-                                                    <img style="height: 40px; width: 40px; margin-right: 12px; margin-top: 8px;" src="./assets/img/Icons/javascript.svg" alt="">
-                                                    <img style="height: 40px; width: 40px; margin-right: 12px; margin-top: 8px;" src="./assets/img/Icons/jquery.svg" alt="">
-                                                    <img style="height: 40px; width: 40px; margin-right: 12px; margin-top: 8px;" src="./assets/img/Icons/html.svg" alt="">
-                                                </div>    
-                                            </div>
-                                        </div>
+                        <div class="col-lg-7 col-md-12 col-sm-12 pt-5 pr-5">
+                            <div class="btn-group tab-button-wrapper fade-left">
+                                <button data-tab-index="0" class="tab-button">Hello</button>
+                                <button data-tab-index="1" class="tab-button">Origin</button>
+                                <button data-tab-index="2" class="tab-button">Hobbies</button>
+                                <button data-tab-index="3" class="tab-button">Social Media</button>
+                            </div>                    
+                            <div class="tabs hello active-tab flex" style="justify-content: center !important; margin-top: -36px;">
+                                <div class="fade-left">
+                                    <h3 class="text-white mb-4">
+                                        <i class="bi bi-browser-chrome"></i> Junior <span class="text-accent">Software Engineer</span>
+                                    </h3>
+                                    <p class="text-white">
+                                        <small>
+                                            Hello there! I'm Andika Dwi Saputra, and I'm currently in an internship program 
+                                            at <span class="text-accent">Akastra Toyota</span> as a 
+                                            <span class="text-accent">Junior Developer.</span> 
+                                            Feel free to check out my portfolio!
+                                        </small>
+                                    </p>
+                                    <div class="button-wrapper">
+                                        <button id="btn-cv" class="btn-outline-accent">
+                                            Download CV
+                                        </button>
+                                        <a href="https://wa.me/qr/Q5BPJDQQIUBLH1" class="btn-accent">
+                                            <i class="bi bi-whatsapp text-main"></i> Contact Me
+                                        </a>
                                     </div>
                                 </div>
-                                <div class="row modal-desc" style="padding: 24px;">
-                                    <h5 class="description"><small>Description</small></h5>
-                                    <p class="desc" style="font-weight: 300;">
-                                        Attendify is an attendance management web app that can automatically recap employees' attendance data from different sources, including security input, Face Recognition Attendance Machines, and custom input from the HCD Team. The main purpose of this app is to provide recaps for daily, monthly, or even yearly attendance.
+                            </div>
+                            <div class="tabs flex justify-content-start">
+                                <div class="fade-left">
+                                    <h3 class="text-white my-4">
+                                        My <span class="text-accent">Origin</span>
+                                    </h3>
+                                    <p class="text-white mb-3">
+                                        <small>
+                                            I was born in Banjarnegara on July 9th, 2005, and I have lived there ever 
+                                            since. Computers were not really my thing, I have no access to "computer" back then. 
+                                            My first time handling a computer was when I was in Senior High School. 
+                                            I couldn't even switch on a computer back then. However, for some reason, I found my 
+                                            passion there. I have always studied hard ever since, working on building myself to 
+                                            become a future-ready programmer.
+                                        </small>
+                                    </p>
+    
+                                    <small class="mb-2 d-block">
+                                        <span class="text-accent">
+                                            Full Name:
+                                        </span>
+                                        Andika Dwi Saputra
+                                    </small>
+                                    <small class="mb-2 d-block">
+                                        <span class="text-accent">
+                                            Nationality:
+                                        </span>
+                                        Indonesia
+                                    </small>
+                                    <small class="mb-2 d-block">
+                                        <span class="text-accent">
+                                            Address:
+                                        </span>
+                                        Blabar, Kecepit RT 01/RW 01, Punggelan, Banjarnegara
+                                    </small>
+                                    <small class="mb-2 d-block">
+                                        <span class="text-accent">
+                                            Age:
+                                        </span>
+                                        <small id="age"></small>
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="tabs flex justify-content-start">
+                                <div class="fade-left">
+                                    <h3 class="text-white my-4">
+                                        <span class="text-accent">Hobbies</span>
+                                    </h3>
+                                    <p class="text-white mb-3">
+                                        <small>
+                                            I have a lot of hobbies, actually. I love to play the guitar and perform many 
+                                            songs during my free time (I suggest you not to listen :> ). I also enjoy watching 
+                                            movies, reading novels, and such. And, of course, I like to level up my skills!
+                                        </small>
                                     </p>
                                 </div>
                             </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <div class="tabs flex" style="justify-content: center !important; margin-top: -36px;">
+                                <div class="fade-left">
+                                    <h3 class="text-white">
+                                        Social <span class="text-accent">Media</span>
+                                    </h3>
+                                    <small class="text-white">Reach me out!</small>
+    
+                                    <div class="contact d-flex gap-3">
+                                        <a href="mailto:andika.dwi.saputra.7925@gmail.com">
+                                            <i class="bi bi-envelope"></i>
+                                        </a>            
+                                        <a href="https://www.instagram.com/andikads__">
+                                            <i class="bi bi-instagram"></i>
+                                        </a>            
+                                        <a href="https://www.youtube.com/channel/UCGAoFirO5LplzI-OO9nxx8g">
+                                            <i class="bi bi-youtube"></i>
+                                        </a>            
+                                        <a href="https://wa.me/qr/Q5BPJDQQIUBLH1">
+                                            <i class="bi bi-whatsapp"></i>
+                                        </a>            
+                                        <a href="https://www.linkedin.com/in/andika-dwi-saputra-10877928b/">
+                                            <i class="bi bi-linkedin"></i>
+                                        </a>
+                                        <a href="https://github.com/Andikss">
+                                            <i class="bi bi-github"></i>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-12">
-                    <div class="projects-card fade-up">
-                        <div class="projects-preview">
-                            <img src="/assets/img/Portfolio/easytask.webp" alt="">
-                            <div class="popup" data-bs-toggle="modal" data-bs-target="#easytask">
-                                <i class="bi bi-plus-lg"></i>
-                                <h4>Project Management</h4>
-                            </div>
-                        </div>    
-                    </div>
+                </section>
 
-                    <div class="modal fade" id="easytask" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="easytaskLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-xl modal-dialog-scrollable modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h1 class="modal-title fs-5 modal-title" id="easytaskLabel">Easy<span class="text-color">task</span></h1>
-                                    <i class="bi bi-x-lg btn-x" data-bs-dismiss="modal" aria-label="Close"></i>
-                                </div>
-                            <div class="modal-body">
-                                <div class="row mb-3">
-                                    <div class="col-lg-7 col-md-12 col-sm-12" style="display: flex; align-items: center; justify-content: center;">
-                                        <div class="modal-img-container">
-                                            <a href="./assets/img/Portfolio/sql.webp">
-                                                <img src="./assets/img/Portfolio/easytask.webp" alt="">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-5 col-md-12 col-sm-12 modal-right">
-                                        <div class="col mb-3">
-                                            <div class="modal-col">
-                                                <p class="text-color" style="font-size: 12px;"><small>Utility</small></p>
-                                                <h5 class="text-white" style="margin-top: -16px; font-size: 24px;">Project Management</h5>
-                                            </div>
-                                        </div>
-                                        <div class="col mb-3">
-                                            <div class="modal-col">
-                                                <p class="text-color" style="font-size: 12px;"><small>Framework</small></p>
-                                                <h5 class="text-white" style="margin-top: -16px; font-size: 24px;">Laravel + React</h5>
-                                            </div>
-                                        </div>
-                                        <div class="col mb-3">
-                                            <div class="modal-col">
-                                                <p class="text-color" style="font-size: 12px;"><small>Other Tools</small></p>
-                                                <div class="modal-row" style="margin-top: -14px;">
-                                                    <img style="height: 40px; width: 40px; margin-right: 12px; margin-top: 8px;" src="./assets/img/Icons/tailwind.svg" alt="">
-                                                    <img style="height: 40px; width: 40px; margin-right: 12px; margin-top: 8px;" src="./assets/img/Icons/material-ui.svg" alt="">
-                                                    <img style="height: 40px; width: 40px; margin-right: 12px; margin-top: 8px;" src="./assets/img/Icons/jquery.svg" alt="">
-                                                </div>
-                                            </div>
-                                        </div>
+                <section id="skills">
+                    <h2 class="text-center text-white text-title mt-4">Skills<span class="text-accent"></span></h2>
+                    <p class="text-center mb-3">
+                        <small>
+                            Toolkits that help me <span class="text-accent">complete</span> all of my <span class="text-accent">projects</span>
+                        </small>
+                    </p>
 
-                                        <div class="col mb-3">
-                                            <div class="modal-col">
-                                                <p class="text-color" style="font-size: 12px;"><small>Programming Language</small></p>
-                                                <div class="modal-row" style="margin-top: -14px;">
-                                                    <img style="height: 40px; width: 40px; margin-right: 12px; margin-top: 8px;" src="./assets/img/Icons/php.svg" alt="">
-                                                    <img style="height: 40px; width: 40px; margin-right: 12px; margin-top: 8px;" src="./assets/img/Icons/javascript.svg" alt="">
-                                                </div>    
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row modal-desc" style="padding: 24px;">
-                                    <h5 class="description"><small>Description</small></h5>
-                                    <p class="desc" style="font-weight: 300;">
-                                        Easy Task is a task management tool that helps our teams work together. It has been used by Akastra Toyota and KSC Motor Company. I have contributed to the development process and have also take a part on refactoring updates later on.
-                                    </p>
-                                </div>
+                    <div class="row px-4 mb-0 fade-left">
+                        <div class="col-lg-2 col-md-6 col-sm-12 p-2">
+                            <div class="badge shadow-sm">
+                                <img src="./assets/img/Icons/git.svg" alt="Git">
+                                <p>Git</p>
                             </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                </div>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-sm-12 p-2">
+                            <div class="badge shadow-sm">
+                                <img src="./assets/img/Icons/laravel.svg" alt="Laravel">
+                                <p>Laravel</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-sm-12 p-2">
+                            <div class="badge shadow-sm">
+                                <img src="./assets/img/Icons/nodejs.svg" alt="NodeJS">
+                                <p>NodeJS</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-sm-12 p-2">
+                            <div class="badge shadow-sm">
+                                <img src="./assets/img/Icons/jquery.svg" alt="JQuery">
+                                <p>JQuery</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-sm-12 p-2">
+                            <div class="badge shadow-sm">
+                                <img src="./assets/img/Icons/bootstrap.svg" alt="Bootstrap">
+                                <p>Bootstrap</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-sm-12 p-2">
+                            <div class="badge shadow-sm">
+                                <img src="./assets/img/Icons/php.svg" alt="PHP">
+                                <p>PHP</p>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-12">
-                    <div class="projects-card fade-up">
-                        <div class="projects-preview">
-                            <img src="/assets/img/Portfolio/databank.webp" alt="">
-                            <div class="popup" data-bs-toggle="modal" data-bs-target="#databank">
-                                <i class="bi bi-plus-lg"></i>
-                                <h4>Databank</h4>
+                    <div class="row px-4 mt-0 fade-right mobile-skills">
+                        <div class="col-lg-2 col-md-6 col-sm-12 p-2">
+                            <div class="badge shadow-sm">
+                                <img src="./assets/img/Icons/mysql.svg" alt="MySQL">
+                                <p>MySQL</p>
                             </div>
-                        </div>        
-                    </div>
-
-                    <div class="modal fade" id="databank" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="databankLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-xl modal-dialog-scrollable modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h1 class="modal-title fs-5 modal-title" id="databankLabel">Data<span class="text-color">Bank</span></h1>
-                                    <i class="bi bi-x-lg btn-x" data-bs-dismiss="modal" aria-label="Close"></i>
-                                </div>
-                            <div class="modal-body">
-                                <div class="row mb-3">
-                                    <div class="col-lg-7 col-md-12 col-sm-12" style="display: flex; align-items: center; justify-content: center;">
-                                        <div class="modal-img-container">
-                                            <a href="./assets/img/Portfolio/databank.webp">
-                                                <img src="./assets/img/Portfolio/databank.webp" alt="">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-5 col-md-12 col-sm-12 modal-right">
-                                        <div class="col mb-3">
-                                            <div class="modal-col">
-                                                <p class="text-color" style="font-size: 12px;"><small>Utility</small></p>
-                                                <h5 class="text-white" style="margin-top: -16px; font-size: 24px;">Data Source</h5>
-                                            </div>
-                                        </div>
-                                        <div class="col mb-3">
-                                            <div class="modal-col">
-                                                <p class="text-color" style="font-size: 12px;"><small>Framework</small></p>
-                                                <h5 class="text-white" style="margin-top: -16px; font-size: 24px;">Express JS</h5>
-                                            </div>
-                                        </div>
-                                        <div class="col mb-3">
-                                            <div class="modal-col">
-                                                <p class="text-color" style="font-size: 12px;"><small>Other Tools</small></p>
-                                                <div class="modal-row" style="margin-top: -14px;">
-                                                    <img style="height: 40px; width: 40px; margin-right: 12px; margin-top: 8px;" src="./assets/img/Icons/sql-server.svg" alt="">
-                                                    <img style="height: 40px; width: 40px; margin-right: 12px; margin-top: 8px;" src="./assets/img/Icons/jquery.svg" alt="">
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col mb-3">
-                                            <div class="modal-col">
-                                                <p class="text-color" style="font-size: 12px;"><small>Programming Language</small></p>
-                                                <div class="modal-row" style="margin-top: -14px;">
-                                                    <img style="height: 40px; width: 40px; margin-right: 12px; margin-top: 8px;" src="./assets/img/Icons/javascript.svg" alt="">
-                                                    <img style="height: 40px; width: 40px; margin-right: 12px; margin-top: 8px;" src="./assets/img/Icons/html.svg" alt="">
-                                                </div>    
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row modal-desc" style="padding: 24px;">
-                                    <h5 class="description"><small>Description</small></h5>
-                                    <p class="desc" style="font-weight: 300;">
-                                        DataBank is a web application built for monitoring and retrieving data from the DMS Staging Database at Akastra Toyota. It provides a centralized platform for efficiently managing and accessing critical data like revenue, unit entry, etc.
-                                    </p>
-                                </div>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-sm-12 p-2">
+                            <div class="badge shadow-sm">
+                                <img src="./assets/img/Icons/react.svg" alt="ReactJS" class="rotate">
+                                <p>ReactJS</p>
                             </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                </div>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-sm-12 p-2">
+                            <div class="badge shadow-sm">
+                                <img src="./assets/img/Icons/csharp.svg" alt="C#">
+                                <p>C#</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-sm-12 p-2">
+                            <div class="badge shadow-sm">
+                                <img src="./assets/img/Icons/html.svg" alt="HTML5">
+                                <p>HTML 5</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-sm-12 p-2">
+                            <div class="badge shadow-sm">
+                                <img src="./assets/img/Icons/css.svg" alt="CSS3">
+                                <p>CSS 3</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-sm-12 p-2">
+                            <div class="badge shadow-sm">
+                                <img src="./assets/img/Icons/sql-server.svg" alt="Microsoft SQL Server">
+                                <p>Microsoft SQL Server</p>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="row mt-0">
-                <div class="col-lg-4 col-md-4 col-sm-12">
-                    <div class="projects-card fade-up">
-                        <div class="projects-preview">
-                            <img src="/assets/img/Portfolio/ar.webp" alt="">
-                            <div class="popup" data-bs-toggle="modal" data-bs-target="#ar">
-                                <i class="bi bi-plus-lg"></i>
-                                <h4>Augmented Reality</h4>
+                    <div class="row px-4 mt-0 more-skills">
+                        <div class="col-lg-2 col-md-6 col-sm-12 p-2">
+                            <div class="badge shadow-sm">
+                                <img src="./assets/img/Icons/javascript.svg" alt="JavaScript">
+                                <p>JavaScript</p>
                             </div>
-                        </div>    
-                    </div>
-
-                    <div class="modal fade" id="ar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="arLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-xl modal-dialog-scrollable modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h1 class="modal-title fs-5 modal-title" id="arLabel">Augmented <span class="text-color">Reality</span></h1>
-                                    <i class="bi bi-x-lg btn-x" data-bs-dismiss="modal" aria-label="Close"></i>
-                                </div>
-                            <div class="modal-body">
-                                <div class="row mb-3">
-                                    <div class="col-lg-7 col-md-12 col-sm-12" style="display: flex; align-items: center; justify-content: center;">
-                                        <div class="modal-img-container">
-                                            <a href="./assets/img/Portfolio/ar.webp">
-                                                <img src="./assets/img/Portfolio/ar.webp" alt="">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-5 col-md-12 col-sm-12 modal-right">
-                                        <div class="col mb-3">
-                                            <div class="modal-col">
-                                                <p class="text-color" style="font-size: 12px;"><small>Utility</small></p>
-                                                <h5 class="text-white" style="margin-top: -16px; font-size: 24px;">Display Avatar and Statistic</h5>
-                                            </div>
-                                        </div>
-                                        <div class="col mb-3">
-                                            <div class="modal-col">
-                                                <p class="text-color" style="font-size: 12px;"><small>Framework</small></p>
-                                                <h5 class="text-white" style="margin-top: -16px; font-size: 24px;">Unity</h5>
-                                            </div>
-                                        </div>
-                                        <div class="col mb-3">
-                                            <div class="modal-col">
-                                                <p class="text-color" style="font-size: 12px;"><small>Other Tools</small></p>
-                                                <div class="modal-row" style="margin-top: -14px;">
-                                                    <img style="height: 40px; width: 40px; margin-right: 12px; margin-top: 8px;" src="./assets/img/Icons/unity.svg" alt="">
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col mb-3">
-                                            <div class="modal-col">
-                                                <p class="text-color" style="font-size: 12px;"><small>Programming Language</small></p>
-                                                <div class="modal-row" style="margin-top: -14px;">
-                                                    <img style="height: 40px; width: 40px; margin-right: 12px; margin-top: 8px;" src="./assets/img/Icons/csharp.svg" alt="">
-                                                </div>    
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row modal-desc" style="padding: 24px;">
-                                    <h5 class="description"><small>Description</small></h5>
-                                    <p class="desc" style="font-weight: 300;">
-                                        AR2 is an augmented reality app/game that I built using Unity and the Vuforia engine. It was a school project for assessment back then, and I worked on building this app with my team as coders.
-                                    </p>
-                                </div>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-sm-12 p-2">
+                            <div class="badge shadow-sm">
+                                <img src="./assets/img/Icons/nginx.svg" alt="NGINX">
+                                <p>NGINX</p>
                             </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                </div>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-sm-12 p-2">
+                            <div class="badge shadow-sm">
+                                <img src="./assets/img/Icons/apache.svg" alt="Apache">
+                                <p>Apache</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-sm-12 p-2">
+                            <div class="badge shadow-sm">
+                                <img src="./assets/img/Icons/docker.svg" alt="Docker">
+                                <p>Docker</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-sm-12 p-2">
+                            <div class="badge shadow-sm">
+                                <img src="./assets/img/Icons/linux.svg" alt="Linux">
+                                <p>Linux</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-sm-12 p-2">
+                            <div class="badge shadow-sm">
+                                <img src="./assets/img/Icons/livewire.svg" alt="Livewire">
+                                <p>Livewire</p>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-12">
-                    <div class="projects-card fade-up">
-                        <div class="projects-preview">
-                            <img src="/assets/img/Portfolio/lks.webp" alt="">
-                            <div class="popup" data-bs-toggle="modal" data-bs-target="#lks">
-                                <i class="bi bi-plus-lg"></i>
-                                <h4>IT Software Solution For Business</h4>
+                    <div class="row px-4 mt-0 more-skills">
+                        <div class="col-lg-2 col-md-6 col-sm-12 p-2">
+                            <div class="badge shadow-sm">
+                                <img src="./assets/img/Icons/figma.svg" alt="Figma">
+                                <p>Figma</p>
                             </div>
-                        </div>    
-                    </div>
-
-                    <div class="modal fade" id="lks" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="lksLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-xl modal-dialog-scrollable modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h1 class="modal-title fs-5 modal-title" id="lksLabel">Lomba Kecerdasan <span class="text-color">Siswa</span></h1>
-                                    <i class="bi bi-x-lg btn-x" data-bs-dismiss="modal" aria-label="Close"></i>
-                                </div>
-                            <div class="modal-body">
-                                <div class="row mb-3">
-                                    <div class="col-lg-7 col-md-12 col-sm-12" style="display: flex; align-items: center; justify-content: center;">
-                                        <div class="modal-img-container">
-                                            <a href="./assets/img/Portfolio/lks.webp">
-                                                <img src="./assets/img/Portfolio/lks.webp" alt="">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-5 col-md-12 col-sm-12 modal-right">
-                                        <div class="col mb-3">
-                                            <div class="modal-col">
-                                                <p class="text-color" style="font-size: 12px;"><small>Utility</small></p>
-                                                <h5 class="text-white" style="margin-top: -16px; font-size: 24px;">Windows Forms Apps</h5>
-                                            </div>
-                                        </div>
-                                        <div class="col mb-3">
-                                            <div class="modal-col">
-                                                <p class="text-color" style="font-size: 12px;"><small>Framework</small></p>
-                                                <h5 class="text-white" style="margin-top: -16px; font-size: 24px;">.NET Framework</h5>
-                                            </div>
-                                        </div>
-                                        <div class="col mb-3">
-                                            <div class="modal-col">
-                                                <p class="text-color" style="font-size: 12px;"><small>Category</small></p>
-                                                <h5 class="text-white" style="margin-top: -16px; font-size: 24px;">Activity</h5>
-                                            </div>
-                                        </div>
-
-                                        <div class="col mb-3">
-                                            <div class="modal-col">
-                                                <p class="text-color" style="font-size: 12px;"><small>Programming Language</small></p>
-                                                <div class="modal-row" style="margin-top: -14px;">
-                                                    <img style="height: 40px; width: 40px; margin-right: 12px; margin-top: 8px;" src="./assets/img/Icons/csharp.svg" alt="">
-                                                </div>    
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row modal-desc" style="padding: 24px;">
-                                    <h5 class="description"><small>Description</small></h5>
-                                    <p class="desc" style="font-weight: 300;">
-                                        After winning the IT Software Solution for Business competition in Banjarnegara, I made my way to the provincial competition. Even though I didn't win again, I am highly proud to made it this far.
-                                    </p>
-                                </div>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-sm-12 p-2">
+                            <div class="badge shadow-sm">
+                                <img src="./assets/img/Icons/canva.svg" alt="Canva">
+                                <p>Canva</p>
                             </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                </div>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-sm-12 p-2">
+                            <div class="badge shadow-sm">
+                                <img src="./assets/img/Icons/tailwind.svg" alt="Tailwind">
+                                <p>Tailwind</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-sm-12 p-2">
+                            <div class="badge shadow-sm">
+                                <img src="./assets/img/Icons/material-ui.svg" alt="Material UI">
+                                <p>Material UI</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-sm-12 p-2">
+                            <div class="badge shadow-sm">
+                                <img src="./assets/img/Icons/chakra.svg" alt="Chakra UI">
+                                <p>Chakra UI</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-sm-12 p-2">
+                            <div class="badge shadow-sm">
+                                <img src="./assets/img/Icons/express.svg" alt="ExpressJS">
+                                <p>ExpressJS</p>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-12">
-                    <div class="projects-card fade-up">
-                        <div class="projects-preview">
-                            <img src="/assets/img/Portfolio/sql-advanced.webp" alt="">
-                            <div class="popup" data-bs-toggle="modal" data-bs-target="#sql">
-                                <i class="bi bi-plus-lg"></i>
-                                <h4>SQL Sertification</h4>
-                            </div>
-                        </div>    
-                    </div>
-                    <div class="modal fade" id="sql" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="lksLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-xl modal-dialog-scrollable modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h1 class="modal-title fs-5 modal-title" id="lksLabel">SQL <span class="text-color">Certification</span></h1>
-                                    <i class="bi bi-x-lg btn-x" data-bs-dismiss="modal" aria-label="Close"></i>
-                                </div>
-                            <div class="modal-body">
-                                <div class="row mb-3">
-                                    <div class="col-lg-7 col-md-12 col-sm-12" style="display: flex; align-items: center; justify-content: center;">
-                                        <div class="modal-img-container">
-                                            <a href="./assets/img/Portfolio/lks.webp">
-                                                <img src="./assets/img/Portfolio/sql-advanced.webp" alt="">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-5 col-md-12 col-sm-12 modal-right">
-                                        <div class="col mb-3">
-                                            <div class="modal-col">
-                                                <p class="text-color" style="font-size: 12px;"><small>Certification Type</small></p>
-                                                <h5 class="text-white" style="margin-top: -16px; font-size: 24px;">SQL-Advanced</h5>
-                                            </div>
-                                        </div>
-                                        <div class="col mb-3">
-                                            <div class="modal-col">
-                                                <p class="text-color" style="font-size: 12px;"><small>Certification Source</small></p>
-                                                <h5 class="text-white" style="margin-top: -16px; font-size: 24px;">HackerRank</h5>
-                                            </div>
-                                        </div>
-                                        <div class="col mb-3">
-                                            <div class="modal-col">
-                                                <p class="text-color" style="font-size: 12px;"><small>Category</small></p>
-                                                <h5 class="text-white" style="margin-top: -16px; font-size: 24px;">Certification</h5>
-                                            </div>
-                                        </div>
 
-                                        <div class="col mb-3">
-                                            <div class="modal-col">
-                                                <p class="text-color" style="font-size: 12px;"><small>Database Platform</small></p>
-                                                <div class="modal-row" style="margin-top: -14px;">
-                                                    <img style="height: 40px; width: 40px; margin-right: 12px; margin-top: 8px;" src="./assets/img/Icons/mysql.svg" alt="">
-                                                    <img style="height: 40px; width: 40px; margin-right: 12px; margin-top: 8px;" src="./assets/img/Icons/sql-server.svg" alt="">
-                                                </div>    
-                                            </div>
+                    <div class="row justify-content-center fade-up">
+                        <a id="toggle-skills" href="#" class="w-auto text-center text-white">
+                            Show More <i class="bi bi-chevron-down"></i>
+                        </a>
+                    </div>
+                </section>
+
+                <section id="experience" class="shadow">
+                    <h2 class="text-white text-title mt-4">Experience</h2>
+
+                    <div class="container-fluid">
+                        <div class="row row-1">
+                            <div class="col-lg-6 col-md-12 col-sm-12">
+                                <ul>
+                                    <li class="fade-up">
+                                        <h4 class="text-white mb-2 d-block">
+                                            Network & <span class="text-accent">Software Student</span>
+                                        </h4>
+                                        <div class="wrapper">
+                                            <strong>
+                                                <small>SMKN 1 Punggelan | June 2020 - April 2024</small>
+                                            </strong>
+                                            <p class="mt-2">
+                                                <small>
+                                                    I'm a full-time student in the SIJA program, which stands for Sistem 
+                                                    Informatika Jaringan dan Aplikasi (Network and Application Information System). 
+                                                    This is the place that introduced me to networking and more
+                                                </small>
+                                            </p>
                                         </div>
+                                    </li>
+                                    <li class="fade-up">
+                                        <h4 class="text-white mb-2">
+                                            Junior <span class="text-accent">Software Engineer</span>
+                                        </h4>
+                                        <div class="wrapper">
+                                            <strong>
+                                                <small>Akastra Toyota | March 2023 - March 2024</small>
+                                            </strong>
+                                            <p class="pt-2">
+                                                <small>
+                                                    I started my programming journey here at Akastra Toyota 
+                                                    as an Intern Junior Software Engineer. I've built and 
+                                                    participated in many incredible projects here. This is the 
+                                                    place that I prepared myself to be a future-ready programmer.
+                                                </small>
+                                            </p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="filler col-lg-6 col-md-12 col-sm-12 d-flex justify-content-center align-content-center fade-right">
+                                <img src="./assets/img/Icons/csharp.svg" alt="React Icon" width="200px">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="filler col-lg-6 col-md-12 col-sm-12 d-flex justify-content-center align-content-center fade-left">
+                                <img src="./assets/img/Icons/react.svg" alt="React Icon" width="200px" class="rotate">
+                            </div>
+                            <div class="col-lg-6 col-md-12 col-sm-12">
+                                <ul>
+                                    <li class="fade-up">
+                                        <h4 class="text-white mb-2">
+                                            IT Software Solution <span class="text-accent">for Business</span>
+                                        </h4>
+                                        <div class="wrapper">
+                                            <strong>
+                                                <small>IT Software Solution For Business | March 2023</small>
+                                            </strong>
+                                            <p class="mt-2">
+                                                <small>
+                                                    I participated in LKS IT Software Solution For Business 
+                                                    and became the champion in Banjarnegara. I made my way 
+                                                    through the provincial competition. Even though I didn't 
+                                                    win in the provincial stage, I'm highly proud to made it 
+                                                    this far.
+                                                </small>
+                                            </p>
+                                        </div>
+                                    </li>
+                                    <li class="fade-up">
+                                        <h4 class="text-white mb-2">
+                                            English <span class="text-accent">Certification</span>
+                                        </h4>
+                                        <div class="wrapper">
+                                            <strong>
+                                                <small>TOEIC Test | August 2022</small>
+                                            </strong>
+                                            <p class="pt-2">
+                                                <small>
+                                                    I took the TOEIC Test, which is a benchmark for assessing 
+                                                    someone's English skills. I was able to score 800 points, 
+                                                    which placed me in the 'advanced' level in terms of English 
+                                                    proficiency. <a href="#">Certificate</a>
+                                                </small>
+                                            </p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="d-flex align-items-center justify-content-end mx-4 fade-right">
+                            <a href="https://www.linkedin.com/in/andika-dwi-saputra-10877928b/" class="dark-link shadow">
+                                <img src="./assets/img/Icons/linkedin.svg" alt="Linkedin" width="40">&nbsp;
+                                <span>Connect with me!</span>
+                            </a>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="portfolio">
+                    <h2 class="text-center text-white text-title mt-4">Excelent <span class="text-accent">Portfolio</span></h2>
+                    <p class="text-center mb-4">
+                        <small>
+                            Check out my wonderful <span class="text-accent">projects</span> & <span class="text-accent">achievements</span> that I have built throughout my journey!
+                        </small>
+                    </p>
+
+                    <div id="projects" class="px-5 pb-5">
+                        <div class="fade-left">
+                            <h3>
+                                Projects
+                            </h2>
+                            <div class="accent"></div>
+                        </div>
+
+                        <div class="row my-4 fade-up">
+                            <div class="col-lg-4 col-md-12 col-sm-12 d-flex">
+                                <div class="card shadow">
+                                    <div class="card-body">
+                                        <div class="image-wrapper">
+                                            <img src="./assets/img/Portfolio/attendify.webp" alt="Attendify">
+                                        </div>
+                                        <h5 class="text-white">Attendance <span class="text-accent">Management</span></h5>
+                                        <p class="text-white">
+                                            <small>
+                                                Attendify is an attendance management web app that can automatically recap employees' 
+                                                attendance data from different sources, including security input, Face Recognition 
+                                                Attendance Machines, and custom input from the HCD Team.
+                                            </small>
+                                        </p>
                                     </div>
                                 </div>
-                                <div class="row modal-desc" style="padding: 24px;">
-                                    <h5 class="description"><small>Description</small></h5>
-                                    <p class="desc" style="font-weight: 300;">
-                                        Getting my SQL certification at HackerRank and achieving Advanced Level, which covers topics like query optimization, data modeling, Indexing, window functions, and pivots in SQL.
-                                    </p>
+                            </div>
+                            <div class="col-lg-4 col-md-12 col-sm-12 d-flex">
+                                <div class="card shadow">
+                                    <div class="card-body">
+                                        <div class="image-wrapper">
+                                            <img src="./assets/img/Portfolio/akastra-care.webp" alt="Akastra Care">
+                                        </div>
+                                        <h5 class="text-white">Akastra Care - <span class="text-accent">Company Profile</span></h5>
+                                        <p class="text-white">
+                                            <small>
+                                                Company profile website to help customer find workshop easily. Make an appointment 
+                                                for services and improve the company's sales.
+                                            </small>
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <div class="col-lg-4 col-md-12 col-sm-12 d-flex">
+                                <div class="card shadow mb-0">
+                                    <div class="card-body">
+                                        <div class="image-wrapper">
+                                            <img src="./assets/img/Portfolio/wired.webp" alt="Wired">
+                                        </div>
+                                        <h5 class="text-white">Livewire <span class="text-accent">Chat</span></h5>
+                                        <p class="text-white">
+                                            <small>
+                                                Wired is a real-time messaging application developed with Laravel, 
+                                                Livewire, Alpine.js, and Pusher. I created this app for me to learn 
+                                                how pusher works with livewire.
+                                            </small>
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="row my-4 fade-up">
+                            <div class="col-lg-4 col-md-12 col-sm-12 d-flex">
+                                <div class="card shadow">
+                                    <div class="card-body">
+                                        <div class="image-wrapper">
+                                            <img src="./assets/img/Portfolio/akastra-passport.webp" alt="Akastra Passport">
+                                        </div>
+                                        <h5 class="text-white">Akastra <span class="text-accent">Passport</span></h5>
+                                        <p class="text-white">
+                                            <small>
+                                                Akastra Passport is an OAuth2 authentication server that enables Akastra's 
+                                                internal applications to use Single Sign-On (SSO) authentication. This allows 
+                                                us to create a robust yet simple experience for users and developers.
+                                            </small>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-12 col-sm-12 d-flex">
+                                <div class="card shadow">
+                                    <div class="card-body">
+                                        <div class="image-wrapper">
+                                            <img src="./assets/img/Portfolio/easytask.webp" alt="Easytask">
+                                        </div>
+                                        <h5 class="text-white">Project <span class="text-accent">Management</span></h5>
+                                        <p class="text-white">
+                                            <small>
+                                                Project Management AKA EasyTask is a task management tool that helps our 
+                                                teams work together. It has been used by Akastra Toyota and KSC Motor Company. 
+                                                I have contributed to the development process and have also take a part on 
+                                                refactoring updates later on.
+                                            </small>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-12 col-sm-12 d-flex">
+                                <div class="card shadow mb-0">
+                                    <div class="card-body">
+                                        <div class="image-wrapper">
+                                            <img src="./assets/img/Portfolio/staging.webp" alt="Staging Panel">
+                                        </div>
+                                        <h5 class="text-white">Staging <span class="text-accent">Panel</span></h5>
+                                        <p class="text-white">
+                                            <small>
+                                                Fetching Akastra's database and exporting it directly to an Excel 
+                                                file allows for the export of pre-formatted available data or the 
+                                                use of custom SQL queries. This eases the management team's ability 
+                                                to manage service data.
+                                            </small>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row my-4 fade-up">
+                            <div class="col-lg-4 col-md-12 col-sm-12 d-flex">
+                                <div class="card shadow">
+                                    <div class="card-body">
+                                        <div class="image-wrapper">
+                                            <img src="./assets/img/Portfolio/tracking.webp" alt="Akastra Tracking">
+                                        </div>
+                                        <h5 class="text-white">Akastra <span class="text-accent">Tracking</span></h5>
+                                        <p class="text-white">
+                                            <small>
+                                                Akastra Tracking helps customers keep track of their vehicles while servicing at Akastra Toyota
+                                            </small>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-12 col-sm-12 d-flex">
+                                <div class="card shadow">
+                                    <div class="card-body">
+                                        <div class="image-wrapper">
+                                            <img src="./assets/img/Portfolio/parking.webp" alt="Parking">
+                                        </div>
+                                        <h5 class="text-white">E <span class="text-accent">Parking</span></h5>
+                                        <p class="text-white">
+                                            <small>
+                                                E-parking management for Akastra Care (Akastra's branch) eases 
+                                                monitoring of the parking lot and helps to identify the root cause 
+                                                of crowded parking lots.
+                                            </small>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-12 col-sm-12 d-flex">
+                                <div class="card shadow mb-0">
+                                    <div class="card-body">
+                                        <div class="image-wrapper">
+                                            <img src="./assets/img/Portfolio/mrs.webp" alt="MRS Genius">
+                                        </div>
+                                        <h5 class="text-white">MRS Genius <span class="text-accent">APIs</span></h5>
+                                        <p class="text-white">
+                                            <small>
+                                                API services for the MRS Genius application for Toyota MRA automatically 
+                                                generate attacklist data every month, dashboard for monitoring, making 
+                                                reminder management easier for the MRA team.
+                                            </small>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex align-items-center justify-content-center fade-up">
+                            <a href="https://github.com/Andikss" class="dark-link shadow">
+                                <img src="./assets/img/Icons/github.svg" alt="Github" width="40">&nbsp;
+                                <span>Check out my GitHub!</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div id="certificate" class="px-5 py-4 shadow">
+                        <div class="fade-left">
+                            <h3>
+                                Certificate
+                            </h3>
+                            <div class="accent"></div>
+                        </div>
+
+                        <div class="row fade-left">
+                            <div class="col-lg-6 col-ms-12 col-sm-12">
+                                <small>
+                                    Most of the skills I gained were <span class="text-accent">self-taught</span>. However, I also 
+                                    acquired some certifications through testing and competitions.
+                                </small>
+                            </div>
+                        </div>
+                    
+                        <div class="row mt-4 mb-5">
+                            <div class="col-lg-9 col-md-12 col-md-12">
+                                <div class="row">
+                                    <div class="mb-3 col-lg-4 col-md-12 col-sm-12 d-flex fade-left">
+                                        <img class="shadow" src="./assets/img/Portfolio/sql-advanced.webp" alt="SQL Advanced">
+                                    </div>
+                                    <div class="mb-3 col-lg-4 col-md-12 col-sm-12 d-flex fade-left">
+                                        <img class="shadow" src="./assets/img/Portfolio/javascript-intermediate.webp" alt="Javascript Intermediate">
+                                    </div>
+                                    <div class="mb-3 col-lg-4 col-md-12 col-sm-12 d-flex fade-left">
+                                        <img class="shadow" src="./assets/img/Portfolio/webdev.webp" alt="Web Development">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="mb-3 col-lg-4 col-md-12 col-sm-12 d-flex fade-left">
+                                        <img class="shadow" src="./assets/img/Portfolio/data-programing.webp" alt="Data Programming">
+                                    </div>
+                                    <div class="mb-3 col-lg-4 col-md-12 col-sm-12 d-flex fade-left">
+                                        <img class="shadow" src="./assets/img/Portfolio/tech.webp" alt="Tech for Everyone">
+                                    </div>
+                                    <div class="mb-3 col-lg-4 col-md-12 col-sm-12 d-flex fade-left">
+                                        <img class="shadow" src="./assets/img/Portfolio/lks.webp" alt="Lomba Kecerdasan Siswa">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-12 col-sm-12 d-flex flex-column fade-right">
+                                <img class="shadow" src="./assets/img/Portfolio/toeic.webp" alt="TOEIC English" width="100%">
+                                <a href="https://www.linkedin.com/in/andika-dwi-saputra-10877928b/" class="connect shadow">
+                                    <img src="./assets/img/Icons/linkedin.svg" alt="Linkedin" width="40">&nbsp;
+                                    Connect with me
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="follow-wrapper d-flex align-items-center justify-content-center my-4 fade-up">
+                            <a href="https://www.instagram.com/andikads__" class="dark-link shadow">
+                                <img src="./assets/img/Icons/instagram.svg" alt="Instagram" width="40">&nbsp;
+                                <span>Follow me on Instagram</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                </section>
+            </div>
+        </main>
+
+        <footer class="center flex-column">
+            <div class="banner shadow-lg">
+                <div class="row">
+                    <div class="col-lg-4 col-md-12 col-sm-12 center">
+                        <h4 class="text-white">
+                            Start a project
+                        </h4>
+                    </div>
+                    <div class="col-lg-4 col-md-12 col-sm-12 center">
+                        <p class="text-center">
+                            Interested in working together? We should 
+                            queue up a time to chat. I’ll buy the coffee.
+                        </p>
+                    </div>
+                    <div class="col-lg-4 col-md-12 col-sm-12 center">
+                        <a href="https://wa.me/qr/Q5BPJDQQIUBLH1" class="btn-outline-accent">
+                            <i class="bi bi-journal-check"></i>&nbsp;
+                            Wrap it up!
+                        </a>
                     </div>
                 </div>
             </div>
 
-        </section>
+            <span class="p-0">Living, learning, & <span class="text-accent">leveling up</span></span>
+            <span class="p-0"><span class="text-accent">one day</span> at a time</span>
 
-        <footer>
-            <div class="footer-start" style="height: 30%;">
-                <h2 class="section-title pt-4 pb-3" style="font-size: 24px;">Thanks for <span class="text-color">Visiting</span></h2>
-                <p class="section-desc" style="font-size: 12px;">Let me know if you have any <span class="text-color">suggestions</span> for me to upgrade my portfolio.</p>
+            <div class="contact d-flex gap-3 mb-4">
+                <div class="wrapper">
+                    <a href="mailto:andika.dwi.saputra.7925@gmail.com">
+                        <i class="bi bi-envelope"></i>
+                    </a> 
+                </div>
+                <div class="wrapper">
+                    <a href="https://www.instagram.com/andikads__">
+                        <i class="bi bi-instagram"></i>
+                    </a>  
+                </div>
+                <div class="wrapper">
+                    <a href="https://www.youtube.com/channel/UCGAoFirO5LplzI-OO9nxx8g">
+                        <i class="bi bi-youtube"></i>
+                    </a>  
+                </div>
+                <div class="wrapper">
+                    <a href="https://wa.me/qr/Q5BPJDQQIUBLH1">
+                        <i class="bi bi-whatsapp"></i>
+                    </a>  
+                </div>
+                <div class="wrapper">
+                    <a href="https://www.linkedin.com/in/andika-dwi-saputra-10877928b/">
+                        <i class="bi bi-linkedin"></i>
+                    </a>
+                </div>
+                <div class="wrapper">
+                    <a href="https://github.com/Andikss">
+                        <i class="bi bi-github"></i>
+                    </a>
+                </div>
             </div>
-            <div class="div d-none">
-                <a class="social" href="mailto:andika.dwi.saputra.7925@gmail.com"><i class="bi bi-envelope"></i></a>            
-                <a class="social" href="https://www.instagram.com/andikads__"><i class="bi bi-instagram"></i></a>            
-                <a class="social" href="https://www.youtube.com/channel/UCGAoFirO5LplzI-OO9nxx8g"><i class="bi bi-youtube"></i></a>            
-                <a class="social" href="https://wa.me/qr/Q5BPJDQQIUBLH1"><i class="bi bi-whatsapp"></i></a>            
-                <a class="social" href="https://www.linkedin.com/in/andika-dwi-saputra-10877928b/"><i class="bi bi-linkedin"></i></a>
-                <a class="social" href="https://github.com/Andikss"><i class="bi bi-github"></i></a>
-            </div>
-            <div class="footer-content" style="height: 50%;">
-                <!-- <img src="./assets/img/Icons/git.svg" alt="" class="skill-icon"> -->
-                <ul class="ul">
-                    <li class="li">
-                      <input type="checkbox" checked/>
-                      <div class="letter">A</div>
-                    </li>
-                    <li class="li">
-                      <input type="checkbox" />
-                      <div class="letter">N</div>
-                    </li>
-                    <li class="li">
-                      <input type="checkbox" />
-                      <div class="letter">D</div>
-                    </li>
-                    <li class="li">
-                      <input type="checkbox" />
-                      <div class="letter">I</div>
-                    </li>
-                    <li class="li">
-                      <input type="checkbox" />
-                      <div class="letter">K</div>
-                    </li>
-                    <li class="li">
-                      <input type="checkbox" />
-                      <div class="letter">A</div>
-                    </li>
-                    <li class="li">
-                      <input type="checkbox" checked />
-                      <div class="letter">D</div>
-                    </li>
-                    <li class="li">
-                      <input type="checkbox" />
-                      <div class="letter">S</div>
-                    </li>
-                </ul>
-                <!-- <img src="./assets/img/Icons/laravel.svg" alt="" class="skill-icon"> -->
-            </div>
-            <div class="footer-end" style="height: 20%;">
-                <p style="color: #FEFFFE; text-align: center; font-size: 14px;">
-                    andika.dwi.saputra.7925@gmail.com | +6285743699909
-                </p>
-                <p style="font-size: small; opacity: 70%; color: #FEFFFE; text-align: center; margin-top: -8px;">
-                    <small>Developed by Andika Dwi Saputra <strong>All Right Reserved</strong></small>
-                </p>
-            </div>
+
+            <p>
+                Handcrafted by <a href="https://github.com/Andikss" class="text-white">@andikss</a>
+            </p>
         </footer>
-    </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/lazy-with-preload@2.0.3/lib/index.min.js"></script>
-    <script src="assets/js/main.js"></script>
-
-</body>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+        <script src="assets/js/main.js"></script>
+    </body>
 </html>
