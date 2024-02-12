@@ -51,7 +51,7 @@ function slideSkills(direction) {
 
 // Auto Typed Text
 var typed = new Typed(".auto-type", {
-    strings: ["Web Developer", "Determined learner", "Software Engineer", "Loving You ❤"],
+    strings: ["Web Developer", "Determined learner", "Software Engineer"],
     typeSpeed: 100,
     backSpeed: 100,
     loop: true
@@ -81,20 +81,29 @@ document.addEventListener('DOMContentLoaded', function () {
     const btnCv = document.getElementById('btn-cv');
 
     btnCv.addEventListener('click', function () {
-        Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'CV is not available 😢',
-            customClass: {
-                popup: 'dark-sweet',
-                header: 'dark-sweet',
-                title: 'dark-sweet',
-                content: 'dark-sweet',
-                actions: 'dark-sweet',
-                confirmButton: 'dark-sweet',
-            },
-            buttonStyling: false,
-        });
+
+        let downloadLink      = document.createElement('a');
+        downloadLink.href     = 'assets/static/curriculum-vitae.pdf';
+        downloadLink.download = 'curriculum.pdf';
+        
+        document.body.appendChild(downloadLink);        
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+
+        // Swal.fire({
+        //     icon: 'error',
+        //     title: 'Oops...',
+        //     text: 'CV is not available 😢',
+        //     customClass: {
+        //         popup: 'dark-sweet',
+        //         header: 'dark-sweet',
+        //         title: 'dark-sweet',
+        //         content: 'dark-sweet',
+        //         actions: 'dark-sweet',
+        //         confirmButton: 'dark-sweet',
+        //     },
+        //     buttonStyling: false,
+        // });
     });
 });
 
@@ -180,3 +189,26 @@ fadeUpElements.forEach(element => {
 fadeDownElements.forEach(element => {
     fadeDownObserver.observe(element);
 });
+
+document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+  
+      const targetId = this.getAttribute('href');
+      const targetElement = document.querySelector(targetId);
+  
+      if (targetElement) {
+        const offsetTop = targetElement.offsetTop - 80; 
+  
+        window.scrollTo({
+          top: offsetTop,
+          behavior: 'smooth',
+        });
+      }
+    });
+  });
+  
+  var swiper = new Swiper('.swiper-container', {
+    slidesPerView: 1,
+    spaceBetween: 10,
+  });
