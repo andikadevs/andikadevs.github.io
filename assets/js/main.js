@@ -29,8 +29,13 @@ $('#toggle-skills').on('click', function(e) {
     e.preventDefault(); 
     $('.more-skills').toggleClass('show'); 
     $('.mobile-skills').toggleClass('show'); 
-    $('#toggle-skills i').toggleClass('bi-chevron-down bi-chevron-up'); 
+    if ($(this).text().includes('Show More')) {
+        $(this).html('Show Less <i class="bi bi-chevron-up"></i>');
+    } else {
+        $(this).html('Show More <i class="bi bi-chevron-down"></i>');
+    }
 });
+
 
 // Skills SLider
 let currentSlide = 0;
