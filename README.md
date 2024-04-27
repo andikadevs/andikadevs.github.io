@@ -1,7 +1,7 @@
 
-# Junior Developer 📝
+# Fullstack Developer 📝
 
-Hello there! I'm Andika Dwi Saputra, and I'm currently in an internship program at Akastra Toyota as a Junior Developer.
+Hello there! I'm Andika Dwi Saputra, and I'm a Fullstack Developer.
 
 ## 🛠️ Ability toolkit
 
