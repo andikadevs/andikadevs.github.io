@@ -563,6 +563,26 @@ header.slide-down {
                     border-bottom: 1px solid var(--accent);
                 }
             }
+
+            .card-footer {
+                background: var(--secondary);
+                border-radius: 2px;
+                border-top-right-radius: 0px;
+                border-top-left-radius: 0px;
+                display: flex;
+                justify-content: space-between;
+
+                .wrapper {
+                    display: flex;
+                    flex-direction: row;
+                    gap: 4px;
+                    min-height: 35px;
+
+                    img {
+                        width: 30px;
+                    }
+                }
+            }
         }
 
         .card:hover .popup {
@@ -609,6 +629,10 @@ header.slide-down {
             .row {
                 .card {
                     margin-bottom: 16px;
+
+                    .image-wrapper {
+                        margin-bottom: 12px;
+                    }
                 }
             }
 

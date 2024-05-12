@@ -179,6 +179,11 @@ main {
     }
 }
 
+.btn-outline-accent.sm {
+    padding: 6px 12px;
+    font-size: 14px;
+}
+
 .btn-outline-accent:hover {
     background-color: var(--accent);
     color: var(--main);
@@ -227,6 +232,30 @@ main {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+
+.floating {
+    animation: floating-move 10s linear infinite, floating-bob 2s ease-in-out infinite;
+}
+
+@keyframes floating-move {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+  
+@keyframes floating-bob {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+  
 
 /* LOADER */
 #loader-container {
@@ -277,26 +306,3 @@ main {
       transform: rotate(0.5turn);
     }
 }
-
-@keyframes floating-move {
-    0% {
-      transform: translateX(-100%);
-    }
-    100% {
-      transform: translateX(100%);
-    }
-}
-  
-@keyframes floating-bob {
-    0%, 100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-10px);
-    }
-}
-  
-.floating {
-    animation: floating-move 10s linear infinite, floating-bob 2s ease-in-out infinite;
-}
-  
