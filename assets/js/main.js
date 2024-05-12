@@ -18,6 +18,21 @@ function scrollFunction() {
   document.getElementById("progress-bar").style.width = scrolled + "%";
 }
 
+// Theme Toggler
+const themeToggler  = document.getElementById('theme-toggler');
+const themeCheckbox = document.getElementById('theme-checkbox');
+const mainImage     = document.querySelector('.main-image');
+
+themeCheckbox.addEventListener('change', function() {
+    if (themeCheckbox.checked) {
+        document.body.classList.add('light-theme');
+        mainImage.setAttribute('src', 'assets/img/main-illustration-white.webp')
+    } else {
+        document.body.classList.remove('light-theme');
+        mainImage.setAttribute('src', 'assets/img/main-illustration.webp')
+    }
+});
+
 // Navbar active tab
 window.addEventListener('scroll', function() {
     const sections = document.querySelectorAll('section');
@@ -95,15 +110,25 @@ const typed = new Typed(".auto-type", {
     loop: true
 });
 
-// Tabs
-const tabs = document.querySelectorAll('.tabs');
+// Get the tab buttons and tabs
 const tabButtons = document.querySelectorAll('.tab-button');
+const tabs = document.querySelectorAll('.tabs');
 
+// Tabs
 function showTab(index) {
     tabs.forEach((tab, i) => {
         tab.classList.remove('active-tab');
         if (i === index) {
             tab.classList.add('active-tab');
+        }
+    });
+
+    // Update button classes
+    tabButtons.forEach((button, i) => {
+        if (i === index) {
+            button.classList.add('active');
+        } else {
+            button.classList.remove('active');
         }
     });
 }
@@ -113,6 +138,7 @@ tabButtons.forEach((button, index) => {
         showTab(index);
     });
 });
+
 
 // CV Button
 document.addEventListener('DOMContentLoaded', function () {

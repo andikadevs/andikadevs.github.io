@@ -29,6 +29,10 @@ header {
         outline: none;
         box-shadow: none;
     }
+
+    .nav-link.active {
+        color: var(--accent) !important;
+    }
 }
 
 header.slide-up {
@@ -111,7 +115,7 @@ header.slide-down {
                 display: block;
                 width: 2px;
                 height: 100px;
-                background-color: #F1BE6C; 
+                background-color: var(--accent); 
                 margin-bottom: 10px; 
             }
         }
@@ -243,10 +247,15 @@ header.slide-down {
             width: 100%;
 
             .tab-button {
-                background-color: transparent;
                 color: white;
                 padding: 5px;
                 flex: 1;
+                border-radius: 0px !important;
+            }
+            
+            .tab-button.active {
+                background: var(--accent);
+                color: var(--dark);
             }
         }
         
@@ -469,7 +478,7 @@ header.slide-down {
                     position: absolute;
                     width: 3px;
                     height: 80%;
-                    background-color: #F1BE6C; 
+                    background-color: var(--accent); 
                     margin-bottom: 10px; 
                     left: -24px;
                     box-shadow: 0 0 10px var(--accent); 

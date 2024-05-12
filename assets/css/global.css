@@ -1,14 +1,54 @@
 :root {
-    --main: #34353A;
-    --secondary: #3C3E43;
-    --dark: #26262b;
-    --accent: #F1BE6C;
+    --main-dark: #34353A;
+    --secondary-dark: #3C3E43;
+    --dark-dark: #26262b;
+    --accent-dark: #F1BE6C;
+
+    /* Light theme colors */
+    --main-light: #FFFFFF;
+    --secondary-light: #F0F0F0;
+    --dark-light: #E5E5E5;
+    --accent-light: #F2C32F;
+}
+
+.dark-theme {
+    --main: var(--main-dark);
+    --secondary: var(--secondary-dark);
+    --dark: var(--dark-dark);
+    --accent: var(--accent-dark);
+    color: white;
+}
+
+.light-theme {
+    --main: var(--main-light);
+    --secondary: var(--secondary-light);
+    --dark: var(--dark-light);
+    --accent: var(--accent-light);
+    
+    *{
+        color: var(--dark-dark);
+    }
+
+    .text-white {
+        color: var(--dark-dark) !important;
+    }
+
+    .navbar-toggler-icon {
+        color: var(--dark-dark) !important;
+    }
+
+    .tab-button {
+        color: var(--dark-dark) !important;
+    }
+
+    .slider::before {
+        box-shadow: inset 2px -2px 0 1.8px var(--main-dark);
+    }
 }
 
 * {
     font-family: 'Poppins', sans-serif;
     text-decoration: none !important;
-    color: white;
     /* border: 1px solid red; */
 }
 
@@ -80,11 +120,11 @@ main {
 }
 
 .text-main {
-    color: var(--main);
+    color: var(--main) !important;
 }
 
 .text-accent {
-    color: var(--accent);
+    color: var(--accent) !important;
 }
 
 .center {
@@ -304,5 +344,81 @@ main {
 @keyframes s8 {
     100% {
       transform: rotate(0.5turn);
+    }
+}
+
+/* Theme Switch */
+.switch {
+    font-size: 17px;
+    position: relative;
+    display: inline-block;
+    width: 3.5em;
+    height: 2em;
+}
+  
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+  
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--main);
+    transition: .4s;
+    border-radius: 30px;
+ }
+  
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 1.4em;
+    width: 1.4em;
+    border-radius: 20px;
+    left: 0.3em;
+    bottom: 0.3em;
+    background-color: var(--main);
+    box-shadow: inset 2px -2px 0 1.8px #fff;
+    transition: .4s;
+    animation: anima1 0.3s linear;
+}
+  
+@keyframes anima1 {
+    0% {
+      transform: translateX(1.5em);
+    }
+  
+    80% {
+      transform: translateX(-0.3em);
+    }
+  
+    100% {
+      transform: translateX(0em);
+    }
+}
+  
+.switch input:checked + .slider:before {
+    background-color: var(--accent-dark);
+    box-shadow: none;
+    transform: translateX(1.5em);
+    animation: anima 0.3s linear;
+}
+  
+@keyframes anima {
+    0% {
+      transform: translateX(0px)
+    }
+  
+    80% {
+      transform: translateX(1.6em)
+    }
+  
+    100% {
+      transform: translateX(1.4em)
     }
 }

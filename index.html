@@ -33,7 +33,7 @@
         <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     </head>
 
-    <body>
+    <body class="dark-theme">
         <div id="progress-bar-container">
             <div id="progress-bar"></div>
         </div>
@@ -69,7 +69,7 @@
                             <a class="nav-link" href="#portfolio">Portfolio</a>
                         </li>
                     </ul>
-                    <form class="d-flex gap-2">
+                    <div class="d-flex align-items-center gap-2">
                         <a target="_blank" href="mailto:andikadwisaputra.dev@gmail.com" class="btn-accent">
                             <i class="bi bi-envelope"></i>&nbsp;
                             Email
@@ -78,7 +78,11 @@
                             <i class="bi bi-github"></i>&nbsp;
                             GitHub
                         </a>
-                    </form>
+                        <label class="switch" id="theme-toggler">
+                            <input type="checkbox" id="theme-checkbox">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
                 </div>                
             </div>
         </header>
@@ -125,17 +129,17 @@
                         </div>
                         <div class="col-lg-7 col-md-12 col-sm-12 pt-5 pr-5">
                             <div class="btn-group tab-button-wrapper fade-left">
-                                <button data-tab-index="0" class="tab-button">Hello</button>
-                                <button data-tab-index="1" class="tab-button">Origin</button>
-                                <button data-tab-index="2" class="tab-button">Hobbies</button>
-                                <button data-tab-index="3" class="tab-button">Social Media</button>
-                            </div>                    
+                                <button class="shadow btn-outline-accent tab-button active" data-tab-index="0">Hello</button>
+                                <button class="shadow btn-outline-accent tab-button" data-tab-index="1">Origin</button>
+                                <button class="shadow btn-outline-accent tab-button" data-tab-index="2">Hobbies</button>
+                                <button class="shadow btn-outline-accent tab-button" data-tab-index="3">Social Media</button>
+                            </div>
                             <div class="tabs hello active-tab flex" style="justify-content: center !important; margin-top: -36px;">
                                 <div class="fade-left">
-                                    <h3 class="text-white mb-4">
+                                    <h3 class="mb-4">
                                         <i class="bi bi-browser-chrome"></i> Fullstack <span class="text-accent">Developer</span>
                                     </h3>
-                                    <p class="text-white">
+                                    <p>
                                         <small>
                                             Hello there! I'm Andika Dwi Saputra, and I'm a
                                             <span class="text-accent">Fullstack Developer</span>
@@ -154,10 +158,10 @@
                             </div>
                             <div class="tabs flex justify-content-start">
                                 <div class="fade-left">
-                                    <h3 class="text-white my-4">
+                                    <h3 class="my-4">
                                         My <span class="text-accent">Origin</span>
                                     </h3>
-                                    <p class="text-white mb-3">
+                                    <p class="mb-3">
                                         <small>
                                             I was born in <span class="text-accent">Banjarnegara</span> on July 9th, 2005, and I have lived there ever 
                                             since. Computers were not really my thing, I have no access to "computer" back then. 
@@ -196,10 +200,10 @@
                             </div>
                             <div class="tabs flex justify-content-start">
                                 <div class="fade-left">
-                                    <h3 class="text-white my-4">
+                                    <h3 class="my-4">
                                         <span class="text-accent">Hobbies</span>
                                     </h3>
-                                    <p class="text-white mb-3">
+                                    <p class="mb-3">
                                         <small>
                                             I have a lot of hobbies, actually. I love to play the guitar and perform many 
                                             songs during my free time (I suggest you not to listen :> ). I also enjoy watching 
@@ -210,28 +214,28 @@
                             </div>
                             <div class="tabs flex" style="justify-content: center !important; margin-top: -36px;">
                                 <div class="fade-left">
-                                    <h3 class="text-white">
+                                    <h3 class="">
                                         Social <span class="text-accent">Media</span>
                                     </h3>
-                                    <small class="text-white">Reach me out!</small>
+                                    <small class="">Reach me out!</small>
     
                                     <div class="contact d-flex gap-3">
-                                        <a target="_blank" href="mailto:andikadwisaputra.dev@gmail.com">
+                                        <a target="_blank" class="text-white" href="mailto:andikadwisaputra.dev@gmail.com">
                                             <i class="bi bi-envelope"></i>
                                         </a>            
-                                        <a target="_blank" href="https://www.instagram.com/andikads__">
+                                        <a target="_blank" class="text-white" href="https://www.instagram.com/andikads__">
                                             <i class="bi bi-instagram"></i>
                                         </a>            
-                                        <a target="_blank" href="https://www.youtube.com/channel/UCGAoFirO5LplzI-OO9nxx8g">
+                                        <a target="_blank" class="text-white" href="https://www.youtube.com/channel/UCGAoFirO5LplzI-OO9nxx8g">
                                             <i class="bi bi-youtube"></i>
                                         </a>            
-                                        <a target="_blank" href="https://wa.me/6285743699909">
+                                        <a target="_blank" class="text-white" href="https://wa.me/6285743699909">
                                             <i class="bi bi-whatsapp"></i>
                                         </a>            
-                                        <a target="_blank" href="https://www.linkedin.com/in/andika-dwi-saputra-10877928b/">
+                                        <a target="_blank" class="text-white" href="https://www.linkedin.com/in/andika-dwi-saputra-10877928b/">
                                             <i class="bi bi-linkedin"></i>
                                         </a>
-                                        <a target="_blank" href="https://github.com/Andikss">
+                                        <a target="_blank" class="text-white" href="https://github.com/Andikss">
                                             <i class="bi bi-github"></i>
                                         </a>
                                     </div>
@@ -406,14 +410,14 @@
                 </section>
 
                 <section id="experience" class="shadow">
-                    <h2 class="text-white text-title mt-4">Experience</h2>
+                    <h2 class="text-title mt-4">Experience</h2>
 
                     <div class="container-fluid">
                         <div class="row row-1">
                             <div class="col-lg-6 col-md-12 col-sm-12">
                                 <ul>
                                     <li class="fade-up">
-                                        <h4 class="text-white mb-2 d-block">
+                                        <h4 class="mb-2 d-block">
                                             Network & <span class="text-accent">Software Student</span>
                                         </h4>
                                         <div class="wrapper">
@@ -430,7 +434,7 @@
                                         </div>
                                     </li>
                                     <li class="fade-up">
-                                        <h4 class="text-white mb-2">
+                                        <h4 class="mb-2">
                                             Junior <span class="text-accent">Software Engineer</span>
                                         </h4>
                                         <div class="wrapper">
@@ -460,7 +464,7 @@
                             <div class="col-lg-6 col-md-12 col-sm-12">
                                 <ul>
                                     <li class="fade-up">
-                                        <h4 class="text-white mb-2">
+                                        <h4 class="mb-2">
                                             IT Software Solution <span class="text-accent">for Business</span>
                                         </h4>
                                         <div class="wrapper">
@@ -479,7 +483,7 @@
                                         </div>
                                     </li>
                                     <li class="fade-up">
-                                        <h4 class="text-white mb-2">
+                                        <h4 class="mb-2">
                                             English <span class="text-accent">Certification</span>
                                         </h4>
                                         <div class="wrapper">
@@ -503,7 +507,7 @@
                             <div class="col-lg-6 col-md-12 col-sm-12">
                                 <ul>
                                     <li class="fade-up">
-                                        <h4 class="text-white mb-2">
+                                        <h4 class="mb-2">
                                             Web Technology <span class="text-accent">Competition</span>
                                         </h4>
                                         <div class="wrapper">
@@ -537,7 +541,7 @@
                 </section>
 
                 <section id="portfolio">
-                    <h2 class="text-center text-white text-title mt-4">Excelent <span class="text-accent">Portfolio</span></h2>
+                    <h2 class="text-center text-title mt-4">Excelent <span class="text-accent">Portfolio</span></h2>
                     <p class="text-center mb-4">
                         <small>
                             Check out my wonderful <span class="text-accent">projects</span> & <span class="text-accent">achievements</span> that I have built throughout my journey!
@@ -841,24 +845,22 @@
                         <div class="row mt-4 mb-5">
                             <div class="col-lg-9 col-md-12 col-md-12">
                                 <div class="row mb-3">
-                                    <div class="col-lg-4 col-md-12 col-sm-12 d-flex fade-left">
+                                    <div class="col-lg-4 col-md-6 col-sm-12 d-flex fade-left mb-3">
                                         <img class="shadow" src="./assets/img/Portfolio/sql-advanced.webp" alt="SQL Advanced">
                                     </div>
-                                    <div class="col-lg-4 col-md-12 col-sm-12 d-flex fade-left">
+                                    <div class="col-lg-4 col-md-6 col-sm-12 d-flex fade-left mb-3">
                                         <img class="shadow" src="./assets/img/Portfolio/javascript-intermediate.webp" alt="Javascript Intermediate">
                                     </div>
-                                    <div class="col-lg-4 col-md-12 col-sm-12 d-flex fade-left">
+                                    <div class="col-lg-4 col-md-6 col-sm-12 d-flex fade-left mb-3">
                                         <img class="shadow" src="./assets/img/Portfolio/webdev.webp" alt="Web Development">
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-4 col-md-12 col-sm-12 d-flex fade-left">
+                                    <div class="col-lg-4 col-md-6 col-sm-12 d-flex fade-left mb-3">
                                         <img class="shadow" src="./assets/img/Portfolio/data-programing.webp" alt="Data Programming">
                                     </div>
-                                    <div class="col-lg-4 col-md-12 col-sm-12 d-flex fade-left">
+                                    <div class="col-lg-4 col-md-6 col-sm-12 d-flex fade-left mb-3">
                                         <img class="shadow" src="./assets/img/Portfolio/tech.webp" alt="Tech for Everyone">
                                     </div>
-                                    <div class="col-lg-4 col-md-12 col-sm-12 d-flex fade-left">
+                                    <div class="col-lg-4 col-md-6 col-sm-12 d-flex fade-left mb-3">
                                         <img class="shadow" src="./assets/img/Portfolio/lks.webp" alt="Lomba Kecerdasan Siswa">
                                     </div>
                                 </div>
@@ -884,7 +886,7 @@
             <div class="banner shadow-lg">
                 <div class="row">
                     <div class="col-lg-4 col-md-12 col-sm-12 center">
-                        <h4 class="text-white">
+                        <h4>
                             Start a project
                         </h4>
                     </div>
@@ -908,32 +910,32 @@
 
             <div class="contact d-flex gap-3 mb-4">
                 <div class="wrapper">
-                    <a target="_blank" href="mailto:andikadwisaputra.dev@gmail.com">
+                    <a target="_blank" class="text-white" href="mailto:andikadwisaputra.dev@gmail.com">
                         <i class="bi bi-envelope"></i>
                     </a> 
                 </div>
                 <div class="wrapper">
-                    <a target="_blank" href="https://www.instagram.com/andikads__">
+                    <a target="_blank" class="text-white" href="https://www.instagram.com/andikads__">
                         <i class="bi bi-instagram"></i>
                     </a>  
                 </div>
                 <div class="wrapper">
-                    <a target="_blank" href="https://www.youtube.com/channel/UCGAoFirO5LplzI-OO9nxx8g">
+                    <a target="_blank" class="text-white" href="https://www.youtube.com/channel/UCGAoFirO5LplzI-OO9nxx8g">
                         <i class="bi bi-youtube"></i>
                     </a>  
                 </div>
                 <div class="wrapper">
-                    <a target="_blank" href="https://wa.me/6285743699909">
+                    <a target="_blank" class="text-white" href="https://wa.me/6285743699909">
                         <i class="bi bi-whatsapp"></i>
                     </a>  
                 </div>
                 <div class="wrapper">
-                    <a target="_blank" href="https://www.linkedin.com/in/andika-dwi-saputra-10877928b/">
+                    <a target="_blank" class="text-white" href="https://www.linkedin.com/in/andika-dwi-saputra-10877928b/">
                         <i class="bi bi-linkedin"></i>
                     </a>
                 </div>
                 <div class="wrapper">
-                    <a target="_blank" href="https://github.com/Andikss">
+                    <a target="_blank" class="text-white" href="https://github.com/Andikss">
                         <i class="bi bi-github"></i>
                     </a>
                 </div>
