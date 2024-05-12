@@ -7,10 +7,16 @@ header {
     top: 0;
     left: 0;
     transition: transform 0.5s ease-in-out;
-    padding: 16px 12px !important;
+    padding: 4px 12px !important;
 
     .navbar-brand {
         filter: brightness(0.6);
+
+        .main-logo {
+            color: #ffffff;
+            font-size: 40px;
+            margin: 0 !important;
+        }
     }
 
     .navbar-toggler {
