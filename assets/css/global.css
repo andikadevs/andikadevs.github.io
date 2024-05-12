@@ -48,6 +48,25 @@ main {
     top: 0;
 }
 
+/* Progress Bar */
+
+#progress-bar-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px; 
+    background-color: var(--main); 
+    z-index: 1000;
+
+    #progress-bar {
+        height: 100%;
+        background-color: var(--accent);
+        width: 0;
+        transition: width 0.3s ease; 
+    }
+}
+
 
 
 /* CUSTOM CLASSESS */
@@ -258,3 +277,26 @@ main {
       transform: rotate(0.5turn);
     }
 }
+
+@keyframes floating-move {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+}
+  
+@keyframes floating-bob {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+}
+  
+.floating {
+    animation: floating-move 10s linear infinite, floating-bob 2s ease-in-out infinite;
+}
+  

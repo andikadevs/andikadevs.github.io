@@ -498,7 +498,7 @@ header.slide-down {
             ul {    
                 li {    
                     .wrapper::before {
-                        left: -18.5px;
+                        left: -24px;
                     }
                 }
             }
@@ -625,7 +625,7 @@ header.slide-down {
                 .connect {
                     background: var(--secondary);
                     filter: brightness(1.1);
-                    color: white;
+                    color: var(--main);
                 }
             }
 

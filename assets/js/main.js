@@ -8,6 +8,39 @@ $(window).on('load', function() {
     $("body").css("overflow", "auto");
 });
 
+// Progress bar
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+  const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  const scrolled = (scrollTop / scrollHeight) * 100;
+  document.getElementById("progress-bar").style.width = scrolled + "%";
+}
+
+// Navbar active tab
+window.addEventListener('scroll', function() {
+    const sections = document.querySelectorAll('section');
+    let currentSection = '';
+
+    sections.forEach(function(section) {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        if (pageYOffset >= (sectionTop - sectionHeight / 3)) {
+            currentSection = section.getAttribute('id');
+        }
+    });
+
+    const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+    navLinks.forEach(function(link) {
+        link.classList.remove('active');
+        if (link.getAttribute('href').substring(1) === currentSection) {
+            link.classList.add('active');
+        }
+    });
+});
+
+
 // Navbar dynamic
 let lastScrollTop = 0;
 
@@ -55,7 +88,7 @@ function slideSkills(direction) {
 }
 
 // Auto Typed Text
-var typed = new Typed(".auto-type", {
+const typed = new Typed(".auto-type", {
     strings: ["Web Developer", "Determined learner", "Software Engineer"],
     typeSpeed: 100,
     backSpeed: 100,
@@ -120,7 +153,8 @@ function calculateAge(birthDate) {
 
     if (
         today.getMonth() < birthDateObj.getMonth() ||
-        (today.getMonth() === birthDateObj.getMonth() && today.getDate() < birthDateObj.getDate())
+        (today.getMonth() === birthDateObj.getMonth() && 
+        today.getDate() < birthDateObj.getDate())
     ) {
         age--;
     }
@@ -128,15 +162,15 @@ function calculateAge(birthDate) {
     return age;
 }
 
-const birthDate = '2005-07-09'; // yyyy-mm-dd format
+const birthDate  = '2005-07-09'; // yyyy-mm-dd format
 const ageElement = document.getElementById('age');
 const age = calculateAge(birthDate);
 ageElement.textContent = age;
 
-const fadeLeftElements = document.querySelectorAll('.fade-left');
+const fadeLeftElements  = document.querySelectorAll('.fade-left');
 const fadeRightElements = document.querySelectorAll('.fade-right');
-const fadeUpElements = document.querySelectorAll('.fade-up');
-const fadeDownElements = document.querySelectorAll('.fade-down');
+const fadeUpElements    = document.querySelectorAll('.fade-up');
+const fadeDownElements  = document.querySelectorAll('.fade-down');
 
 // Fade Animations
 const fadeLeftObserver = new IntersectionObserver((entries, observer) => {
@@ -213,7 +247,7 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     });
   });
   
-  var swiper = new Swiper('.swiper-container', {
-    slidesPerView: 1,
-    spaceBetween: 10,
-  });
+const swiper = new Swiper('.swiper-container', {
+  slidesPerView: 1,
+  spaceBetween: 10,
+});
