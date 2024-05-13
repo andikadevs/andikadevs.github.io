@@ -1,6 +1,4 @@
 // Loader 
-$("body").css("overflow", "hidden");
-
 $(window).on('load', function() {
     $("#loader-container").removeClass('visible');
     $("body").css("overflow", "auto");
