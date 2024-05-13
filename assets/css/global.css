@@ -37,6 +37,10 @@
         color: var(--dark-dark) !important;
     }
 
+    .profile-image::after, .profile-image::before {
+        border-color: var(--dark-dark) !important;
+    }
+
     .tab-button {
         color: var(--dark-dark) !important;
     }
