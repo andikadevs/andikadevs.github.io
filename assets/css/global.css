@@ -195,6 +195,7 @@ main {
     color: var(--main);
     border-radius: 2px;
     border: 1px solid var(--accent);
+    text-wrap: nowrap !important;
 
     i {
         color: var(--main);
@@ -212,6 +213,7 @@ main {
     border-radius: 2px;
     border: 1px solid var(--accent);
     transition: background-color 0.3s, color 0.3s;
+    text-wrap: nowrap !important;
 
     i {
         color: var(--accent);
