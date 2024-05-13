@@ -14,18 +14,42 @@ function scrollFunction() {
   document.getElementById("progress-bar").style.width = scrolled + "%";
 }
 
-// Theme Toggler
 const themeToggler  = document.getElementById('theme-toggler');
 const themeCheckbox = document.getElementById('theme-checkbox');
 const mainImage     = document.querySelector('.main-image');
 
+// Function to save theme state in local storage
+function saveThemeState(theme) {
+    localStorage.setItem('theme', theme);
+}
+
+// Function to load theme state from local storage
+function loadThemeState() {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') {
+        document.body.classList.add('light-theme');
+        mainImage.setAttribute('src', 'assets/img/main-illustration-white.webp');
+        themeCheckbox.checked = true;
+    } else {
+        document.body.classList.remove('light-theme');
+        mainImage.setAttribute('src', 'assets/img/main-illustration.webp');
+        themeCheckbox.checked = false;
+    }
+}
+
+// Check theme state on page load
+loadThemeState();
+
+// Event listener for theme toggler
 themeCheckbox.addEventListener('change', function() {
     if (themeCheckbox.checked) {
         document.body.classList.add('light-theme');
-        mainImage.setAttribute('src', 'assets/img/main-illustration-white.webp')
+        mainImage.setAttribute('src', 'assets/img/main-illustration-white.webp');
+        saveThemeState('light');
     } else {
         document.body.classList.remove('light-theme');
-        mainImage.setAttribute('src', 'assets/img/main-illustration.webp')
+        mainImage.setAttribute('src', 'assets/img/main-illustration.webp');
+        saveThemeState('dark');
     }
 });
 
