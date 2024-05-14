@@ -1,8 +1,21 @@
-// Loader 
+// On load
 $(window).on('load', function() {
     $("#loader-container").removeClass('visible');
     $("body").css("overflow", "auto");
+
+    setTimeout(() => {
+        let toastElement = document.getElementById('firstToast');
+        let toast = new bootstrap.Toast(toastElement);
+        toast.show();
+    }, 3000);
+
+    setTimeout(() => {
+        let secondToast = document.getElementById('secondToast');
+        let toast = new bootstrap.Toast(secondToast);
+        toast.show();
+    }, 22000);
 });
+
 
 // Progress bar
 window.onscroll = function() {scrollFunction()};
