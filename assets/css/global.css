@@ -301,7 +301,21 @@ main {
     }
 }
 
-  
+.dark-link {
+    transition: box-shadow 300ms ease-in-out;
+
+    img {
+        transition: transform 300ms ease;
+    }
+}
+
+.dark-link:hover {
+    box-shadow: 0 .5rem 1rem var(--accent) !important;
+
+    img {
+        transform: rotate(-15deg); 
+    }
+}
 
 /* LOADER */
 #loader-container {
