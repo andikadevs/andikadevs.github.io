@@ -41,11 +41,9 @@ function loadThemeState() {
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'light') {
         document.body.classList.add('light-theme');
-        // mainImage.setAttribute('src', 'assets/img/main-illustration-white.webp');
         themeCheckbox.checked = true;
     } else {
         document.body.classList.remove('light-theme');
-        // mainImage.setAttribute('src', 'assets/img/main-illustration.webp');
         themeCheckbox.checked = false;
     }
 }
@@ -57,11 +55,9 @@ loadThemeState();
 themeCheckbox.addEventListener('change', function() {
     if (themeCheckbox.checked) {
         document.body.classList.add('light-theme');
-        // mainImage.setAttribute('src', 'assets/img/main-illustration-white.webp');
         saveThemeState('light');
     } else {
         document.body.classList.remove('light-theme');
-        // mainImage.setAttribute('src', 'assets/img/main-illustration.webp');
         saveThemeState('dark');
     }
 });
