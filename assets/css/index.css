@@ -505,7 +505,7 @@ header.slide-down {
     }
 }
 
-#experience {
+#experience, #education {
     position: relative;
     background: var(--secondary);
     padding-bottom: 42px;
@@ -550,7 +550,7 @@ header.slide-down {
 }
 
 @media screen and (max-width: 1024px) {
-    #experience {
+    #experience, #education {
         .row-1 {
             padding: 42px 0px 0px 0px !important;
         }
