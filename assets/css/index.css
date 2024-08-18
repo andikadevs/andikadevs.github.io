@@ -427,6 +427,41 @@ header.slide-down {
     }
 }
 
+#companies {
+    margin-top: 30px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    width: 100dvw;
+    background: var(--secondary);
+    overflow: hidden;
+    white-space: nowrap;
+
+    .company-slider {
+        animation: 15s slide infinite linear;
+        display: inline-block;
+
+        img {
+            height: 40px;
+            margin: 0 40px;
+            filter: grayscale(1);
+            transition: filter 0.3s;
+        }
+
+        img:hover {
+            filter: grayscale(0);
+        }
+    }
+}
+
+@keyframes slide {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+}
+
 #skills {
     height: auto;
     width: 100%;

@@ -14,6 +14,9 @@ $(window).on('load', function() {
         let toast = new bootstrap.Toast(secondToast);
         toast.show();
     }, 22000);
+
+    let company = document.querySelector('.company-slider').cloneNode(true);
+    document.querySelector('#companies').appendChild(company)
 });
 
 
