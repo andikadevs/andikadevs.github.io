@@ -3,22 +3,60 @@ $(window).on('load', function() {
     $("#loader-container").removeClass('visible');
     $("body").css("overflow", "auto");
 
-    setTimeout(() => {
-        let toastElement = document.getElementById('firstToast');
-        let toast = new bootstrap.Toast(toastElement);
-        toast.show();
-    }, 3000);
+    // setTimeout(() => {
+    //     let toastElement = document.getElementById('firstToast');
+    //     let toast = new bootstrap.Toast(toastElement);
+    //     toast.show();
+    // }, 3000);
 
-    setTimeout(() => {
-        let secondToast = document.getElementById('secondToast');
-        let toast = new bootstrap.Toast(secondToast);
-        toast.show();
-    }, 22000);
+    // setTimeout(() => {
+    //     let secondToast = document.getElementById('secondToast');
+    //     let toast = new bootstrap.Toast(secondToast);
+    //     toast.show();
+    // }, 22000);
 
     let company = document.querySelector('.company-slider').cloneNode(true);
     document.querySelector('#companies').appendChild(company)
 });
 
+$(document).ready(function() {
+    const toastContainer = $('#facts-container');
+    const apiUrl = 'https://uselessfacts.jsph.pl/random.json?language=en'; // Useless Facts API URL
+
+    function showToast(fact) {
+        const toastHTML = `
+            <div class="toast fade" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                    <strong class="me-auto">Did You Know? 🤔</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body" style="background: white; color: var(--secondary-dark);">
+                    ${fact}
+                </div>
+            </div>
+        `;
+
+        toastContainer.append(toastHTML);
+
+        const toastElement = toastContainer.children('.toast').last()[0];
+        const toast = new bootstrap.Toast(toastElement);
+        toast.show();
+
+        // Remove the toast after it fades out
+        setTimeout(() => $(toastElement).fadeOut(), 5000); 
+    }
+
+    function fetchAndDisplayFact() {
+        $.getJSON(apiUrl, function(data) {
+            const fact = data.text;
+            showToast(fact);
+        });
+    }
+
+    setInterval(fetchAndDisplayFact, 15000); 
+
+    fetchAndDisplayFact();
+});
 
 // Progress bar
 window.onscroll = function() {scrollFunction()};

@@ -53,6 +53,14 @@ header.slide-down {
     }
 }
 
+#facts-container {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin: 20px;
+    z-index: 999;
+}
+
 #hero {
     height: 100dvh;
     width: 100dvw;
@@ -441,7 +449,6 @@ header.slide-down {
         display: inline-block;
 
         img {
-            height: 40px;
             margin: 0 40px;
             filter: grayscale(1);
             transition: filter 0.3s;
