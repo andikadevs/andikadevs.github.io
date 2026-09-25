@@ -73,7 +73,7 @@
 .btn:hover .btn__icon--diag { transform: translate(2px, -2px); }
 
 .btn--light { --btn-bg: var(--white); --btn-fg: var(--ink); }
-.btn--brand { --btn-bg: var(--brand); --btn-fg: var(--brand-fg); }
+.btn--brand { --btn-bg: var(--brand-strong); --btn-fg: var(--white); }
 .btn--ghost {
   --btn-bg: transparent; --btn-fg: var(--fg);
   border-color: var(--border-strong);
@@ -321,7 +321,7 @@
 
 /* ---- Colour blocks (full-bleed OKAY bands) -------------------------------- */
 .block { position: relative; overflow: hidden; isolation: isolate; }
-.block--brand { background: var(--brand); color: var(--white); }
+.block--brand { background: var(--brand-strong); color: var(--white); }
 .block--sky   { background: linear-gradient(180deg, var(--hero-from), var(--hero-to)); color: var(--white); }
 .block--ink   { background: var(--ink); color: var(--cream); }
 .block--white { background: var(--white); color: var(--ink); }
@@ -414,7 +414,7 @@
 .feature__big { font: 800 var(--text-3xl) / 1 var(--font-display); letter-spacing: -0.03em; }
 .feature--ink   { background: var(--ink-2); color: var(--cream); }
 .feature--sky   { background: linear-gradient(160deg, var(--sky-100), var(--sky-200)); color: var(--sky-800); }
-.feature--brand { background: var(--brand); color: var(--white); }
+.feature--brand { background: var(--brand-strong); color: var(--white); }
 .feature--white { background: var(--white); color: var(--ink); border: 1px solid var(--border); }
 
 /* ---- Dialog -------------------------------------------------------------- */
@@ -451,7 +451,7 @@
 .blueprint {
   position: relative; isolation: isolate;
   color: var(--white);
-  background: linear-gradient(180deg, var(--hero-from), var(--hero-to));
+  background: linear-gradient(180deg, var(--hero-from), var(--hero-mid) 55%, var(--hero-to));
 }
 
 /* ---- Cloud: soft cumulus drawn from overlapping radial puffs -------------- */
@@ -618,7 +618,11 @@
     linear-gradient(currentColor, currentColor) center / 100% 1.5px no-repeat,
     linear-gradient(currentColor, currentColor) center / 1.5px 100% no-repeat;
 }
-.blueprint .sheet, .block--brand .sheet, .block--ink .sheet { color: rgb(255 255 255 / 0.75); }
+.blueprint .sheet, .block--brand .sheet, .block--ink .sheet {
+  color: var(--white);
+  padding: 6px 12px; border-radius: var(--radius-pill);
+  background: rgb(10 35 70 / 0.3);          /* keeps small white text ≥ 4.5:1 on the lightest sky */
+}
 .blueprint .sheet__no, .block--brand .sheet__no, .block--ink .sheet__no { color: var(--white); }
 
 /* ---- Dimension line: measures a word, with a mono label underneath -------- */
@@ -736,8 +740,9 @@
   [data-split][data-reveal].is-in .w > span { transform: none; }
 
   /* Scroll-lit words: brighten one by one as the element's --p rises. */
-  [data-split="scrub"] .w > span {
-    opacity: clamp(0.16, calc((var(--p, 0) * 2.2 - 0.45) * var(--wn) - var(--wi) + 1), 1);
+  [data-split="scrub"] { color: var(--fg); }
+  [data-split="scrub"] .w > span {       /* dim words stay ≥ 3:1 against the page (large text) */
+    opacity: clamp(0.5, calc((var(--p, 0) * 2.2 - 0.45) * var(--wn) - var(--wi) + 1), 1);
     transition: opacity 120ms linear;
   }
 

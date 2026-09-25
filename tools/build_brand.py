@@ -61,7 +61,15 @@ def geometry():
     at = font.path(at_glyph, at_cx - (txmin + txmax) / 2 * k, at_cy + (tymin + tymax) / 2 * k, k)
     hit = (offset + a_x + axmin - 40, baseline - x_height - 60, axmax - axmin + 80, x_height + 120)
 
-    return {"mark": mark, "letters": letters, "dot": dot, "bar": bar, "caret": caret, "at_index": a_i,
+    # Highest point of anything drawn (the mark's ring stroke and the i's dot rise
+    # above the ascender line), so the viewBox never clips them.
+    tops = [dot[1] - dot[2]]
+    for m in re.finditer(r'<circle[^>]*cy="(-?[\d.]+)" r="([\d.]+)"(?:[^>]*stroke-width="([\d.]+)")?', mark):
+        tops.append(float(m[1]) - float(m[2]) - float(m[3] or 0) / 2)
+    tops += [float(y) for y in re.findall(r'<rect[^>]*y="(-?[\d.]+)"', mark)]
+    top = min(0, *tops) - 16
+
+    return {"mark": mark, "letters": letters, "dot": dot, "bar": bar, "caret": caret, "at_index": a_i, "top": top,
             "at": at, "at_center": (at_cx, at_cy), "hit": hit,
             "width": caret[0] + caret[2], "height": bar[1] + bar[3]}
 
@@ -74,7 +82,8 @@ def wordmark_svg():
     )
     (acx, acy), (hx, hy, hw, hh) = g["at_center"], g["hit"]
     (cx, cy, r), (bx, by, bw, bh), (kx, ky, kw, kh) = g["dot"], g["bar"], g["caret"]
-    return f'''<svg class="wm" viewBox="0 -8 {g["width"]:.0f} {g["height"] + 16:.0f}" data-at="{acx:.0f},{acy + 8:.0f},{g["width"]:.0f},{g["height"] + 16:.0f}" fill="currentColor">
+    top, h = g["top"], g["height"] - g["top"] + 16
+    return f'''<svg class="wm" viewBox="0 {top:.0f} {g["width"]:.0f} {h:.0f}" data-at="{acx:.0f},{acy - top:.0f},{g["width"]:.0f},{h:.0f}" fill="currentColor">
         <g class="wm__mark" aria-hidden="true">{g["mark"]}</g>
         <g class="wm__letters" aria-hidden="true">{letters}</g>
         <path class="wm__at" d="{g["at"]}" aria-hidden="true"/>

@@ -6,6 +6,7 @@
 // a card. Prev/next and arrow keys work too; the front card opens its case study.
 import { html, render, $ } from "../core/dom.js";
 import { pick } from "../core/i18n.js";
+import { srcset } from "../core/media.js";
 import { projects, DISCIPLINES } from "../data/projects.js";
 
 const N = projects.length;
@@ -23,7 +24,7 @@ let els = null;        // cached nodes, refreshed after each render
 
 const card = (p, i) => html`
   <button class="deck-card" type="button" data-deck-card="${i}" tabindex="-1" aria-label="${pick(p.title)}">
-    <span class="shot"><img src="${p.cover}" alt="" draggable="false" loading="${i < 3 ? "eager" : "lazy"}" decoding="async" width="1823" height="966"></span>
+    <span class="shot"><img src="${p.cover}" srcset="${srcset(p.cover)}" sizes="(min-width: 900px) 30vw, 72vw" alt="" draggable="false" loading="${i < 3 ? "eager" : "lazy"}" decoding="async" width="1600" height="848"></span>
   </button>`;
 
 const info = (p, i) => html`

@@ -32,7 +32,7 @@ const highlight = (item) => html`
 
 const social = (s) => html`<li><a href="${s.url}" target="_blank" rel="noopener">${s.label}</a></li>`;
 
-const logo = (c) => html`<li><img src="${c.logo}" alt="${c.name}" loading="lazy" height="40"></li>`;
+const logo = (c) => html`<li><img src="${c.logo}" alt="${c.name}" loading="lazy" decoding="async" width="${c.width}" height="${c.height}"></li>`;
 
 export function renderAbout() {
   render($("[data-experience]"), experience.map(job));

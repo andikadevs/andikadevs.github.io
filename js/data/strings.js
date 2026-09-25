@@ -39,6 +39,7 @@ export const strings = {
     "work.prev": "Previous project",
     "work.next": "Next project",
     "work.hint": "Drag, swipe or use the arrow keys",
+    "work.carousel": "Projects",
     "work.visit": "Visit site",
     "work.private": "Internal system, not public",
     "work.problem": "The problem",
@@ -59,6 +60,7 @@ export const strings = {
 
     "hl.eyebrow": "A few numbers",
     "hl.title": "What the work added up to.",
+    "hl.row": "Numbers — scroll sideways",
 
     "contact.eyebrow": "Contact",
     "contact.lead": "Hiring for a remote role, or have a system that needs untangling? My inbox is open.",
@@ -106,6 +108,7 @@ export const strings = {
     "work.prev": "Proyek sebelumnya",
     "work.next": "Proyek berikutnya",
     "work.hint": "Geser, swipe, atau pakai tombol panah",
+    "work.carousel": "Proyek",
     "work.visit": "Buka situs",
     "work.private": "Sistem internal, tidak publik",
     "work.problem": "Masalahnya",
@@ -126,6 +129,7 @@ export const strings = {
 
     "hl.eyebrow": "Sedikit angka",
     "hl.title": "Hasil kerjanya, dalam angka.",
+    "hl.row": "Angka — geser ke samping",
 
     "contact.eyebrow": "Kontak",
     "contact.lead": "Lagi cari orang buat posisi remote, atau punya sistem yang perlu dirapikan? Kabari aja.",

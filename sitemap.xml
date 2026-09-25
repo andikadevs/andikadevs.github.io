@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://andikadevs.github.io/</loc>
+    <lastmod>2026-09-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://andikadevs.github.io/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://andikadevs.github.io/?lang=id"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://andikadevs.github.io/"/>
+    <image:image><image:loc>https://andikadevs.github.io/assets/img/og.jpg</image:loc></image:image>
+    <image:image><image:loc>https://andikadevs.github.io/assets/img/andika.webp</image:loc></image:image>
+    <image:image><image:loc>https://andikadevs.github.io/assets/projects/international/hero.webp</image:loc></image:image>
+    <image:image><image:loc>https://andikadevs.github.io/assets/projects/passport/dashboard.webp</image:loc></image:image>
+    <image:image><image:loc>https://andikadevs.github.io/assets/projects/management/dashboard.webp</image:loc></image:image>
+    <image:image><image:loc>https://andikadevs.github.io/assets/projects/automations/dashboard.webp</image:loc></image:image>
+    <image:image><image:loc>https://andikadevs.github.io/assets/projects/corpus/research.webp</image:loc></image:image>
+    <image:image><image:loc>https://andikadevs.github.io/assets/projects/kerjamalam/hero.webp</image:loc></image:image>
+    <image:image><image:loc>https://andikadevs.github.io/assets/projects/depot/files.webp</image:loc></image:image>
+    <image:image><image:loc>https://andikadevs.github.io/assets/projects/pddikti/ui.webp</image:loc></image:image>
+    <image:image><image:loc>https://andikadevs.github.io/assets/projects/scraper/scraper.webp</image:loc></image:image>
+    <image:image><image:loc>https://andikadevs.github.io/assets/projects/conflow/dashboard.webp</image:loc></image:image>
+    <image:image><image:loc>https://andikadevs.github.io/assets/projects/bio/hero.webp</image:loc></image:image>
+    <image:image><image:loc>https://andikadevs.github.io/assets/projects/topmatch/hero.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://andikadevs.github.io/?lang=id</loc>
+    <lastmod>2026-09-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://andikadevs.github.io/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://andikadevs.github.io/?lang=id"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://andikadevs.github.io/"/>
+  </url>
+</urlset>

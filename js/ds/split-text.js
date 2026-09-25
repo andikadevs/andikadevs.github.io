@@ -6,11 +6,16 @@ export function splitWords(root = document) {
     const text = el.textContent.trim().replace(/\s+/g, " ");
     if (el.dataset.splitText === text && el.querySelector(".w")) return;
     el.dataset.splitText = text;
-    el.setAttribute("aria-label", text);
+
+    // Screen readers get the sentence once, as plain hidden text; the animated
+    // word spans are hidden from them (aria-label isn't allowed on a plain span/p).
+    const spoken = document.createElement("span");
+    spoken.className = "sr-only";
+    spoken.textContent = text;
 
     const words = text.split(" ");
     el.style.setProperty("--wn", words.length);
-    el.replaceChildren(...words.flatMap((word, i) => {
+    el.replaceChildren(spoken, ...words.flatMap((word, i) => {
       const outer = document.createElement("span");
       outer.className = "w";
       outer.setAttribute("aria-hidden", "true");

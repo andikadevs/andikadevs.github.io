@@ -5,6 +5,7 @@ import { t, pick } from "../core/i18n.js";
 import { projects, DISCIPLINES } from "../data/projects.js";
 import { external, close } from "./icons.js";
 import { lockScroll, unlockScroll } from "../ds/smooth-scroll.js";
+import { srcset } from "../core/media.js";
 
 const PREFIX = "#project/";
 const bySlug = new Map(projects.map((p) => [p.slug, p]));
@@ -26,7 +27,7 @@ const view = (p) => html`
         : html`<p class="label label--muted">${t("work.private")}</p>`}
     </header>
 
-    <img class="case__cover" src="${p.cover}" alt="" width="1200" height="750">
+    <img class="case__cover" src="${p.cover}" srcset="${srcset(p.cover)}" sizes="(min-width: 960px) 820px, 100vw" alt="${pick(p.title)} — main screen" width="1600" height="848">
 
     <div class="case__metrics">
       ${p.metrics.map((m) => html`<div class="stat"><span class="stat__value">${m.value}</span><span class="stat__label">${pick(m.label)}</span></div>`)}
@@ -38,7 +39,7 @@ const view = (p) => html`
       <section><h3 class="label label--muted">${t("work.stack")}</h3><div class="cluster">${p.stack.map((s) => html`<span class="chip">${s}</span>`)}</div></section>
     </div>
 
-    ${p.gallery.length ? html`<div class="case__gallery">${p.gallery.map((src) => html`<img src="${src}" alt="" loading="lazy" decoding="async">`)}</div>` : ""}
+    ${p.gallery.length ? html`<div class="case__gallery">${p.gallery.map((src, i) => html`<img src="${src}" srcset="${srcset(src)}" sizes="(min-width: 760px) 410px, 100vw" alt="${pick(p.title)} — screen ${i + 2}" loading="lazy" decoding="async" width="1600" height="848">`)}</div>` : ""}
   </article>`;
 
 export function initProjectDialog(dialog) {
