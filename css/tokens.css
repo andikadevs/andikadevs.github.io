@@ -1,0 +1,159 @@
+/* ==========================================================================
+   Blueprint DS — design tokens
+   A soft sky with a faint drawing on it: sky blue, white clouds and
+   hairline annotations. Calm surfaces, precise details.
+   Every other file reads these variables; nothing else hard-codes a value.
+   ========================================================================== */
+
+@import url("../fonts/fonts.css");
+
+:root {
+  /* ---- Raw palette ------------------------------------------------------ */
+  --sky-50:  #eef7ff;
+  --sky-100: #cdeeff;
+  --sky-200: #9fd3fa;
+  --sky-300: #71b7f4;   /* hero gradient start */
+  --sky-400: #5da3e3;
+  --sky-500: #3f8fd6;   /* brand blue — solid blocks, links */
+  --sky-600: #5788b3;   /* hero gradient end */
+  --sky-700: #1f3b6d;   /* night gradient start */
+  --sky-800: #111c36;
+  --sky-900: #031835;   /* night gradient end */
+
+  --white:   #ffffff;
+  --cream:   #fff9f1;
+  --cream-2: #f6efe2;
+  --sand:    #eee8d2;
+  --ink:     #060606;
+  --ink-2:   #1a1a1a;
+  --night:   #0a0a0f;
+
+  --sun:   #ffda3f;     /* availability dot, tiny highlights only */
+  --coral: #fc9073;     /* rare accent: paper plane, alerts */
+
+  /* ---- Semantic (light) ------------------------------------------------- */
+  --bg:           var(--cream);
+  --bg-raised:    var(--white);
+  --bg-sunken:    var(--cream-2);
+  --bg-inverse:   var(--ink);
+  --fg:           var(--ink);
+  --fg-muted:     rgb(6 6 6 / 0.62);
+  --fg-subtle:    rgb(6 6 6 / 0.42);
+  --fg-inverse:   var(--cream);
+  --border:       rgb(6 6 6 / 0.12);
+  --border-strong: rgb(6 6 6 / 0.85);
+  --brand:        var(--sky-500);
+  --brand-fg:     var(--white);
+  --hero-from:    var(--sky-300);
+  --hero-to:      var(--sky-600);
+  --glass-bg:     rgb(255 255 255 / 0.22);
+  --glass-border: rgb(255 255 255 / 0.55);
+  --focus:        var(--ink);
+
+  /* ---- Blueprint ---------------------------------------------------------- */
+  --line:        rgb(255 255 255 / 0.7);    /* drawn lines on blue */
+  --hairline:    1.5px;
+
+  /* ---- Typography ------------------------------------------------------- */
+  --font-display: "Bricolage Grotesque", "Arial Black", system-ui, sans-serif; /* heavy stacked headlines */
+  --font-sans:    "Space Grotesk", system-ui, sans-serif;                      /* body + UI */
+  --font-mono:    "JetBrains Mono", ui-monospace, monospace;                   /* labels, buttons */
+
+  --text-xs:   0.75rem;
+  --text-sm:   0.875rem;
+  --text-base: 1rem;
+  --text-lg:   1.125rem;
+  --text-xl:   1.375rem;
+  --text-2xl:  clamp(1.6rem, 1.2rem + 1.6vw, 2.25rem);
+  --text-3xl:  clamp(2rem, 1.3rem + 2.8vw, 3.5rem);
+  --text-4xl:  clamp(2.6rem, 1.4rem + 5vw, 5.5rem);
+  --text-5xl:  clamp(3.2rem, 1.2rem + 8vw, 8.5rem);
+
+  --leading-tight: 0.95;
+  --leading-snug:  1.2;
+  --leading-body:  1.6;
+  --tracking-tight: -0.035em;
+  --tracking-label: 0.14em;
+
+  /* ---- Space (4px base) ------------------------------------------------- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+  --space-10: 144px;
+
+  --gutter:    clamp(16px, 4vw, 60px);
+  --container: 1320px;
+  --section-y: clamp(72px, 10vw, 160px);
+
+  /* ---- Shape ------------------------------------------------------------ */
+  --radius-sm:   8px;
+  --radius-md:   16px;
+  --radius-lg:   24px;
+  --radius-xl:   36px;
+  --radius-pill: 999px;
+
+  /* ---- Elevation -------------------------------------------------------- */
+  --shadow-sm:    0 1px 2px rgb(17 28 54 / 0.08);
+  --shadow-md:    0 10px 30px -12px rgb(17 28 54 / 0.28);
+  --shadow-lg:    0 30px 60px -24px rgb(17 28 54 / 0.4);
+  --shadow-brand: 0 6px 16px -6px rgb(30 58 95 / 0.45);   /* tinted lift on hover */
+  --shadow-glass: inset 0 4px 6px rgb(255 255 255 / 0.25);
+  --glow:         0 0 24px rgb(255 255 255 / 0.55);
+
+  /* ---- Motion ----------------------------------------------------------- */
+  --ease-out:    cubic-bezier(0.22, 1, 0.36, 1);     /* reveals, slides */
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);  /* press + hover scale */
+  --ease-bounce: cubic-bezier(0.3, 1.25, 0.4, 1);    /* toggles, icon swaps */
+  --ease-std:    cubic-bezier(0.4, 0, 0.2, 1);       /* layout (width/gap) */
+
+  --dur-fast: 180ms;
+  --dur-base: 320ms;
+  --dur-slow: 600ms;
+  --dur-reveal: 900ms;
+
+  --hover-scale: 1.03;
+  --press-scale: 0.97;
+
+  color-scheme: light;
+}
+
+/* ---- Night theme ------------------------------------------------------
+   Set by theme.js (saved choice, else system preference) before first paint,
+   so the night values live in exactly one place. */
+:root[data-theme="dark"] {
+  /* Night is deep navy, not black, so the sky, the clouds and the page share one hue. */
+  --bg:           #0b1733;   /* = the bottom of the night sky, so cloud banks dissolve into it */
+  --bg-raised:    #142346;
+  --bg-sunken:    #0e1b3a;
+  --bg-inverse:   var(--cream);
+  --fg:           var(--cream);
+  --fg-muted:     rgb(255 249 241 / 0.68);
+  --fg-subtle:    rgb(255 249 241 / 0.45);
+  --fg-inverse:   var(--ink);
+  --border:       rgb(255 249 241 / 0.12);
+  --border-strong: rgb(255 249 241 / 0.85);
+  --brand:        var(--sky-400);
+  --hero-from:    #1c3868;
+  --hero-to:      #0b1733;
+  --glass-bg:     rgb(255 255 255 / 0.08);
+  --glass-border: rgb(255 255 255 / 0.22);
+  --focus:        var(--cream);
+  color-scheme: dark;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-fast: 1ms;
+    --dur-base: 1ms;
+    --dur-slow: 1ms;
+    --dur-reveal: 1ms;
+    --hover-scale: 1;
+    --press-scale: 1;
+  }
+}

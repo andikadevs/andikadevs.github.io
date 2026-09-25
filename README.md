@@ -1,51 +1,73 @@
+# andika — portfolio
 
-# Fullstack Developer 📝
+Personal portfolio of Andika Dwi Saputra. Plain HTML, CSS and ES modules: no build step,
+no framework, no dependencies. Deploys to GitHub Pages as-is.
 
-Hello there! I'm Andika Dwi Saputra, and I'm a Fullstack Developer.
+## Run locally
 
-## 🛠️ Ability toolkit
+```bash
+python3 -m http.server 8080   # then open http://localhost:8080
+```
 
-Can't program everything by myself, can I? Here is a list of all the tools that help me complete all my projects!
-#### Programming Language
-<div style="display: flex; flex-direction: row;">
-    <img src="https://github.com/devicons/devicon/blob/master/icons/html5/html5-original-wordmark.svg" alt="html5" width="40" height="40" style="margin-right: 12px"/>
-    <img src="https://github.com/devicons/devicon/blob/master/icons/css3/css3-original-wordmark.svg" alt="css3" width="40" height="40" style="margin-right: 12px"/>
-    <img src="https://github.com/devicons/devicon/blob/master/icons/javascript/javascript-original.svg" alt="javascript" width="40" height="40" style="margin-right: 12px"/>
-    <img src="https://github.com/devicons/devicon/blob/master/icons/php/php-original.svg" alt="php" width="40" height="40" style="margin-right: 12px"/>
-    <img src="https://github.com/devicons/devicon/blob/master/icons/csharp/csharp-original.svg" alt="c#" width="40" height="40" style="margin-right: 12px"/>
-</div>
+ES modules need a server; opening `index.html` from the file system won't load the scripts.
 
-#### Tools & Framework
-<div style="display: flex; flex-direction: row;">
-    <img src="https://github.com/devicons/devicon/blob/master/icons/laravel/laravel-original.svg" alt="laravel" width="40" height="40" style="margin-right: 12px"/>
-    <img src="https://github.com/devicons/devicon/blob/master/icons/nodejs/nodejs-original-wordmark.svg" alt="nodejs" width="40" height="40" style="margin-right: 12px"/>
-    <img src="https://github.com/devicons/devicon/blob/master/icons/express/express-original-wordmark.svg" alt="express" width="40" height="40" style="margin-right: 12px"/>
-    <img src="https://github.com/devicons/devicon/blob/master/icons/composer/composer-original.svg" alt="composer" width="40" height="40" style="margin-right: 12px"/>
-    <img src="https://github.com/devicons/devicon/blob/master/icons/livewire/livewire-original.svg" alt="composer" width="40" height="40" style="margin-right: 12px"/>
-    <img src="https://github.com/devicons/devicon/blob/master/icons/jquery/jquery-original.svg" alt="composer" width="40" height="40" style="margin-right: 12px"/>
-    <img src="https://github.com/devicons/devicon/blob/master/icons/dotnetcore/dotnetcore-original.svg" alt="dotnet" width="40" height="40" style="margin-right: 12px"/>
-    <img src="https://github.com/devicons/devicon/blob/master/icons/bootstrap/bootstrap-plain-wordmark.svg" alt="bootstrap" width="40" height="40" style="margin-right: 12px"/>
-    <img src="https://github.com/devicons/devicon/blob/master/icons/materialui/materialui-original.svg" alt="materialui" width="40" height="40" style="margin-right: 12px"/>
-    <img src="https://github.com/devicons/devicon/blob/master/icons/react/react-original-wordmark.svg" alt="react" width="40" height="40" style="margin-right: 12px"/>
-</div>
+## Deploy (GitHub Pages)
 
-#### Databases & Baas ( Backend as a Services )
-<div style="display: flex; flex-direction: row;">
-    <img src="https://github.com/devicons/devicon/blob/master/icons/mysql/mysql-original-wordmark.svg" alt="mysql" width="40" height="40" style="margin-right: 12px"/>
-    <img src="https://github.com/devicons/devicon/blob/master/icons/microsoftsqlserver/microsoftsqlserver-plain-wordmark.svg" alt="mssql" width="40" height="40" style="margin-right: 12px"/>
-    <img src="https://github.com/devicons/devicon/blob/master/icons/git/git-original.svg" alt="git" width="40" height="40" style="margin-right: 12px"/>
-</div>
+Live at **https://andikadevs.github.io/**: this folder is the `andikadevs/andikadevs.github.io`
+repo, served by GitHub Pages from `main` (root). Push to `main` and it redeploys.
 
-#### DevOps
-<div style="display: flex; flex-direction: row;">
-    <img src="https://github.com/devicons/devicon/blob/master/icons/linux/linux-original.svg" alt="git" width="40" height="40" style="margin-right: 12px"/>
-    <img src="https://github.com/devicons/devicon/blob/master/icons/apache/apache-original.svg" alt="git" width="40" height="40" style="margin-right: 12px"/>
-    <img src="https://github.com/devicons/devicon/blob/master/icons/docker/docker-original.svg" alt="git" width="40" height="40" style="margin-right: 12px"/>
-    <img src="https://github.com/devicons/devicon/blob/master/icons/nginx/nginx-original.svg" alt="git" width="40" height="40" style="margin-right: 12px"/>
-</div>
+All paths are relative, so the site also works under a sub-path. `.nojekyll` stops Jekyll
+from touching the files; `404.html` finds its way home in both setups.
 
-## Portfolio
+## Structure
 
-I'm a fighter who will do everything to become the best version of myself! I'm always eager to learn and level up my skills. Here is my portfolio, the place where I deliver my all ideas and inovations. You'll see innovative solutions and a bunch of web projects here! 
+```
+index.html              page shell + English copy (readable without JS)
+404.html                self-contained not-found page
+css/
+  tokens.css            ┐
+  base.css              ├ Blueprint design system (source: ~/Designs/blueprint-ds)
+  components.css        ┘
+  site.css              page layout only: arranges components, defines no new ones
+js/
+  theme.js              day/night, runs in <head> before first paint
+  main.js               entry: wires data → sections → interactions
+  core/dom.js           html`` template (auto-escapes) + render()
+  core/i18n.js          language state, t(), pick(), static [data-i18n] pass
+  ds/*.js               design-system behaviours: smooth scroll (Lenis, vendored, MIT),
+                        scroll progress → CSS --p, split text, count-up, magnetic, marquee…
+  sections/*.js         one file per page section; data in, markup out
+  data/projects.js      case studies
+  data/profile.js       bio, experience, education, highlights, stack, socials
+  data/strings.js       interface copy, EN + ID
+assets/                 images, logos, CV
+fonts/                  self-hosted Google Fonts (OFL)
+tools/                  glyphs.py, mark.py, build_brand.py: regenerate the logo, favicon and footer wordmark
+                        from the display font (pip install fonttools brotli)
+```
 
-[My Portfolio](https://andikss.github.io)
+## Motion
+
+Scroll effects are written in CSS. `ds/scroll-progress.js` writes `--p` (0 → 1 as an element
+crosses the viewport) onto every `[data-scroll]` element, and `site.css` turns that into
+transforms inside `@media (prefers-reduced-motion: no-preference)`. With reduced motion,
+Lenis is skipped and every effect is off.
+
+## Editing content
+
+- **A project** → add an object to `js/data/projects.js`; it joins the Work orbit and the hero
+  (give it a `short` label for the hero node). Screenshots go in `assets/projects/<dir>/`:
+  the first is the cover, the rest become the case-study gallery.
+- **Any visible text** → it's either an `{ en, id }` pair in `js/data/*` or a key in
+  `js/data/strings.js`. Both languages must have the same keys; missing ones fall back to English.
+- **Colours, spacing, motion** → `css/tokens.css`. Nothing else hard-codes a value.
+
+## i18n
+
+English is the default. The language switch saves the choice; `?lang=id` forces Indonesian
+(handy for sharing). A case study can be linked directly: `#project/stekom-passport`.
+
+## Updating the design system
+
+The three `css/` token/base/component files and `js/ds/` are copies from `~/Designs/blueprint-ds`.
+Change them there, then run `./sync-ds.sh`.
