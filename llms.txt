@@ -1,0 +1,41 @@
+# Andika Dwi Saputra (andikadevs)
+
+> Fullstack developer in Semarang, Indonesia. I build the software companies quietly run on: internal tools, single sign-on, media services, AI pipelines. Three-plus years, mostly for universities and hiring platforms in Indonesia. Open to remote roles.
+
+I started as an intern at a Toyota dealership, writing Laravel. Today I run the platform behind a university's apps, build tools for Toploker.com, and keep a small studio going on the side. I like problems where a boring manual step is costing someone hours a week.
+
+## Work
+
+- [STEKOM International](https://andikadevs.github.io/#project/stekom-international): University website, Universitas STEKOM, 2026. The official international site of Universitas STEKOM. Real English and Indonesian pages, plus an admin where each department runs its own content.
+- [STEKOM Passport](https://andikadevs.github.io/#project/stekom-passport): Identity & SSO, Universitas STEKOM, 2026. An OpenID Connect provider for the whole campus. One login for every internal app, with typed SDKs for TypeScript, Python and PHP.
+- [OTO Management](https://andikadevs.github.io/#project/oto-management): Internal system, Toploker.com, 2024. Toploker's operational backbone: ads, revenue recaps, invoices and broadcasts in one place, updating live.
+- [SnapCRM](https://andikadevs.github.io/#project/snapcrm): WhatsApp automation, Universitas STEKOM & Toploker.com, 2024. A CRM that turns large lead lists into WhatsApp conversations, with broadcasts and auto-reply flows.
+- [Corpus](https://andikadevs.github.io/#project/corpus): AI research pipeline, Universitas STEKOM, 2026. A multi-agent pipeline that drafts academic manuscripts from real sources, and refuses to ship a citation it can't trace back.
+- [Kerja Malam](https://andikadevs.github.io/#project/kerja-malam): Job portal · PWA, Kerja Malam, 2025. A job board for night-shift, part-time and freelance work in Indonesia. Light enough for a cheap phone, and it still works offline.
+- [Depot](https://andikadevs.github.io/#project/depot): Media service, Universitas STEKOM, 2026. One multi-tenant media service for every campus app: presigned uploads, background thumbnails and transcodes, signed delivery, HMAC webhooks.
+- [PDDikti API & MCP](https://andikadevs.github.io/#project/pddikti-api): Open-source API, Open source, 2026. A typed, documented read-only API over Indonesia's higher-education dataset, also exposed as an MCP server so AI agents can query it.
+- [Jobs Scraper](https://andikadevs.github.io/#project/jobs-scraper): AI data pipeline, Toploker.com, 2026. Watches Instagram accounts by region, scrapes vacancy posts, and lets Gemini sort real jobs from noise before anything hits the database.
+- [Conflow](https://andikadevs.github.io/#project/conflow): Content scheduling, Universitas STEKOM, 2026. Write, schedule and publish social posts across channels from one dashboard, with a media library that imports from Google Drive.
+- [Bio](https://andikadevs.github.io/#project/bio): Link-in-bio builder, Universitas STEKOM, 2026. A self-hosted link-in-bio builder for campus teams: drag-and-drop pages, themes, QR codes and analytics that stay on campus servers.
+- [TopMatch](https://andikadevs.github.io/#project/topmatch): HR SaaS landing, Toploker.com, 2025. The recruitment product site for Toploker, aimed at HR teams, with pricing out in the open.
+
+## Experience
+
+- Fullstack Developer & Analyst, Toploker.com (2024 — now): I build the systems Toploker runs on: OTO Management, SnapCRM, the jobs scraper, TopMatch and the CV catalog. Most of my week is spent finding the manual step nobody likes and making it go away.
+- Software Engineer, International Office, Universitas STEKOM (2024 — now): Developer on the international team. I built the international site and the campus platform around it: Passport for single sign-on, Depot for media, Conflow, Bio and Corpus.
+- Founder, Manggala Cloud (2024 — now): A small web and app studio in Semarang, running six services: the studio site, digital wedding invitations, birthday pages, an invitation editor with checkout, an affiliate portal, and the admin that runs it all.
+- Junior Software Engineer (Intern), Akastra Toyota (2023 — 2024): Where I learned to ship. Company sites, an OAuth2 SSO server, vehicle tracking, e-parking, a staging export panel and the MRS Genius APIs.
+
+## Contact
+
+- Email: andikadwisaputra.dev@gmail.com
+- [GitHub](https://github.com/andikadevs): @andikadevs
+- [LinkedIn](https://www.linkedin.com/in/andikadwisaputra): in/andikadwisaputra
+- [Medium](https://medium.com/@andikads): @andikads
+- [Instagram](https://instagram.com/andikads__): @andikads__
+- CV (PDF): https://andikadevs.github.io/assets/docs/cv-andika-dwi-saputra.pdf
+
+## Optional
+
+- [Full text of every case study](https://andikadevs.github.io/llms-full.txt)
+- [Sitemap](https://andikadevs.github.io/sitemap.xml)

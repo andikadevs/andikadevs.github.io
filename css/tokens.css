@@ -44,8 +44,10 @@
   --border-strong: rgb(6 6 6 / 0.85);
   --brand:        var(--sky-500);
   --brand-fg:     var(--white);
-  --hero-from:    var(--sky-300);
-  --hero-to:      var(--sky-600);
+  --hero-from:    #3d8fdb;   /* sky, deep enough that white large text is ≥ 3:1 at the top */
+  --hero-mid:     #3176b9;   /* white body text ≥ 4.5:1 from here down */
+  --hero-to:      #2f6aa4;
+  --brand-strong: #2b6cb0;   /* filled surfaces carrying white text: 5.4:1 */
   --glass-bg:     rgb(255 255 255 / 0.22);
   --glass-border: rgb(255 255 255 / 0.55);
   --focus:        var(--ink);
@@ -140,6 +142,7 @@
   --border-strong: rgb(255 249 241 / 0.85);
   --brand:        var(--sky-400);
   --hero-from:    #1c3868;
+  --hero-mid:     #13264b;
   --hero-to:      #0b1733;
   --glass-bg:     rgb(255 255 255 / 0.08);
   --glass-border: rgb(255 255 255 / 0.22);

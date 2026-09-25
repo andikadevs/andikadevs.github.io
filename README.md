@@ -53,6 +53,18 @@ crosses the viewport) onto every `[data-scroll]` element, and `site.css` turns t
 transforms inside `@media (prefers-reduced-motion: no-preference)`. With reduced motion,
 Lenis is skipped and every effect is off.
 
+## Build scripts
+
+The site runs straight from the source files. These regenerate the derived bits; run them
+after editing and commit the output:
+
+- `node tools/build.mjs`: `css/app.css` (one minified stylesheet), the `<head>` meta/OG/hreflang
+  block, JSON-LD, the `<noscript>` project list, `sitemap.xml`, `robots.txt`,
+  `llms.txt`, `llms-full.txt`, `manifest.webmanifest`. All from `js/data/*`, so nothing is typed twice.
+- `python3 tools/build_brand.py`: nav/hero mark, favicon.svg and the footer wordmark (needs fonttools).
+- `python3 tools/optimize_images.py`: 1600px + 800px screenshots, logos, photo (needs Pillow).
+- `node tools/render_images.mjs`: `og.jpg` and PNG icons (needs playwright-core + Chrome).
+
 ## Editing content
 
 - **A project** → add an object to `js/data/projects.js`; it joins the Work orbit and the hero

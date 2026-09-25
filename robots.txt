@@ -1,0 +1,15 @@
+# andikadevs.github.io — everyone is welcome, search engines and AI assistants alike.
+User-agent: *
+Allow: /
+
+# AI crawlers: allowed. A plain-text summary is at /llms.txt, the full text at /llms-full.txt.
+User-agent: GPTBot
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://andikadevs.github.io/sitemap.xml

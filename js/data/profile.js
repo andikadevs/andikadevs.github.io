@@ -16,11 +16,11 @@ export const profile = {
 };
 
 export const clients = [
-  { name: "Universitas STEKOM", logo: "assets/logos/stekom.webp" },
-  { name: "Toploker.com",       logo: "assets/logos/toploker.webp" },
-  { name: "Akastra Toyota",     logo: "assets/logos/akastra.webp" },
-  { name: "Kerja Malam",        logo: "assets/logos/kerjamalam.webp" },
-  { name: "Digitek",            logo: "assets/logos/digitek.webp" },
+  { name: "Universitas STEKOM", logo: "assets/logos/stekom.webp", width: 238, height: 88 },
+  { name: "Toploker.com", logo: "assets/logos/toploker.webp", width: 405, height: 88 },
+  { name: "Akastra Toyota", logo: "assets/logos/akastra.webp", width: 252, height: 61 },
+  { name: "Kerja Malam", logo: "assets/logos/kerjamalam.webp", width: 587, height: 88 },
+  { name: "Digitek", logo: "assets/logos/digitek.webp", width: 88, height: 88 },
 ];
 
 export const experience = [

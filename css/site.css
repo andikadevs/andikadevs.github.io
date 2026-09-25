@@ -16,6 +16,7 @@
 }
 .nav.is-scrolled .nav-mark { --accent: var(--brand); color: var(--fg); filter: none; }
 .nav-pill { padding-inline: var(--space-2); }
+.nav:not(.is-scrolled) .nav-pill { background: rgb(10 35 70 / 0.26); }   /* white links ≥ 4.5:1 over the lightest sky */
 .nav-pill__links .nav-link { color: var(--white); }
 .nav.is-scrolled .nav-pill__links .nav-link { color: var(--fg); }
 .nav.is-scrolled .nav-link:hover, .nav.is-scrolled .nav-link[aria-current="true"] { border-color: var(--border-strong); }
@@ -83,12 +84,12 @@
 .hero__title > span { display: block; }
 .hero__light { font-weight: 300; letter-spacing: -0.045em; }
 .hero__title .dim { margin-bottom: 0.3em; }
-.hero__lead { color: rgb(255 255 255 / 0.92); max-width: 50ch; margin-inline: auto; font-size: var(--text-lg); text-shadow: 0 1px 18px rgb(31 59 109 / 0.3); }
+.hero__lead { color: var(--white); max-width: 50ch; margin-inline: auto; font-size: var(--text-lg); text-shadow: 0 1px 18px rgb(31 59 109 / 0.3); }
 .hero__actions { justify-content: center; }
 .hero__caption {
   display: flex; align-items: center; gap: var(--space-2);
   font: 500 11px / 1.4 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase;
-  color: rgb(255 255 255 / 0.8);
+  color: var(--white);
 }
 
 /* The orbit fills the hero behind the copy; wires fade out in the middle so
@@ -111,7 +112,7 @@
 .hero .cloudbank--back { opacity: 0.6; bottom: 10%; }
 
 /* ---- Ticker -------------------------------------------------------------- */
-.ticker { padding-block: var(--space-4) var(--space-6); color: var(--sky-500); }
+.ticker { padding-block: var(--space-4) var(--space-6); color: var(--sky-600); }   /* ≥ 3:1 on cream */
 [data-theme="dark"] .ticker { color: var(--sky-300); }
 .ticker .marquee__item { font-weight: 700; opacity: 0.9; }
 .marquee__sep {                          /* a node on a wire */
@@ -155,7 +156,7 @@
   /* Sky at the top, then a long, soft fade into the page colour at the bottom,
      so the next section starts without an edge. */
   background: linear-gradient(180deg,
-    var(--hero-from) 0%, var(--hero-to) calc(100% - clamp(320px, 34vw, 480px)),
+    var(--hero-from) 0%, var(--hero-mid) 40%, var(--hero-to) calc(100% - clamp(320px, 34vw, 480px)),
     color-mix(in srgb, var(--hero-to) 55%, var(--bg)) calc(100% - clamp(160px, 17vw, 240px)),
     var(--bg) 100%);
 }
@@ -172,7 +173,7 @@
 .work__sub {
   max-width: 22ch;
   font: 800 var(--text-2xl) / 1.1 var(--font-display); letter-spacing: -0.02em; text-transform: uppercase;
-  color: rgb(255 255 255 / 0.92);
+  color: var(--white);
 }
 
 .deck {
@@ -195,9 +196,9 @@
   transition: opacity var(--dur-base) ease, transform var(--dur-slow) var(--ease-out);
 }
 .deck-info__item.is-active { opacity: 1; transform: none; pointer-events: auto; transition-delay: 120ms; }
-.deck-info__meta { color: rgb(255 255 255 / 0.75); }
+.deck-info__meta { color: var(--white); }
 .deck-info__title { font: 800 var(--text-3xl) / 1 var(--font-display); letter-spacing: var(--tracking-tight); }
-.deck-info__text { color: rgb(255 255 255 / 0.88); max-width: 42ch; }
+.deck-info__text { color: var(--white); max-width: 42ch; }
 .chip--light { color: var(--white); border-color: rgb(255 255 255 / 0.4); }
 
 .deck__nav { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); }
@@ -224,7 +225,7 @@
 .deck__btn:hover::before { opacity: 1; scale: 1; }
 .deck__btn:active { transform: scale(0.94); }
 .deck__btn svg { width: 18px; height: 18px; }
-.deck__hint { color: rgb(255 255 255 / 0.6); }
+.deck__hint { color: var(--white); opacity: 0.9; }
 
 .deck__stage { position: relative; min-height: min(70vh, 640px); touch-action: pan-y; cursor: grab; user-select: none; }
 .deck__stage:active { cursor: grabbing; }
@@ -312,7 +313,8 @@
   transform-origin: 50% 100%;
 }
 .hscroll__card:hover { transform: none; }
-.hscroll__card p { opacity: 0.75; }
+.hscroll__card p { opacity: 0.9; }
+.hscroll__card.feature--brand p { opacity: 1; }   /* white on brand-strong must stay ≥ 4.5:1 */
 
 
 /* ---- Studio (sheet 04) --------------------------------------------------- */
@@ -324,7 +326,7 @@
 }
 .studio > .split { position: relative; z-index: 1; }
 .studio .split { align-items: center; }
-.studio .lead { color: rgb(255 255 255 / 0.9); max-width: 40ch; }
+.studio .lead { color: var(--white); max-width: 40ch; }
 .studio .heading { text-shadow: 0 2px 24px rgb(31 59 109 / 0.2); }
 .studio__plan { display: grid; gap: var(--space-5); justify-items: center; }
 .studio__plan .graph { max-width: 540px; }
@@ -339,7 +341,7 @@
 .studio__plan .graph__packets { opacity: clamp(0, (var(--p, 0) - 0.4) * 5, 1); }
 .studio__caption {
   display: grid; justify-items: center; gap: var(--space-3); text-align: center;
-  font: 500 11px / 1.4 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: rgb(255 255 255 / 0.85);
+  font: 500 11px / 1.4 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--white);
 }
 [data-theme="dark"] 
 /* ---- Footer wordmark (built by tools/build_brand.py) ----------------------
@@ -462,7 +464,7 @@
   overflow: hidden;
   /* Dusk: the sky darkens into the footer's navy, so there's no edge between them. */
   background: linear-gradient(180deg,
-    var(--hero-from) 0%, var(--hero-to) 48%,
+    var(--hero-from) 0%, var(--hero-mid) 30%, var(--hero-to) 48%,
     color-mix(in srgb, var(--hero-to) 55%, var(--sky-900)) 72%,
     var(--sky-900) 100%);
 }
@@ -474,8 +476,8 @@
   letter-spacing: var(--tracking-tight);
   max-width: 13ch;
 }
-.contact__lead { max-width: 46ch; font-size: var(--text-lg); color: rgb(255 255 255 / 0.86); }
-.contact__email { font: 500 var(--text-sm) / 1 var(--font-mono); color: rgb(255 255 255 / 0.8); letter-spacing: 0.04em; overflow-wrap: anywhere; }
+.contact__lead { max-width: 46ch; font-size: var(--text-lg); color: var(--white); }
+.contact__email { font: 500 var(--text-sm) / 1 var(--font-mono); color: var(--white); letter-spacing: 0.04em; overflow-wrap: anywhere; }
 
 .footer { background: var(--sky-900); color: var(--cream); padding-block: var(--space-6) var(--space-6); }
 .footer__mark { position: relative; display: block; margin-bottom: var(--space-7); color: var(--cream); }
