@@ -4,9 +4,13 @@
 import { html, render, $ } from "../core/dom.js";
 import { projects } from "../data/projects.js";
 import { initParallax } from "../ds/tilt.js";
+import { onScroll } from "../ds/smooth-scroll.js";
 
 const CHAR_W = 7.4;
 const COMPACT = 760;          // below this, nodes are dots without labels
+const SPREAD = 0.35;          // how far chips drift outward as the hero scrolls away (× their distance from centre)
+
+let layout = null;            // { hub, nodes } from the last draw, used by the scroll step
 
 const nodeWidth = (label) => label.length * CHAR_W + 22;
 
@@ -36,8 +40,7 @@ const node = (n, i, compact) => {
   const w = compact ? 16 : nodeWidth(n.short);
   const h = compact ? 16 : 30;
   return html`
-    <a class="graph__node orbit__node" href="#project/${n.slug}" data-project="${n.slug}" aria-label="${n.short}"
-       style="--i:${i}; --dx:${(n.x - n.cx).toFixed(0)}px; --dy:${(n.y - n.cy).toFixed(0)}px">
+    <a class="graph__node orbit__node" href="#project/${n.slug}" data-project="${n.slug}" aria-label="${n.short}" style="--i:${i}">
       <rect x="${(n.x - w / 2).toFixed(1)}" y="${(n.y - h / 2).toFixed(1)}" width="${w.toFixed(1)}" height="${h}" rx="${h / 2}"/>
       ${compact ? "" : html`<text x="${n.x.toFixed(1)}" y="${(n.y + 4).toFixed(1)}" text-anchor="middle">${n.short}</text>`}
     </a>`;
@@ -71,6 +74,7 @@ function draw(scene, mount, anchor, copy, title) {
   const compact = w < COMPACT;
   const nodes = sides(projects, w, zone).map((n) => ({ ...n, cx: w / 2, cy: (zone.top + zone.bottom) / 2 }));
   const wires = nodes.map((n) => curve(hub, n));
+  layout = { hub, nodes };
 
   render(mount, html`
     <svg class="graph orbit" viewBox="0 0 ${w.toFixed(0)} ${h.toFixed(0)}" width="${w.toFixed(0)}" height="${h.toFixed(0)}" role="group" aria-label="Projects, wired to me">
@@ -80,6 +84,24 @@ function draw(scene, mount, anchor, copy, title) {
       </g>`}
       ${nodes.map((n, i) => node(n, i, compact))}
     </svg>`);
+}
+
+// Chips drift outward as the hero scrolls away; each wire is recomputed to end
+// on its chip and the packet's path follows, so wire and chip never separate.
+function follow(scene) {
+  if (!layout) return;
+  const { top, height } = scene.getBoundingClientRect();
+  const p = Math.min(1, Math.max(0, -top / height));
+  const chips = scene.querySelectorAll(".orbit__node");
+  const edges = scene.querySelectorAll(".orbit__wires .graph__edge");
+  const packets = scene.querySelectorAll(".orbit__wires .graph__packet");
+  layout.nodes.forEach((n, i) => {
+    const dx = (n.x - n.cx) * p * SPREAD, dy = (n.y - n.cy) * p * SPREAD;
+    chips[i]?.setAttribute("transform", `translate(${dx.toFixed(1)} ${dy.toFixed(1)})`);
+    const d = curve(layout.hub, { x: n.x + dx, y: n.y + dy });
+    edges[i]?.setAttribute("d", d);
+    packets[i]?.style.setProperty("offset-path", `path('${d}')`);
+  });
 }
 
 export function renderHero() {
@@ -95,9 +117,11 @@ export function renderHero() {
     if (Math.abs(scene.clientWidth - width) < 2) return;   // ignore mobile URL-bar height jitter
     width = scene.clientWidth;
     draw(scene, mount, anchor, copy, title);
+    follow(scene);
   };
   new ResizeObserver(redraw).observe(scene);
   document.fonts?.ready.then(() => { width = 0; redraw(); });
 
+  if (!matchMedia("(prefers-reduced-motion: reduce)").matches) onScroll(() => follow(scene));
   initParallax(scene);
 }

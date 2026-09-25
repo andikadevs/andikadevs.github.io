@@ -566,8 +566,8 @@
 @media (prefers-reduced-motion: no-preference) {
   /* Hero: copy lifts away while the projects drift outward from the centre. */
   .hero__center { transform: translateY(calc(var(--p, 0) * -16vh)); opacity: calc(1 - var(--p, 0) * 1.5); }
-  .orbit__node { transform: translate(calc(var(--dx) * var(--p, 0) * 0.35), calc(var(--dy) * var(--p, 0) * 0.35)); opacity: calc(1 - var(--p, 0) * 1.2); }
-  .orbit__wires { opacity: calc(1 - var(--p, 0) * 1.6); }
+  .orbit__node { opacity: calc(1 - var(--p, 0) * 1.2); }   /* position: hero.js moves chip + wire together */
+  .orbit__wires { opacity: calc(1 - var(--p, 0) * 1.2); }   /* fades with the chips it's attached to */
   .hero__title > span:nth-child(2) { --delay: 120ms; }
   .hero__title > span:nth-child(3) { --delay: 240ms; }
 
