@@ -1,1131 +1,340 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <title>AndikaDS</title>
-        <!-- Required meta tags -->
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-        <link rel="shortcut icon" href="./assets/img/Icons/github.svg" type="image/x-icon">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Andika Dwi Saputra — Fullstack Developer in Semarang, Indonesia</title>
+  <meta name="description" content="Fullstack developer building internal systems, identity platforms and AI pipelines for universities and companies in Indonesia. NestJS, Laravel, React, Next.js.">
+  <meta name="author" content="Andika Dwi Saputra">
+  <meta name="theme-color" content="#5788b3">
 
-        <!-- Bootstrap CSS v5.2.1 -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"/>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" integrity="sha384-b6lVK+yci+bfDmaY1u0zE8YYJt0TZxLEAFyYSLHId4xoVvsrQu3INevFKo+Xir8e" crossorigin="anonymous">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Andika Dwi Saputra — Fullstack Developer">
+  <meta property="og:description" content="Internal systems, single sign-on, media services and AI pipelines, built in Indonesia.">
+  <meta property="og:image" content="assets/img/andika.webp">
+  <meta name="twitter:card" content="summary_large_image">
 
-        <!-- SEO meta tags -->
-        <meta name="google-site-verification" content="IqswOLgWKoqP0UBGNGJR1NXEYs9mxJPPXUJF-eR6N1w" />
-        <meta name="description" content="Cultivated Junior Fullstack Software Engineer with a big passion for building software applications with engaging user interfaces and robust technical structures. Proficient in utilizing various frameworks following industrial standards. Always eager to learn and improve in the fast-paced world of technology." />
-        <meta name="keywords" content="GitHub, portfolio, profile, projects, software development, programming, laravel, phpmyadmin, software engineer" />
-        <meta name="author" content="Andika Dwi Saputra" />
-        <meta name="robots" content="index, follow" />
-        <meta name="googlebot" content="index, follow" />
-        <meta property="og:title" content="AndikaDS" />
-        <meta property="og:description" content="Cultivated Junior Fullstack Software Engineer with a big passion for building software applications with engaging user interfaces and robust technical structures. Proficient in utilizing various frameworks following industrial standards. Always eager to learn and improve in the fast-paced world of technology." />
-        <meta property="og:image" content="./assets/img/profile-2.webp" />
-        <meta property="og:url" content="https://github.com/Andikss" />
-        <meta property="og:type" content="profile" />
-        <meta property="og:site_name" content="Andika Dwi Saputra" />
-        <meta property="og:locale" content="id_ID" />
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+  <link rel="preload" href="fonts/bricolagegrotesque_v9_3y9K6as8bTXq_nANBjzKo3IeZx8z6up5BeSl9D4dj_x9PpZBMlGIInE.woff2" as="font" type="font/woff2" crossorigin>
 
+  <script src="js/theme.js"></script>
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/lenis.css">
+  <link rel="stylesheet" href="css/site.css">
 
-        <link rel="stylesheet" href="./assets/css/index.css">
-        <link rel="stylesheet" href="./assets/css/global.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Andika Dwi Saputra",
+    "jobTitle": "Fullstack Developer",
+    "address": { "@type": "PostalAddress", "addressLocality": "Semarang", "addressCountry": "ID" },
+    "email": "mailto:andikadwisaputra.dev@gmail.com",
+    "sameAs": [
+      "https://github.com/andikadevs",
+      "https://www.linkedin.com/in/andikadwisaputra",
+      "https://medium.com/@andikads"
+    ],
+    "knowsAbout": ["NestJS", "Laravel", "React", "Next.js", "TypeScript", "PostgreSQL", "OpenID Connect"]
+  }
+  </script>
+  <script type="module" src="js/main.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main" data-i18n="a11y.skip">Skip to content</a>
 
-        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    </head>
+  <!-- ============ NAV ============ -->
+  <header class="nav" data-nav>
+    <div class="nav__side">
+      <a class="nav-mark mascot" href="#main" aria-label="andikadevs — home">
+      <!-- navmark:start -->
+      <svg class="nav-mark__icon" aria-hidden="true" viewBox="0 0 947 947"><g transform="translate(109.3 837.9)"><circle class="mk-ring" cx="364" cy="-364" r="267" fill="none" stroke="currentColor" stroke-width="194" pathLength="1"/><circle class="mk-eye" cx="291" cy="-383" r="58" fill="currentColor"/><circle class="mk-eye" cx="444" cy="-383" r="58" fill="currentColor"/><rect class="mk-stem" x="534" y="-452" width="194" height="452" rx="97" fill="currentColor"/><circle class="mk-packet" cx="631" cy="-627" r="121" fill="var(--accent)"/></g></svg>
+      <!-- navmark:end -->
+      </a>
+    </div>
 
-    <body class="dark-theme" style="overflow: hidden;">
-        <div id="facts-container" class="position-fixed bottom-0 end-0" style="z-index: 11"></div>
+    <nav class="nav-pill" aria-label="Main">
+      <div class="nav-pill__links">
+        <a class="nav-link" href="#about" data-i18n="nav.about">About</a>
+        <a class="nav-link" href="#work" data-i18n="nav.work">Work</a>
+        <a class="nav-link" href="#experience" data-i18n="nav.experience">Experience</a>
+        <a class="nav-link" href="#contact" data-i18n="nav.contact">Contact</a>
+      </div>
+      <span class="nav-pill__status"><span class="pulse-dot"></span><span data-nav-readout>Andika Dwi Saputra</span></span>
+    </nav>
 
-        <div id="progress-bar-container">
-            <div id="progress-bar"></div>
+    <div class="nav__side nav__side--end">
+      <div class="segmented" role="group" aria-label="Language" data-i18n-attr="aria-label: nav.lang" data-lang-switch>
+        <button type="button" data-lang="en" aria-pressed="true">EN</button>
+        <button type="button" data-lang="id" aria-pressed="false">ID</button>
+      </div>
+      <button class="icon-btn theme-toggle" type="button" data-theme-toggle aria-label="Switch light or dark mode" data-i18n-attr="aria-label: nav.theme">
+        <svg class="ico-sun" viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="5"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 1.5v2M12 20.5v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1.5 12h2M20.5 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/></g></svg>
+        <svg class="ico-moon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11Z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ============ HERO: sheet 01 ============ -->
+    <section class="blueprint hero" data-hero data-night data-scroll="exit" aria-labelledby="hero-title">
+      <span class="cloud" style="--w:420px; top:3%; left:-14%; --dx:120px; --o:.8" data-cloud="1"></span>
+      <span class="cloud" style="--w:360px; top:6%; right:4%; --drift:110s; --dx:-100px; --o:.75" data-cloud="2"></span>
+      <span class="cloud" style="--w:300px; top:40%; left:44%; --drift:130s; --dx:90px; --o:.35; --blur:12px" data-cloud="3"></span>
+      <span class="cloud" style="--w:440px; top:58%; right:-10%; --drift:100s; --dx:-120px; --o:.7" data-cloud="2"></span>
+
+      <div class="hero__orbit" data-hero-graph data-depth="12" aria-hidden="false"></div>
+
+      <div class="container hero__center">
+        <span class="hero__mark mascot" data-hero-anchor aria-hidden="true">
+      <!-- heromark:start -->
+      <svg class="hero__mark-icon" aria-hidden="true" viewBox="0 0 947 947"><g transform="translate(109.3 837.9)"><circle class="mk-ring" cx="364" cy="-364" r="267" fill="none" stroke="currentColor" stroke-width="194" pathLength="1"/><circle class="mk-eye" cx="291" cy="-383" r="58" fill="currentColor"/><circle class="mk-eye" cx="444" cy="-383" r="58" fill="currentColor"/><rect class="mk-stem" x="534" y="-452" width="194" height="452" rx="97" fill="currentColor"/><circle class="mk-packet" cx="631" cy="-627" r="121" fill="var(--accent)"/></g></svg>
+      <!-- heromark:end -->
+        </span>
+        <p class="sheet"><span class="sheet__no">01 / 06</span><span data-i18n="hero.sheet">andikadevs — fullstack developer</span></p>
+        <h1 class="display hero__title" id="hero-title">
+          <span data-i18n="hero.line1" data-split data-reveal>Developer</span>
+          <span class="hero__light" data-i18n="hero.line2" data-split data-reveal>who ships</span>
+          <span data-reveal><span class="dim" data-dim="3+ yrs · 25+ shipped" data-i18n="hero.line3" data-i18n-attr="data-dim: hero.dim">systems.</span></span>
+        </h1>
+        <p class="lead hero__lead" data-i18n="hero.lead">I build the software companies quietly run on: internal tools, single sign-on, media services, AI pipelines. Three-plus years, mostly for universities and hiring platforms in Indonesia.</p>
+        <div class="cluster hero__actions">
+          <a class="btn btn--light" href="#work" data-magnetic><span data-i18n="hero.ctaWork">See the work</span>
+            <svg class="btn__icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
+          <a class="btn btn--glass" href="assets/docs/cv-andika-dwi-saputra.pdf" download data-i18n="hero.ctaCv">Download CV</a>
+        </div>
+        <p class="hero__caption"><span class="pulse-dot"></span><span data-i18n="hero.caption">Everything I've shipped, wired to one person. Click a project.</span></p>
+      </div>
+
+      <div class="cloudbank cloudbank--back" aria-hidden="true"></div>
+      <div class="cloudbank" aria-hidden="true"></div>
+    </section>
+
+    <!-- ============ TICKER ============ -->
+    <div class="ticker" aria-hidden="true">
+      <div class="marquee">
+        <div class="marquee__track">
+          <span class="marquee__item">NestJS</span><span class="marquee__sep"></span>
+          <span class="marquee__item">Laravel</span><span class="marquee__sep"></span>
+          <span class="marquee__item">React</span><span class="marquee__sep"></span>
+          <span class="marquee__item">Next.js</span><span class="marquee__sep"></span>
+          <span class="marquee__item">PostgreSQL</span><span class="marquee__sep"></span>
+          <span class="marquee__item">OpenID Connect</span><span class="marquee__sep"></span>
+          <span class="marquee__item">Docker</span><span class="marquee__sep"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ ABOUT: sheet 02, held still while the brush paints Work's sky in ============ -->
+    <div class="paint-scene" data-paint-scene>
+    <section class="section intro" id="about" data-paint-hold aria-label="About">
+      <div class="container intro__grid">
+        <figure class="fig intro__photo" data-scroll>
+          <img src="assets/img/andika.webp" alt="Andika Dwi Saputra" width="720" height="720" loading="lazy">
+          <figcaption class="fig__caption">Fig. 02 — Andika, Central Java</figcaption>
+        </figure>
+        <div class="stack intro__text" style="--stack-gap: var(--space-6)">
+          <p class="sheet"><span class="sheet__no">02 / 06</span><span data-i18n="nav.about">About</span></p>
+          <p class="intro__statement" data-scroll>
+            <span data-i18n="intro.text" data-split="scrub">I started as an intern at a Toyota dealership, writing Laravel. Today I run the platform behind a university's apps, build tools for Toploker.com, and keep a small studio going on the side.</span>
+            <strong data-i18n="intro.strong" data-split="scrub">I like problems where a boring manual step is costing someone hours a week.</strong>
+          </p>
+          <div class="intro__stats" data-reveal>
+            <div class="stat"><span class="stat__value" data-count-up>3+</span><span class="stat__label" data-i18n="stat.years">Years shipping</span></div>
+            <div class="stat"><span class="stat__value" data-count-up>25+</span><span class="stat__label" data-i18n="stat.projects">Projects shipped</span></div>
+            <div class="stat"><span class="stat__value" data-count-up>11+</span><span class="stat__label" data-i18n="stat.sso">Apps on my SSO</span></div>
+          </div>
+          <div class="intro__clients" data-reveal>
+            <p class="label label--muted" data-i18n="intro.clients">Built for</p>
+            <ul class="logo-row" role="list" data-clients></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+      <div class="paint-scene__canvas" aria-hidden="true">
+        <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+          <path class="paint-scene__stroke" pathLength="1"
+                d="M-18 14 C6 -12 30 -8 50 -24 C34 6 10 24 -22 40 C18 34 52 10 110 -16 C96 18 62 36 14 64 C-2 74 -14 84 -24 96 C24 84 64 54 124 26 C116 58 86 80 44 108 C72 104 100 88 128 70 C124 94 112 112 94 132 C110 124 122 118 134 112"/>
+        </svg>
+      </div>
+      <div class="paint-scene__run" aria-hidden="true"></div>
+    </div>
+
+    <!-- ============ WORK: sheet 03 ============ -->
+    <section class="blueprint work" id="work" data-night aria-labelledby="work-title">
+      <div class="container work__head" data-reveal-group>
+        <p class="sheet" data-reveal><span class="sheet__no">03 / 06</span><span data-i18n="work.eyebrow">Selected work</span></p>
+        <h2 class="bracket-heading" id="work-title" data-reveal>
+          <span class="bracket-heading__b bracket-heading__b--l" aria-hidden="true">[</span><span data-i18n="nav.work">Work</span><span class="bracket-heading__b bracket-heading__b--r" aria-hidden="true">]</span>
+        </h2>
+        <p class="work__sub" data-i18n="work.title" data-split data-reveal>Things I built that people use every day.</p>
+      </div>
+
+      <div class="container">
+        <div class="deck" data-deck tabindex="0" role="region" aria-roledescription="carousel" aria-labelledby="work-title">
+          <div class="deck__info">
+            <p class="deck__count" aria-live="polite"><span data-deck-current>01</span><i aria-hidden="true"></i><span data-deck-total>12</span></p>
+            <div class="deck-info" data-deck-infos></div>
+            <div class="deck__nav">
+              <button class="deck__btn" type="button" data-deck-prev aria-label="Previous project" data-i18n-attr="aria-label: work.prev">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 8H3M7 4 3 8l4 4"/></svg>
+              </button>
+              <button class="deck__btn" type="button" data-deck-next aria-label="Next project" data-i18n-attr="aria-label: work.next">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg>
+              </button>
+              <a class="btn btn--light" href="#project/stekom-international" data-deck-open data-project="stekom-international" data-magnetic><span data-i18n="work.open">Read case study</span>
+                <svg class="btn__icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
+            </div>
+            <p class="deck__hint label" data-i18n="work.hint">Drag, swipe or use the arrow keys</p>
+          </div>
+          <div class="deck__stage" data-deck-stage>
+            <div class="deck__cards" data-deck-cards></div>
+          </div>
+        </div>
+      </div>
+      <span class="cloud" style="--w:420px; bottom:6%; left:-6%; --dx:90px; --o:.55" aria-hidden="true"></span>
+      <span class="cloud" style="--w:340px; bottom:12%; right:-4%; --drift:120s; --dx:-80px; --o:.45" aria-hidden="true"></span>
+    </section>
+
+    <!-- ============ STUDIO: sheet 04 ============ -->
+    <section class="section studio-wrap" aria-labelledby="studio-title">
+      <div class="container">
+      <div class="blueprint studio" data-night data-scroll>
+      <span class="cloud" style="--w:380px; top:-6%; right:-6%; --dx:-80px; --o:.6"></span>
+      <span class="cloud" style="--w:300px; bottom:-8%; left:-4%; --drift:120s; --dx:70px; --o:.5"></span>
+      <div class="split">
+        <div class="stack" data-reveal-group>
+          <p class="sheet" data-reveal><span class="sheet__no">04 / 06</span><span data-i18n="studio.label">On the side</span></p>
+          <h2 class="heading" id="studio-title" data-split data-reveal data-i18n="studio.title">I also run a small studio.</h2>
+          <p class="lead" data-reveal data-i18n="studio.body">Manggala Cloud builds websites and apps from Semarang. It runs six services, from digital wedding invitations to an affiliate portal. It's where I try ideas before I'd recommend them to anyone else.</p>
+          <div data-reveal>
+            <a class="btn btn--light" href="https://www.manggala.cloud" target="_blank" rel="noopener" data-magnetic><span data-i18n="studio.cta">Visit Manggala Cloud</span>
+              <svg class="btn__icon btn__icon--diag" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12 12 4M5 4h7v7"/></svg></a>
+          </div>
         </div>
 
-        <div id="loader-container" class="visible">
-            <div class="traffic-loader"></div>
-        </div>
+        <figure class="studio__plan">
+          <svg class="graph" viewBox="0 0 520 400" role="img" aria-label="Manggala Cloud: six services from one studio">
+            <g class="graph__edges">
+              <path class="graph__edge" pathLength="1" style="--i:0" d="M260 200 Q90 200 90 84"/>
+              <path class="graph__edge" pathLength="1" style="--i:1" d="M260 174 L260 64"/>
+              <path class="graph__edge" pathLength="1" style="--i:2" d="M260 200 Q430 200 430 84"/>
+              <path class="graph__edge" pathLength="1" style="--i:3" d="M260 200 Q90 200 90 316"/>
+              <path class="graph__edge" pathLength="1" style="--i:4" d="M260 226 L260 336"/>
+              <path class="graph__edge" pathLength="1" style="--i:5" d="M260 200 Q430 200 430 316"/>
+            </g>
+            <g class="graph__packets">
+              <circle class="graph__packet" r="3" style="offset-path: path('M260 200 Q90 200 90 84'); --delay:0.00s; --dur:2.4s"/>
+              <circle class="graph__packet" r="3" style="offset-path: path('M260 174 L260 64'); --delay:0.45s; --dur:2.8s"/>
+              <circle class="graph__packet" r="3" style="offset-path: path('M260 200 Q430 200 430 84'); --delay:0.90s; --dur:3.2s"/>
+              <circle class="graph__packet" r="3" style="offset-path: path('M260 200 Q90 200 90 316'); --delay:1.35s; --dur:2.4s"/>
+              <circle class="graph__packet" r="3" style="offset-path: path('M260 226 L260 336'); --delay:1.80s; --dur:2.8s"/>
+              <circle class="graph__packet" r="3" style="offset-path: path('M260 200 Q430 200 430 316'); --delay:2.25s; --dur:3.2s"/>
+            </g>
+            <g class="graph__node"><rect x="45" y="56" width="90" height="28" rx="14"/><text x="90" y="74" text-anchor="middle">studio</text></g>
+            <g class="graph__node"><rect x="205" y="36" width="110" height="28" rx="14"/><text x="260" y="54" text-anchor="middle">wedding</text></g>
+            <g class="graph__node"><rect x="375" y="56" width="110" height="28" rx="14"/><text x="430" y="74" text-anchor="middle">birthday</text></g>
+            <g class="graph__node"><rect x="45" y="316" width="90" height="28" rx="14"/><text x="90" y="334" text-anchor="middle">admin</text></g>
+            <g class="graph__node"><rect x="210" y="336" width="100" height="28" rx="14"/><text x="260" y="354" text-anchor="middle">editor</text></g>
+            <g class="graph__node"><rect x="370" y="316" width="120" height="28" rx="14"/><text x="430" y="334" text-anchor="middle">affiliate</text></g>
+            <g class="graph__node graph__hub studio__hub">
+              <rect x="170" y="174" width="180" height="52" rx="26"/>
+              <image href="assets/logos/manggala.svg" x="190" y="186" width="140" height="28" preserveAspectRatio="xMidYMid meet"/>
+            </g>
+          </svg>
+          <figcaption class="studio__caption">
+            <span data-i18n="studio.caption">Fig. 04 — six services, one studio.</span>
+          </figcaption>
+        </figure>
+      </div>
+      </div>
+      </div>
+    </section>
 
-        <!-- <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 11">
-            <div id="firstToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false" style="margin-bottom: 0px;">
-                <div class="toast-header" style="background: var(--dark-light);">
-                    <i class="bi bi-bell me-2"></i>
-                    <strong class="me-auto">Andika Dwi Saputra</strong>
-                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                </div>
-                <div class="toast-body" style="background: white; color: var(--secondary-dark);">
-                    <span>Hey there! have a look around 😁</span>
-                </div>
-            </div>
-
-            <div id="secondToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false" style="margin-top: 12px;">
-                <div class="toast-header" style="background: var(--dark-light);">
-                    <i class="bi bi-bell me-2"></i>
-                    <strong class="me-auto">Andika Dwi Saputra</strong>
-                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                </div>
-                <div class="toast-body" style="background: white; color: var(--secondary-dark);">
-                    <span class="me-2">Chat With Me 🤔 ?</span>
-                    <a href="https://wa.me/6285743699909">
-                        <i class="bi bi-whatsapp"></i>
-                        WhatsApp
-                    </a>
-                </div>
-            </div>
-        </div> -->
-
-        <header class="navbar navbar-expand-lg navbar-dark shadow">
-            <div class="container-fluid">
-                <a class="navbar-brand center gap-2" target="_blank" href="https://github.com/Andikss/">
-                    <i class="bi bi-github main-logo"></i>
-                    <span class="text-white d-none">AndikaDS</span>
-                </a>
-                <button button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarColor01">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 gap-3">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#hero">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#about">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#skills">Skills</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#education">Education</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#experience">Experience</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#portfolio">Portfolio</a>
-                        </li>
-                    </ul>
-                    <div class="d-flex align-items-center gap-2">
-                        <a target="_blank" href="mailto:andikadwisaputra.dev@gmail.com" class="btn-accent shadow-sm">
-                            <i class="bi bi-envelope"></i>&nbsp;
-                            Email
-                        </a>
-                        <a target="_blank" href="https://github.com/Andikss" class="btn-outline-accent shadow-sm">
-                            <i class="bi bi-github"></i>&nbsp;
-                            GitHub
-                        </a>
-                        <label class="switch" id="theme-toggler">
-                            <input type="checkbox" id="theme-checkbox">
-                            <span class="slider"></span>
-                        </label>
-                    </div>
-                </div>                
-            </div>
+    <!-- ============ EXPERIENCE: sheet 05 ============ -->
+    <section class="section" id="experience" aria-labelledby="exp-title">
+      <div class="container exp">
+        <header class="section-head exp__head">
+          <p class="sheet"><span class="sheet__no">05 / 06</span><span data-i18n="exp.eyebrow">Experience</span></p>
+          <h2 class="heading" id="exp-title" data-i18n="exp.title" data-split data-reveal>Where I've been.</h2>
+          <div class="exp__edu">
+            <p class="label label--muted" data-i18n="exp.education">Education</p>
+            <ul class="edu-list" role="list" data-education></ul>
+          </div>
         </header>
+        <div class="accordion" data-experience data-reveal-group></div>
+      </div>
+    </section>
 
-        <main>
-            <section id="hero">
-                <div class="box box-1"></div>
-                <div class="box box-2"></div>
-                <div class="box box-3"></div>
-                <div class="box box-4"></div>
-                <div class="box box-5"></div>
-                <div class="box box-6"></div>
-                <div class="row">
-                    <div class="col-lg-6 col-md-6 col-sm-12 p-5 d-flex justify-content-center flex-column fade-left">
-                        <h1 style="text-wrap: nowrap;">Andika Dwi Saputra</h1>
-                        <h2>I'm <span class="auto-type text-accent"></span></h2>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-12 position-relative" style="display: flex; align-items: end; justify-content: center;">
-                        <img src="./assets/img/main-person-illustration.webp" class="hero-person" alt="Person" style="width: 80%;">
-                        <div class="social-media fade-up">
-                            <a class="social" target="_blank" href="mailto:andikadwisaputra.dev@gmail.com"><i class="bi bi-envelope"></i></a>            
-                            <a class="social" target="_blank" href="https://www.instagram.com/andikads__"><i class="bi bi-instagram"></i></a>            
-                            <a class="social" target="_blank" href="https://wa.me/6285743699909"><i class="bi bi-whatsapp"></i></a>            
-                            <a class="social" target="_blank" href="https://www.linkedin.com/in/andika-dwi-saputra-10877928b/"><i class="bi bi-linkedin"></i></a>
-                            <a class="social" target="_blank" href="https://github.com/Andikss"><i class="bi bi-github"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </section>
+    <!-- ============ NUMBERS: pinned horizontal scroll, jelly cards ============ -->
+    <section class="hscroll numbers" data-hscroll aria-labelledby="hl-title">
+      <div class="hscroll__sticky">
+        <div class="container hscroll__head">
+          <div class="stack" style="--stack-gap: var(--space-3)">
+            <p class="label label--muted" data-i18n="hl.eyebrow">A few numbers</p>
+            <h2 class="heading" id="hl-title" data-i18n="hl.title" data-split data-reveal>What the work added up to.</h2>
+          </div>
+          <div class="hscroll__meta">
+            <span data-hscroll-count>01 / 08</span>
+            <span class="hscroll__bar-track"><span class="hscroll__bar"></span></span>
+          </div>
+        </div>
+        <div class="hscroll__viewport">
+          <div class="hscroll__track" data-highlights></div>
+        </div>
+      </div>
+    </section>
 
-            <div id="content">
-                <section id="about" class="p-4 shadow">
-                    <div class="vignette-top"></div>
-                    <div class="vignette-right"></div>
-                    <div class="vignette-bottom"></div>
+    <!-- ============ CONTACT: sheet 06 ============ -->
+    <section class="contact" id="contact" aria-labelledby="contact-title">
+      <div class="blueprint contact__band" data-night data-scroll>
+        <div class="cloudbank cloudbank--top" aria-hidden="true"></div>
+        <span class="cloud" style="--w:460px; top:34%; left:-6%; --dx:110px; --o:.7"></span>
+        <span class="cloud" style="--w:340px; top:52%; right:-4%; --drift:120s; --dx:-90px; --o:.6"></span>
+        <div class="container contact__inner" data-reveal-group>
+          <p class="sheet" data-reveal><span class="sheet__no">06 / 06</span><span data-i18n="contact.eyebrow">Contact</span></p>
+          <h2 class="contact__title" id="contact-title" data-split data-reveal data-i18n="contact.title">Let's build the next thing.</h2>
+          <p class="contact__lead" data-reveal data-i18n="contact.lead">Hiring for a remote role, or have a system that needs untangling? My inbox is open.</p>
+          <div class="cluster contact__actions" data-reveal>
+            <a class="btn btn--light" href="mailto:andikadwisaputra.dev@gmail.com" data-magnetic><span data-i18n="contact.mail">Send an email</span>
+              <svg class="btn__icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
+            <button class="btn btn--glass" type="button" data-copy-email data-magnetic>
+              <svg class="btn__icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="5" width="9" height="9" rx="2"/><path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2h-6A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5"/></svg>
+              <span data-i18n="contact.copy">Copy email</span></button>
+          </div>
+          <p class="contact__email" data-reveal>andikadwisaputra.dev@gmail.com</p>
+        </div>
+      </div>
 
-                    <h2 class="text-center text-white text-title">About <span class="text-accent">Me</span></h2>
-                    <p class="text-center mb-5">
-                        <small>
-                            Let me <span class="text-accent">introduce</span> myself and tell you about my journey to becoming a <span class="text-accent">developer</span>
-                        </small>
-                    </p>
+      <footer class="footer">
+        <div class="container footer__mark" data-wordmark>
+        <p class="sr-only">andikadevs</p>
+        <div class="wm-spread" data-wm-spread></div>
+      <!-- wordmark:start -->
+      <svg class="wm" viewBox="0 -8 5355 850" data-at="2915,444,5355,850" fill="currentColor">
+        <g class="wm__mark" aria-hidden="true"><circle class="mk-ring" cx="364" cy="336" r="267" fill="none" stroke="currentColor" stroke-width="194" pathLength="1"/><circle class="mk-eye" cx="291" cy="317" r="58" fill="currentColor"/><circle class="mk-eye" cx="444" cy="317" r="58" fill="currentColor"/><rect class="mk-stem" x="534" y="248" width="194" height="452" rx="97" fill="currentColor"/><circle class="mk-packet" cx="631" cy="73" r="121" fill="var(--accent)"/></g>
+        <g class="wm__letters" aria-hidden="true"><path class="wm__letter" d="M884.6 700V401V172H1021.6V387H1029.6Q1035.6 309 1055.6 258.5Q1075.6 208 1112.6 183Q1149.6 158 1206.6 158Q1292.6 158 1336.1 215Q1379.6 272 1379.6 385V700H1217.6V406Q1217.6 352 1201.1 325Q1184.6 298 1148.6 298Q1118.6 298 1095.6 319Q1072.6 340 1059.6 387Q1046.6 434 1046.6 513V700Z" style="--i:1;--from:inset(0% 0% 100% 0%)"/><path class="wm__letter" d="M1605.6 714Q1548.6 714 1503.1 683Q1457.6 652 1431.1 589Q1404.6 526 1404.6 430Q1404.6 339 1428.6 278.5Q1452.6 218 1496.6 188Q1540.6 158 1599.6 158Q1645.6 158 1681.1 177Q1716.6 196 1739.6 237Q1762.6 278 1771.6 344H1780.6Q1775.6 310 1770.6 277Q1765.6 244 1763.1 213Q1760.6 182 1760.6 155V0H1922.6V514V700H1781.6V537H1774.6Q1763.6 595 1741.1 634.5Q1718.6 674 1685.1 694Q1651.6 714 1605.6 714ZM1662.6 585Q1681.6 585 1699.6 576.5Q1717.6 568 1731.6 550Q1745.6 532 1754.1 505Q1762.6 478 1762.6 441V434Q1762.6 404 1756.6 380.5Q1750.6 357 1740.6 340.5Q1730.6 324 1717.6 313.5Q1704.6 303 1690.1 298Q1675.6 293 1661.6 293Q1630.6 293 1609.6 314Q1588.6 335 1578.6 368.5Q1568.6 402 1568.6 441Q1568.6 480 1579.6 513Q1590.6 546 1611.6 565.5Q1632.6 585 1662.6 585Z" style="--i:2;--from:inset(100% 0% 0% 0%)"/><path class="wm__letter" d="M1966.6 700V172H2128.6V700Z" style="--i:3;--from:inset(0% 100% 0% 0%)"/><path class="wm__letter" d="M2172.6 700V0H2330.6V371Q2364.6 353 2389.1 330Q2413.6 307 2430.6 280.5Q2447.6 254 2458.1 226.5Q2468.6 199 2475.6 172H2661.6Q2650.6 212 2630.1 249.5Q2609.6 287 2579.6 319.5Q2549.6 352 2510.1 378Q2470.6 404 2422.6 421V429Q2484.6 419 2524.1 426.5Q2563.6 434 2586.6 454.5Q2609.6 475 2622.1 506Q2634.6 537 2641.6 575L2664.6 700H2489.6L2478.6 612Q2474.6 580 2467.6 552Q2460.6 524 2440.6 506.5Q2420.6 489 2377.6 489H2330.6V700Z" style="--i:4;--from:inset(0% 0% 0% 100%)"/><path class="wm__letter wm__letter--at" d="M2824.6 714Q2784.6 714 2748.6 700Q2712.6 686 2689.6 654.5Q2666.6 623 2666.6 570Q2666.6 521 2685.6 490.5Q2704.6 460 2736.6 441.5Q2768.6 423 2806.6 413.5Q2844.6 404 2881.6 397Q2933.6 387 2959.6 381Q2985.6 375 2995.1 367Q3004.6 359 3004.6 345Q3004.6 316 2983.1 301Q2961.6 286 2926.6 286Q2904.6 286 2882.6 294Q2860.6 302 2846.6 322.5Q2832.6 343 2833.6 381L2689.6 371Q2687.6 308 2708.6 266.5Q2729.6 225 2766.1 201.5Q2802.6 178 2846.1 168Q2889.6 158 2932.6 158Q3011.6 158 3062.6 187.5Q3113.6 217 3138.1 272.5Q3162.6 328 3162.6 407V501Q3162.6 534 3162.6 567.5Q3162.6 601 3162.6 634Q3162.6 667 3162.6 700H3022.6Q3022.6 664 3022.6 627Q3022.6 590 3022.6 549H3016.6Q3012.6 594 2987.1 631.5Q2961.6 669 2920.1 691.5Q2878.6 714 2824.6 714ZM2891.6 596Q2908.6 596 2928.1 589.5Q2947.6 583 2965.1 568Q2982.6 553 2993.6 526.5Q3004.6 500 3004.6 461V437L3031.6 434Q3023.6 447 3005.1 455Q2986.6 463 2963.6 467.5Q2940.6 472 2917.1 476.5Q2893.6 481 2873.6 488.5Q2853.6 496 2841.1 508.5Q2828.6 521 2828.6 543Q2828.6 569 2847.1 582.5Q2865.6 596 2891.6 596Z" style="--i:5;--from:inset(0% 0% 100% 0%)"/><path class="wm__letter" d="M3387.6 714Q3330.6 714 3285.1 683Q3239.6 652 3213.1 589Q3186.6 526 3186.6 430Q3186.6 339 3210.6 278.5Q3234.6 218 3278.6 188Q3322.6 158 3381.6 158Q3427.6 158 3463.1 177Q3498.6 196 3521.6 237Q3544.6 278 3553.6 344H3562.6Q3557.6 310 3552.6 277Q3547.6 244 3545.1 213Q3542.6 182 3542.6 155V0H3704.6V514V700H3563.6V537H3556.6Q3545.6 595 3523.1 634.5Q3500.6 674 3467.1 694Q3433.6 714 3387.6 714ZM3444.6 585Q3463.6 585 3481.6 576.5Q3499.6 568 3513.6 550Q3527.6 532 3536.1 505Q3544.6 478 3544.6 441V434Q3544.6 404 3538.6 380.5Q3532.6 357 3522.6 340.5Q3512.6 324 3499.6 313.5Q3486.6 303 3472.1 298Q3457.6 293 3443.6 293Q3412.6 293 3391.6 314Q3370.6 335 3360.6 368.5Q3350.6 402 3350.6 441Q3350.6 480 3361.6 513Q3372.6 546 3393.6 565.5Q3414.6 585 3444.6 585Z" style="--i:6;--from:inset(100% 0% 0% 0%)"/><path class="wm__letter" d="M3999.6 714Q3924.6 714 3874.1 692.5Q3823.6 671 3792.6 633.5Q3761.6 596 3748.1 548Q3734.6 500 3734.6 447Q3734.6 390 3749.1 338Q3763.6 286 3794.1 245.5Q3824.6 205 3873.1 181.5Q3921.6 158 3989.6 158Q4057.6 158 4106.1 181.5Q4154.6 205 4183.6 247Q4212.6 289 4221.1 344Q4229.6 399 4218.6 463L3835.6 469V381L4094.6 376L4073.6 427Q4079.6 381 4072.1 349.5Q4064.6 318 4044.6 301.5Q4024.6 285 3989.6 285Q3952.6 285 3930.6 304Q3908.6 323 3899.6 357.5Q3890.6 392 3890.6 439Q3890.6 520 3917.6 557Q3944.6 594 4000.6 594Q4024.6 594 4040.6 588Q4056.6 582 4066.6 570.5Q4076.6 559 4080.6 542.5Q4084.6 526 4083.6 505L4231.6 513Q4234.6 546 4225.1 581Q4215.6 616 4189.6 646Q4163.6 676 4117.1 695Q4070.6 714 3999.6 714Z" style="--i:7;--from:inset(0% 100% 0% 0%)"/><path class="wm__letter" d="M4383.6 700 4224.6 172H4396.6L4487.6 566H4491.6L4586.6 172H4748.6L4589.6 700Z" style="--i:8;--from:inset(0% 0% 0% 100%)"/><path class="wm__letter" d="M4990.6 714Q4937.6 714 4892.1 703.5Q4846.6 693 4813.1 670Q4779.6 647 4762.1 608.5Q4744.6 570 4747.6 515L4888.6 503Q4890.6 536 4903.6 557.5Q4916.6 579 4939.6 589Q4962.6 599 4995.6 599Q5026.6 599 5049.1 588.5Q5071.6 578 5071.6 553Q5071.6 540 5063.6 531.5Q5055.6 523 5034.1 515.5Q5012.6 508 4971.6 498Q4920.6 485 4879.6 472Q4838.6 459 4809.6 441Q4780.6 423 4765.6 396.5Q4750.6 370 4750.6 331Q4750.6 276 4780.1 237.5Q4809.6 199 4861.6 178.5Q4913.6 158 4981.6 158Q5042.6 158 5095.6 177Q5148.6 196 5179.1 239Q5209.6 282 5201.6 353L5063.6 366Q5066.6 337 5055.6 316.5Q5044.6 296 5023.6 285.5Q5002.6 275 4972.6 275Q4938.6 275 4920.1 287.5Q4901.6 300 4901.6 319Q4901.6 334 4913.1 344.5Q4924.6 355 4949.1 362.5Q4973.6 370 5012.6 379Q5046.6 386 5083.6 397Q5120.6 408 5152.6 426.5Q5184.6 445 5204.6 475Q5224.6 505 5224.6 551Q5224.6 600 5197.6 637Q5170.6 674 5118.6 694Q5066.6 714 4990.6 714Z" style="--i:9;--from:inset(0% 0% 100% 0%)"/></g>
+        <path class="wm__at" d="M2913.9 721.1Q2837.8 721.1 2778.1 703Q2718.3 684.9 2677 649Q2635.7 613.1 2614 559.9Q2592.2 506.6 2592.2 436.4Q2592.2 366.8 2614 313.2Q2635.7 259.6 2677 223.7Q2718.3 187.9 2778.1 169.4Q2837.8 150.9 2913.9 150.9Q2989.3 150.9 3049 169Q3108.8 187.1 3150.8 223.4Q3192.8 259.6 3214.9 312.8Q3237 366.1 3237 436.4Q3237 506.6 3214.9 560.3Q3192.8 613.9 3150.8 649.4Q3108.8 684.9 3049 703Q2989.3 721.1 2913.9 721.1ZM2913.9 630.5Q2991.4 630.5 3042.2 609.9Q3092.9 589.2 3117.9 546.1Q3142.9 503 3142.9 436.4Q3142.9 370.4 3117.5 327.3Q3092.1 284.2 3041.4 262.8Q2990.7 241.5 2913.9 241.5Q2836.4 241.5 2786 262.5Q2735.7 283.5 2711.1 326.6Q2686.4 369.7 2686.4 436.4Q2686.4 503 2711.1 546.1Q2735.7 589.2 2786 609.9Q2836.4 630.5 2913.9 630.5ZM2898.7 509.5Q2908.1 509.5 2918.6 506.3Q2929.1 503 2938.5 495.8Q2948 488.5 2954.1 475.5Q2960.3 462.4 2960.3 442.9V426.9L2976.9 416.8Q2971.9 427.7 2958.8 433.8Q2945.8 440 2930.2 444Q2914.6 448 2900.2 452.7Q2885.7 457.4 2876.2 465Q2866.8 472.6 2866.8 485.6Q2866.8 497.9 2875.9 503.7Q2884.9 509.5 2898.7 509.5ZM2852.3 587.8Q2829.1 587.8 2806.7 580.2Q2784.2 572.6 2769.7 554.8Q2755.3 537.1 2755.3 507.4Q2755.3 479.1 2767.6 462.1Q2779.9 445.1 2799.4 435.3Q2819 425.5 2841.5 420.4Q2863.9 415.4 2883.5 412.5Q2909.6 408.1 2927 404.5Q2944.3 400.9 2952.7 395.4Q2961 390 2961 380.6Q2961 374.8 2957.7 369.3Q2954.5 363.9 2946.5 360.3Q2938.5 356.7 2924.1 356.7Q2911 356.7 2897.6 360.7Q2884.2 364.6 2875.5 373.3Q2866.8 382 2868.3 396.5L2771.2 392.2Q2769 360.3 2780.2 337.8Q2791.5 315.4 2812.5 301.6Q2833.5 287.8 2861 281.3Q2888.6 274.8 2919 274.8Q2961 274.8 2990 286.4Q3019 298 3036.4 319.4Q3053.7 340.7 3061.4 370.8Q3069 400.9 3069 437.8V479.8Q3069 491.4 3069 507Q3069 522.6 3069 537.8Q3069 553 3069 563.1Q3069 573.3 3069 574H2974Q2973.3 552.3 2973.3 530.9Q2973.3 509.5 2972.6 487.8H2968.3Q2963.2 517.5 2948.7 540.3Q2934.2 563.1 2909.9 575.5Q2885.7 587.8 2852.3 587.8Z" aria-hidden="true"/>
+        <circle class="wm__ping" cx="2915" cy="436" r="288" aria-hidden="true"/>
+        <circle class="wm__shape wm__dot" cx="2047.6" cy="40.2" r="85.0"/>
+        <rect class="wm__shape wm__bar" x="3187" y="770" width="2038" height="64" rx="8"/>
+        <rect class="wm__shape wm__caret" x="5285" y="172" width="70" height="528" rx="6"/>
+        <rect class="wm__hit" x="2627" y="112" width="576" height="648" tabindex="0" role="button" aria-label="Find me online" aria-expanded="false" data-wm-hit/>
+      </svg>
+      <!-- wordmark:end -->
+        </div>
+        <div class="container footer__inner">
+          <p class="footer__meta"><span>© <span data-year>2026</span></span> <span data-i18n="footer.built">Designed &amp; built by Andika</span></p>
+          <p class="footer__clock"><span class="label label--muted" data-i18n="contact.local">My local time</span> <span data-clock>—</span></p>
+          <ul class="footer__links" role="list" data-socials></ul>
+        </div>
+      </footer>
+    </section>
+  </main>
 
-                    <div class="row px-5">
-                        <div class="col-lg-5 col-md-12 col-sm-12 p-0 m-0 center">
-                            <div class="profile-image fade-right">
-                                <img src="./assets/img/profile-2.webp" alt="Profile Image" class="profile-image shadow">
-                            </div>
-                        </div>
-                        <div class="col-lg-7 col-md-12 col-sm-12 pt-5 pr-5">
-                            <div class="btn-group tab-button-wrapper fade-left">
-                                <button class="shadow-sm btn-outline-accent tab-button active" data-tab-index="0">Hello</button>
-                                <button class="shadow-sm btn-outline-accent tab-button" data-tab-index="1">Origin</button>
-                                <button class="shadow-sm btn-outline-accent tab-button" data-tab-index="2">Hobbies</button>
-                                <button class="shadow-sm btn-outline-accent tab-button" data-tab-index="3">Social Media</button>
-                            </div>
-                            <div class="tabs hello active-tab flex" style="justify-content: center !important; margin-top: -36px;">
-                                <div class="fade-left">
-                                    <h3 class="mb-4">
-                                        <i class="bi bi-browser-chrome"></i> Fullstack <span class="text-accent">Developer</span>
-                                    </h3>
-                                    <p>
-                                        <small>
-                                            Hello there! I'm Andika Dwi Saputra, and I'm a
-                                            <span class="text-accent">Fullstack Developer!</span>
-                                            Feel free to check out my portfolio!
-                                        </small>
-                                    </p>
-                                    <div class="button-wrapper">
-                                        <button id="btn-cv" class="btn-outline-accent shadow-sm">
-                                            Download CV
-                                        </button>
-                                        <a target="_blank" href="https://wa.me/6285743699909" class="btn-accent shadow-sm">
-                                            <i class="bi bi-whatsapp text-main"></i> Contact Me
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tabs flex justify-content-start">
-                                <div class="fade-left">
-                                    <h3 class="my-4">
-                                        My <span class="text-accent">Origin</span>
-                                    </h3>
-                                    <p class="mb-3">
-                                        <small>
-                                            I was born in <span class="text-accent">Banjarnegara</span> on July 9th, 2005, and I have lived there ever 
-                                            since. Computers were not really my thing, I have no access to "computer" back then. 
-                                            My first time handling a computer was when I was in Senior High School. 
-                                            I couldn't even switch on a computer back then. However, I found my 
-                                            passion there. I have always studied hard ever since, working on building myself to 
-                                            become a future-ready <span class="text-accent">programmer</span>.
-                                        </small>
-                                    </p>
-    
-                                    <small class="mb-2 d-block">
-                                        <span class="text-accent">
-                                            Full Name:
-                                        </span>
-                                        Andika Dwi Saputra
-                                    </small>
-                                    <small class="mb-2 d-block">
-                                        <span class="text-accent">
-                                            Nationality:
-                                        </span>
-                                        Indonesia
-                                    </small>
-                                    <small class="mb-2 d-block">
-                                        <span class="text-accent">
-                                            Address:
-                                        </span>
-                                        Blabar, Kecepit RT 01/RW 02, Punggelan, Banjarnegara
-                                    </small>
-                                    <small class="mb-2 d-block">
-                                        <span class="text-accent">
-                                            Age:
-                                        </span>
-                                        <small id="age"></small>
-                                    </small>
-                                </div>
-                            </div>
-                            <div class="tabs flex justify-content-start">
-                                <div class="fade-left">
-                                    <h3 class="my-4">
-                                        <span class="text-accent">Hobbies</span>
-                                    </h3>
-                                    <p class="mb-3">
-                                        <small>
-                                            I have a lot of hobbies, actually. I love to play the guitar and perform many 
-                                            songs during my free time (I suggest you not to listen :> ). I also enjoy watching 
-                                            movies, reading novels, and such. And, of course, I like to level up my skills!
-                                        </small>
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="tabs flex" style="justify-content: center !important; margin-top: -36px;">
-                                <div class="fade-left">
-                                    <h3 class="">
-                                        Social <span class="text-accent">Media</span>
-                                    </h3>
-                                    <small class="">Reach me out!</small>
-    
-                                    <div class="contact d-flex gap-3">
-                                        <a target="_blank" class="text-white" href="mailto:andikadwisaputra.dev@gmail.com">
-                                            <i class="bi bi-envelope"></i>
-                                        </a>            
-                                        <a target="_blank" class="text-white" href="https://www.instagram.com/andikads__">
-                                            <i class="bi bi-instagram"></i>
-                                        </a>            
-                                        <a target="_blank" class="text-white" href="https://www.youtube.com/channel/UCGAoFirO5LplzI-OO9nxx8g">
-                                            <i class="bi bi-youtube"></i>
-                                        </a>            
-                                        <a target="_blank" class="text-white" href="https://wa.me/6285743699909">
-                                            <i class="bi bi-whatsapp"></i>
-                                        </a>            
-                                        <a target="_blank" class="text-white" href="https://www.linkedin.com/in/andika-dwi-saputra-10877928b/">
-                                            <i class="bi bi-linkedin"></i>
-                                        </a>
-                                        <a target="_blank" class="text-white" href="https://github.com/Andikss">
-                                            <i class="bi bi-github"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <section id="companies">
-                    <p class="text-center text-white mb-4">
-                        <small>
-                            Companies That 
-                            <span class="text-accent">Trusted Me</span>
-                        </small>
-                    </p>
-                
-                    <div class="company-slider mb-4">
-                        <img src="/assets/img/Companies/Akastra.png" alt="Akastra Toyota" height="40px">
-                        <img src="/assets/img/Companies/Toploker.png" alt="Toploker.com" height="40px">
-                        <img src="/assets/img/Companies/DIGITEK.png" alt="PT Digital Bisnis Ekonomi" height="100px">
-                        <img src="/assets/img/Companies/STEKOM.png" alt="Stekom University" height="40px">
-                        <img src="/assets/img/Companies/Akastra.png" alt="Akastra Toyota" height="40px">
-                        <img src="/assets/img/Companies/Toploker.png" alt="Toploker.com" height="40px">
-                    </div>
-                </section>
-                
-                
-
-                <section id="skills">
-                    <h2 class="text-center text-white text-title mt-4">Skills<span class="text-accent"></span></h2>
-                    <p class="text-center mb-3">
-                        <small>
-                            Toolkits that help me <span class="text-accent">complete</span> all of my <span class="text-accent">projects</span>
-                        </small>
-                    </p>
-
-                    <div class="row px-4 mb-0">
-                        <div class="col-lg-2 col-md-6 col-sm-12 p-2 fade-left">
-                            <div class="badge shadow-sm">
-                                <img src="./assets/img/Icons/git.svg" alt="Git">
-                                <p>Git</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-md-6 col-sm-12 p-2 fade-left">
-                            <div class="badge shadow-sm">
-                                <img src="./assets/img/Icons/laravel.svg" alt="Laravel">
-                                <p>Laravel</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-md-6 col-sm-12 p-2 fade-left">
-                            <div class="badge shadow-sm">
-                                <img src="./assets/img/Icons/nodejs.svg" alt="NodeJS">
-                                <p>NodeJS</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-md-6 col-sm-12 p-2 fade-left">
-                            <div class="badge shadow-sm">
-                                <img src="./assets/img/Icons/jquery.svg" alt="JQuery">
-                                <p>JQuery</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-md-6 col-sm-12 p-2 fade-left">
-                            <div class="badge shadow-sm">
-                                <img src="./assets/img/Icons/bootstrap.svg" alt="Bootstrap">
-                                <p>Bootstrap</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-md-6 col-sm-12 p-2 fade-left">
-                            <div class="badge shadow-sm">
-                                <img src="./assets/img/Icons/php.svg" alt="PHP">
-                                <p>PHP</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-md-6 col-sm-12 p-2 fade-left">
-                            <div class="badge shadow-sm">
-                                <img src="./assets/img/Icons/mysql.svg" alt="MySQL">
-                                <p>MySQL</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-md-6 col-sm-12 p-2 fade-left">
-                            <div class="badge shadow-sm">
-                                <img src="./assets/img/Icons/react.svg" alt="ReactJS" class="rotate">
-                                <p>ReactJS</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-md-6 col-sm-12 p-2 fade-left">
-                            <div class="badge shadow-sm">
-                                <img src="./assets/img/Icons/csharp.svg" alt="C#">
-                                <p>C#</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-md-6 col-sm-12 p-2 fade-left">
-                            <div class="badge shadow-sm">
-                                <img src="./assets/img/Icons/html.svg" alt="HTML5">
-                                <p>HTML 5</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-md-6 col-sm-12 p-2 fade-left">
-                            <div class="badge shadow-sm">
-                                <img src="./assets/img/Icons/css.svg" alt="CSS3">
-                                <p>CSS 3</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-md-6 col-sm-12 p-2 fade-left">
-                            <div class="badge shadow-sm">
-                                <img src="./assets/img/Icons/sql-server.svg" alt="Microsoft SQL Server">
-                                <p>Microsoft SQL Server</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row px-4 mt-0 more-skills">
-                        <div class="col-lg-2 col-md-6 col-sm-12 p-2 fade-left">
-                            <div class="badge shadow-sm">
-                                <img src="./assets/img/Icons/javascript.svg" alt="JavaScript">
-                                <p>JavaScript</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-md-6 col-sm-12 p-2 fade-left">
-                            <div class="badge shadow-sm">
-                                <img src="./assets/img/Icons/nginx.svg" alt="NGINX">
-                                <p>NGINX</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-md-6 col-sm-12 p-2 fade-left">
-                            <div class="badge shadow-sm">
-                                <img src="./assets/img/Icons/apache.svg" alt="Apache">
-                                <p>Apache</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-md-6 col-sm-12 p-2 fade-left">
-                            <div class="badge shadow-sm">
-                                <img src="./assets/img/Icons/docker.svg" class="floating" alt="Docker">
-                                <p>Docker</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-md-6 col-sm-12 p-2 fade-left">
-                            <div class="badge shadow-sm">
-                                <img src="./assets/img/Icons/linux.svg" alt="Linux">
-                                <p>Linux</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-md-6 col-sm-12 p-2 fade-left">
-                            <div class="badge shadow-sm">
-                                <img src="./assets/img/Icons/livewire.svg" alt="Livewire">
-                                <p>Livewire</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-md-6 col-sm-12 p-2 fade-left">
-                            <div class="badge shadow-sm">
-                                <img src="./assets/img/Icons/figma.svg" alt="Figma">
-                                <p>Figma</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-md-6 col-sm-12 p-2 fade-left">
-                            <div class="badge shadow-sm">
-                                <img src="./assets/img/Icons/canva.svg" alt="Canva">
-                                <p>Canva</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-md-6 col-sm-12 p-2 fade-left">
-                            <div class="badge shadow-sm">
-                                <img src="./assets/img/Icons/tailwind.svg" alt="Tailwind">
-                                <p>Tailwind</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-md-6 col-sm-12 p-2 fade-left">
-                            <div class="badge shadow-sm">
-                                <img src="./assets/img/Icons/material-ui.svg" alt="Material UI">
-                                <p>Material UI</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-md-6 col-sm-12 p-2 fade-left">
-                            <div class="badge shadow-sm">
-                                <img src="./assets/img/Icons/chakra.svg" alt="Chakra UI">
-                                <p>Chakra UI</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-md-6 col-sm-12 p-2 fade-left">
-                            <div class="badge shadow-sm">
-                                <img src="./assets/img/Icons/express.svg" alt="ExpressJS">
-                                <p>ExpressJS</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row justify-content-center fade-up">
-                        <a id="toggle-skills" href="#" class="floating w-auto text-center text-white">
-                            Show More <i class="bi bi-chevron-down"></i>
-                        </a>
-                    </div>
-                </section>
-
-                <section id="education" class="shadow">
-                    <h2 class="text-title mt-4">Education</h2>
-
-                    <div class="container-fluid">
-                        <div class="row row-1">
-                            <div class="col-lg-6 col-md-12 col-sm-12">
-                                <ul>
-                                    <li class="fade-up">
-                                        <h4 class="mb-2">
-                                            Network & <span class="text-accent">Application</span>
-                                        </h4>
-                                        <div class="wrapper">
-                                            <strong>
-                                                <small>SMKN 1 Punggelan | June 2020 - April 2024</small>
-                                            </strong>
-                                            <p class="mt-2">
-                                                <small>
-                                                    I'm a full-time student in the SIJA program, 
-                                                    which stands for Sistem Informatika Jaringan 
-                                                    dan Aplikasi (Network and Application Information System). 
-                                                    This is the place that introduced me to networking and more
-                                                </small>
-                                            </p>
-                                        </div>
-                                    </li>
-                                    <li class="fade-up">
-                                        <h4 class="mb-2">
-                                            Bachelor of <span class="text-accent">Enginering</span>
-                                        </h4>
-                                        <div class="wrapper">
-                                            <strong>
-                                                <small>STEKOM University | June 2024 - Present</small>
-                                            </strong>
-                                            <p class="pt-2">
-                                                <small>
-                                                    I am an undergraduate at STEKOM University pursuing a Bachelor's Degree in Computer Engineering with a full scholarship
-                                                </small>
-                                            </p>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="filler col-lg-6 col-md-12 col-sm-12 d-flex justify-content-center align-content-center fade-left">
-                                <img src="./assets/img/Icons/react.svg" alt="React Icon" width="200px" class="rotate">
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <section id="experience" class="shadow mt-5">
-                    <h2 class="text-title mt-4">Experience</h2>
-
-                    <div class="container-fluid">
-                        <div class="row row-1">
-                            <div class="col-lg-6 col-md-12 col-sm-12">
-                                <ul>
-                                    <li class="fade-up">
-                                        <h4 class="mb-2">
-                                            Junior <span class="text-accent">Software Engineer</span>
-                                        </h4>
-                                        <div class="wrapper">
-                                            <strong>
-                                                <small>Akastra Toyota | March 2023 - March 2024</small>
-                                            </strong>
-                                            <p class="pt-2">
-                                                <small>
-                                                    I started my programming journey here at Akastra Toyota 
-                                                    as an Intern Junior Software Engineer. I've built and 
-                                                    participated in many incredible projects here. This is the 
-                                                    place that I prepared myself to be a future-ready programmer.
-                                                </small>
-                                            </p>
-                                        </div>
-                                    </li>
-                                    <li class="fade-up">
-                                        <h4 class="mb-2">
-                                            English <span class="text-accent">Certification</span>
-                                        </h4>
-                                        <div class="wrapper">
-                                            <strong>
-                                                <small>TOEIC Test | August 2022</small>
-                                            </strong>
-                                            <p class="pt-2">
-                                                <small>
-                                                    I took the TOEIC Test, which is a benchmark for assessing 
-                                                    someone's English skills. I scored 800 points out of 1000, 
-                                                    which placed me in the 'advanced' level in terms of English 
-                                                    proficiency. <a target="_blank" download href="./assets/img/Portfolio/toeic.webp">Certificate</a>
-                                                </small>
-                                            </p>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="filler col-lg-6 col-md-12 col-sm-12 d-flex justify-content-center align-content-center fade-right">
-                                <img src="./assets/img/Icons/csharp.svg" alt="React Icon" width="200px">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="filler col-lg-6 col-md-12 col-sm-12 d-flex justify-content-center align-content-center fade-left">
-                                <img src="./assets/img/Icons/nodejs.svg" alt="React Icon" width="200px" class="floating">
-                            </div>
-                            <div class="col-lg-6 col-md-12 col-sm-12">
-                                <ul>
-                                    <li class="fade-up">
-                                        <h4 class="mb-2">
-                                            IT Software Solution <span class="text-accent">for Business</span>
-                                        </h4>
-                                        <div class="wrapper">
-                                            <strong>
-                                                <small>IT Software Solution For Business | March 2023</small>
-                                            </strong>
-                                            <p class="mt-2">
-                                                <small>
-                                                    I participated in LKS IT Software Solution For Business 
-                                                    and became the champion in Banjarnegara. I made my way 
-                                                    through the provincial competition. Even though I didn't 
-                                                    win in the provincial stage, I'm highly proud to made it 
-                                                    this far.
-                                                </small>
-                                            </p>
-                                        </div>
-                                    </li>
-                                    <li class="fade-up">
-                                        <h4 class="mb-2">
-                                            Web Technology <span class="text-accent">Competition</span>
-                                        </h4>
-                                        <div class="wrapper">
-                                            <strong>
-                                                <small>Web Technology | February 2024</small>
-                                            </strong>
-                                            <p class="pt-2">
-                                                <small>
-                                                    I won the LKS Web Technology Competition in Banjarnegara, 
-                                                    where I competed by building a full-stack web app with 
-                                                    payment gateway integration. The stack used in this competition 
-                                                    was Laravel.
-                                                </small>
-                                            </p>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-6 col-md-12 col-sm-12">
-                                <ul>
-                                    <li class="fade-up">
-                                        <h4 class="mb-2">
-                                            Digital Marketing <span class="text-accent">Analyst</span>
-                                        </h4>
-                                        <div class="wrapper">
-                                            <strong>
-                                                <small>Toploker.com | May 2024 - Now</small>
-                                            </strong>
-                                            <p class="pt-2">
-                                                <small>
-                                                    I work at Toploker.com as a Digital Marketing Analyst. 
-                                                    My job involves finding and analyzing the best digital 
-                                                    marketing strategies for the company. I also look for 
-                                                    ways to improve our team and develop better algorithms 
-                                                    to save time or increase company's value.
-                                                </small>
-                                            </p>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="filler col-lg-6 col-md-12 col-sm-12 d-flex justify-content-center align-content-center fade-right">
-                                <img class="floating" src="./assets/img/Icons/docker.svg" alt="Docker Icon" width="200px">
-                            </div>
-                        </div>
-
-                        <div class="d-flex align-items-center justify-content-end mx-4 fade-right">
-                            <a target="_blank" href="https://www.linkedin.com/in/andika-dwi-saputra-10877928b/" class="dark-link shadow">
-                                <img src="./assets/img/Icons/linkedin.svg" alt="Linkedin" width="40">&nbsp;
-                                <span>Connect with me!</span>
-                            </a>
-                        </div>
-                    </div>
-                </section>
-
-                <section id="portfolio">
-                    <h2 class="text-center text-title mt-4">Excelent <span class="text-accent">Portfolio</span></h2>
-                    <p class="text-center mb-4">
-                        <small>
-                            Check out my wonderful <span class="text-accent">projects</span> & <span class="text-accent">achievements</span> that I have built throughout my journey!
-                        </small>
-                    </p>
-
-                    <div id="projects" class="px-5 pb-5">
-                        <div class="fade-left">
-                            <h3>
-                                Projects
-                            </h2>
-                            <div class="accent"></div>
-                        </div>
-
-                        <div class="row my-4">
-                            <div class="col-lg-4 col-md-6 col-sm-12 d-flex mb-3 fade-up">
-                                <div class="card shadow">
-                                    <div class="card-body">
-                                        <div class="image-wrapper mb-2">
-                                            <img src="./assets/img/Portfolio/ads-management.webp" alt="Ads Management">
-                                        </div>
-                                        <h5 class="text-white">Ads <span class="text-accent">Management</span></h5>
-                                        <p class="text-white">
-                                            <small>
-                                                Ads Management is a comperhesive website that builds up for managing Toploker.com ads.
-                                                The goal is to streamline the ad management process, making it easier and more efficient 
-                                                for users to handle their advertising needs on Toploker.
-                                            </small>
-                                        </p>
-                                    </div>
-                                    <div class="card-footer">
-                                        <div class="wrapper">
-                                            <img src="./assets/img/Icons/laravel.svg" alt="Laravel">
-                                            <img src="./assets/img/Icons/react.svg" alt="ReactJS" class="rotate">
-                                            <img src="./assets/img/Icons/chakra.svg" alt="ChakraUI">
-                                            <img src="./assets/img/Icons/javascript.svg" alt="Javascript">
-                                            <img src="./assets/img/Icons/mysql.svg" alt="Javascript">
-                                        </div>
-                                        <a target="_blank" href="#" class="btn btn-outline-accent sm shadow-sm float-end disabled">
-                                            <i class="bi bi-slash-circle"></i>
-                                            Unauthorized
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-sm-12 d-flex mb-3 fade-up">
-                                <div class="card shadow">
-                                    <div class="card-body">
-                                        <div class="image-wrapper mb-2">
-                                            <img src="./assets/img/Portfolio/attendify.webp" alt="Attendify">
-                                        </div>
-                                        <h5 class="text-white">Attendance <span class="text-accent">Management</span></h5>
-                                        <p class="text-white">
-                                            <small>
-                                                Attendify is an attendance management web app that can automatically recap employees' 
-                                                attendance data from different sources, including security input, Face Recognition 
-                                                Attendance Machines, and custom input from the HCD Team.
-                                            </small>
-                                        </p>
-                                    </div>
-                                    <div class="card-footer">
-                                        <div class="wrapper">
-                                            <img src="./assets/img/Icons/laravel.svg" alt="Laravel">
-                                            <img src="./assets/img/Icons/jquery.svg" alt="JQuery">
-                                            <img src="./assets/img/Icons/javascript.svg" alt="Javascript">
-                                            <img src="./assets/img/Icons/mysql.svg" alt="Javascript">
-                                        </div>
-                                        <a target="_blank" href="#" class="btn btn-outline-accent sm shadow-sm float-end disabled">
-                                            <i class="bi bi-slash-circle"></i>
-                                            Unauthorized
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-sm-12 d-flex mb-3 fade-up">
-                                <div class="card shadow">
-                                    <div class="card-body">
-                                        <div class="image-wrapper mb-2">
-                                            <img src="./assets/img/Portfolio/akastra.webp" alt="Akastra">
-                                        </div>
-                                        <h5 class="text-white">Akastra - <span class="text-accent">Company Profile</span></h5>
-                                        <p class="text-white">
-                                            <small>
-                                                Akastra Company Profile enhances Akastra's SEO on the internet with seamless 
-                                                company web pages, booking services, articles, and more. This website increases 
-                                                Akastra's visibility on the internet.
-                                            </small>
-                                        </p>
-                                    </div>
-                                    <div class="card-footer">
-                                        <div class="wrapper">
-                                            <img src="./assets/img/Icons/laravel.svg" alt="Laravel">
-                                            <img src="./assets/img/Icons/livewire.svg" alt="Livewire">
-                                            <img src="./assets/img/Icons/jquery.svg" alt="JQuery">
-                                            <img src="./assets/img/Icons/javascript.svg" alt="Javascript">
-                                            <img src="./assets/img/Icons/mysql.svg" alt="MySQL">
-                                        </div>
-                                        <a target="_blank" href="https://akastra.id" class="btn btn-outline-accent sm shadow-sm">
-                                            <i class="bi bi-browser-chrome"></i> 
-                                            Checkout
-                                        </a> 
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-sm-12 d-flex mb-3 fade-up">
-                                <div class="card shadow">
-                                    <div class="card-body">
-                                        <div class="image-wrapper mb-2">
-                                            <img src="./assets/img/Portfolio/akastra-care.webp" alt="Akastra Care">
-                                        </div>
-                                        <h5 class="text-white">Akastra Care - <span class="text-accent">Company Profile</span></h5>
-                                        <p class="text-white">
-                                            <small>
-                                                Company profile website to help customer find workshop easily. Make an appointment 
-                                                for services and improve the company's sales.
-                                            </small>
-                                        </p>
-                                    </div>
-                                    <div class="card-footer">
-                                        <div class="wrapper">
-                                            <img src="./assets/img/Icons/laravel.svg" alt="Laravel">
-                                            <img src="./assets/img/Icons/jquery.svg" alt="JQuery">
-                                            <img src="./assets/img/Icons/javascript.svg" alt="Javascript">
-                                            <img src="./assets/img/Icons/mysql.svg" alt="MySQL">
-                                        </div>
-                                        <a target="_blank" href="https://akastra-care.id" class="btn btn-outline-accent sm shadow-sm">
-                                            <i class="bi bi-browser-chrome"></i> 
-                                            Checkout
-                                        </a> 
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-sm-12 d-flex mb-3 fade-up">
-                                <div class="card shadow mb-0">
-                                    <div class="card-body">
-                                        <div class="image-wrapper mb-2">
-                                            <img src="./assets/img/Portfolio/wired.webp" alt="Wired">
-                                        </div>
-                                        <h5 class="text-white">Livewire <span class="text-accent">Chat</span></h5>
-                                        <p class="text-white">
-                                            <small>
-                                                Wired is a real-time messaging application developed with Laravel, 
-                                                Livewire, Alpine.js, and Pusher. I created this app for me to learn 
-                                                how pusher works with livewire.
-                                            </small>
-                                        </p>
-                                    </div>
-                                    <div class="card-footer">
-                                        <div class="wrapper">
-                                            <img src="./assets/img/Icons/laravel.svg" alt="Laravel">
-                                            <img src="./assets/img/Icons/alpinejs.svg" alt="AlpineJS">
-                                            <img src="./assets/img/Icons/livewire.svg" alt="Livewire">
-                                            <img src="./assets/img/Icons/pusher.svg" alt="Pusher">
-                                            <img src="./assets/img/Icons/tailwind.svg" alt="Tailwind">
-                                        </div>
-                                        <a target="_blank" href="https://github.com/Andikss/livewire-chat" class="btn btn-outline-accent sm shadow-sm float-end">
-                                            <i class="bi bi-github"></i> 
-                                            Checkout
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-sm-12 d-flex mb-3 fade-up">
-                                <div class="card shadow">
-                                    <div class="card-body">
-                                        <div class="image-wrapper mb-2">
-                                            <img src="./assets/img/Portfolio/akastra-passport.webp" alt="Akastra Passport">
-                                        </div>
-                                        <h5 class="text-white">Akastra <span class="text-accent">Passport</span></h5>
-                                        <p class="text-white">
-                                            <small>
-                                                Akastra Passport is an OAuth2 authentication server that enables Akastra's 
-                                                internal applications to use Single Sign-On (SSO) authentication. This allows 
-                                                us to create a robust yet simple experience for users and developers.
-                                            </small>
-                                        </p>
-                                    </div>
-                                    <div class="card-footer">
-                                        <div class="wrapper">
-                                            <img src="./assets/img/Icons/laravel.svg" alt="Laravel">
-                                            <img src="./assets/img/Icons/jquery.svg" alt="JQuery">
-                                            <img src="./assets/img/Icons/javascript.svg" alt="Javascript">
-                                            <img src="./assets/img/Icons/bootstrap.svg" alt="Bootstrap">
-                                        </div>
-                                        <a target="_blank" href="#" class="btn btn-outline-accent sm shadow-sm float-end disabled">
-                                            <i class="bi bi-slash-circle"></i>
-                                            Unauthorized
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-sm-12 d-flex mb-3 fade-up">
-                                <div class="card shadow">
-                                    <div class="card-body">
-                                        <div class="image-wrapper mb-2">
-                                            <img src="./assets/img/Portfolio/easytask.webp" alt="Easytask">
-                                        </div>
-                                        <h5 class="text-white">Project <span class="text-accent">Management</span></h5>
-                                        <p class="text-white">
-                                            <small>
-                                                Project Management AKA EasyTask is a task management tool that helps our 
-                                                teams work together. It has been used by Akastra Toyota and KSC Motor Company. 
-                                                I have contributed to the refactoring updates.
-                                            </small>
-                                        </p>
-                                    </div>
-                                    <div class="card-footer">
-                                        <div class="wrapper">
-                                            <img src="./assets/img/Icons/laravel.svg" alt="Laravel">
-                                            <img class="rotate" src="./assets/img/Icons/react.svg" alt="ReactJS">
-                                            <img src="./assets/img/Icons/javascript.svg" alt="Javascript">
-                                            <img src="./assets/img/Icons/material-ui.svg" alt="MaterialUI">
-                                        </div>
-                                        <a target="_blank" href="#" class="btn btn-outline-accent sm shadow-sm float-end disabled">
-                                            <i class="bi bi-slash-circle"></i>
-                                            Unauthorized
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-sm-12 d-flex mb-3 fade-up">
-                                <div class="card shadow mb-0">
-                                    <div class="card-body">
-                                        <div class="image-wrapper mb-2">
-                                            <img src="./assets/img/Portfolio/staging.webp" alt="Staging Panel">
-                                        </div>
-                                        <h5 class="text-white">Staging <span class="text-accent">Panel</span></h5>
-                                        <p class="text-white">
-                                            <small>
-                                                Fetching Akastra's database and exporting it directly to an Excel 
-                                                file allows for the export of pre-formatted available data or the 
-                                                use of custom SQL queries. This eases the management team's ability 
-                                                to manage service data.
-                                            </small>
-                                        </p>
-                                    </div>
-                                    <div class="card-footer">
-                                        <div class="wrapper">
-                                            <img src="./assets/img/Icons/laravel.svg" alt="Laravel">
-                                            <img src="./assets/img/Icons/javascript.svg" alt="Javascript">
-                                            <img src="./assets/img/Icons/php.svg" alt="PHP">
-                                            <img src="./assets/img/Icons/sql-server.svg" alt="Microsoft SQL Server">
-                                        </div>
-                                        <a target="_blank" href="#" class="btn btn-outline-accent sm shadow-sm float-end disabled">
-                                            <i class="bi bi-slash-circle"></i>
-                                            Unauthorized
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-sm-12 d-flex mb-3 fade-up">
-                                <div class="card shadow">
-                                    <div class="card-body">
-                                        <div class="image-wrapper mb-2">
-                                            <img src="./assets/img/Portfolio/tracking.webp" alt="Akastra Tracking">
-                                        </div>
-                                        <h5 class="text-white">Akastra <span class="text-accent">Tracking</span></h5>
-                                        <p class="text-white">
-                                            <small>
-                                                Akastra Tracking helps customers keep track of their vehicles while servicing at Akastra Toyota
-                                            </small>
-                                        </p>
-                                    </div>
-                                    <div class="card-footer">
-                                        <div class="wrapper">
-                                            <img src="./assets/img/Icons/laravel.svg" alt="Laravel">
-                                            <img src="./assets/img/Icons/jquery.svg" alt="JQuery">
-                                            <img src="./assets/img/Icons/bootstrap.svg" alt="Bootstrap">
-                                            <img src="./assets/img/Icons/mysql.svg" alt="MySQL">
-                                        </div>
-                                        <a target="_blank" href="#" class="btn btn-outline-accent sm shadow-sm float-end disabled">
-                                            <i class="bi bi-slash-circle"></i>
-                                            Unauthorized
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-sm-12 d-flex mb-3 fade-up">
-                                <div class="card shadow">
-                                    <div class="card-body">
-                                        <div class="image-wrapper mb-2">
-                                            <img src="./assets/img/Portfolio/parking.webp" alt="Parking">
-                                        </div>
-                                        <h5 class="text-white">E <span class="text-accent">Parking</span></h5>
-                                        <p class="text-white">
-                                            <small>
-                                                E-parking management for Akastra Care (Akastra's branch) eases 
-                                                monitoring of the parking lot and helps to identify the root cause 
-                                                of crowded parking lots.
-                                            </small>
-                                        </p>
-                                    </div>
-                                    <div class="card-footer">
-                                        <div class="wrapper">
-                                            <img src="./assets/img/Icons/laravel.svg" alt="Laravel">
-                                            <img src="./assets/img/Icons/jquery.svg" alt="JQuery">
-                                            <img src="./assets/img/Icons/bootstrap.svg" alt="Bootstrap">
-                                            <img src="./assets/img/Icons/mysql.svg" alt="MySQL">
-                                        </div>
-                                        <a target="_blank" href="#" class="btn btn-outline-accent sm shadow-sm float-end disabled">
-                                            <i class="bi bi-slash-circle"></i>
-                                            Unauthorized
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-sm-12 d-flex mb-3 fade-up">
-                                <div class="card shadow mb-0">
-                                    <div class="card-body">
-                                        <div class="image-wrapper mb-2">
-                                            <img src="./assets/img/Portfolio/mrs.webp" alt="MRS Genius">
-                                        </div>
-                                        <h5 class="text-white">MRS Genius <span class="text-accent">APIs</span></h5>
-                                        <p class="text-white">
-                                            <small>
-                                                API services for the MRS Genius application for Toyota MRA automatically 
-                                                generate attacklist data every month, dashboard for monitoring, making 
-                                                reminder management easier for the MRA team.
-                                            </small>
-                                        </p>
-                                    </div>
-                                    <div class="card-footer">
-                                        <div class="wrapper">
-                                            <img src="./assets/img/Icons/laravel.svg" alt="Laravel">
-                                            <img src="./assets/img/Icons/mysql.svg" alt="MySQL">
-                                        </div>
-                                        <a target="_blank" href="#" class="btn btn-outline-accent sm shadow-sm float-end disabled">
-                                            <i class="bi bi-slash-circle"></i>
-                                            Unauthorized
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="d-flex align-items-center justify-content-center fade-up">
-                            <a target="_blank" href="https://github.com/Andikss" class="dark-link shadow">
-                                <img src="./assets/img/Icons/github.svg" alt="Github" width="40">&nbsp;
-                                <span>Check out my GitHub!</span>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div id="certificate" class="px-5 py-4 shadow">
-                        <div class="fade-left">
-                            <h3>
-                                Certificate
-                            </h3>
-                            <div class="accent"></div>
-                        </div>
-
-                        <div class="row fade-left">
-                            <div class="col-lg-6 col-ms-12 col-sm-12">
-                                <small>
-                                    Most of the skills I gained were <span class="text-accent">self-taught</span>. However, I also 
-                                    acquired some certifications through testing and competitions.
-                                </small>
-                            </div>
-                        </div>
-                    
-                        <div class="row mt-4 mb-5 g-3">
-                            <div class="col-lg-9 col-md-12 col-md-12">
-                                <div class="row g-3">
-                                    <div class="col-lg-4 col-md-6 col-sm-12 d-flex fade-left">
-                                        <img class="shadow" src="./assets/img/Portfolio/sql-advanced.webp" alt="SQL Advanced">
-                                    </div>
-                                    <div class="col-lg-4 col-md-6 col-sm-12 d-flex fade-left">
-                                        <img class="shadow" src="./assets/img/Portfolio/javascript-intermediate.webp" alt="Javascript Intermediate">
-                                    </div>
-                                    <div class="col-lg-4 col-md-6 col-sm-12 d-flex fade-left">
-                                        <img class="shadow" src="./assets/img/Portfolio/webdev.webp" alt="Web Development">
-                                    </div>
-                                    <div class="col-lg-4 col-md-6 col-sm-12 d-flex fade-left">
-                                        <img class="shadow" src="./assets/img/Portfolio/data-programing.webp" alt="Data Programming">
-                                    </div>
-                                    <div class="col-lg-4 col-md-6 col-sm-12 d-flex fade-left">
-                                        <img class="shadow" src="./assets/img/Portfolio/tech.webp" alt="Tech for Everyone">
-                                    </div>
-                                    <div class="col-lg-4 col-md-6 col-sm-12 d-flex fade-left">
-                                        <img class="shadow" src="./assets/img/Portfolio/lks.webp" alt="Lomba Kecerdasan Siswa">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-12 col-sm-12 d-flex flex-column fade-right">
-                                <img class="shadow" src="./assets/img/Portfolio/toeic.webp" alt="TOEIC English" width="100%">
-                            </div>
-                        </div>
-
-                        <div class="follow-wrapper d-flex align-items-center justify-content-center my-4 fade-up gap-3">
-                            <a target="_blank" href="https://www.instagram.com/andikads__" class="dark-link shadow">
-                                <img src="./assets/img/Icons/instagram.svg" alt="Instagram" width="40">&nbsp;
-                                <span>Follow me on Instagram</span>
-                            </a>
-                        </div>
-                    </div>
-                    
-                </section>
-            </div>
-        </main>
-
-        <footer class="center flex-column">
-            <div class="banner shadow-lg">
-                <div class="row">
-                    <div class="col-lg-4 col-md-12 col-sm-12 center">
-                        <h4>
-                            Start a project
-                        </h4>
-                    </div>
-                    <div class="col-lg-4 col-md-12 col-sm-12 center">
-                        <p class="text-center">
-                            Interested in working together? We should 
-                            queue up a time to chat. I’ll buy the coffee.
-                        </p>
-                    </div>
-                    <div class="col-lg-4 col-md-12 col-sm-12 center">
-                        <a target="_blank" href="https://wa.me/qr/Q5BPJDQQIUBLH1" class="btn-outline-accent shadow-sm">
-                            <i class="bi bi-journal-check"></i>&nbsp;
-                            Wrap it up!
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <span class="p-0">Living, learning, & <span class="text-accent">leveling up</span></span>
-            <span class="p-0"><span class="text-accent">one day</span> at a time</span>
-
-            <div class="contact d-flex gap-3 mb-4">
-                <div class="wrapper">
-                    <a target="_blank" class="text-white" href="mailto:andikadwisaputra.dev@gmail.com">
-                        <i class="bi bi-envelope"></i>
-                    </a>
-                    <span class="tooltip">Email</span>
-                </div>
-                <div class="wrapper">
-                    <a target="_blank" class="text-white" href="https://www.instagram.com/andikads__">
-                        <i class="bi bi-instagram"></i>
-                    </a>
-                    <span class="tooltip">Instagram</span>
-                </div>
-                <div class="wrapper">
-                    <a target="_blank" class="text-white" href="https://www.youtube.com/channel/UCGAoFirO5LplzI-OO9nxx8g">
-                        <i class="bi bi-youtube"></i>
-                    </a>
-                    <span class="tooltip">YouTube</span>
-                </div>
-                <div class="wrapper">
-                    <a target="_blank" class="text-white" href="https://wa.me/6285743699909">
-                        <i class="bi bi-whatsapp"></i>
-                    </a>
-                    <span class="tooltip">WhatsApp</span>
-                </div>
-                <div class="wrapper">
-                    <a target="_blank" class="text-white" href="https://www.linkedin.com/in/andika-dwi-saputra-10877928b/">
-                        <i class="bi bi-linkedin"></i>
-                    </a>
-                    <span class="tooltip">LinkedIn</span>
-                </div>
-                <div class="wrapper">
-                    <a target="_blank" class="text-white" href="https://github.com/Andikss">
-                        <i class="bi bi-github"></i>
-                    </a>
-                    <span class="tooltip">GitHub</span>
-                </div>
-            </div>
-            
-
-            <p>
-                Handcrafted by <a target="_blank" href="https://github.com/Andikss" class="text-white">@andikss</a>
-            </p>
-        </footer>
-
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
-        <script src="assets/js/main.js"></script>
-    </body>
+  <dialog class="dialog" data-project-dialog data-lenis-prevent aria-labelledby="case-title"></dialog>
+</body>
 </html>
