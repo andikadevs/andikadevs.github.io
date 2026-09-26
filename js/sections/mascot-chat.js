@@ -1,4 +1,4 @@
-// The mascot chats: every so often, while it's idle, it says a random line in a
+// The mascot chats: every so often, while it's idle, it grumbles a random line in a
 // speech bubble (never the same one twice in a row), and a click gets a reaction.
 // It keeps quiet during the welcome, while dozing, and while the tab is hidden,
 // and the bubble tucks away as soon as the page scrolls (the mascot moves then).
@@ -27,7 +27,8 @@ export function initMascotChat(fly, bubble, ready = Promise.resolve()) {
   };
   const quiet = () => document.hidden || fly.classList.contains("is-hello") || fly.classList.contains("is-idle-sleepy");
   const next = () => {
-    const lines = pick(chatter.lines).filter((l) => l !== last);
+    const set = fly.classList.contains("is-docked") ? chatter.docked : chatter.lines;   // parked in the nav: its own complaints
+    const lines = pick(set).filter((l) => l !== last);
     last = lines[Math.floor(Math.random() * lines.length)];
     return last;
   };
