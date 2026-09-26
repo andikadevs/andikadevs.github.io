@@ -119,7 +119,7 @@
   .hero__eyebrow { grid-area: eyebrow; }
   .hero__title { grid-area: title; }
   .hero__actions { grid-area: actions; justify-content: flex-start; margin-top: calc(var(--space-4) * -1); }   /* .dim already leaves room below the headline */
-  .hero__mark { grid-area: mark; width: clamp(170px, 21vw, 300px); margin: 0; }
+  .hero__mark { grid-area: mark; width: clamp(190px, 24vw, 350px); margin: 0 clamp(16px, 5vw, 110px) 0 0; }   /* in from the edge, toward the copy */
 }
 
 
@@ -151,11 +151,6 @@
   .blueprint > .cloud:not(:first-of-type), .work > .cloud:not(:first-of-type) { display: none; }
   .hero > .cloud:first-of-type { --w: 260px !important; top: 8% !important; left: auto !important; right: -14%; --o: 0.55; }
 }
-.graph__node { cursor: pointer; }
-.graph__node rect { transition: fill var(--dur-fast) ease, transform var(--dur-base) var(--ease-spring); transform-box: fill-box; transform-origin: center; }
-.graph__node:hover rect, .graph__node:focus-visible rect { fill: var(--white); transform: scale(1.1); }
-.graph__node:hover text, .graph__node:focus-visible text { fill: var(--sky-700); }
-.graph__node:focus-visible { outline: none; }
 
 .hero > .container { position: relative; z-index: 2; }
 .hero { padding-bottom: clamp(170px, 19vw, 290px); }
@@ -368,33 +363,74 @@
 .hscroll__card.feature--brand p { opacity: 1; }   /* white on brand-strong must stay ≥ 4.5:1 */
 
 
-/* ---- Studio (sheet 04) --------------------------------------------------- */
+.studio-wrap { overflow-x: clip; }            /* the sky glow and drifting clouds may bleed, the page may not */
+/* ---- Studio (sheet 04): Manggala Cloud, as an actual cloud ---------------
+   No card: one big cloud floats on the page with the copy inside it, and the
+   six services drift around it as little clouds. Both use the same silhouette
+   (assets/img/cloud.svg) as a mask, stretched to fit whatever they hold. */
 .studio {
-  overflow: hidden;
-  padding: clamp(28px, 6vw, 88px);
-  border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-lg);
+  --cloud-top: var(--white);
+  --cloud-base: #dcecfb;
+  --cloud-ink: var(--sky-800);
+  --cloud-drop: drop-shadow(0 24px 30px rgb(63 143 214 / 0.26));
+  --cloud-shape: url("../assets/img/cloud.svg") center / 100% 100% no-repeat;
+  position: relative;
+  display: grid; justify-items: center;
+  padding-block: clamp(24px, 4vw, 64px);
 }
-.studio > .split { position: relative; z-index: 1; }
-.studio .split { align-items: center; }
-.studio .lead { color: var(--white); max-width: 40ch; }
-.studio .heading { text-shadow: 0 2px 24px rgb(31 59 109 / 0.2); }
-.studio__plan { display: grid; gap: var(--space-5); justify-items: center; }
-.studio__plan .graph { max-width: 540px; }
-.studio__plan .graph__node text { font-size: 13px; }
-.studio__plan .graph__node:not(.graph__hub) rect { fill: var(--sky-500); stroke: rgb(255 255 255 / 0.85); stroke-width: 1.2; }   /* solid, so wires tuck behind */
-.studio__plan .graph__hub rect { fill: var(--white); stroke: none; filter: drop-shadow(0 8px 20px rgb(3 24 53 / 0.3)); }
-.studio__hub { cursor: default; }
-.studio__hub:hover rect { transform: none; }
-[data-theme="dark"] .studio__plan .graph__node:not(.graph__hub) rect { fill: #1f3d73; }
-.studio__plan .graph__hub text { font-size: 13px; }
-.studio__plan .graph__edge { stroke: rgb(255 255 255 / 0.7); stroke-width: 1.6; stroke-linecap: round; }
-.studio__plan .graph__packets { opacity: clamp(0, (var(--p, 0) - 0.4) * 5, 1); }
-.studio__caption {
-  display: grid; justify-items: center; gap: var(--space-3); text-align: center;
-  font: 500 11px / 1.4 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--white);
+.studio::before {                               /* a patch of sky behind it, no edges */
+  content: ""; position: absolute; inset: -10% -6%; z-index: 0; pointer-events: none;
+  background: radial-gradient(50% 50% at 50% 55%, rgb(159 211 250 / 0.5), rgb(159 211 250 / 0.18) 55%, transparent 75%);
 }
-[data-theme="dark"] 
+[data-theme="dark"] .studio {
+  --cloud-top: #e3ecfb; --cloud-base: #b3c7ea;
+  --cloud-drop: drop-shadow(0 0 44px rgb(190 215 255 / 0.3));
+}
+[data-theme="dark"] .studio::before { background: radial-gradient(50% 50% at 50% 55%, rgb(120 160 230 / 0.22), transparent 72%); }
+
+.nimbus, .cloudlet { position: relative; isolation: isolate; filter: var(--cloud-drop); color: var(--cloud-ink); }
+.nimbus::before, .cloudlet::before {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(var(--cloud-top) 50%, var(--cloud-base));
+  -webkit-mask: var(--cloud-shape); mask: var(--cloud-shape);
+}
+
+.nimbus {
+  z-index: 1; width: min(100%, 980px);
+  padding: clamp(110px, 13vw, 180px) clamp(40px, 13%, 190px) clamp(70px, 8vw, 110px);
+}
+.nimbus__copy { justify-items: center; text-align: center; gap: var(--space-5); max-width: 600px; margin-inline: auto; }
+.nimbus__logo { display: block; height: clamp(28px, 2.8vw, 36px); width: auto; }
+.nimbus .sheet { background: var(--sky-50); color: var(--cloud-ink); }
+.nimbus .sheet__no { color: inherit; }
+.nimbus .heading { color: var(--cloud-ink); }
+.nimbus .lead { color: rgb(17 28 54 / 0.8); max-width: 44ch; }
+
+/* The services: small clouds drifting around the big one. */
+.studio__services { margin: 0; padding: 0; list-style: none; }
+.cloudlet {
+  padding: 30px 38px 20px;
+  font: 500 12px / 1 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap;
+  --cloud-drop: drop-shadow(0 12px 16px rgb(63 143 214 / 0.24));
+  transition: scale var(--dur-base) var(--ease-spring);
+}
+.cloudlet:hover { scale: 1.08; }
+@media (min-width: 1100px) {
+  .studio__services { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
+  .cloudlet { position: absolute; left: var(--x); top: var(--y); pointer-events: auto; }
+}
+@media (max-width: 1099px) {
+  .studio__services {
+    position: relative; z-index: 2; margin-top: -28px;
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 6px; max-width: 640px;
+  }
+  .cloudlet:nth-child(even) { margin-top: 18px; }
+}
+@media (max-width: 520px) {
+  .nimbus { --cloud-shape: url("../assets/img/cloud-tall.svg") center / 100% 100% no-repeat; padding: 120px 40px 120px; }   /* an upright cloud for the tall column */
+  .cloudlet { padding: 26px 26px 16px; font-size: 11px; }
+}
+
 /* ---- Footer wordmark (built by tools/build_brand.py) ----------------------
    Letters unclip from alternating sides; then the i's dot pops, the bar draws
    under "devs" and the caret lands and keeps blinking. .is-in plays, removing
@@ -633,9 +669,10 @@
   .hero .cloud[data-cloud="3"] { transform: translateY(calc(var(--p, 0) * -40vh)) scale(calc(1 + var(--p, 0) * 0.4)); }
   .hero .cloudbank--back { transform: translateY(calc(var(--p, 0) * -34vh)); will-change: transform; }   /* rises slower: depth */
 
-  /* Studio plan: wires are drawn by scrolling. */
-  .studio .graph__edge { --draw: clamp(0, 1 - (var(--p, 0) - 0.15) * 3, 1); }
-  .studio .graph__node:not(.graph__hub) { opacity: clamp(0, (var(--p, 0) - 0.3) * 5, 1); }
+  /* Studio: the little clouds bob on their own; the big one floats up a little with scroll. */
+  .cloudlet { animation: cloudlet-bob 5.5s ease-in-out infinite; animation-delay: calc(var(--i, 0) * -0.9s); }
+  .nimbus { translate: 0 calc((0.5 - var(--p, 0.5)) * 50px); }
+  @keyframes cloudlet-bob { 50% { transform: translateY(-9px); } }
 
   /* Figure drifts against the scroll on small screens; on desktop it's pinned. */
   @media (max-width: 959px) {

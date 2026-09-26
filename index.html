@@ -627,54 +627,28 @@
     <!-- ============ STUDIO: sheet 04 ============ -->
     <section class="section studio-wrap" aria-labelledby="studio-title">
       <div class="container">
-      <div class="blueprint studio" data-night data-scroll>
-      <span class="cloud" style="--w:380px; top:-6%; right:-6%; --dx:-80px; --o:.6"></span>
-      <span class="cloud" style="--w:300px; bottom:-8%; left:-4%; --drift:120s; --dx:70px; --o:.5"></span>
-      <div class="split">
-        <div class="stack" data-reveal-group>
+      <div class="studio" data-scroll>
+      <div class="nimbus">
+        <div class="stack nimbus__copy" data-reveal-group>
           <p class="sheet" data-reveal><span class="sheet__no">04 / 06</span><span data-i18n="studio.label">On the side</span></p>
+          <img class="nimbus__logo" src="assets/logos/manggala.svg" alt="Manggala Cloud" width="1760" height="480" loading="lazy" decoding="async" data-reveal>
           <h2 class="heading" id="studio-title" data-split data-reveal data-i18n="studio.title">I also run a small studio.</h2>
           <p class="lead" data-reveal data-i18n="studio.body">Manggala Cloud builds websites and apps from Semarang. It runs six services, from digital wedding invitations to an affiliate portal. It's where I try ideas before I'd recommend them to anyone else.</p>
           <div data-reveal>
-            <a class="btn btn--light" href="https://www.manggala.cloud" target="_blank" rel="noopener" data-magnetic><span data-i18n="studio.cta">Visit Manggala Cloud</span>
+            <a class="btn btn--brand" href="https://www.manggala.cloud" target="_blank" rel="noopener" data-magnetic><span data-i18n="studio.cta">Visit Manggala Cloud</span>
               <svg class="btn__icon btn__icon--diag" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12 12 4M5 4h7v7"/></svg></a>
           </div>
         </div>
-
-        <figure class="studio__plan">
-          <svg class="graph" viewBox="0 0 520 400" role="img" aria-label="Manggala Cloud: six services from one studio">
-            <g class="graph__edges">
-              <path class="graph__edge" pathLength="1" style="--i:0" d="M260 200 Q90 200 90 84"/>
-              <path class="graph__edge" pathLength="1" style="--i:1" d="M260 174 L260 64"/>
-              <path class="graph__edge" pathLength="1" style="--i:2" d="M260 200 Q430 200 430 84"/>
-              <path class="graph__edge" pathLength="1" style="--i:3" d="M260 200 Q90 200 90 316"/>
-              <path class="graph__edge" pathLength="1" style="--i:4" d="M260 226 L260 336"/>
-              <path class="graph__edge" pathLength="1" style="--i:5" d="M260 200 Q430 200 430 316"/>
-            </g>
-            <g class="graph__packets">
-              <circle class="graph__packet" r="3" style="offset-path: path('M260 200 Q90 200 90 84'); --delay:0.00s; --dur:2.4s"/>
-              <circle class="graph__packet" r="3" style="offset-path: path('M260 174 L260 64'); --delay:0.45s; --dur:2.8s"/>
-              <circle class="graph__packet" r="3" style="offset-path: path('M260 200 Q430 200 430 84'); --delay:0.90s; --dur:3.2s"/>
-              <circle class="graph__packet" r="3" style="offset-path: path('M260 200 Q90 200 90 316'); --delay:1.35s; --dur:2.4s"/>
-              <circle class="graph__packet" r="3" style="offset-path: path('M260 226 L260 336'); --delay:1.80s; --dur:2.8s"/>
-              <circle class="graph__packet" r="3" style="offset-path: path('M260 200 Q430 200 430 316'); --delay:2.25s; --dur:3.2s"/>
-            </g>
-            <g class="graph__node"><rect x="45" y="56" width="90" height="28" rx="14"/><text x="90" y="74" text-anchor="middle">studio</text></g>
-            <g class="graph__node"><rect x="205" y="36" width="110" height="28" rx="14"/><text x="260" y="54" text-anchor="middle">wedding</text></g>
-            <g class="graph__node"><rect x="375" y="56" width="110" height="28" rx="14"/><text x="430" y="74" text-anchor="middle">birthday</text></g>
-            <g class="graph__node"><rect x="45" y="316" width="90" height="28" rx="14"/><text x="90" y="334" text-anchor="middle">admin</text></g>
-            <g class="graph__node"><rect x="210" y="336" width="100" height="28" rx="14"/><text x="260" y="354" text-anchor="middle">editor</text></g>
-            <g class="graph__node"><rect x="370" y="316" width="120" height="28" rx="14"/><text x="430" y="334" text-anchor="middle">affiliate</text></g>
-            <g class="graph__node graph__hub studio__hub">
-              <rect x="170" y="174" width="180" height="52" rx="26"/>
-              <image href="assets/logos/manggala.svg" x="190" y="186" width="140" height="28" preserveAspectRatio="xMidYMid meet"/>
-            </g>
-          </svg>
-          <figcaption class="studio__caption">
-            <span data-i18n="studio.caption">Fig. 04 — six services, one studio.</span>
-          </figcaption>
-        </figure>
       </div>
+
+      <ul class="studio__services" aria-label="Services" data-i18n-attr="aria-label: studio.services">
+        <li class="cloudlet" style="--x:4%; --y:8%; --i:0" data-i18n="studio.svc.site">Studio site</li>
+        <li class="cloudlet" style="--x:1%; --y:44%; --i:1" data-i18n="studio.svc.wedding">Wedding invites</li>
+        <li class="cloudlet" style="--x:6%; --y:78%; --i:2" data-i18n="studio.svc.birthday">Birthday pages</li>
+        <li class="cloudlet" style="--x:80%; --y:6%; --i:3" data-i18n="studio.svc.editor">Invite editor</li>
+        <li class="cloudlet" style="--x:84%; --y:42%; --i:4" data-i18n="studio.svc.affiliate">Affiliate portal</li>
+        <li class="cloudlet" style="--x:79%; --y:80%; --i:5" data-i18n="studio.svc.admin">Admin panel</li>
+      </ul>
       </div>
       </div>
     </section>
