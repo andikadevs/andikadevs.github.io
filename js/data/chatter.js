@@ -141,7 +141,22 @@ export const chatter = {
   streak: {
     5: { en: "That's five boops. I'm telling HR.", id: "Udah lima kali. Aku lapor HRD, ya." },
     10: { en: "Ten boops! A new record. Please stop.", id: "Sepuluh kali! Rekor baru. Tolong berhenti." },
+    15: { en: "Fifteen. I'm filing a formal complaint.", id: "Lima belas. Aku ajukan keluhan resmi." },
     20: { en: "Twenty. You win. I have nothing left.", id: "Dua puluh. Kamu menang. Aku menyerah." },
+    30: { en: "Thirty?! That's it. I'm going on strike.", id: "Tiga puluh?! Cukup. Aku mogok kerja." },
+  },
+  // the theme toggle, clicked over and over (said in the new theme)
+  themeSpam: {
+    3: { en: "Are you… testing the light switch?", id: "Kamu lagi… ngetes saklar lampu?" },
+    5: { en: "Day! Night! Day! I've got jet lag.", id: "Siang! Malam! Siang! Aku kena jet lag." },
+    8: { en: "Okay, disco mode unlocked. Happy now?", id: "Oke, mode disko terbuka. Puas?" },
+    12: { en: "I'm going to be sick. Pick one. Please.", id: "Aku mual. Pilih satu aja. Tolong." },
+  },
+  // the language switch, clicked over and over (said in the new language)
+  langSpam: {
+    3: { en: "Make up your mind. English or Indonesian?", id: "Putuskan dong. Inggris atau Indonesia?" },
+    5: { en: "Bahasa… language… bahasa… I'm confused.", id: "Language… bahasa… language… aku bingung." },
+    8: { en: "Great. Now I speak neither.", id: "Mantap. Sekarang aku nggak bisa dua-duanya." },
   },
 
   // pointer rests on it (sometimes)

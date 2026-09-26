@@ -39,6 +39,7 @@ export function initMascotIdle(mascot) {
   });
   mascot.addEventListener("pointerenter", (event) => { if (event.pointerType === "mouse") play(pick(HOVER, last)); });
   mascot.addEventListener("pointerdown", () => play("boop", { force: true }));
+  mascot.addEventListener("tejo:move", (event) => { if (MOVES.includes(event.detail)) play(event.detail, { force: true }); });   // asked for by mascot-chat.js
   mascot.addEventListener("focus", () => { if (mascot.matches(":focus-visible")) play("wink"); });
   setTimeout(schedule, 4500);                                          // after the welcome
 }
