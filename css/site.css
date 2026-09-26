@@ -28,6 +28,28 @@
 @keyframes loader-failsafe { to { opacity: 0; visibility: hidden; } }
 @media (prefers-reduced-motion: reduce) { .loader { display: none; } }
 
+/* ---- Cursor: solid, native (drawn by the OS, so it never lags) ------------
+   A rounded arrow in the brand colours; over links it carries a little dot,
+   like the mascot's packet; over the project deck it's a drag pill. White over
+   the sky, pale blue on the night theme. Custom properties inherit, so any
+   link inside a sky section picks up the sky version automatically. */
+:root {
+  --cursor: url("../assets/img/cursors/paper.svg") 6 3, auto;
+  --cursor-hover: url("../assets/img/cursors/paper-hover.svg") 6 3, pointer;
+}
+.blueprint, .mascot-fly:not(.is-on-paper) {
+  --cursor: url("../assets/img/cursors/sky.svg") 6 3, auto;
+  --cursor-hover: url("../assets/img/cursors/sky-hover.svg") 6 3, pointer;
+}
+[data-theme="dark"] {
+  --cursor: url("../assets/img/cursors/night.svg") 6 3, auto;
+  --cursor-hover: url("../assets/img/cursors/night-hover.svg") 6 3, pointer;
+}
+[data-theme="dark"] .blueprint { --cursor: url("../assets/img/cursors/sky.svg") 6 3, auto; --cursor-hover: url("../assets/img/cursors/sky-hover.svg") 6 3, pointer; }
+html { cursor: var(--cursor); }
+:is(a, button, [role="button"], label, summary, select, .mascot, .wm__hit, .cloudlet) { cursor: var(--cursor-hover); }
+.deck__stage, .deck__stage:active { cursor: url("../assets/img/cursors/drag.svg") 22 14, grab; }
+
 /* ---- Nav extras ---------------------------------------------------------- */
 .nav-mark { display: block; width: 48px; aspect-ratio: 1; }   /* dock slot: the mascot flies in here */
 .nav-pill { padding-inline: var(--space-2); }
@@ -107,7 +129,6 @@
 }
 .mascot-hello.is-on { opacity: 1; scale: 1; }
 .mascot-fly.is-on-paper { filter: drop-shadow(0 4px 12px rgb(31 59 109 / 0.35)); }   /* stays white on paper; the shadow gives it an edge */
-.mascot { cursor: pointer; }
 .mascot svg { display: block; width: 100%; height: auto; overflow: visible; }
 .mascot .mk-eye { transform-box: fill-box; transform-origin: center; translate: var(--lx, 0) var(--ly, 0); transition: translate 0.25s var(--ease-out); }
 .mascot .mk-packet, .mascot .mk-stem { transform-box: fill-box; }
@@ -359,8 +380,7 @@
 .deck__btn svg { width: 18px; height: 18px; }
 .deck__hint { color: var(--white); opacity: 0.9; }
 
-.deck__stage { position: relative; min-height: min(70vh, 640px); touch-action: pan-y; cursor: grab; user-select: none; }
-.deck__stage:active { cursor: grabbing; }
+.deck__stage { position: relative; min-height: min(70vh, 640px); touch-action: pan-y; user-select: none; }
 .deck__cards { position: absolute; inset: 0; }
 .deck-card {
   position: absolute; left: 50%; top: 50%;
@@ -514,22 +534,24 @@
   }
   .cloudlet:nth-child(even) { margin-top: 18px; }
 }
-/* Phones: the logo-shaped cloud keeps its true proportions at full width and
-   holds the label and heading; the description and button follow on the page
-   just beneath it. The services sit in a tidy two-column grid, bobbing together. */
+/* Phones: the logo-shaped cloud keeps its true proportions (never wider than
+   520px) and holds the label and heading; the description and button follow on
+   the page just beneath it. The services cascade down in a loose zigzag, left
+   column anchored left and right column anchored right, so they never overflow. */
 @media (max-width: 760px) {
-  .nimbus { width: 100%; aspect-ratio: auto; padding: calc(100cqw * 0.2) 0 0; }
-  .nimbus::before { inset: 0 -5% auto; aspect-ratio: 5 / 3; }   /* a touch wider than the column: more room inside */
+  .studio { --cw: min(100cqw, 520px); }
+  .nimbus { width: var(--cw); aspect-ratio: auto; padding: calc(var(--cw) * 0.2) 0 0; }
+  .nimbus::before { inset: 0 0 auto; aspect-ratio: 5 / 3; }
   .nimbus__copy { gap: var(--space-4); }
-  .nimbus .heading { font-size: clamp(1.7rem, 7.4vw, 2.2rem); max-width: 18ch; text-wrap: balance; }   /* two lines, inside the cloud's body */
-  .nimbus .lead { margin-top: calc(100cqw * 0.13); color: var(--fg); opacity: 0.82; }   /* on the page now, not the cloud */
-  .studio__services {
-    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 10px;
-    width: 100%; max-width: 440px; margin-top: var(--space-4);
+  .nimbus .heading {                           /* inside the cloud's body; its box runs to the cloud's bottom edge */
+    font-size: clamp(1.55rem, 6.6vw, 2.2rem); max-width: 17ch; text-wrap: balance;
+    min-height: calc(var(--cw) * 0.4 - 58px);
   }
+  .nimbus .lead { margin-top: var(--space-6); color: var(--fg); opacity: 0.82; }   /* on the page now, not the cloud */
+  .studio__services { position: relative; display: block; width: 100%; max-width: 440px; height: 330px; margin-top: var(--space-4); }
   .cloudlet, .cloudlet:nth-child(n) {
-    margin: 0; min-width: 0; text-align: center; white-space: normal;
-    padding: 28px 8px 16px; font-size: 11px; line-height: 1.2; animation-delay: 0s;
+    position: absolute; left: var(--ml, auto); right: var(--mr, auto); top: var(--mt); margin: 0;
+    padding: 28px 16px 16px; font-size: calc(11px * var(--k, 1)); white-space: nowrap;
   }
 }
 
@@ -651,11 +673,10 @@
 .contact__band {
   padding-block: clamp(230px, 27vw, 390px) clamp(160px, 18vw, 260px);   /* clear the cloud bank (≤ 300px) + breathing room */
   overflow: hidden;
-  /* Dusk: the sky darkens into the footer's navy, so there's no edge between them. */
+  /* The sky brightens toward the horizon, where the footer's sea begins. */
   background: linear-gradient(180deg,
-    var(--hero-from) 0%, var(--hero-mid) 30%, var(--hero-to) 48%,
-    color-mix(in srgb, var(--hero-to) 55%, var(--sky-900)) 72%,
-    var(--sky-900) 100%);
+    var(--hero-from) 0%, var(--hero-mid) 30%, var(--hero-to) 64%,
+    color-mix(in srgb, var(--hero-to) 50%, var(--horizon)) 84%, var(--horizon) 100%);
 }
 .contact__band .cloudbank--top { --bank: var(--bg-sunken); }
 .contact__band > .container { position: relative; z-index: 2; }
@@ -669,7 +690,143 @@
 .contact__lead { max-width: 46ch; font-size: var(--text-lg); color: var(--white); }
 .contact__email { font: 500 var(--text-sm) / 1 var(--font-mono); color: var(--white); letter-spacing: 0.04em; overflow-wrap: anywhere; }
 
-.footer { background: var(--sky-900); color: var(--cream); padding-block: var(--space-6) var(--space-6); }
+/* Things that move with scroll while carrying a blur or shadow get their own
+   compositor layer, so each frame moves a cached picture instead of repainting
+   the shadow (the hero headline's 40px glow, the studio cloud's drop-shadow). */
+.hero__center, .hero .cloud, .nimbus, .studio__services, .cloudlet, .contact__band .cloud { will-change: transform; }
+
+/* ---- Footer: the sea ------------------------------------------------------
+   Three wave layers roll along the horizon (masks sliding sideways), sun glints
+   twinkle on the surface, light rays fall through the water, bubbles rise past
+   the wordmark. Transform/opacity only, and paused while off screen. */
+:root { --horizon: #9fd0f5; --sea-back: #69b4e6; --sea-mid: #3f93d4; --sea-top: #2a7bc0; --sea-deep: #0b2b57; --sea-floor: #061a3a; --glint: #ffffff; }
+[data-theme="dark"] { --horizon: #2c4d86; --sea-back: #1f4278; --sea-mid: #183566; --sea-top: #112a55; --sea-deep: #081a3a; --sea-floor: #040c1f; --glint: #e3ecff; }   /* moonlit: the horizon glows so the waves read */
+.footer { position: relative; isolation: isolate; overflow: hidden; color: var(--cream); padding-block: clamp(150px, 16vw, 210px) var(--space-6); }
+.ocean {
+  position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: linear-gradient(180deg, var(--horizon) 0 50px, var(--sea-top) 112px, color-mix(in srgb, var(--sea-top) 45%, var(--sea-deep)) 38%, var(--sea-deep) 72%, var(--sea-floor));
+}
+.ocean[data-offscreen] *, .ocean[data-offscreen] *::before, .ocean[data-offscreen] *::after { animation-play-state: paused !important; }
+.wave {
+  position: absolute; left: 0; top: var(--top); height: var(--h); width: calc(100% + var(--tile));
+  background: var(--fill);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 100' preserveAspectRatio='none'%3E%3Cpath d='M0 38 Q150 8 300 38 T600 38 V100 H0 Z'/%3E%3C/svg%3E") 0 0 / var(--tile) 100% repeat-x;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 100' preserveAspectRatio='none'%3E%3Cpath d='M0 38 Q150 8 300 38 T600 38 V100 H0 Z'/%3E%3C/svg%3E") 0 0 / var(--tile) 100% repeat-x;
+  animation: wave-roll var(--speed) linear infinite;
+  will-change: transform;
+}
+.wave--back  { --fill: var(--sea-back); --tile: 520px; --h: 64px; --top: 22px; --speed: 26s; opacity: 0.85; }
+.wave--mid   { --fill: var(--sea-mid);  --tile: 760px; --h: 70px; --top: 36px; --speed: 19s; animation-direction: reverse; }
+.wave--front { --fill: var(--sea-top);  --tile: 980px; --h: 72px; --top: 48px; --speed: 14s; }
+@keyframes wave-roll { to { transform: translateX(calc(-1 * var(--tile))); } }
+
+.ocean__glints {                               /* sun (or moon) sparkles on the water */
+  position: absolute; left: 0; right: 0; top: 96px; height: 120px;
+  background:
+    radial-gradient(1.6px 1.6px at 12% 20%, var(--glint), transparent), radial-gradient(1.2px 1.2px at 23% 62%, var(--glint), transparent),
+    radial-gradient(2px 2px at 37% 34%, var(--glint), transparent),     radial-gradient(1.3px 1.3px at 49% 70%, var(--glint), transparent),
+    radial-gradient(1.8px 1.8px at 58% 18%, var(--glint), transparent), radial-gradient(1.2px 1.2px at 71% 52%, var(--glint), transparent),
+    radial-gradient(2px 2px at 83% 28%, var(--glint), transparent),     radial-gradient(1.4px 1.4px at 92% 66%, var(--glint), transparent);
+  animation: glint 3.2s ease-in-out infinite;
+}
+.ocean__glints + .ocean__glints { top: 108px; transform: translateX(4%); animation-delay: -1.6s; }
+@keyframes glint { 0%, 100% { opacity: 0.2; } 50% { opacity: 0.95; } }
+
+.ocean__shimmer {                              /* the sun's (or moon's) reflection: glitter scattered down the swell */
+  position: absolute; left: 62%; top: 78px; width: min(340px, 46vw); height: 150px; translate: -50% 0;
+  -webkit-mask: linear-gradient(#000 40%, transparent); mask: linear-gradient(#000 40%, transparent);
+}
+.ocean__shimmer::before, .ocean__shimmer::after { content: ""; position: absolute; inset: 0; animation: shimmer 2.2s ease-in-out infinite alternate; }
+.ocean__shimmer::before {
+  background:
+    radial-gradient(12px 1.6px at 24% 45%, color-mix(in srgb, var(--glint) 81%, transparent), transparent),
+    radial-gradient(14px 1.7px at 43% 19%, color-mix(in srgb, var(--glint) 91%, transparent), transparent),
+    radial-gradient(20px 1.8px at 49% 11%, color-mix(in srgb, var(--glint) 57%, transparent), transparent),
+    radial-gradient(15px 1.8px at 58% 94%, color-mix(in srgb, var(--glint) 83%, transparent), transparent),
+    radial-gradient(7px 1.3px at 60% 17%, color-mix(in srgb, var(--glint) 66%, transparent), transparent),
+    radial-gradient(14px 1.5px at 51% 5%, color-mix(in srgb, var(--glint) 93%, transparent), transparent),
+    radial-gradient(14px 1.6px at 40% 51%, color-mix(in srgb, var(--glint) 68%, transparent), transparent),
+    radial-gradient(15px 1.9px at 32% 96%, color-mix(in srgb, var(--glint) 87%, transparent), transparent),
+    radial-gradient(6px 1.9px at 51% 32%, color-mix(in srgb, var(--glint) 73%, transparent), transparent),
+    radial-gradient(9px 2.1px at 65% 82%, color-mix(in srgb, var(--glint) 93%, transparent), transparent),
+    radial-gradient(14px 2.1px at 53% 2%, color-mix(in srgb, var(--glint) 73%, transparent), transparent),
+    radial-gradient(17px 1.9px at 65% 9%, color-mix(in srgb, var(--glint) 67%, transparent), transparent),
+    radial-gradient(19px 1.2px at 41% 10%, color-mix(in srgb, var(--glint) 66%, transparent), transparent),
+    radial-gradient(7px 1.9px at 66% 11%, color-mix(in srgb, var(--glint) 63%, transparent), transparent),
+    radial-gradient(15px 1.2px at 41% 55%, color-mix(in srgb, var(--glint) 84%, transparent), transparent),
+    radial-gradient(13px 1.3px at 52% 13%, color-mix(in srgb, var(--glint) 67%, transparent), transparent),
+    radial-gradient(14px 1.3px at 56% 93%, color-mix(in srgb, var(--glint) 73%, transparent), transparent),
+    radial-gradient(12px 1.2px at 35% 82%, color-mix(in srgb, var(--glint) 100%, transparent), transparent),
+    radial-gradient(11px 1.4px at 49% 22%, color-mix(in srgb, var(--glint) 58%, transparent), transparent),
+    radial-gradient(16px 1.3px at 62% 10%, color-mix(in srgb, var(--glint) 82%, transparent), transparent),
+    radial-gradient(13px 1.7px at 23% 37%, color-mix(in srgb, var(--glint) 94%, transparent), transparent),
+    radial-gradient(8px 2.0px at 56% 19%, color-mix(in srgb, var(--glint) 92%, transparent), transparent),
+    radial-gradient(21px 1.3px at 56% 25%, color-mix(in srgb, var(--glint) 98%, transparent), transparent),
+    radial-gradient(11px 1.5px at 78% 85%, color-mix(in srgb, var(--glint) 60%, transparent), transparent),
+    radial-gradient(18px 1.4px at 55% 6%, color-mix(in srgb, var(--glint) 92%, transparent), transparent),
+    radial-gradient(9px 1.3px at 48% 58%, color-mix(in srgb, var(--glint) 87%, transparent), transparent);
+}
+.ocean__shimmer::after {
+  background:
+    radial-gradient(21px 1.7px at 51% 8%, color-mix(in srgb, var(--glint) 68%, transparent), transparent),
+    radial-gradient(6px 1.1px at 74% 88%, color-mix(in srgb, var(--glint) 67%, transparent), transparent),
+    radial-gradient(11px 1.7px at 57% 44%, color-mix(in srgb, var(--glint) 61%, transparent), transparent),
+    radial-gradient(19px 2.1px at 53% 36%, color-mix(in srgb, var(--glint) 85%, transparent), transparent),
+    radial-gradient(5px 1.1px at 43% 67%, color-mix(in srgb, var(--glint) 96%, transparent), transparent),
+    radial-gradient(17px 1.1px at 46% 68%, color-mix(in srgb, var(--glint) 84%, transparent), transparent),
+    radial-gradient(20px 1.2px at 49% 47%, color-mix(in srgb, var(--glint) 80%, transparent), transparent),
+    radial-gradient(16px 1.8px at 36% 71%, color-mix(in srgb, var(--glint) 87%, transparent), transparent),
+    radial-gradient(13px 2.0px at 64% 77%, color-mix(in srgb, var(--glint) 94%, transparent), transparent),
+    radial-gradient(17px 2.0px at 44% 41%, color-mix(in srgb, var(--glint) 81%, transparent), transparent),
+    radial-gradient(13px 1.2px at 36% 61%, color-mix(in srgb, var(--glint) 84%, transparent), transparent),
+    radial-gradient(14px 1.8px at 68% 95%, color-mix(in srgb, var(--glint) 72%, transparent), transparent),
+    radial-gradient(15px 1.2px at 35% 71%, color-mix(in srgb, var(--glint) 89%, transparent), transparent),
+    radial-gradient(17px 1.6px at 47% 5%, color-mix(in srgb, var(--glint) 65%, transparent), transparent),
+    radial-gradient(17px 1.4px at 28% 68%, color-mix(in srgb, var(--glint) 56%, transparent), transparent),
+    radial-gradient(16px 1.3px at 50% 30%, color-mix(in srgb, var(--glint) 63%, transparent), transparent),
+    radial-gradient(15px 1.4px at 39% 87%, color-mix(in srgb, var(--glint) 85%, transparent), transparent),
+    radial-gradient(13px 1.9px at 42% 21%, color-mix(in srgb, var(--glint) 96%, transparent), transparent),
+    radial-gradient(8px 1.2px at 32% 85%, color-mix(in srgb, var(--glint) 77%, transparent), transparent),
+    radial-gradient(15px 1.8px at 66% 81%, color-mix(in srgb, var(--glint) 98%, transparent), transparent),
+    radial-gradient(10px 1.3px at 55% 28%, color-mix(in srgb, var(--glint) 74%, transparent), transparent),
+    radial-gradient(11px 1.4px at 64% 61%, color-mix(in srgb, var(--glint) 93%, transparent), transparent),
+    radial-gradient(4px 2.0px at 42% 94%, color-mix(in srgb, var(--glint) 57%, transparent), transparent),
+    radial-gradient(12px 1.4px at 52% 69%, color-mix(in srgb, var(--glint) 91%, transparent), transparent),
+    radial-gradient(6px 1.9px at 54% 4%, color-mix(in srgb, var(--glint) 66%, transparent), transparent),
+    radial-gradient(6px 1.7px at 56% 15%, color-mix(in srgb, var(--glint) 75%, transparent), transparent);
+  animation-delay: -1.1s;
+}
+@keyframes shimmer { from { opacity: 0.15; transform: translateX(-4px); } to { opacity: 0.95; transform: translateX(4px); } }
+.ocean__rays {                                 /* light falling through the water */
+  position: absolute; left: 0; right: 0; top: 100px; height: 70%;
+  background:
+    linear-gradient(100deg, transparent 12%, rgb(255 255 255 / 0.07) 16%, transparent 22%),
+    linear-gradient(96deg, transparent 38%, rgb(255 255 255 / 0.06) 43%, transparent 49%),
+    linear-gradient(104deg, transparent 63%, rgb(255 255 255 / 0.08) 67%, transparent 73%),
+    linear-gradient(98deg, transparent 82%, rgb(255 255 255 / 0.05) 86%, transparent 91%);
+  -webkit-mask: linear-gradient(#000, transparent); mask: linear-gradient(#000, transparent);
+  transform-origin: 50% 0; animation: rays 9s ease-in-out infinite alternate;
+}
+@keyframes rays { from { opacity: 0.55; transform: skewX(-4deg); } to { opacity: 1; transform: skewX(4deg); } }
+
+.ocean__bubbles { position: absolute; inset: 110px 0 0; overflow: hidden; }   /* bubbles stay under the surface */
+.ocean__bubbles i {
+  position: absolute; bottom: -24px; left: var(--x); width: var(--s); aspect-ratio: 1; border-radius: 50%;
+  border: 1px solid rgb(255 255 255 / 0.45);
+  background: radial-gradient(circle at 32% 30%, rgb(255 255 255 / 0.55), rgb(255 255 255 / 0.06) 45%, transparent 70%);
+  animation: bubble var(--d) ease-in infinite; animation-delay: var(--l);
+}
+@keyframes bubble {
+  0% { transform: translate(0, 0); opacity: 0; }
+  12% { opacity: 0.9; }
+  50% { transform: translate(var(--sway), -45vh); }
+  85% { opacity: 0.7; }
+  100% { transform: translate(0, -90vh); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) { .ocean *, .footer__mark { animation: none !important; } }
+
+.footer__mark { animation: float-on-sea 7s ease-in-out infinite; }   /* the wordmark bobs on the swell */
+@keyframes float-on-sea { 50% { transform: translateY(-6px) rotate(-0.4deg); } }
 .footer__mark { position: relative; display: block; margin-bottom: var(--space-7); color: var(--cream); }
 
 /* The second "a" becomes an "@" on hover/focus, and social cards spread out of it
@@ -678,7 +835,7 @@
 .wm__at { fill: var(--sky-300); opacity: 0; transform-box: fill-box; transform-origin: center; transform: scale(0.3) rotate(-160deg); transition: opacity 0.2s ease, transform 0.6s var(--ease-spring); }
 .wm.is-at .wm__letter--at { opacity: 0; transform: scale(0.3) rotate(140deg); }
 .wm.is-at .wm__at { opacity: 1; transform: none; }
-.wm__hit { fill: transparent; cursor: pointer; outline: none; }
+.wm__hit { fill: transparent; outline: none; }
 
 /* Idle hint: every few seconds the a hops and wiggles and a ring pings out of it,
    so it reads as something you can poke. Stops while the @ is open. */
@@ -722,19 +879,6 @@
   transition-delay: calc(var(--k) * 45ms);
 }
 @media (prefers-reduced-motion: reduce) { .wm-card, .wm__at, .wm__letter--at { transition: none; } }
-.footer__inner { display: grid; gap: var(--space-4); align-items: center; font-size: var(--text-sm); }
-.footer__meta { display: flex; flex-wrap: wrap; gap: var(--space-2); color: rgb(255 249 241 / 0.7); }
-.footer__clock { display: flex; gap: var(--space-3); align-items: center; }
-.footer__clock .label--muted { color: rgb(255 249 241 / 0.5); }
-.footer__links { display: flex; flex-wrap: wrap; gap: var(--space-5); list-style: none; padding: 0; }
-.footer__links a { position: relative; }
-.footer__links a::after {
-  content: ""; position: absolute; left: 0; right: 0; bottom: -3px; height: 1px;
-  background: currentColor; transform: scaleX(0); transform-origin: right;
-  transition: transform var(--dur-base) var(--ease-out);
-}
-.footer__links a:hover::after { transform: scaleX(1); transform-origin: left; }
-@media (min-width: 900px) { .footer__inner { grid-template-columns: 1fr auto auto; gap: var(--space-7); } }
 
 /* ---- Small screens ------------------------------------------------------- */
 @media (max-width: 440px) { .nav-pill { display: none; } }
