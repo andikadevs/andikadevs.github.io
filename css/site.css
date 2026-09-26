@@ -5,6 +5,29 @@
 
 .section-head { display: grid; gap: var(--space-3); max-width: 760px; }
 
+/* ---- Loader (loader.js) -------------------------------------------------
+   Paper-coloured cover; the signature draws stroke by stroke, erases, then the
+   cover's giant scribble thins and pulls away to reveal the page. If the script
+   never takes over, a failsafe fades it out on its own. */
+.loader {
+  position: fixed; inset: 0; z-index: 100; pointer-events: none;
+  display: grid; place-items: center;
+  animation: loader-failsafe 0.5s ease 7s forwards;
+}
+.loader__cover { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.loader__cover path {
+  fill: none; stroke: var(--bg); stroke-width: 80%; stroke-linecap: round; stroke-linejoin: round;
+  stroke-dasharray: 1 1;
+}
+.loader__signature { position: relative; width: min(82vw, 660px); height: auto; overflow: visible; color: var(--brand-strong); }
+[data-theme="dark"] .loader__signature { color: var(--sky-100); }
+.loader__signature mask path {               /* the pen that reveals the ink */
+  fill: none; stroke: #fff; stroke-width: 15; stroke-linecap: round; stroke-linejoin: round;
+  stroke-dasharray: 1 1; stroke-dashoffset: 1; opacity: 0;
+}
+@keyframes loader-failsafe { to { opacity: 0; visibility: hidden; } }
+@media (prefers-reduced-motion: reduce) { .loader { display: none; } }
+
 /* ---- Nav extras ---------------------------------------------------------- */
 .nav-mark { display: block; width: 48px; aspect-ratio: 1; }   /* dock slot: the mascot flies in here */
 .nav-pill { padding-inline: var(--space-2); }
@@ -74,12 +97,13 @@
   background: var(--white); color: var(--sky-800);
   font: 600 18px / 1 var(--font-sans); white-space: nowrap;   /* size set by mascot-fly.js */
   box-shadow: 0 12px 28px rgb(31 59 109 / 0.22);
-  translate: -50% -100%; opacity: 0; scale: 0.6; transform-origin: 50% 100%;
+  translate: 0 -100%; opacity: 0; scale: 0.6; transform-origin: 0 100%;   /* anchored at its bottom-left, by the tail */
   transition: opacity 0.3s ease, scale 0.45s var(--ease-spring);
 }
-.mascot-hello::after {                          /* the tail, pointing down at the mascot */
-  content: ""; position: absolute; left: 50%; top: 100%; translate: -50% -50%; rotate: 45deg;
-  width: 0.8em; height: 0.8em; background: inherit; border-radius: 0 0 3px 0;
+.mascot-hello::after {                          /* the tail, pointing down-left at the mascot */
+  content: ""; position: absolute; left: 0.9em; top: 100%;
+  width: 0.9em; height: 0.8em; background: inherit;
+  clip-path: polygon(0 0, 100% 0, 0 100%); translate: 0 -1px;
 }
 .mascot-hello.is-on { opacity: 1; scale: 1; }
 .mascot-fly.is-on-paper { filter: drop-shadow(0 4px 12px rgb(31 59 109 / 0.35)); }   /* stays white on paper; the shadow gives it an edge */
