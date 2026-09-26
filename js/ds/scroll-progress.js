@@ -1,7 +1,10 @@
 // Writes scroll position into CSS so effects can be authored in stylesheets:
 //   [data-scroll]         --p 0 → 1 while the element travels up through the viewport
 //   [data-scroll="exit"]  --p 0 → 1 as an element that starts on screen scrolls away
-//   :root                 --page (0 → 1) and --velocity (−1 → 1, eased)
+//   [data-scroll-page]    --page (0 → 1 down the whole document)
+//   [data-scroll-velocity] --velocity (−1 → 1, eased)
+// (Page-wide values go only on the elements that ask for them: written on :root
+// they'd restyle the entire document every frame.)
 // Call watchScroll() again after rendering new [data-scroll] elements.
 import { onScroll } from "./smooth-scroll.js";
 
@@ -19,11 +22,17 @@ const io = new IntersectionObserver(
   { rootMargin: "25% 0px" },
 );
 
-function measure(el, vh) {
+const progressOf = (el, vh) => {
   const { top, height } = el.getBoundingClientRect();
-  const progress = PROGRESS[el.dataset.scroll] ?? PROGRESS.default;
-  el.style.setProperty("--p", round(clamp01(progress(top, height, vh))));
-}
+  return round(clamp01((PROGRESS[el.dataset.scroll] ?? PROGRESS.default)(top, height, vh)));
+};
+const last = new WeakMap();                     // skip writes when nothing changed
+const write = (el, name, value) => {
+  if (last.get(el)?.[name] === value) return;
+  last.set(el, { ...last.get(el), [name]: value });
+  el.style.setProperty(name, value);
+};
+const measure = (el, vh) => write(el, "--p", progressOf(el, vh));
 
 export function watchScroll(root = document) {
   root.querySelectorAll("[data-scroll]").forEach((el) => {
@@ -34,14 +43,21 @@ export function watchScroll(root = document) {
 
 export function initScrollProgress() {
   const html = document.documentElement;
+  const pageEls = [...document.querySelectorAll("[data-scroll-page]")];
+  const velocityEls = [...document.querySelectorAll("[data-scroll-velocity]")];
   let velocity = 0;
 
   onScroll(({ y, velocity: v }) => {
     const vh = innerHeight;
-    active.forEach((el) => measure(el, vh));
+    const progress = [...active].map((el) => [el, progressOf(el, vh)]);          // read…
+    const page = round(clamp01(y / Math.max(html.scrollHeight - vh, 1)));
     velocity += (Math.max(-1, Math.min(1, v / 40)) - velocity) * 0.2;
-    html.style.setProperty("--velocity", round(velocity));
-    html.style.setProperty("--page", round(clamp01(y / Math.max(html.scrollHeight - vh, 1))));
+    const vel = round(velocity);
+    return () => {                                                               // …then write
+      progress.forEach(([el, p]) => write(el, "--p", p));
+      pageEls.forEach((el) => write(el, "--page", page));
+      velocityEls.forEach((el) => write(el, "--velocity", vel));
+    };
   });
   watchScroll();
 }
