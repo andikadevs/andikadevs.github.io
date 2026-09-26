@@ -68,10 +68,10 @@ export function initHScroll(section) {
 
   onScroll(() => {
     if (!section.classList.contains("is-pinned")) return;
-    const { top } = section.getBoundingClientRect();
-    const p = clamp(-top / Math.max(section.offsetHeight - innerHeight, 1), 0, 1);
+    const { top, height } = section.getBoundingClientRect();
+    const p = clamp(-top / Math.max(height - innerHeight, 1), 0, 1);
     target = p * dist;
-    setMeta(p);
+    return () => setMeta(p);
   });
 
   viewport.addEventListener("scroll", () => {
@@ -83,7 +83,14 @@ export function initHScroll(section) {
 
   // One loop: ease the track toward its target (pinned) and feed the springs
   // with whichever movement is happening (pinned track or native row).
+  // It only runs while the section is on screen.
+  let visible = false, running = false;
+  new IntersectionObserver(([entry]) => {
+    visible = entry.isIntersecting;
+    if (visible && !running) { running = true; requestAnimationFrame(frame); }
+  }).observe(section);
   const frame = () => {
+    if (!visible) { running = false; return; }
     let velocity;
     if (section.classList.contains("is-pinned")) {
       x += (target - x) * 0.12;
@@ -97,6 +104,5 @@ export function initHScroll(section) {
     jiggle(velocity);
     requestAnimationFrame(frame);
   };
-  requestAnimationFrame(frame);
   setMeta(0);
 }

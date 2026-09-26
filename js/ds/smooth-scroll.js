@@ -1,5 +1,10 @@
 // Inertial scrolling via Lenis, plus a tiny pub/sub so other modules can react
 // to every scroll frame without each one adding its own listener.
+//
+// Listeners run in two phases so a frame costs one layout, not one per module:
+// each listener reads what it needs (getBoundingClientRect, offsetHeight…) and
+// may return a function; those returned functions run after every listener has
+// read, and are where the style writes go.
 // Falls back to native scrolling when the visitor prefers reduced motion.
 import Lenis from "./vendor/lenis.mjs";
 
@@ -8,7 +13,11 @@ let lenis = null;
 
 export const onScroll = (fn) => { listeners.add(fn); return () => listeners.delete(fn); };
 
-const emit = (state) => listeners.forEach((fn) => fn(state));
+const emit = (state) => {
+  const writes = [];
+  listeners.forEach((fn) => { const write = fn(state); if (typeof write === "function") writes.push(write); });
+  writes.forEach((write) => write());
+};
 
 export function initSmoothScroll({ offset = -88 } = {}) {
   const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;

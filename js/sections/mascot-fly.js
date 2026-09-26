@@ -38,15 +38,19 @@ export function initMascotFly(fly, anchor, dock, bubble, ready = Promise.resolve
     return { x: lerp(rest.left, d.left, t), y: lerp(rest.top, d.top, t), size: lerp(rest.width, d.width, t), t };
   };
 
-  const apply = ({ x, y, size }, t) => {
+  // Reads (layout) and writes (styles) are kept apart, so a scroll frame costs one layout.
+  const onSkyAt = ({ x, y, size }) => {                                      // white over sky, shadowed over paper
+    const cx = x + size / 2, cy = y + size / 2;
+    return skies.some((el) => { const r = el.getBoundingClientRect(); return cx > r.left && cx < r.right && cy > r.top && cy < r.bottom; });
+  };
+  const write = ({ x, y, size }, t, onSky) => {
     fly.style.width = `${rest.width}px`;
     fly.style.transform = `translate(${x.toFixed(1)}px, ${y.toFixed(1)}px) scale(${(size / rest.width).toFixed(4)})`;
-    const cx = x + size / 2, cy = y + size / 2;                              // white over sky, shadowed over paper
-    const onSky = skies.some((el) => { const r = el.getBoundingClientRect(); return cx > r.left && cx < r.right && cy > r.top && cy < r.bottom; });
     fly.classList.toggle("is-on-paper", !onSky);
     fly.classList.toggle("is-docked", t > 0.98);
     fly.classList.add("is-placed");
   };
+  const apply = (pose, t) => write(pose, t, onSkyAt(pose));
 
   // ---- Welcome ------------------------------------------------------------
   let intro = null;                                                        // { start, from? }
@@ -90,7 +94,12 @@ export function initMascotFly(fly, anchor, dock, bubble, ready = Promise.resolve
   };
 
   const remeasure = () => { rest = null; place(); };
-  onScroll(() => { if (scrollY > 4) cutToHome(); place(); });
+  onScroll(() => {
+    if (scrollY > 4) cutToHome();
+    if (intro) return;                                                     // the welcome's own loop is placing it
+    const home = scrollPose(), onSky = onSkyAt(home);                      // read…
+    return () => write(home, home.t, onSky);                               // …then write
+  });
   addEventListener("resize", remeasure);
   new ResizeObserver(remeasure).observe(anchor);
   document.fonts?.ready.then(remeasure);

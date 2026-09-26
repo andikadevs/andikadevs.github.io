@@ -26,11 +26,13 @@ export function initPaintScenes(root = document) {
     new ResizeObserver(pin).observe(hold);
     addEventListener("resize", pin);
 
+    let painted = "";
     onScroll(() => {
-      const { top } = run.getBoundingClientRect();
+      const { top, height } = run.getBoundingClientRect();
       // 0 when the run starts entering from the bottom, 1 when it has fully passed the top.
-      const progress = clamp01((innerHeight - top) / (run.offsetHeight + innerHeight * 0.0001));
-      scene.style.setProperty("--paint", progress.toFixed(4));
+      const progress = clamp01((innerHeight - top) / (height + innerHeight * 0.0001)).toFixed(4);
+      if (progress === painted) return;
+      return () => { painted = progress; scene.style.setProperty("--paint", progress); };
     });
   });
 }
