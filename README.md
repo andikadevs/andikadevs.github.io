@@ -62,6 +62,7 @@ after editing and commit the output:
   block, JSON-LD, the `<noscript>` project list, `sitemap.xml`, `robots.txt`,
   `llms.txt`, `llms-full.txt`, `manifest.webmanifest`. All from `js/data/*`, so nothing is typed twice.
 - `python3 tools/build_brand.py`: nav/hero mark, favicon.svg and the footer wordmark (needs fonttools).
+- `python3 tools/signature.py`: the loader's signature (slanted, broad-nib strokes plus the masks that draw them) into `index.html`.
 - `python3 tools/optimize_images.py`: 1600px + 800px screenshots, logos, photo (needs Pillow).
 - `node tools/render_images.mjs`: `og.jpg` and PNG icons (needs playwright-core + Chrome).
 

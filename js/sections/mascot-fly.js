@@ -14,7 +14,7 @@ const mix = (a, b, t) => ({ x: lerp(a.x, b.x, t), y: lerp(a.y, b.y, t), size: le
 
 const DROP = 1100, HOLD = 1500, HOME = 1100;                                // welcome timeline, ms
 
-export function initMascotFly(fly, anchor, dock, bubble) {
+export function initMascotFly(fly, anchor, dock, bubble, ready = Promise.resolve()) {
   if (!fly || !anchor || !dock) return;
   const skies = [...document.querySelectorAll(".blueprint")];
   const hero = anchor.closest(".hero");
@@ -61,9 +61,12 @@ export function initMascotFly(fly, anchor, dock, bubble) {
     fly.classList.toggle("is-hello", hello);
     if (bubble) {
       bubble.classList.toggle("is-on", hello && e < DROP + HOLD - 200);
-      bubble.style.left = `${(s.x + s.size * 0.38).toFixed(1)}px`;          // left/top, so the pop-in scale doesn't move it
-      bubble.style.top = `${(s.y - s.size * 0.1).toFixed(1)}px`;            // clear of the packet above its head
+      // A dialog box off its top-right shoulder (its tail points back at the mascot),
+      // kept on screen. left/top rather than transform, so the pop-in scale doesn't move it.
       bubble.style.fontSize = `${Math.min(Math.max(s.size * 0.075, 17), 30).toFixed(1)}px`;   // grows with the mascot
+      const x = s.x + s.size * 0.88, fits = x + bubble.offsetWidth + 12 <= innerWidth;
+      bubble.style.left = `${Math.min(x, innerWidth - bubble.offsetWidth - 12).toFixed(1)}px`;
+      bubble.style.top = `${(s.y + s.size * (fits ? 0.06 : -0.14)).toFixed(1)}px`;   // no room beside the packet: sit above it (clear of the hop)
     }
     if (e < DROP) return mix(above, s, easeOutBack(clamp01(e / DROP)));
     if (e < DROP + HOLD) return s;
@@ -94,7 +97,8 @@ export function initMascotFly(fly, anchor, dock, bubble) {
 
   const welcome = !matchMedia("(prefers-reduced-motion: reduce)").matches && scrollY < 4 && !location.hash;
   if (welcome) {
-    intro = { start: performance.now() + 250 };                            // a beat after first paint
+    intro = { start: Infinity };                                          // waits above the screen until the loader is done
+    ready.then(() => { if (intro && intro.start === Infinity) intro.start = performance.now() + 700; });   // once the wipe has mostly cleared
     const tick = () => { place(); if (intro) requestAnimationFrame(tick); };
     requestAnimationFrame(tick);
   } else {
