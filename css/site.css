@@ -701,9 +701,9 @@ html { cursor: var(--cursor); }
    the wordmark. Transform/opacity only, and paused while off screen. */
 :root { --horizon: #9fd0f5; --sea-back: #69b4e6; --sea-mid: #3f93d4; --sea-top: #2a7bc0; --sea-deep: #0b2b57; --sea-floor: #061a3a; --glint: #ffffff; }
 [data-theme="dark"] { --horizon: #2c4d86; --sea-back: #1f4278; --sea-mid: #183566; --sea-top: #112a55; --sea-deep: #081a3a; --sea-floor: #040c1f; --glint: #e3ecff; }   /* moonlit: the horizon glows so the waves read */
-.footer { position: relative; isolation: isolate; overflow: hidden; color: var(--cream); padding-block: clamp(150px, 16vw, 210px) var(--space-6); }
+.footer { position: relative; isolation: isolate; color: var(--cream); padding-block: clamp(150px, 16vw, 210px) var(--space-6); }
 .ocean {
-  position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  position: absolute; inset: 0; z-index: -1; pointer-events: none; overflow: hidden;   /* the sea clips its own waves, not the footer */
   background: linear-gradient(180deg, var(--horizon) 0 50px, var(--sea-top) 112px, color-mix(in srgb, var(--sea-top) 45%, var(--sea-deep)) 38%, var(--sea-deep) 72%, var(--sea-floor));
 }
 .ocean[data-offscreen] *, .ocean[data-offscreen] *::before, .ocean[data-offscreen] *::after { animation-play-state: paused !important; }
