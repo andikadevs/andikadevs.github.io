@@ -31,7 +31,26 @@ function applyStatic(root = document) {
   });
   document.documentElement.lang = current;
   document.title = t("meta.title");
-  document.querySelector('meta[name="description"]')?.setAttribute("content", t("meta.description"));
+  applyHead();
+}
+
+// The <head> follows the language too, so the ?lang=id page describes itself:
+// its own canonical URL (matching the hreflang alternates), title, description and locale.
+const LOCALE = { en: "en_US", id: "id_ID" };
+function applyHead() {
+  const set = (selector, attr, value) => document.head.querySelector(selector)?.setAttribute(attr, value);
+  const url = new URL(document.querySelector('link[rel="canonical"]')?.href ?? location.href);
+  url.search = current === DEFAULT ? "" : `?lang=${current}`;
+  url.hash = "";
+  set('link[rel="canonical"]', "href", url.href);
+  set('meta[property="og:url"]', "content", url.href);
+  for (const [selector, key] of [
+    ['meta[name="description"]', "meta.description"], ['meta[property="og:description"]', "meta.description"],
+    ['meta[name="twitter:description"]', "meta.description"], ['meta[property="og:title"]', "meta.title"],
+    ['meta[name="twitter:title"]', "meta.title"], ['meta[property="og:image:alt"]', "meta.ogAlt"], ['meta[name="twitter:image:alt"]', "meta.ogAlt"],
+  ]) set(selector, "content", t(key));
+  set('meta[property="og:locale"]', "content", LOCALE[current]);
+  set('meta[property="og:locale:alternate"]', "content", LOCALE[current === "en" ? "id" : "en"]);
 }
 
 export function setLang(next, { save = true } = {}) {

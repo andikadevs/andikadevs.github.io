@@ -4,8 +4,10 @@
 
 export const strings = {
   en: {
-    "meta.title": "Andika Dwi Saputra — Fullstack Developer in Semarang, Indonesia",
-    "meta.description": "Fullstack developer building internal systems, identity platforms and AI pipelines for universities and companies in Indonesia. NestJS, Laravel, React, Next.js.",
+    "meta.title": "Andika Dwi Saputra — Fullstack Developer in Semarang",
+    "meta.description": "Andika Dwi Saputra (andikadevs), fullstack developer in Semarang: SSO, internal tools, AI pipelines, and well-designed company profile and portfolio sites.",
+    "meta.ogAlt": "Andika Dwi Saputra, fullstack developer — andikadevs",
+    "work.shot": "Screenshot",
 
     "nav.work": "Work",
     "nav.about": "About",
@@ -25,7 +27,7 @@ export const strings = {
     "hero.ctaWork": "See the work",
     "hero.ctaCv": "Download CV",
 
-    "intro.text": "I started as an intern at a Toyota dealership, writing Laravel. Today I run the platform behind a university's apps, build tools for Toploker.com, and keep a small studio going on the side.",
+    "intro.text": "I started as an intern at a Toyota dealership, writing Laravel. Today I run the platform behind a university's apps, build tools for Toploker.com, and keep a small studio going on the side, where I also design and build company profiles and portfolio sites.",
     "intro.strong": "I like problems where a boring manual step is costing someone hours a week.",
     "intro.clients": "Built for",
     "stat.years": "Years shipping",
@@ -80,7 +82,9 @@ export const strings = {
 
   id: {
     "meta.title": "Andika Dwi Saputra — Fullstack Developer di Semarang",
-    "meta.description": "Fullstack developer yang membangun sistem internal, platform SSO, dan pipeline AI untuk kampus dan perusahaan di Indonesia. NestJS, Laravel, React, Next.js.",
+    "meta.description": "Andika Dwi Saputra (andikadevs), fullstack developer di Semarang: SSO, sistem internal, pipeline AI, serta website company profile dan portofolio.",
+    "meta.ogAlt": "Andika Dwi Saputra, fullstack developer — andikadevs",
+    "work.shot": "Tangkapan layar",
 
     "nav.work": "Karya",
     "nav.about": "Tentang",
@@ -100,7 +104,7 @@ export const strings = {
     "hero.ctaWork": "Lihat karya",
     "hero.ctaCv": "Unduh CV",
 
-    "intro.text": "Saya memulai karier sebagai pemagang di dealer Toyota dengan Laravel. Kini saya mengelola platform di balik aplikasi-aplikasi kampus, membangun sistem untuk Toploker.com, dan menjalankan studio kecil di sela waktu.",
+    "intro.text": "Saya memulai karier sebagai pemagang di dealer Toyota dengan Laravel. Kini saya mengelola platform di balik aplikasi-aplikasi kampus, membangun sistem untuk Toploker.com, serta menjalankan studio kecil tempat saya merancang dan membangun website company profile maupun portofolio.",
     "intro.strong": "Saya paling bersemangat ketika menemukan pekerjaan manual yang menyita waktu tim berjam-jam setiap minggu.",
     "intro.clients": "Klien & institusi",
     "stat.years": "Tahun pengalaman",

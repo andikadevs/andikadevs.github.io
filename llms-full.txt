@@ -6,7 +6,7 @@
 
 I build the software companies quietly run on: internal tools, single sign-on, media services, AI pipelines. Three-plus years, mostly for universities and hiring platforms in Indonesia.
 
-I started as an intern at a Toyota dealership, writing Laravel. Today I run the platform behind a university's apps, build tools for Toploker.com, and keep a small studio going on the side. I like problems where a boring manual step is costing someone hours a week.
+I started as an intern at a Toyota dealership, writing Laravel. Today I run the platform behind a university's apps, build tools for Toploker.com, and keep a small studio going on the side, where I also design and build company profiles and portfolio sites. I like problems where a boring manual step is costing someone hours a week.
 
 Built for: Universitas STEKOM, Toploker.com, Akastra Toyota, Kerja Malam, Digitek.
 
