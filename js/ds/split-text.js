@@ -1,5 +1,6 @@
 // Wraps each word of [data-split] in spans so CSS can animate words one by one.
 // Sets --wi (word index) on every word and --wn (word count) on the element.
+// The words stay real text (read once, in order, by screen readers and crawlers).
 // Safe to call again after the text changes (e.g. a language switch).
 export function splitWords(root = document) {
   root.querySelectorAll("[data-split]").forEach((el) => {
@@ -7,18 +8,11 @@ export function splitWords(root = document) {
     if (el.dataset.splitText === text && el.querySelector(".w")) return;
     el.dataset.splitText = text;
 
-    // Screen readers get the sentence once, as plain hidden text; the animated
-    // word spans are hidden from them (aria-label isn't allowed on a plain span/p).
-    const spoken = document.createElement("span");
-    spoken.className = "sr-only";
-    spoken.textContent = text;
-
     const words = text.split(" ");
     el.style.setProperty("--wn", words.length);
-    el.replaceChildren(spoken, ...words.flatMap((word, i) => {
+    el.replaceChildren(...words.flatMap((word, i) => {
       const outer = document.createElement("span");
       outer.className = "w";
-      outer.setAttribute("aria-hidden", "true");
       outer.style.setProperty("--wi", i);
       const inner = document.createElement("span");
       inner.textContent = word;
