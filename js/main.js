@@ -21,6 +21,7 @@ import { initProjectDialog } from "./sections/project-dialog.js";
 import { initCopyEmail, initClock } from "./sections/contact.js";
 import { initWordmark } from "./sections/wordmark.js";
 import { initMascots } from "./sections/mascot.js";
+import { initMascotFly } from "./sections/mascot-fly.js";
 
 function renderContent() {
   renderDeck();
@@ -65,4 +66,5 @@ initCopyEmail($("[data-copy-email]"));
 initClock($("[data-clock]"));
 initWordmark($("[data-wordmark]"));
 initMascots();
+initMascotFly($("[data-mascot-fly]"), $("[data-hero-anchor]"), $("[data-mascot-dock]"));
 $("[data-year]").textContent = new Date().getFullYear();

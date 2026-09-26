@@ -6,15 +6,7 @@
 .section-head { display: grid; gap: var(--space-3); max-width: 760px; }
 
 /* ---- Nav extras ---------------------------------------------------------- */
-.nav-mark {
-  --accent: var(--sky-100);
-  display: block;
-  width: 48px;
-  color: var(--white);
-  filter: drop-shadow(0 4px 10px rgb(31 59 109 / 0.25));
-  transition: color var(--dur-base) ease;
-}
-.nav.is-scrolled .nav-mark { --accent: var(--brand); color: var(--fg); filter: none; }
+.nav-mark { display: block; width: 48px; aspect-ratio: 1; }   /* dock slot: the mascot flies in here */
 .nav-pill { padding-inline: var(--space-2); }
 .nav:not(.is-scrolled) .nav-pill { background: rgb(10 35 70 / 0.26); }   /* white links ≥ 4.5:1 over the lightest sky */
 .nav-pill__links .nav-link { color: var(--white); }
@@ -39,18 +31,23 @@
 /* The character (.mascot), used in the nav and above the headline: full size,
    no frame. Idle: floats, tilts, blinks, glances around, bobs its packet.
    Eyes follow the pointer (--lx/--ly from hero.js); hover = hop. */
-.hero__mark {
+.hero__mark { display: block; width: clamp(84px, 9vw, 120px); aspect-ratio: 1; margin-bottom: var(--space-2); }   /* where the mascot rests */
+
+/* The mascot itself: fixed, moved by mascot-fly.js from the hero spot to the nav dock. */
+.mascot-fly {
   --accent: var(--sky-100);
-  display: block;
-  width: clamp(84px, 9vw, 120px);
+  position: fixed; left: 0; top: 0; z-index: 60;
+  display: block; aspect-ratio: 1;
+  transform-origin: 0 0; will-change: transform;
   color: var(--white);
   filter: drop-shadow(0 10px 22px rgb(31 59 109 / 0.28));
-  margin-bottom: var(--space-2);
+  transition: color var(--dur-base) ease, filter var(--dur-base) ease;
 }
+.mascot-fly .mk-ring { fill: var(--sky-400); transition: fill var(--dur-base) ease; }   /* face filled over the sky: hides the wires behind it */
+[data-theme="dark"] .mascot-fly .mk-ring { fill: #1c3868; }
+.mascot-fly.is-on-paper { --accent: var(--brand); color: var(--fg); filter: none; }
+.mascot-fly.is-on-paper .mk-ring { fill: transparent; }
 .mascot { cursor: pointer; }
-/* Hero character: its face is filled, so the wires that start behind it never show through. */
-.hero__mark .mk-ring { fill: var(--sky-400); }
-[data-theme="dark"] .hero__mark .mk-ring { fill: #1c3868; }
 .mascot svg { display: block; width: 100%; height: auto; overflow: visible; }
 .mascot .mk-eye { transform-box: fill-box; transform-origin: center; translate: var(--lx, 0) var(--ly, 0); transition: translate 0.25s var(--ease-out); }
 .mascot .mk-packet, .mascot .mk-stem { transform-box: fill-box; }
@@ -60,7 +57,6 @@
   .mascot .mk-eye { animation: mark-eyes 9s ease-in-out infinite; }
   .mascot .mk-packet { animation: packet-bob 1.9s ease-in-out infinite; }
   .mascot .mk-stem { animation: stem-wave 4.2s ease-in-out infinite; }
-  .nav-mark.mascot svg, .nav-mark.mascot .mk-eye, .nav-mark.mascot .mk-stem { animation-delay: -1.3s; }   /* out of step with the hero one */
   .mascot:hover .mk-packet { animation: packet-hop 0.6s var(--ease-bounce) infinite; }
   .mascot:hover .mk-eye { animation: mark-happy 0.6s ease-in-out infinite; }
   .mascot:hover svg { animation: mark-hop 0.6s var(--ease-bounce) infinite; }
@@ -83,11 +79,12 @@
 .hero__title { color: var(--white); text-shadow: 0 4px 40px rgb(31 59 109 / 0.22); }
 .hero__title > span { display: block; }
 .hero__light { font-weight: 300; letter-spacing: -0.045em; }
-.hero__title .dim { margin-bottom: 0.3em; }
+.hero__title .dim { margin-bottom: 0.75em; }   /* room for the dimension line + its label */
 .hero__lead { color: var(--white); max-width: 50ch; margin-inline: auto; font-size: var(--text-lg); text-shadow: 0 1px 18px rgb(31 59 109 / 0.3); }
 .hero__actions { justify-content: center; }
 .hero__caption {
-  display: flex; align-items: center; gap: var(--space-2);
+  display: block; text-align: center; text-wrap: balance;
+  max-width: 44ch;
   font: 500 11px / 1.4 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase;
   color: var(--white);
 }
@@ -99,7 +96,21 @@
 .hero.is-measuring .hero__mark * { animation: none !important; transform: none !important; transition: none !important; }
 .hero__orbit { position: absolute; inset: 0; z-index: 1; transition: translate 0.9s var(--ease-out); }
 .hero__orbit .graph { position: absolute; inset: 0; width: 100%; height: 100%; }
-@media (max-width: 759px) { .hero__orbit { opacity: 0.55; } }
+/* The caption's dot rides inline with its first word, even when the line wraps. */
+.hero__caption .pulse-dot { display: inline-block; vertical-align: middle; margin-right: var(--space-2); }
+
+/* Narrow screens: sheet labels stack (number over text), centred in a compact chip. */
+@media (max-width: 520px) {
+  .sheet { flex-direction: column; gap: 4px; text-align: center; border-radius: 14px; }
+  .sheet::before { display: none; }
+  .hero .sheet, .contact__inner .sheet { align-self: center; }
+}
+
+/* Phones: one cloud per sky section, so they never pile up behind the copy. */
+@media (max-width: 759px) {
+  .blueprint > .cloud:not(:first-of-type), .work > .cloud:not(:first-of-type) { display: none; }
+  .hero > .cloud:first-of-type { --w: 260px !important; top: 8% !important; left: auto !important; right: -14%; --o: 0.55; }
+}
 .graph__node { cursor: pointer; }
 .graph__node rect { transition: fill var(--dur-fast) ease, transform var(--dur-base) var(--ease-spring); transform-box: fill-box; transform-origin: center; }
 .graph__node:hover rect, .graph__node:focus-visible rect { fill: var(--white); transform: scale(1.1); }
@@ -471,6 +482,7 @@
 .contact__band .cloudbank--top { --bank: var(--bg-sunken); }
 .contact__band > .container { position: relative; z-index: 2; }
 .contact__inner { display: grid; justify-items: center; text-align: center; gap: var(--space-5); }
+.contact__actions { justify-content: center; }
 .contact__title {
   font: 800 var(--text-5xl) / 0.95 var(--font-display);
   letter-spacing: var(--tracking-tight);
@@ -574,7 +586,7 @@
   /* On load: wires draw out from the mark, then each project pops in along them. */
   .hero .graph__edge { animation: draw 1.4s var(--ease-out) both; animation-delay: calc(500ms + var(--i) * 60ms); }
   .hero .orbit__node rect, .hero .orbit__node text { animation: node-in 0.8s var(--ease-spring) both; animation-delay: calc(900ms + var(--i, 0) * 60ms); transform-box: fill-box; transform-origin: center; }
-  .hero__mark { animation: mark-in 1s var(--ease-spring) 150ms both; }
+  .mascot-fly { animation: mark-in 1s var(--ease-spring) 150ms both; }   /* opacity/scale/rotate: composes with the JS transform */
   @keyframes draw { from { stroke-dashoffset: 1; } }
   @keyframes node-in { from { opacity: 0; scale: 0.4; } }
   @keyframes mark-in { from { opacity: 0; scale: 0.5; rotate: -20deg; } }

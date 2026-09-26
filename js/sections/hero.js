@@ -7,7 +7,7 @@ import { initParallax } from "../ds/tilt.js";
 import { onScroll } from "../ds/smooth-scroll.js";
 
 const CHAR_W = 7.4;
-const COMPACT = 760;          // below this, nodes are dots without labels
+const COMPACT = 760;          // below this there's no orbit at all: the headline gets the screen
 const SPREAD = 0.35;          // how far chips drift outward as the hero scrolls away (× their distance from centre)
 
 let layout = null;            // { hub, nodes } from the last draw, used by the scroll step
@@ -36,13 +36,13 @@ function curve(a, b) {
   return `M${a.x.toFixed(1)} ${a.y.toFixed(1)} Q${b.x.toFixed(1)} ${a.y.toFixed(1)} ${b.x.toFixed(1)} ${b.y.toFixed(1)}`;
 }
 
-const node = (n, i, compact) => {
-  const w = compact ? 16 : nodeWidth(n.short);
-  const h = compact ? 16 : 30;
+const node = (n, i) => {
+  const w = nodeWidth(n.short);
+  const h = 30;
   return html`
     <a class="graph__node orbit__node" href="#project/${n.slug}" data-project="${n.slug}" aria-label="${n.short}" style="--i:${i}">
       <rect x="${(n.x - w / 2).toFixed(1)}" y="${(n.y - h / 2).toFixed(1)}" width="${w.toFixed(1)}" height="${h}" rx="${h / 2}"/>
-      ${compact ? "" : html`<text x="${n.x.toFixed(1)}" y="${(n.y + 4).toFixed(1)}" text-anchor="middle">${n.short}</text>`}
+      <text x="${n.x.toFixed(1)}" y="${(n.y + 4).toFixed(1)}" text-anchor="middle">${n.short}</text>
     </a>`;
 };
 
@@ -71,18 +71,18 @@ function draw(scene, mount, anchor, copy, title) {
     top: title.getBoundingClientRect().top - s.top,
     bottom: Math.min(h, innerHeight) - 90,
   };
-  const compact = w < COMPACT;
+  if (w < COMPACT) { layout = null; render(mount, ""); return; }
   const nodes = sides(projects, w, zone).map((n) => ({ ...n, cx: w / 2, cy: (zone.top + zone.bottom) / 2 }));
   const wires = nodes.map((n) => curve(hub, n));
   layout = { hub, nodes };
 
   render(mount, html`
     <svg class="graph orbit" viewBox="0 0 ${w.toFixed(0)} ${h.toFixed(0)}" width="${w.toFixed(0)}" height="${h.toFixed(0)}" role="group" aria-label="Projects, wired to me">
-      ${compact ? "" : html`<g class="orbit__wires">
+      <g class="orbit__wires">
         ${wires.map((d, i) => html`<path class="graph__edge" d="${d}" pathLength="1" style="--i:${i}"/>`)}
         ${wires.map(packet)}
-      </g>`}
-      ${nodes.map((n, i) => node(n, i, compact))}
+      </g>
+      ${nodes.map((n, i) => node(n, i))}
     </svg>`);
 }
 
