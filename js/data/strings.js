@@ -6,7 +6,7 @@ export const strings = {
   en: {
     "meta.title": "Andika Dwi Saputra — Fullstack Developer in Semarang",
     "meta.description": "Andika Dwi Saputra (andikadevs), fullstack developer in Semarang: SSO, internal tools, AI pipelines, and well-designed company profile and portfolio sites.",
-    "meta.ogAlt": "Andika Dwi Saputra, fullstack developer — andikadevs",
+    "meta.ogAlt": "Hi, I’m Andika Dwi Saputra, fullstack developer — the andikadevs mascot says hello",
     "work.shot": "Screenshot",
 
     "nav.work": "Work",
@@ -83,7 +83,7 @@ export const strings = {
   id: {
     "meta.title": "Andika Dwi Saputra — Fullstack Developer di Semarang",
     "meta.description": "Andika Dwi Saputra (andikadevs), fullstack developer di Semarang: SSO, sistem internal, pipeline AI, serta website company profile dan portofolio.",
-    "meta.ogAlt": "Andika Dwi Saputra, fullstack developer — andikadevs",
+    "meta.ogAlt": "Halo, saya Andika Dwi Saputra, fullstack developer — maskot andikadevs menyapa",
     "work.shot": "Tangkapan layar",
 
     "nav.work": "Karya",
