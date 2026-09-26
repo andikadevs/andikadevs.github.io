@@ -11,8 +11,26 @@
 .nav:not(.is-scrolled) .nav-pill { background: rgb(10 35 70 / 0.26); }   /* white links ≥ 4.5:1 over the lightest sky */
 .nav-pill__links .nav-link { color: var(--white); }
 .nav.is-scrolled .nav-pill__links .nav-link { color: var(--fg); }
-.nav.is-scrolled .nav-link:hover, .nav.is-scrolled .nav-link[aria-current="true"] { border-color: var(--border-strong); }
-.nav-link:hover, .nav-link[aria-current="true"] { border-color: currentColor; }
+/* The active link sits on a little cloud: a rounded body (::before) with three
+   puffs on top (::after), sized in px so any word length stays cloud-shaped. */
+.nav-pill__links { padding-block: 14px; margin-block: -14px; }   /* headroom so the puffs aren't clipped by the collapsing row */
+.nav-pill__links .nav-link { --cloud: var(--white); position: relative; isolation: isolate; border: 0; transition: color var(--dur-base) ease; }
+.nav.is-scrolled .nav-pill__links .nav-link { --cloud: var(--sky-100); }
+.nav-pill__links .nav-link::before, .nav-pill__links .nav-link::after {
+  content: ""; position: absolute; z-index: -1; pointer-events: none;
+  opacity: 0; scale: 0.6; transition: opacity var(--dur-base) ease, scale var(--dur-base) var(--ease-spring);
+}
+.nav-pill__links .nav-link::before { inset: 7px -2px 2px; border-radius: var(--radius-pill); background: var(--cloud); }
+.nav-pill__links .nav-link::after {
+  inset: -4px 4px 45%;
+  background:
+    radial-gradient(circle at 26% 72%, var(--cloud) 0 10px, transparent 10.5px),
+    radial-gradient(circle at 50% 58%, var(--cloud) 0 12px, transparent 12.5px),
+    radial-gradient(circle at 74% 76%, var(--cloud) 0 9px, transparent 9.5px);
+}
+.nav-pill__links .nav-link:hover::before, .nav-pill__links .nav-link:hover::after { opacity: 0.3; scale: 0.9; }
+.nav .nav-pill__links .nav-link[aria-current="true"] { color: var(--sky-800); }   /* dark ink on the cloud, in every nav state and theme */
+.nav-pill__links .nav-link[aria-current="true"]::before, .nav-pill__links .nav-link[aria-current="true"]::after { opacity: 1; scale: 1; }
 .nav-pill__status { color: var(--fg); font: 500 var(--text-xs) / 1 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; }
 @keyframes caret-blink { 50% { opacity: 0; } }
 
@@ -45,6 +63,24 @@
 }
 .mascot-fly .mk-ring { fill: var(--sky-400); transition: fill var(--dur-base) ease; }   /* face filled over the sky: hides the wires behind it */
 [data-theme="dark"] .mascot-fly .mk-ring { fill: #1c3868; }
+/* Welcome (mascot-fly.js): it drops in to the middle, hops and says hello, then flies home. */
+.mascot-fly.is-hello svg { animation: mark-hop 0.6s var(--ease-bounce) 2; }
+.mascot-fly.is-hello .mk-eye { animation: mark-happy 0.6s ease-in-out 2; }
+.mascot-fly.is-hello .mk-packet { animation: packet-hop 0.6s var(--ease-bounce) 2; }
+.mascot-hello {
+  position: fixed; left: 0; top: 0; z-index: 61; pointer-events: none;
+  padding: 0.7em 1.2em; border-radius: var(--radius-pill);
+  background: var(--white); color: var(--sky-800);
+  font: 600 18px / 1 var(--font-sans); white-space: nowrap;   /* size set by mascot-fly.js */
+  box-shadow: 0 12px 28px rgb(31 59 109 / 0.22);
+  translate: -50% -100%; opacity: 0; scale: 0.6; transform-origin: 50% 100%;
+  transition: opacity 0.3s ease, scale 0.45s var(--ease-spring);
+}
+.mascot-hello::after {                          /* the tail, pointing down at the mascot */
+  content: ""; position: absolute; left: 50%; top: 100%; translate: -50% -50%; rotate: 45deg;
+  width: 0.8em; height: 0.8em; background: inherit; border-radius: 0 0 3px 0;
+}
+.mascot-hello.is-on { opacity: 1; scale: 1; }
 .mascot-fly.is-on-paper { filter: drop-shadow(0 4px 12px rgb(31 59 109 / 0.35)); }   /* stays white on paper; the shadow gives it an edge */
 .mascot { cursor: pointer; }
 .mascot svg { display: block; width: 100%; height: auto; overflow: visible; }
@@ -398,10 +434,10 @@
   z-index: 1; width: min(100%, 980px);
   aspect-ratio: 5 / 3;                          /* the logo's own proportions, so the lobes stay round */
   display: grid; align-content: center;
-  padding: 10% 14% 3%;
+  padding: 11% 16% 6%;
 }
 .nimbus__copy { justify-items: center; text-align: center; gap: var(--space-5); max-width: 600px; margin-inline: auto; }
-.nimbus__logo { display: block; height: clamp(28px, 2.8vw, 36px); width: auto; }
+.studio__logo { position: relative; z-index: 1; display: block; height: clamp(30px, 3vw, 40px); width: auto; margin-top: clamp(18px, 2.5vw, 32px); }   /* signed under the cloud */
 .nimbus .sheet { background: var(--sky-50); color: var(--cloud-ink); }
 .nimbus .sheet__no { color: inherit; }
 .nimbus .heading { color: var(--cloud-ink); }
@@ -418,11 +454,11 @@
 .cloudlet:hover { scale: 1.08; }
 @media (min-width: 1100px) {
   .studio__services { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
-  .cloudlet { position: absolute; left: var(--x); top: var(--y); pointer-events: auto; }
+  .cloudlet { position: absolute; left: var(--x, auto); right: var(--r, auto); top: var(--y); pointer-events: auto; }
 }
 @media (max-width: 1099px) {
   .studio__services {
-    position: relative; z-index: 2; margin-top: -28px;
+    position: relative; z-index: 2; margin-top: var(--space-5);
     display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 6px; max-width: 640px;
   }
   .cloudlet:nth-child(even) { margin-top: 18px; }
@@ -679,7 +715,7 @@
   .hero__title > span:nth-child(2) { --delay: 120ms; }
   .hero__title > span:nth-child(3) { --delay: 240ms; }
 
-  .mascot-fly { animation: mark-in 1s var(--ease-spring) 150ms both; }   /* opacity/scale/rotate: composes with the JS transform */
+  .mascot-fly.is-entering { animation: mark-in 1s var(--ease-spring) 150ms both; }   /* only when the welcome is skipped (scrolled load, deep link) */
   @keyframes mark-in { from { opacity: 0; scale: 0.5; rotate: -20deg; } }
 
   .hero .cloud[data-cloud="1"] { transform: translate(calc(var(--p, 0) * -8vw), calc(var(--p, 0) * -20vh)); }
