@@ -15,7 +15,6 @@ import { initPaintScenes } from "./ds/paint-scene.js";
 import { initHScroll } from "./ds/hscroll.js";
 import { rollify } from "./ds/text-roll.js";
 import { syncSegmented } from "./ds/segmented.js";
-import { renderHero } from "./sections/hero.js";
 import { renderDeck, initDeck } from "./sections/deck.js";
 import { renderAbout } from "./sections/about.js";
 import { initProjectDialog } from "./sections/project-dialog.js";
@@ -56,7 +55,6 @@ initI18n();
 
 initSmoothScroll();
 initScrollProgress();
-renderHero();
 watchScroll();
 initNav($("[data-nav]"));
 initMarquees();
