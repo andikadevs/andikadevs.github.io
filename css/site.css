@@ -122,16 +122,9 @@ html { cursor: var(--cursor); }
   translate: 0 -100%; opacity: 0; scale: 0.6; transform-origin: 0 100%;   /* anchored at its bottom-left, by the tail */
   transition: opacity 0.3s ease, scale 0.45s var(--ease-spring);
 }
-.mascot-hello::after {                          /* the tail, pointing down-left at the mascot */
-  content: ""; position: absolute; left: 0.9em; top: 100%;
-  width: 0.9em; height: 0.8em; background: inherit;
-  clip-path: polygon(0 0, 100% 0, 0 100%); translate: 0 -1px;
-}
 .mascot-hello.is-on { opacity: 1; scale: 1; }
 .mascot-hello.is-left { transform-origin: 100% 100%; }
-.mascot-hello.is-left::after { left: auto; right: 0.9em; clip-path: polygon(0 0, 100% 0, 100% 100%); }   /* tail on the right, toward the mascot */
 .mascot-hello.is-below { translate: 0 0; transform-origin: 0 0; }   /* no room above (docked in the nav): hang below */
-.mascot-hello.is-below::after { top: auto; bottom: 100%; clip-path: polygon(0 100%, 100% 100%, 0 0); translate: 0 1px; }
 .mascot-fly.is-on-paper { filter: drop-shadow(0 4px 12px rgb(31 59 109 / 0.35)); }   /* stays white on paper; the shadow gives it an edge */
 .mascot svg { display: block; width: 100%; height: auto; overflow: visible; }
 .mascot .mk-eye { transform-box: fill-box; transform-origin: center; translate: var(--lx, 0) var(--ly, 0); transition: translate 0.25s var(--ease-out); }
