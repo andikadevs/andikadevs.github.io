@@ -13,6 +13,7 @@ import { initNightSky } from "./ds/night-sky.js";
 import { initThemeToggle } from "./ds/theme-toggle.js";
 import { initPaintScenes } from "./ds/paint-scene.js";
 import { initHScroll } from "./ds/hscroll.js";
+import { rollify } from "./ds/text-roll.js";
 import { syncSegmented } from "./ds/segmented.js";
 import { renderHero } from "./sections/hero.js";
 import { renderDeck, initDeck } from "./sections/deck.js";
@@ -23,7 +24,11 @@ import { initWordmark } from "./sections/wordmark.js";
 import { initMascots } from "./sections/mascot.js";
 import { initMascotFly } from "./sections/mascot-fly.js";
 
+// Labels that roll on hover: nav links and button labels (after i18n has set their text).
+const ROLL = ".nav-link, .btn > [data-i18n]";
+
 function renderContent() {
+  rollify(ROLL);
   renderDeck();
   renderAbout();
   splitWords();
