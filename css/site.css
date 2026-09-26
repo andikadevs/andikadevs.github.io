@@ -45,8 +45,7 @@
 }
 .mascot-fly .mk-ring { fill: var(--sky-400); transition: fill var(--dur-base) ease; }   /* face filled over the sky: hides the wires behind it */
 [data-theme="dark"] .mascot-fly .mk-ring { fill: #1c3868; }
-.mascot-fly.is-on-paper { --accent: var(--brand); color: var(--fg); filter: none; }
-.mascot-fly.is-on-paper .mk-ring { fill: transparent; }
+.mascot-fly.is-on-paper { filter: drop-shadow(0 4px 12px rgb(31 59 109 / 0.35)); }   /* stays white on paper; the shadow gives it an edge */
 .mascot { cursor: pointer; }
 .mascot svg { display: block; width: 100%; height: auto; overflow: visible; }
 .mascot .mk-eye { transform-box: fill-box; transform-origin: center; translate: var(--lx, 0) var(--ly, 0); transition: translate 0.25s var(--ease-out); }
@@ -71,7 +70,7 @@
   86% { transform: scaleY(0.1); }
   90% { transform: scaleY(0.1); }
 }
-@keyframes stem-wave   { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(6deg); } }
+@keyframes stem-wave   { 0%, 100% { transform: none; } 50% { transform: scaleY(1.07); } }   /* stretches up from its foot, so it never leaves the ring */
 @keyframes packet-hop  { 50% { translate: 0 -45%; } }
 @keyframes mark-hop    { 0%, 100% { transform: translateY(0) rotate(0); } 40% { transform: translateY(-14px) rotate(-6deg); } }
 @keyframes mark-happy  { 50% { transform: scaleY(0.35); } }
@@ -374,7 +373,7 @@
   --cloud-ink: var(--sky-800);
   --cloud-drop: drop-shadow(0 24px 30px rgb(63 143 214 / 0.26));
   --cloud-shape: url("../assets/img/cloud.svg") center / 100% 100% no-repeat;
-  position: relative;
+  position: relative; container-type: inline-size;
   display: grid; justify-items: center;
   padding-block: clamp(24px, 4vw, 64px);
 }
@@ -397,7 +396,9 @@
 
 .nimbus {
   z-index: 1; width: min(100%, 980px);
-  padding: clamp(110px, 13vw, 180px) clamp(40px, 13%, 190px) clamp(70px, 8vw, 110px);
+  aspect-ratio: 5 / 3;                          /* the logo's own proportions, so the lobes stay round */
+  display: grid; align-content: center;
+  padding: 10% 14% 3%;
 }
 .nimbus__copy { justify-items: center; text-align: center; gap: var(--space-5); max-width: 600px; margin-inline: auto; }
 .nimbus__logo { display: block; height: clamp(28px, 2.8vw, 36px); width: auto; }
@@ -426,8 +427,25 @@
   }
   .cloudlet:nth-child(even) { margin-top: 18px; }
 }
+/* Phones: the column is too tall for the logo's shape, so the cloud keeps its
+   proportions, bleeds past both edges, and grows a flat body below the lobes.
+   What shows is the top of the mark, with puffs underneath. */
+@media (max-width: 760px) {
+  .nimbus {
+    --w: 160cqw;
+    width: var(--w); margin-inline: calc((100cqw - var(--w)) / 2);
+    aspect-ratio: auto;
+    padding: calc(var(--w) * 0.19) calc((var(--w) - 100cqw) / 2 + 20px) 110px;
+  }
+  .nimbus::before {
+    --head: url("../assets/img/cloud.svg") top / 100% calc(var(--w) * 0.6) no-repeat;
+    --body: linear-gradient(#000 0 0) 0 calc(var(--w) * 0.5) / 100% calc(100% - var(--w) * 0.5 - 60px) no-repeat;
+    --base: url("../assets/img/cloud-base.svg") bottom / 100% 90px no-repeat;
+    -webkit-mask: var(--head), var(--body), var(--base);
+    mask: var(--head), var(--body), var(--base);
+  }
+}
 @media (max-width: 520px) {
-  .nimbus { --cloud-shape: url("../assets/img/cloud-tall.svg") center / 100% 100% no-repeat; padding: 120px 40px 120px; }   /* an upright cloud for the tall column */
   .cloudlet { padding: 26px 26px 16px; font-size: 11px; }
 }
 
