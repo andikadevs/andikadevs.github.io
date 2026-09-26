@@ -20,7 +20,7 @@ export const strings = {
 
     "hero.eyebrow": "Hi, I’m Andika — a",
     "hero.side": "Backend / Frontend / Ops",
-    "hero.hello": "Hi there!",
+    "hero.hello": "Hi, I’m Tejo!",
     "hero.line1": "Developer",
     "hero.line2": "who ships",
     "hero.line3": "systems.",
@@ -98,7 +98,7 @@ export const strings = {
 
     "hero.eyebrow": "Halo, saya Andika —",
     "hero.side": "Backend / Frontend / Ops",
-    "hero.hello": "Halo, selamat datang!",
+    "hero.hello": "Halo, aku Tejo!",
     "hero.line1": "Developer",
     "hero.line2": "di balik",
     "hero.line3": "sistem andal.",
