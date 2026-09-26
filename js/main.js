@@ -69,5 +69,5 @@ initCopyEmail($("[data-copy-email]"));
 initClock($("[data-clock]"));
 initWordmark($("[data-wordmark]"));
 initMascots();
-initMascotFly($("[data-mascot-fly]"), $("[data-hero-anchor]"), $("[data-mascot-dock]"));
+initMascotFly($("[data-mascot-fly]"), $("[data-hero-anchor]"), $("[data-mascot-dock]"), $("[data-mascot-hello]"));
 $("[data-year]").textContent = new Date().getFullYear();
