@@ -117,7 +117,7 @@ html { cursor: var(--cursor); }
   position: fixed; left: 0; top: 0; z-index: 61; pointer-events: none;
   padding: 0.7em 1.2em; border-radius: var(--radius-pill);
   background: var(--white); color: var(--sky-800);
-  font: 600 18px / 1 var(--font-sans); white-space: nowrap;   /* size set by mascot-fly.js */
+  font: 600 18px / 1.25 var(--font-sans); width: max-content; max-width: min(15em, calc(100vw - 24px));   /* size set by mascot-bubble.js; long lines wrap */
   box-shadow: 0 12px 28px rgb(31 59 109 / 0.22);
   translate: 0 -100%; opacity: 0; scale: 0.6; transform-origin: 0 100%;   /* anchored at its bottom-left, by the tail */
   transition: opacity 0.3s ease, scale 0.45s var(--ease-spring);
@@ -128,6 +128,10 @@ html { cursor: var(--cursor); }
   clip-path: polygon(0 0, 100% 0, 0 100%); translate: 0 -1px;
 }
 .mascot-hello.is-on { opacity: 1; scale: 1; }
+.mascot-hello.is-left { transform-origin: 100% 100%; }
+.mascot-hello.is-left::after { left: auto; right: 0.9em; clip-path: polygon(0 0, 100% 0, 100% 100%); }   /* tail on the right, toward the mascot */
+.mascot-hello.is-below { translate: 0 0; transform-origin: 0 0; }   /* no room above (docked in the nav): hang below */
+.mascot-hello.is-below::after { top: auto; bottom: 100%; clip-path: polygon(0 100%, 100% 100%, 0 0); translate: 0 1px; }
 .mascot-fly.is-on-paper { filter: drop-shadow(0 4px 12px rgb(31 59 109 / 0.35)); }   /* stays white on paper; the shadow gives it an edge */
 .mascot svg { display: block; width: 100%; height: auto; overflow: visible; }
 .mascot .mk-eye { transform-box: fill-box; transform-origin: center; translate: var(--lx, 0) var(--ly, 0); transition: translate 0.25s var(--ease-out); }

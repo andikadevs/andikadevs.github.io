@@ -24,6 +24,7 @@ import { initMascots } from "./sections/mascot.js";
 import { initMascotFly } from "./sections/mascot-fly.js";
 import { initMascotIdle } from "./sections/mascot-idle.js";
 import { initLoader } from "./sections/loader.js";
+import { initMascotChat } from "./sections/mascot-chat.js";
 import { initPauseOffscreen } from "./ds/pause-offscreen.js";
 
 // Labels that roll on hover: nav links and button labels (after i18n has set their text).
@@ -77,5 +78,6 @@ initWordmark($("[data-wordmark]"));
 initMascots();
 initMascotFly($("[data-mascot-fly]"), $("[data-hero-anchor]"), $("[data-mascot-dock]"), $("[data-mascot-hello]"), pageReady);
 initMascotIdle($("[data-mascot-fly]"));
+initMascotChat($("[data-mascot-fly]"), $("[data-mascot-hello]"), pageReady);
 initPauseOffscreen();
 $("[data-year]").textContent = new Date().getFullYear();

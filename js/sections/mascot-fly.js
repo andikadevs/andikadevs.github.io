@@ -4,6 +4,7 @@
 // screen, hops with a speech bubble, then flies back to its spot. Scrolling
 // during the welcome sends it home straight away, from wherever it is.
 import { onScroll } from "../ds/smooth-scroll.js";
+import { placeBubble } from "./mascot-bubble.js";
 
 const clamp01 = (n) => Math.min(1, Math.max(0, n));
 const ease = (t) => t * t * (3 - 2 * t);                                   // smoothstep
@@ -65,12 +66,7 @@ export function initMascotFly(fly, anchor, dock, bubble, ready = Promise.resolve
     fly.classList.toggle("is-hello", hello);
     if (bubble) {
       bubble.classList.toggle("is-on", hello && e < DROP + HOLD - 200);
-      // A dialog box off its top-right shoulder (its tail points back at the mascot),
-      // kept on screen. left/top rather than transform, so the pop-in scale doesn't move it.
-      bubble.style.fontSize = `${Math.min(Math.max(s.size * 0.075, 17), 30).toFixed(1)}px`;   // grows with the mascot
-      const x = s.x + s.size * 0.88, fits = x + bubble.offsetWidth + 12 <= innerWidth;
-      bubble.style.left = `${Math.min(x, innerWidth - bubble.offsetWidth - 12).toFixed(1)}px`;
-      bubble.style.top = `${(s.y + s.size * (fits ? 0.06 : -0.14)).toFixed(1)}px`;   // no room beside the packet: sit above it (clear of the hop)
+      if (hello) placeBubble(bubble, s);
     }
     if (e < DROP) return mix(above, s, easeOutBack(clamp01(e / DROP)));
     if (e < DROP + HOLD) return s;
