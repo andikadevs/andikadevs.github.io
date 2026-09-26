@@ -108,7 +108,7 @@ export function renderHero() {
   const scene = $("[data-hero]");
   const mount = $("[data-hero-graph]");
   const anchor = $("[data-hero-anchor]");
-  const copy = $(".hero__lead");
+  const copy = $(".hero__actions");                 // the copy block's widest line
   const title = $(".hero__title");
   if (!scene || !mount || !anchor || !copy || !title) return;
 

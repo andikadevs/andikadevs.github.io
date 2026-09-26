@@ -80,14 +80,26 @@
 .hero__title > span { display: block; }
 .hero__light { font-weight: 300; letter-spacing: -0.045em; }
 .hero__title .dim { margin-bottom: 0.75em; }   /* room for the dimension line + its label */
-.hero__lead { color: var(--white); max-width: 50ch; margin-inline: auto; font-size: var(--text-lg); text-shadow: 0 1px 18px rgb(31 59 109 / 0.3); }
-.hero__actions { justify-content: center; }
-.hero__caption {
-  display: block; text-align: center; text-wrap: balance;
-  max-width: 44ch;
-  font: 500 11px / 1.4 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase;
-  color: var(--white);
+.hero__actions { justify-content: center; margin-top: var(--space-4); }
+.hero__eyebrow { color: var(--white); text-shadow: 0 1px 14px rgb(31 59 109 / 0.35); }
+
+/* Painted sky: fine film grain + faint cirrus wisps over the gradient (all sizes). */
+.hero::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(60% 9% at 22% 18%, rgb(255 255 255 / 0.16), transparent 70%),
+    radial-gradient(48% 7% at 74% 34%, rgb(255 255 255 / 0.12), transparent 70%),
+    radial-gradient(70% 8% at 40% 62%, rgb(255 255 255 / 0.1), transparent 70%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  mix-blend-mode: soft-light; opacity: 0.55;
 }
+.hero__mark::before {                 /* soft sun-glow where the mascot rests */
+  content: ""; position: absolute; inset: -40%; border-radius: 50%; z-index: -1; pointer-events: none;
+  background: radial-gradient(closest-side, rgb(255 255 255 / 0.45), transparent);
+}
+.hero__mark { position: relative; }
+.hero__side { display: none; }
+
 
 /* The orbit fills the hero behind the copy; wires fade out in the middle so
    they never cross the text. */
@@ -96,8 +108,22 @@
 .hero.is-measuring .hero__mark * { animation: none !important; transform: none !important; transition: none !important; }
 .hero__orbit { position: absolute; inset: 0; z-index: 1; transition: translate 0.9s var(--ease-out); }
 .hero__orbit .graph { position: absolute; inset: 0; width: 100%; height: 100%; }
-/* The caption's dot rides inline with its first word, even when the line wraps. */
-.hero__caption .pulse-dot { display: inline-block; vertical-align: middle; margin-right: var(--space-2); }
+
+/* Phones: an editorial hero — copy left-aligned, a vertical label on the edge,
+   and the mascot up in the top-right where a sun would sit. */
+@media (max-width: 760px) {
+  .hero { justify-content: flex-start; padding-top: clamp(190px, 27svh, 270px); }   /* from the top, so the mascot always clears the nav */
+  .hero__center { justify-items: start; text-align: left; padding-left: 58px; gap: var(--space-4); }
+  .hero__mark { position: absolute; top: -112px; right: 10px; width: 92px; margin: 0; }   /* below the nav bar, where a sun would sit */
+  .hero__title { font-size: clamp(3.3rem, 17vw, 4.6rem); line-height: 0.92; }
+  .hero__actions { justify-content: flex-start; margin-top: var(--space-5); }
+  .hero__side {
+    display: block; position: absolute; left: 18px; top: 50%; translate: 0 -50%;   /* in line with the page gutter, clear of the edge */
+    writing-mode: vertical-rl; rotate: 180deg;
+    font: 500 11px / 1 var(--font-mono); letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--white); opacity: 0.85; white-space: nowrap;
+  }
+}
 
 /* Narrow screens: sheet labels stack (number over text), centred in a compact chip. */
 @media (max-width: 520px) {
@@ -119,7 +145,7 @@
 
 .hero > .container { position: relative; z-index: 2; }
 .hero { padding-bottom: clamp(170px, 19vw, 290px); }
-.hero .cloudbank { height: clamp(120px, 15vw, 230px); }
+.hero .cloudbank { height: clamp(120px, 15vw, 230px); z-index: 3; }   /* above the copy: the rising bank covers it */
 .hero .cloudbank--back { opacity: 0.6; bottom: 10%; }
 
 /* ---- Ticker -------------------------------------------------------------- */
@@ -565,7 +591,6 @@
   .hero .cloud[data-cloud="2"]:nth-of-type(2) { top: -3%; }
   .nav { inset-block-start: var(--space-3); gap: var(--space-2); grid-template-columns: auto 1fr auto; }
   .nav__side:first-child { display: flex; }
-  .hero { padding-top: 92px; }
   .intro__stats .stat__label { font-size: var(--text-xs); }
   .logo-row { gap: var(--space-5); }
   .logo-row img { height: 26px; }
@@ -577,7 +602,13 @@
    ========================================================================== */
 @media (prefers-reduced-motion: no-preference) {
   /* Hero: copy lifts away while the projects drift outward from the centre. */
-  .hero__center { transform: translateY(calc(var(--p, 0) * -16vh)); opacity: calc(1 - var(--p, 0) * 1.5); }
+  /* Parallax cover: the copy sinks (moves slower than the page) and fades while
+     the cloud bank rises faster than the page and swallows the hero. */
+  .hero__center { transform: translateY(calc(var(--p, 0) * 22vh)); opacity: calc(1 - var(--p, 0) * 1.25); }
+  .hero .cloudbank:not(.cloudbank--back) { transform: translateY(calc(var(--p, 0) * -62vh)); will-change: transform; }
+  .hero .cloudbank:not(.cloudbank--back)::after {   /* solid body under the rising bank: no gap opens below it */
+    content: ""; position: absolute; left: 0; right: 0; top: 99%; height: 110vh; background: var(--bank);
+  }
   .orbit__node { opacity: calc(1 - var(--p, 0) * 1.2); }   /* position: hero.js moves chip + wire together */
   .orbit__wires { opacity: calc(1 - var(--p, 0) * 1.2); }   /* fades with the chips it's attached to */
   .hero__title > span:nth-child(2) { --delay: 120ms; }
@@ -591,10 +622,10 @@
   @keyframes node-in { from { opacity: 0; scale: 0.4; } }
   @keyframes mark-in { from { opacity: 0; scale: 0.5; rotate: -20deg; } }
 
-  .hero .cloud[data-cloud="1"] { transform: translate(calc(var(--p, 0) * -8vw), calc(var(--p, 0) * 18vh)); }
-  .hero .cloud[data-cloud="2"] { transform: translate(calc(var(--p, 0) * 10vw), calc(var(--p, 0) * 10vh)); }
-  .hero .cloud[data-cloud="3"] { transform: translateY(calc(var(--p, 0) * 28vh)) scale(calc(1 + var(--p, 0) * 0.3)); }
-  .hero .cloudbank--back { translate: 0 calc(var(--p, 0) * -40px); }
+  .hero .cloud[data-cloud="1"] { transform: translate(calc(var(--p, 0) * -8vw), calc(var(--p, 0) * -20vh)); }
+  .hero .cloud[data-cloud="2"] { transform: translate(calc(var(--p, 0) * 10vw), calc(var(--p, 0) * -28vh)); }
+  .hero .cloud[data-cloud="3"] { transform: translateY(calc(var(--p, 0) * -40vh)) scale(calc(1 + var(--p, 0) * 0.4)); }
+  .hero .cloudbank--back { transform: translateY(calc(var(--p, 0) * -34vh)); will-change: transform; }   /* rises slower: depth */
 
   /* Studio plan: wires are drawn by scrolling. */
   .studio .graph__edge { --draw: clamp(0, 1 - (var(--p, 0) - 0.15) * 3, 1); }

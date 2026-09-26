@@ -605,6 +605,29 @@
   .paint-scene__canvas, .paint-scene__run { display: none; }
 }
 
+/* ---- Text roll (text-roll.js) --------------------------------------------- */
+.roll { position: relative; display: inline-grid; overflow: hidden; vertical-align: bottom; padding-block: 0.08em; margin-block: -0.08em; }
+.roll__a, .roll__b { grid-area: 1 / 1; white-space: nowrap; }
+.roll__b { display: inline-flex; }
+.roll__b > span { display: inline-block; transform: translateY(115%); }
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .roll__a { transition: transform 0.45s var(--ease-out); }
+  .roll__b > span { transition: transform 0.5s var(--ease-spring); transition-delay: calc(var(--i) * 14ms); }
+  :is(a, button):hover .roll__a, .roll:hover .roll__a { transform: translateY(-115%); }
+  :is(a, button):hover .roll__b > span, .roll:hover .roll__b > span { transform: none; }
+}
+
+/* ---- Word hover: split headings' words lift and tilt on a spring ----------- */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  [data-split]:not([data-split="scrub"]) .w { cursor: default; }
+  [data-split][data-reveal].is-in:not([data-split="scrub"]) .w:hover { overflow: visible; }   /* reveal mask off while tilted */
+  [data-split][data-reveal].is-in:not([data-split="scrub"]) .w:hover > span {
+    transform: translateY(-0.06em) rotate(-4deg) scale(1.04);
+    transition: transform 0.4s var(--ease-spring);
+    transition-delay: 0ms;
+  }
+}
+
 /* ---- View-transition theme switch: the new theme spreads from the click -- */
 ::view-transition-old(root), ::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
 

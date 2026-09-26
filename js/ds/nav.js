@@ -16,7 +16,8 @@ export function initNav(nav, { compactAfter = 480 } = {}) {
     const i = links.findIndex((a) => a.getAttribute("aria-current") === "true");
     if (!readout || i < 0) return;
     const number = sections[i]?.querySelector(".sheet__no")?.textContent ?? `${pad(i + 1)} / ${pad(links.length)}`;
-    const text = `${number} — ${links[i].textContent}`;
+    const label = links[i].querySelector(".roll__a")?.textContent ?? links[i].textContent;   // rolled links hold the text twice
+    const text = `${number} — ${label}`;
     if (readout.textContent !== text) readout.textContent = text;
   };
 
