@@ -64,7 +64,7 @@ export function initMascotChat(fly, bubble, ready = Promise.resolve()) {
   const loop = () => setTimeout(() => { if (!quiet()) say(idleLine()); loop(); }, gap());
 
   // Reactions.
-  fly.addEventListener("pointerdown", () => {
+  fly.addEventListener("click", () => {                                  // click, not press: counts as the activation sound needs
     boops += 1;
     clearTimeout(boopReset); boopReset = setTimeout(() => { boops = 0; }, 6000);   // a streak is clicks close together
     const streak = chatter.streak[boops];
