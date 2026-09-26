@@ -45,6 +45,7 @@ export function initMascotFly(fly, anchor, dock, bubble) {
     const onSky = skies.some((el) => { const r = el.getBoundingClientRect(); return cx > r.left && cx < r.right && cy > r.top && cy < r.bottom; });
     fly.classList.toggle("is-on-paper", !onSky);
     fly.classList.toggle("is-docked", t > 0.98);
+    fly.classList.add("is-placed");
   };
 
   // ---- Welcome ------------------------------------------------------------
