@@ -5,12 +5,16 @@
 // (browsers require that anyway), while the tab is hidden, and when muted with
 // the [data-sound-toggle] button (the choice is remembered).
 const KEY = "sound";
-const VOLUME = 0.06;
+const VOLUME = 0.13;
 
 let ctx = null, unlocked = false;
 let muted = (() => { try { return localStorage.getItem(KEY) === "off"; } catch { return false; } })();
 
-const ready = () => unlocked && !muted && !document.hidden && (ctx ??= new AudioContext()) && ctx.state !== "closed";
+const ready = () => unlocked && !muted && !document.hidden && ctx && ctx.state !== "closed";
+
+// Browsers only allow sound after a real activation (a click, tap or key; on
+// touch screens a press-down doesn't count), so the context is created and
+// resumed right inside one, and a silent blip wakes up iOS.
 
 // One blip: a soft square/triangle tone with a quick attack and a short tail.
 function blip(at, freq, dur, { type = "square", glide = 1, gain = 1 } = {}) {
@@ -57,16 +61,27 @@ export function sad() {
   blip(t + 0.22, 400, 0.34, { type: "triangle", glide: 0.7, gain: 1.6 });
 }
 
+function unlock() {
+  try {
+    ctx ??= new (window.AudioContext || window.webkitAudioContext)();
+    ctx.resume();
+    const src = ctx.createBufferSource();
+    src.buffer = ctx.createBuffer(1, 1, 22050);
+    src.connect(ctx.destination); src.start(0);
+    unlocked = true;
+  } catch { /* no Web Audio: stay silent */ }
+}
+
 export function initRobotVoice(toggle) {
-  const unlock = () => { unlocked = true; };
-  ["pointerdown", "keydown", "touchstart"].forEach((type) => addEventListener(type, unlock, { once: true, passive: true, capture: true }));   // capture: before the click that plays a sound
+  // capture: runs before the click that plays the first sound
+  ["click", "keydown", "touchend"].forEach((type) => addEventListener(type, () => { if (!unlocked) unlock(); }, { passive: true, capture: true }));
   if (!toggle) return;
   const sync = () => toggle.setAttribute("aria-pressed", String(!muted));
   toggle.addEventListener("click", () => {
     muted = !muted;
     try { localStorage.setItem(KEY, muted ? "off" : "on"); } catch { /* private mode */ }
     sync();
-    if (!muted) { unlocked = true; babble("beep boop"); }            // a little hello so you know it's on
+    if (!muted) { unlock(); babble("beep boop"); }                  // a little hello so you know it's on
   });
   sync();
 }
