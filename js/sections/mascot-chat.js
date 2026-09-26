@@ -3,6 +3,7 @@
 // parked in the nav (and which section you're reading), the time of day, the dark
 // theme, how long you've been still. It also reacts to being clicked (with streaks),
 // hovered, the theme and language switches, and you coming back to the tab.
+// Lines type themselves in; clicks always chirp, idle lines only now and then.
 // Lines never repeat until eight others have been said. Quiet during the welcome,
 // while dozing and while the tab is hidden; the bubble tucks away on scroll.
 import { pick } from "../core/i18n.js";
@@ -12,7 +13,8 @@ import { onScroll } from "../ds/smooth-scroll.js";
 import { babble, boop, sad } from "./robot-voice.js";
 
 const gap = () => 7000 + Math.random() * 5000;                         // 7–12 s between lines
-const readTime = (text) => 2200 + text.length * 45;                     // longer lines stay up longer
+const TYPE = 30;                                                        // ms per character as the bubble types
+const readTime = (text) => 1800 + text.length * 40;                     // how long it stays after typing
 const STILL = 25000;                                                    // "are you still there?"
 const any = (list) => list[Math.floor(Math.random() * list.length)];
 
@@ -25,7 +27,7 @@ export function initMascotChat(fly, bubble, ready = Promise.resolve()) {
   if (!fly || !bubble || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
   const text = bubble.querySelector("span") ?? bubble;
   const recent = [];
-  let hideTimer = 0, talking = false, boops = 0, boopReset = 0, lastActive = Date.now(), stillSaid = false, hiddenAt = 0;
+  let hideTimer = 0, typeTimer = 0, talking = false, voicedLast = false, boops = 0, boopReset = 0, lastActive = Date.now(), stillSaid = false, hiddenAt = 0;
 
   // A fresh line from a set: skips anything said in the last eight.
   const from = (set) => {
@@ -34,18 +36,33 @@ export function initMascotChat(fly, bubble, ready = Promise.resolve()) {
     recent.push(line); if (recent.length > 8) recent.shift();
     return line;
   };
-  const hush = () => { clearTimeout(hideTimer); talking = false; bubble.classList.remove("is-on"); };
+  const hush = () => { clearTimeout(hideTimer); clearInterval(typeTimer); talking = false; bubble.classList.remove("is-on"); };
+  // Speak: the bubble is sized and placed for the whole line, then the text types
+  // itself in; with a voice, the chirps run over exactly that typing time.
   const say = (line, { force = false, voice = true } = {}) => {
     if (!line || (talking && !force)) return;
-    if (voice) babble(line);
     const r = fly.getBoundingClientRect();
+    bubble.style.width = bubble.style.height = "";
     text.textContent = line;
     placeBubble(bubble, { x: r.left, y: r.top, size: r.width }, [0.05, 14, 18]);   // chatty, not shouty
+    bubble.style.width = `${bubble.offsetWidth}px`;                    // hold the final size while typing
+    bubble.style.height = `${bubble.offsetHeight}px`;
+    clearInterval(typeTimer);
+    let shown = 0;
+    text.textContent = "";
+    typeTimer = setInterval(() => {
+      shown += 1;
+      text.textContent = line.slice(0, shown);
+      if (shown >= line.length) clearInterval(typeTimer);
+    }, TYPE);
+    if (voice) babble(line, (line.length * TYPE) / 1000);
     bubble.classList.add("is-on");
     talking = true;
     clearTimeout(hideTimer);
-    hideTimer = setTimeout(hush, readTime(line));
+    hideTimer = setTimeout(hush, line.length * TYPE + readTime(line));
   };
+  // Idle lines only sometimes get a voice, and never two in a row.
+  const idleVoice = () => { voicedLast = !voicedLast && Math.random() < 0.35; return voicedLast; };
   const quiet = () => document.hidden || fly.classList.contains("is-hello") || fly.classList.contains("is-idle-sleepy");
 
   // What to say when nothing in particular is happening.
@@ -61,7 +78,7 @@ export function initMascotChat(fly, bubble, ready = Promise.resolve()) {
     if (r < 0.24 && document.documentElement.dataset.theme === "dark") return from(chatter.dark);
     return from(chatter.lines);
   };
-  const loop = () => setTimeout(() => { if (!quiet()) say(idleLine()); loop(); }, gap());
+  const loop = () => setTimeout(() => { if (!quiet()) say(idleLine(), { voice: idleVoice() }); loop(); }, gap());
 
   // Reactions.
   fly.addEventListener("click", () => {                                  // click, not press: counts as the activation sound needs
@@ -72,7 +89,7 @@ export function initMascotChat(fly, bubble, ready = Promise.resolve()) {
     say(streak ? pick(streak) : from(chatter.boop), { force: true, voice: false });
   });
   fly.addEventListener("pointerenter", (event) => {
-    if (event.pointerType === "mouse" && Math.random() < 0.35 && !quiet()) say(from(chatter.hover));
+    if (event.pointerType === "mouse" && Math.random() < 0.35 && !quiet()) say(from(chatter.hover), { voice: false });
   });
   ["pointermove", "keydown", "wheel", "touchstart"].forEach((type) =>
     addEventListener(type, () => { lastActive = Date.now(); stillSaid = false; }, { passive: true }));

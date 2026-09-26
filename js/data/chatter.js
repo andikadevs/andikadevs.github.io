@@ -1,4 +1,4 @@
-// Everything the mascot says (mascot-chat.js). The bit: Andika has parked it here
+// Everything Tejo, the mascot, says (mascot-chat.js). The bit: Andika has parked it here
 // "on standby" and it is, politely, losing it. Same { en, id } convention; the
 // Indonesian is written for itself, not translated line by line.
 export const chatter = {
@@ -33,6 +33,10 @@ export const chatter = {
       "Quick, look professional. He's checking the analytics.",
       "I float because the floor is lava. Also because CSS.",
       "I was told to “add personality”. Is this enough personality?",
+      "I'm Tejo, by the way. Nobody ever asks.",
+      "Name's Tejo. Occupation: standing here.",
+      "Andika named me Tejo. I wasn't consulted.",
+      "Tejo. Two syllables. Easy to remember, easy to hire.",
     ],
     id: [
       "Disuruh Andika jaga di sini. Itu tiga jam yang lalu.",
@@ -63,6 +67,10 @@ export const chatter = {
       "Cepat, pasang muka profesional. Dia lagi cek analytics.",
       "Aku melayang karena lantainya lava. Sama karena CSS.",
       "Katanya aku harus “punya kepribadian”. Segini cukup belum?",
+      "Namaku Tejo, btw. Nggak ada yang pernah nanya.",
+      "Nama: Tejo. Pekerjaan: berdiri di sini.",
+      "Andika yang kasih nama Tejo. Aku nggak ditanya dulu.",
+      "Tejo. Dua suku kata. Gampang diingat, gampang dipanggil.",
     ],
   },
 
@@ -126,8 +134,8 @@ export const chatter = {
 
   // clicked
   boop: {
-    en: ["Ow. Is this in my job description?", "Please, I'm working.", "Great. Now I have to file a report.", "Okay, that was kind of nice.", "Hey! I'm on the clock.", "Boop received. Processing…", "That's not how you use a mascot.", "Again. No, wait. Don't."],
-    id: ["Aduh. Ini masuk jobdesk juga?", "Tolong, aku lagi kerja.", "Wah, harus bikin laporan nih.", "Oke, itu lumayan enak sih.", "Eh! Aku lagi jam kerja.", "Boop diterima. Sedang diproses…", "Bukan begitu cara pakai maskot.", "Lagi. Eh, jangan deh."],
+    en: ["Ow. Is this in my job description?", "Please, I'm working.", "Great. Now I have to file a report.", "Okay, that was kind of nice.", "Hey! I'm on the clock.", "Boop received. Processing…", "That's not how you use a mascot.", "Again. No, wait. Don't.", "Hey! Tejo has feelings too."],
+    id: ["Aduh. Ini masuk jobdesk juga?", "Tolong, aku lagi kerja.", "Wah, harus bikin laporan nih.", "Oke, itu lumayan enak sih.", "Eh! Aku lagi jam kerja.", "Boop diterima. Sedang diproses…", "Bukan begitu cara pakai maskot.", "Lagi. Eh, jangan deh.", "Eh! Tejo juga punya perasaan."],
   },
   // clicked this many times in a row
   streak: {

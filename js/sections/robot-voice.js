@@ -1,6 +1,6 @@
 // The mascot's voice: cute robot chirps synthesised with Web Audio, no sound
 // files. babble(text) plays a run of short blips that follows the line's length
-// (like a little robot talking); boop() is a springy "bwoop"; sad() a tiny
+// (like a little robot talking, timed to the bubble's typing); boop() is a springy "bwoop"; sad() a tiny
 // "wah-wah". It stays silent until the visitor has interacted with the page
 // (browsers require that anyway), while the tab is hidden, and when muted with
 // the [data-sound-toggle] button (the choice is remembered).
@@ -39,18 +39,19 @@ function play(score) {
   ctx.state === "running" ? go() : ctx.resume().then(go, () => {});
 }
 
-export function babble(text) {
+// Chirps spread across `seconds`, the time the bubble takes to type the line,
+// so the voice runs exactly while it's "talking".
+export function babble(text, seconds = 0.9) {
   play((start) => {
-  const syllables = Math.min(14, Math.max(3, Math.round(text.replace(/\s+/g, "").length / 4)));
-  let t = start;
-  const base = 620 + Math.random() * 140;
-  for (let i = 0; i < syllables; i++) {
-    const up = text.trim().endsWith("?") && i === syllables - 1;      // questions go up at the end
-    const f = base * (0.8 + Math.random() * 0.7);
-    const d = 0.045 + Math.random() * 0.035;
-    blip(t, f, d, { glide: up ? 1.6 : 0.85 + Math.random() * 0.3, gain: 0.8 + Math.random() * 0.3 });
-    t += d + 0.018 + Math.random() * 0.03;
-  }
+    const syllables = Math.min(16, Math.max(3, Math.round(text.replace(/\s+/g, "").length / 4)));
+    const step = seconds / syllables;
+    const base = 620 + Math.random() * 140;
+    for (let i = 0; i < syllables; i++) {
+      const up = text.trim().endsWith("?") && i === syllables - 1;   // questions go up at the end
+      const d = Math.min(step * 0.7, 0.045 + Math.random() * 0.035);
+      blip(start + i * step + Math.random() * step * 0.2, base * (0.8 + Math.random() * 0.7), d,
+        { glide: up ? 1.6 : 0.85 + Math.random() * 0.3, gain: 0.8 + Math.random() * 0.3 });
+    }
   });
 }
 
