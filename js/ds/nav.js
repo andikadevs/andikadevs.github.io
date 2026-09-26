@@ -2,6 +2,8 @@
 // marks the link of the section in view, and writes "03 / 06 — Work" into any
 // [data-nav-readout] so the compact pill says where you are. The number comes
 // from the section's own .sheet__no label when it has one.
+import { onScroll as onScrollFrame } from "./smooth-scroll.js";
+
 const pad = (n) => String(n).padStart(2, "0");
 
 export function initNav(nav, { compactAfter = 480 } = {}) {
@@ -21,8 +23,9 @@ export function initNav(nav, { compactAfter = 480 } = {}) {
     if (readout.textContent !== text) readout.textContent = text;
   };
 
-  const onScroll = () => {
-    const y = scrollY;
+  // Runs in the scroll feed's write phase with the position it already has, so
+  // it never reads scrollY after other modules have written styles this frame.
+  const apply = (y) => {
     nav.classList.toggle("is-scrolled", y > 24);
     nav.classList.toggle("is-compact", y > compactAfter && y > lastY);
     lastY = y;
@@ -39,6 +42,6 @@ export function initNav(nav, { compactAfter = 480 } = {}) {
   );
   sections.forEach((section) => spy.observe(section));
 
-  addEventListener("scroll", onScroll, { passive: true });
-  onScroll();
+  onScrollFrame(({ y }) => () => apply(y));
+  apply(scrollY);
 }
