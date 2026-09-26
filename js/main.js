@@ -22,6 +22,7 @@ import { initCopyEmail, initClock } from "./sections/contact.js";
 import { initWordmark } from "./sections/wordmark.js";
 import { initMascots } from "./sections/mascot.js";
 import { initMascotFly } from "./sections/mascot-fly.js";
+import { initMascotIdle } from "./sections/mascot-idle.js";
 
 // Labels that roll on hover: nav links and button labels (after i18n has set their text).
 const ROLL = ".nav-link, .btn > [data-i18n]";
@@ -70,4 +71,5 @@ initClock($("[data-clock]"));
 initWordmark($("[data-wordmark]"));
 initMascots();
 initMascotFly($("[data-mascot-fly]"), $("[data-hero-anchor]"), $("[data-mascot-dock]"), $("[data-mascot-hello]"));
+initMascotIdle($("[data-mascot-fly]"));
 $("[data-year]").textContent = new Date().getFullYear();
