@@ -514,26 +514,23 @@
   }
   .cloudlet:nth-child(even) { margin-top: 18px; }
 }
-/* Phones: the column is too tall for the logo's shape, so the cloud keeps its
-   proportions, bleeds past both edges, and grows a flat body below the lobes.
-   What shows is the top of the mark, with puffs underneath. */
+/* Phones: the logo-shaped cloud keeps its true proportions at full width and
+   holds the label and heading; the description and button follow on the page
+   just beneath it. The services sit in a tidy two-column grid, bobbing together. */
 @media (max-width: 760px) {
-  .nimbus {
-    --w: 160cqw;
-    width: var(--w); margin-inline: calc((100cqw - var(--w)) / 2);
-    aspect-ratio: auto;
-    padding: calc(var(--w) * 0.19) calc((var(--w) - 100cqw) / 2 + 20px) 110px;
+  .nimbus { width: 100%; aspect-ratio: auto; padding: calc(100cqw * 0.2) 0 0; }
+  .nimbus::before { inset: 0 -5% auto; aspect-ratio: 5 / 3; }   /* a touch wider than the column: more room inside */
+  .nimbus__copy { gap: var(--space-4); }
+  .nimbus .heading { font-size: clamp(1.7rem, 7.4vw, 2.2rem); max-width: 18ch; text-wrap: balance; }   /* two lines, inside the cloud's body */
+  .nimbus .lead { margin-top: calc(100cqw * 0.13); color: var(--fg); opacity: 0.82; }   /* on the page now, not the cloud */
+  .studio__services {
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 10px;
+    width: 100%; max-width: 440px; margin-top: var(--space-4);
   }
-  .nimbus::before {
-    --head: url("../assets/img/cloud.svg") top / 100% calc(var(--w) * 0.6) no-repeat;
-    --body: linear-gradient(#000 0 0) 0 calc(var(--w) * 0.5) / 100% calc(100% - var(--w) * 0.5 - 60px) no-repeat;
-    --base: url("../assets/img/cloud-base.svg") bottom / 100% 90px no-repeat;
-    -webkit-mask: var(--head), var(--body), var(--base);
-    mask: var(--head), var(--body), var(--base);
+  .cloudlet, .cloudlet:nth-child(n) {
+    margin: 0; min-width: 0; text-align: center; white-space: normal;
+    padding: 28px 8px 16px; font-size: 11px; line-height: 1.2; animation-delay: 0s;
   }
-}
-@media (max-width: 520px) {
-  .cloudlet { padding: 26px 26px 16px; font-size: 11px; }
 }
 
 /* ---- Footer wordmark (built by tools/build_brand.py) ----------------------
