@@ -1,7 +1,7 @@
 // The mascot chats. Every 7–12 s while it's idle it grumbles a line, and what it
 // says depends on where it is and what's going on: resting beside the headline,
 // parked in the nav (and which section you're reading), the time of day, the dark
-// theme, how long you've been still. It also reacts to being clicked (with streaks),
+// theme, how long you've been still. It also reacts to being clicked, and to spam-clicking it, the theme or the language,
 // hovered, the theme and language switches, and you coming back to the tab.
 // Lines type themselves in; clicks always chirp, idle lines only now and then.
 // Lines never repeat until eight others have been said. Quiet during the welcome,
@@ -17,6 +17,9 @@ const TYPE = 30;                                                        // ms pe
 const readTime = (text) => 1800 + text.length * 40;                     // how long it stays after typing
 const STILL = 25000;                                                    // "are you still there?"
 const any = (list) => list[Math.floor(Math.random() * list.length)];
+const SPAM = 5000;                                                      // clicks closer than this count as one burst
+// Big milestones get a move as well as a line (played by mascot-idle.js).
+const MOVE_AT = { boop: { 10: "twirl", 20: "shake", 30: "sleepy" }, theme: { 5: "wiggle", 8: "twirl", 12: "shake" }, lang: { 5: "shake", 8: "twirl" } };
 
 const timeOfDay = () => {
   const h = new Date().getHours();
@@ -27,7 +30,7 @@ export function initMascotChat(fly, bubble, ready = Promise.resolve()) {
   if (!fly || !bubble || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
   const text = bubble.querySelector("span") ?? bubble;
   const recent = [];
-  let hideTimer = 0, typeTimer = 0, talking = false, voicedLast = false, boops = 0, boopReset = 0, lastActive = Date.now(), stillSaid = false, hiddenAt = 0;
+  let hideTimer = 0, typeTimer = 0, talking = false, voicedLast = false, lastActive = Date.now(), stillSaid = false, hiddenAt = 0;
 
   // A fresh line from a set: skips anything said in the last eight.
   const from = (set) => {
@@ -80,11 +83,20 @@ export function initMascotChat(fly, bubble, ready = Promise.resolve()) {
   };
   const loop = () => setTimeout(() => { if (!quiet()) say(idleLine(), { voice: idleVoice() }); loop(); }, gap());
 
+  // Bursts: how many times something has been hit in a row (reset after a calm SPAM ms).
+  const bursts = {};
+  const burst = (name) => {
+    const b = (bursts[name] ??= { n: 0, timer: 0 });
+    b.n += 1;
+    clearTimeout(b.timer); b.timer = setTimeout(() => { b.n = 0; }, SPAM);
+    const move = MOVE_AT[name]?.[b.n];
+    if (move) setTimeout(() => fly.dispatchEvent(new CustomEvent("tejo:move", { detail: move })), 60);
+    return b.n;
+  };
+
   // Reactions.
   fly.addEventListener("click", () => {                                  // click, not press: counts as the activation sound needs
-    boops += 1;
-    clearTimeout(boopReset); boopReset = setTimeout(() => { boops = 0; }, 6000);   // a streak is clicks close together
-    const streak = chatter.streak[boops];
+    const streak = chatter.streak[burst("boop")];
     streak ? sad() : boop();
     say(streak ? pick(streak) : from(chatter.boop), { force: true, voice: false });
   });
@@ -101,10 +113,17 @@ export function initMascotChat(fly, bubble, ready = Promise.resolve()) {
 
   ready.then(() => {
     // Theme and language reactions only after the page has settled (both fire once at start).
+    // The first switch gets a normal reaction; clicking it over and over escalates.
     new MutationObserver(() => {
-      say(from(document.documentElement.dataset.theme === "dark" ? chatter.toDark : chatter.toLight), { force: true });
+      const n = burst("theme"), spam = chatter.themeSpam[n];
+      if (spam) { sad(); say(pick(spam), { force: true, voice: false }); }
+      else if (n === 1) say(from(document.documentElement.dataset.theme === "dark" ? chatter.toDark : chatter.toLight), { force: true });
     }).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
-    document.addEventListener("langchange", () => setTimeout(() => say(from(chatter.lang), { force: true }), 50));
+    document.addEventListener("langchange", () => setTimeout(() => {
+      const n = burst("lang"), spam = chatter.langSpam[n];
+      if (spam) { sad(); say(pick(spam), { force: true, voice: false }); }
+      else if (n === 1) say(from(chatter.lang), { force: true });
+    }, 50));
     setTimeout(loop, 6000);                                               // start after the welcome
   });
 }
