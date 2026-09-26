@@ -172,7 +172,7 @@
         "height": 630
       },
       "inLanguage": "en",
-      "dateModified": "2026-09-25"
+      "dateModified": "2026-09-26"
     },
     {
       "@type": "ItemList",
@@ -455,14 +455,17 @@
 <body>
   <a class="skip-link" href="#main" data-i18n="a11y.skip">Skip to content</a>
 
+  <!-- The mascot: rests above the headline, flies to the nav corner as you scroll (mascot-fly.js). -->
+  <a class="mascot mascot-fly" href="#main" aria-label="andikadevs — home" data-mascot-fly>
+      <!-- heromark:start -->
+      <svg class="hero__mark-icon" aria-hidden="true" viewBox="0 0 947 947"><g transform="translate(109.3 837.9)"><circle class="mk-ring" cx="364" cy="-364" r="267" fill="none" stroke="currentColor" stroke-width="194" pathLength="1"/><circle class="mk-eye" cx="291" cy="-383" r="58" fill="currentColor"/><circle class="mk-eye" cx="444" cy="-383" r="58" fill="currentColor"/><rect class="mk-stem" x="534" y="-452" width="194" height="452" rx="97" fill="currentColor"/><circle class="mk-packet" cx="631" cy="-627" r="121" fill="var(--accent)"/></g></svg>
+      <!-- heromark:end -->
+  </a>
+
   <!-- ============ NAV ============ -->
   <header class="nav" data-nav>
     <div class="nav__side">
-      <a class="nav-mark mascot" href="#main" aria-label="andikadevs — home">
-      <!-- navmark:start -->
-      <svg class="nav-mark__icon" aria-hidden="true" viewBox="0 0 947 947"><g transform="translate(109.3 837.9)"><circle class="mk-ring" cx="364" cy="-364" r="267" fill="none" stroke="currentColor" stroke-width="194" pathLength="1"/><circle class="mk-eye" cx="291" cy="-383" r="58" fill="currentColor"/><circle class="mk-eye" cx="444" cy="-383" r="58" fill="currentColor"/><rect class="mk-stem" x="534" y="-452" width="194" height="452" rx="97" fill="currentColor"/><circle class="mk-packet" cx="631" cy="-627" r="121" fill="var(--accent)"/></g></svg>
-      <!-- navmark:end -->
-      </a>
+      <span class="nav-mark" data-mascot-dock aria-hidden="true"></span>
     </div>
 
     <nav class="nav-pill" aria-label="Main">
@@ -498,11 +501,7 @@
       <div class="hero__orbit" data-hero-graph data-depth="12" aria-hidden="false"></div>
 
       <div class="container hero__center">
-        <span class="hero__mark mascot" data-hero-anchor aria-hidden="true">
-      <!-- heromark:start -->
-      <svg class="hero__mark-icon" aria-hidden="true" viewBox="0 0 947 947"><g transform="translate(109.3 837.9)"><circle class="mk-ring" cx="364" cy="-364" r="267" fill="none" stroke="currentColor" stroke-width="194" pathLength="1"/><circle class="mk-eye" cx="291" cy="-383" r="58" fill="currentColor"/><circle class="mk-eye" cx="444" cy="-383" r="58" fill="currentColor"/><rect class="mk-stem" x="534" y="-452" width="194" height="452" rx="97" fill="currentColor"/><circle class="mk-packet" cx="631" cy="-627" r="121" fill="var(--accent)"/></g></svg>
-      <!-- heromark:end -->
-        </span>
+        <span class="hero__mark" data-hero-anchor aria-hidden="true"></span>
         <p class="sheet"><span class="sheet__no">01 / 06</span><span data-i18n="hero.sheet">andikadevs — fullstack developer</span></p>
         <h1 class="display hero__title" id="hero-title">
           <span data-i18n="hero.line1" data-split data-reveal>Developer</span>

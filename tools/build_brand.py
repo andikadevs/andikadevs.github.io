@@ -1,7 +1,7 @@
 """Builds every brand asset from the constructed mark (mark.py) and the display font:
 
   index.html   footer wordmark  — the mark + "ndikadevs", animated by css/site.css (.wm*)
-  index.html   nav + hero mark  — the mark alone
+  index.html   mascot           — the mark alone (the one that flies hero → nav)
   assets/img   favicon.svg      — sky tile with the white mark
 
 Change the mark by editing LOGO in mark.py, then run from the repo root:
@@ -114,12 +114,11 @@ def inline(html, name, content):
 def build():
     index = ROOT / "index.html"
     html = inline(index.read_text(), "wordmark", wordmark_svg())
-    html = inline(html, "navmark", mark_svg("nav-mark__icon"))
     html = inline(html, "heromark", mark_svg("hero__mark-icon"))
     index.write_text(html)
     (ROOT / "assets" / "img" / "favicon.svg").write_text(
         icon_svg(LOGO, font, fg="#ffffff", accent="#cdeeff", background="#3f8fd6"))
-    print(f"brand built with mark '{LOGO}': footer wordmark, nav + hero mark, favicon.svg")
+    print(f"brand built with mark '{LOGO}': footer wordmark, mascot, favicon.svg")
 
 
 if __name__ == "__main__":

@@ -589,6 +589,11 @@
   pointer-events: none;
 }
 .paint-scene__canvas { overflow: hidden; }   /* strokes run past the edges; never onto the next section */
+.paint-scene__canvas::after {                 /* last 4%: a solid wash, so no screen ratio leaves a gap */
+  content: ""; position: absolute; inset: 0;
+  background: var(--paint-color);
+  opacity: clamp(0, (var(--paint, 0) - 0.96) * 25, 1);
+}
 .paint-scene__canvas svg { display: block; width: 100%; height: 100%; }
 .paint-scene__stroke {
   fill: none; stroke: var(--paint-color); stroke-width: 40; stroke-linecap: round; stroke-linejoin: round;
@@ -626,18 +631,22 @@
 .blueprint .sheet__no, .block--brand .sheet__no, .block--ink .sheet__no { color: var(--white); }
 
 /* ---- Dimension line: measures a word, with a mono label underneath -------- */
-.dim { position: relative; display: inline-block; }
+/* --dim-em carries the word's font size (as px) into the pseudo-elements, whose
+   own em is the tiny label font; registered so 1em computes at .dim. */
+@property --dim-em { syntax: "<length>"; inherits: true; initial-value: 16px; }
+.dim { position: relative; display: inline-block; --dim-em: 1em; }
 .dim::after {
-  content: ""; position: absolute; left: 0; right: 0; bottom: -0.16em; height: 0.16em;
+  content: ""; position: absolute; left: 0; right: 0; top: calc(100% + var(--dim-em) * 0.1); height: calc(var(--dim-em) * 0.16);   /* the line */
   border-inline: var(--hairline) solid currentColor;
   background: linear-gradient(currentColor, currentColor) center / 100% var(--hairline) no-repeat;
   transform: scaleX(var(--dim-scale, 1));
   transition: transform 1.2s var(--ease-out) 0.5s;
 }
-.dim::before {
+.dim::before {                            /* label, clear below the line */
   content: attr(data-dim);
-  position: absolute; left: 50%; bottom: -0.5em; translate: -50% 100%; z-index: 1;
+  position: absolute; left: 50%; top: calc(100% + var(--dim-em) * 0.34); translate: -50% 0; z-index: 1;
   font: 500 clamp(10px, 0.14em, 14px) / 1.6 var(--font-mono); letter-spacing: 0.1em; text-transform: uppercase;
+  color: currentColor;
   white-space: nowrap;
   opacity: var(--dim-label, 1);
   transition: opacity var(--dur-slow) ease 1.2s;
