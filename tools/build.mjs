@@ -11,7 +11,8 @@
 //   sitemap.xml, robots.txt, llms.txt, llms-full.txt, manifest.webmanifest
 //
 // No dependencies: Node's own fs and the ES-module data files in js/data.
-import { readFileSync, writeFileSync } from "node:fs";
+import { readFileSync, readdirSync, writeFileSync } from "node:fs";
+import { createHash } from "node:crypto";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -29,6 +30,11 @@ const read = (p) => readFileSync(join(ROOT, p), "utf8");
 const write = (p, s) => { writeFileSync(join(ROOT, p), s); console.log("  wrote", p, `(${(Buffer.byteLength(s) / 1024).toFixed(1)} KB)`); };
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 const abs = (p) => `${SITE}/${p.replace(/^\.?\//, "")}`;
+
+// Cache-busting: a short content hash in the URL, so a new build is fetched
+// straight away instead of waiting out GitHub Pages' 10-minute browser cache.
+const hash = (text) => createHash("sha1").update(text).digest("hex").slice(0, 10);
+const jsVersion = () => hash(readdirSync(join(ROOT, "js"), { recursive: true }).filter((f) => f.endsWith(".js") || f.endsWith(".mjs")).sort().map((f) => read(`js/${f}`)).join(""));
 
 function inject(html, name, content) {
   const re = new RegExp(`(<!-- ${name}:start -->)[\\s\\S]*?(<!-- ${name}:end -->)`);
@@ -98,7 +104,7 @@ function head() {
     `<link rel="manifest" href="manifest.webmanifest">`,
     ``,
     ...fontFiles.map((f) => `<link rel="preload" href="fonts/${f.file}" as="font" type="font/woff2" crossorigin>`),
-    `<link rel="stylesheet" href="css/app.css">`,
+    `<link rel="stylesheet" href="css/app.css?v=${hash(read("css/app.css"))}">`,
   ];
   return lines.map((l) => (l ? `  ${l}` : "")).join("\n");
 }
@@ -313,6 +319,7 @@ let html = read("index.html");
 html = inject(html, "head", head());
 html = inject(html, "jsonld", jsonld());
 html = inject(html, "noscript", noscript());
+html = html.replace(/<script type="module" src="js\/main\.js(\?v=[^"]*)?"><\/script>/, `<script type="module" src="js/main.js?v=${jsVersion()}"></script>`);
 write("index.html", html);
 write("sitemap.xml", sitemap());
 write("robots.txt", robots());

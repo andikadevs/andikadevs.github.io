@@ -50,6 +50,11 @@ html { cursor: var(--cursor); }
 :is(a, button, [role="button"], label, summary, select, .mascot, .wm__hit, .cloudlet) { cursor: var(--cursor-hover); }
 .deck__stage, .deck__stage:active { cursor: url("../assets/img/cursors/drag.svg") 22 14, grab; }
 
+/* Sound toggle (robot-voice.js): speaker with waves when on, a cross when muted. */
+.sound-toggle .ico-mute { display: none; }
+.sound-toggle[aria-pressed="false"] .ico-waves { display: none; }
+.sound-toggle[aria-pressed="false"] .ico-mute { display: inline; }
+
 /* ---- Nav extras ---------------------------------------------------------- */
 .nav-mark { display: block; width: 48px; aspect-ratio: 1; }   /* dock slot: the mascot flies in here */
 .nav-pill { padding-inline: var(--space-2); }
