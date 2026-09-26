@@ -5,9 +5,10 @@
 // (browsers require that anyway), while the tab is hidden, and when muted with
 // the [data-sound-toggle] button (the choice is remembered).
 const KEY = "sound";
-const VOLUME = 0.13;
+const VOLUME = 0.2;
+const LEAD = 0.04;                     // seconds ahead of "now" that notes start
 
-let ctx = null, unlocked = false;
+let ctx = null, out = null, unlocked = false;
 let muted = (() => { try { return localStorage.getItem(KEY) === "off"; } catch { return false; } })();
 
 const ready = () => unlocked && !muted && !document.hidden && ctx && ctx.state !== "closed";
@@ -26,16 +27,23 @@ function blip(at, freq, dur, { type = "square", glide = 1, gain = 1 } = {}) {
   amp.gain.setValueAtTime(0.0001, at);
   amp.gain.exponentialRampToValueAtTime(VOLUME * gain, at + 0.012);
   amp.gain.exponentialRampToValueAtTime(0.0001, at + dur);
-  osc.connect(tone).connect(amp).connect(ctx.destination);
+  osc.connect(tone).connect(amp).connect(out);
   osc.start(at); osc.stop(at + dur + 0.02);
 }
 
-export function babble(text) {
+// Real audio hardware takes a moment to start: notes scheduled before the context
+// is running would land in the past and play silently, so wait for it.
+function play(score) {
   if (!ready()) return;
-  ctx.resume();
+  const go = () => score(ctx.currentTime + LEAD);
+  ctx.state === "running" ? go() : ctx.resume().then(go, () => {});
+}
+
+export function babble(text) {
+  play((start) => {
   const syllables = Math.min(14, Math.max(3, Math.round(text.replace(/\s+/g, "").length / 4)));
-  let t = ctx.currentTime + 0.02;
-  const base = 520 + Math.random() * 120;
+  let t = start;
+  const base = 620 + Math.random() * 140;
   for (let i = 0; i < syllables; i++) {
     const up = text.trim().endsWith("?") && i === syllables - 1;      // questions go up at the end
     const f = base * (0.8 + Math.random() * 0.7);
@@ -43,27 +51,32 @@ export function babble(text) {
     blip(t, f, d, { glide: up ? 1.6 : 0.85 + Math.random() * 0.3, gain: 0.8 + Math.random() * 0.3 });
     t += d + 0.018 + Math.random() * 0.03;
   }
+  });
 }
 
 export function boop() {
-  if (!ready()) return;
-  ctx.resume();
-  const t = ctx.currentTime + 0.01;
-  blip(t, 320, 0.16, { type: "sine", glide: 3, gain: 2.4 });
-  blip(t + 0.11, 880, 0.08, { type: "triangle", glide: 1.2, gain: 1.4 });
+  play((t) => {
+    blip(t, 480, 0.16, { type: "triangle", glide: 2.6, gain: 2 });  // high enough for phone speakers
+    blip(t + 0.12, 1100, 0.09, { type: "square", glide: 1.2, gain: 1 });
+  });
 }
 
 export function sad() {
-  if (!ready()) return;
-  ctx.resume();
-  const t = ctx.currentTime + 0.01;
-  blip(t, 520, 0.2, { type: "triangle", glide: 0.8, gain: 1.6 });
-  blip(t + 0.22, 400, 0.34, { type: "triangle", glide: 0.7, gain: 1.6 });
+  play((t) => {
+    blip(t, 700, 0.2, { type: "square", glide: 0.8, gain: 1 });
+    blip(t + 0.22, 540, 0.36, { type: "square", glide: 0.7, gain: 1 });
+  });
 }
 
 function unlock() {
   try {
-    ctx ??= new (window.AudioContext || window.webkitAudioContext)();
+    if (!ctx) {
+      ctx = new (window.AudioContext || window.webkitAudioContext)();
+      out = ctx.createDynamicsCompressor();                          // evens the chirps out and lifts them on small speakers
+      out.threshold.value = -28; out.ratio.value = 6;
+      const master = ctx.createGain(); master.gain.value = 1.6;
+      out.connect(master).connect(ctx.destination);
+    }
     ctx.resume();
     const src = ctx.createBufferSource();
     src.buffer = ctx.createBuffer(1, 1, 22050);
