@@ -67,8 +67,8 @@ after editing and commit the output:
 
 ## Editing content
 
-- **A project** → add an object to `js/data/projects.js`; it joins the Work orbit and the hero
-  (give it a `short` label for the hero node). Screenshots go in `assets/projects/<dir>/`:
+- **A project** → add an object to `js/data/projects.js`; it joins the Work carousel and the
+  case-study dialog. Screenshots go in `assets/projects/<dir>/`:
   the first is the cover, the rest become the case-study gallery.
 - **Any visible text** → it's either an `{ en, id }` pair in `js/data/*` or a key in
   `js/data/strings.js`. Both languages must have the same keys; missing ones fall back to English.

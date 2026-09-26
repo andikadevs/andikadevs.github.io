@@ -98,16 +98,35 @@
   background: radial-gradient(closest-side, rgb(255 255 255 / 0.45), transparent);
 }
 .hero__mark { position: relative; }
-.hero__side { display: none; }
+.hero__side {                         /* vertical label on the left gutter */
+  position: absolute; left: clamp(18px, 3vw, 44px); top: 50%; translate: 0 -50%;
+  writing-mode: vertical-rl; rotate: 180deg;
+  font: 500 11px / 1 var(--font-mono); letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--white); opacity: 0.85; white-space: nowrap;
+}
+
+/* Desktop: the same editorial page as on phones, set wider. Copy on the left,
+   the mascot big on the right where the sun sits. */
+@media (min-width: 761px) {
+  .hero { justify-content: center; padding-bottom: clamp(120px, 14vw, 220px); }
+  .hero__center {
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas: "eyebrow mark" "title mark" "actions mark";
+    justify-items: start; align-items: center; text-align: left;
+    column-gap: clamp(32px, 6vw, 120px); row-gap: var(--space-4);
+    max-width: var(--container); padding-left: clamp(64px, 8vw, 128px);
+  }
+  .hero__eyebrow { grid-area: eyebrow; }
+  .hero__title { grid-area: title; }
+  .hero__actions { grid-area: actions; justify-content: flex-start; margin-top: calc(var(--space-4) * -1); }   /* .dim already leaves room below the headline */
+  .hero__mark { grid-area: mark; width: clamp(170px, 21vw, 300px); margin: 0; }
+}
 
 
-/* The orbit fills the hero behind the copy; wires fade out in the middle so
-   they never cross the text. */
+/* The mascot's resting spot is measured with animations off (mascot-fly.js). */
 .hero.is-measuring .hero__center,
 .hero.is-measuring .hero__mark,
 .hero.is-measuring .hero__mark * { animation: none !important; transform: none !important; transition: none !important; }
-.hero__orbit { position: absolute; inset: 0; z-index: 1; transition: translate 0.9s var(--ease-out); }
-.hero__orbit .graph { position: absolute; inset: 0; width: 100%; height: 100%; }
 
 /* Phones: an editorial hero — copy left-aligned, a vertical label on the edge,
    and the mascot up in the top-right where a sun would sit. */
@@ -117,12 +136,7 @@
   .hero__mark { position: absolute; top: -112px; right: 10px; width: 92px; margin: 0; }   /* below the nav bar, where a sun would sit */
   .hero__title { font-size: clamp(3.3rem, 17vw, 4.6rem); line-height: 0.92; }
   .hero__actions { justify-content: flex-start; margin-top: var(--space-5); }
-  .hero__side {
-    display: block; position: absolute; left: 18px; top: 50%; translate: 0 -50%;   /* in line with the page gutter, clear of the edge */
-    writing-mode: vertical-rl; rotate: 180deg;
-    font: 500 11px / 1 var(--font-mono); letter-spacing: 0.22em; text-transform: uppercase;
-    color: var(--white); opacity: 0.85; white-space: nowrap;
-  }
+  .hero__side { left: 18px; }
 }
 
 /* Narrow screens: sheet labels stack (number over text), centred in a compact chip. */
@@ -601,7 +615,6 @@
    (0 → 1 through the viewport), so none of this runs without motion.
    ========================================================================== */
 @media (prefers-reduced-motion: no-preference) {
-  /* Hero: copy lifts away while the projects drift outward from the centre. */
   /* Parallax cover: the copy sinks (moves slower than the page) and fades while
      the cloud bank rises faster than the page and swallows the hero. */
   .hero__center { transform: translateY(calc(var(--p, 0) * 22vh)); opacity: calc(1 - var(--p, 0) * 1.25); }
@@ -609,17 +622,10 @@
   .hero .cloudbank:not(.cloudbank--back)::after {   /* solid body under the rising bank: no gap opens below it */
     content: ""; position: absolute; left: 0; right: 0; top: 99%; height: 110vh; background: var(--bank);
   }
-  .orbit__node { opacity: calc(1 - var(--p, 0) * 1.2); }   /* position: hero.js moves chip + wire together */
-  .orbit__wires { opacity: calc(1 - var(--p, 0) * 1.2); }   /* fades with the chips it's attached to */
   .hero__title > span:nth-child(2) { --delay: 120ms; }
   .hero__title > span:nth-child(3) { --delay: 240ms; }
 
-  /* On load: wires draw out from the mark, then each project pops in along them. */
-  .hero .graph__edge { animation: draw 1.4s var(--ease-out) both; animation-delay: calc(500ms + var(--i) * 60ms); }
-  .hero .orbit__node rect, .hero .orbit__node text { animation: node-in 0.8s var(--ease-spring) both; animation-delay: calc(900ms + var(--i, 0) * 60ms); transform-box: fill-box; transform-origin: center; }
   .mascot-fly { animation: mark-in 1s var(--ease-spring) 150ms both; }   /* opacity/scale/rotate: composes with the JS transform */
-  @keyframes draw { from { stroke-dashoffset: 1; } }
-  @keyframes node-in { from { opacity: 0; scale: 0.4; } }
   @keyframes mark-in { from { opacity: 0; scale: 0.5; rotate: -20deg; } }
 
   .hero .cloud[data-cloud="1"] { transform: translate(calc(var(--p, 0) * -8vw), calc(var(--p, 0) * -20vh)); }
