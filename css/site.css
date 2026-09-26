@@ -61,6 +61,7 @@
   filter: drop-shadow(0 10px 22px rgb(31 59 109 / 0.28));
   transition: color var(--dur-base) ease, filter var(--dur-base) ease;
 }
+.mascot-fly:not(.is-placed) { visibility: hidden; }   /* until mascot-fly.js has put it somewhere: no flash at 0,0 on load */
 .mascot-fly .mk-ring { fill: var(--sky-400); transition: fill var(--dur-base) ease; }   /* face filled over the sky: hides the wires behind it */
 [data-theme="dark"] .mascot-fly .mk-ring { fill: #1c3868; }
 /* Welcome (mascot-fly.js): it drops in to the middle, hops and says hello, then flies home. */
