@@ -4,6 +4,9 @@
 // float (`pos`) each frame, so cards travel the real curve, a drag moves the
 // ring continuously, a flick carries on with momentum, and it always settles on
 // a card. Prev/next and arrow keys work too; the front card opens its case study.
+// It spins in with a sound the first time it's seen; each move ticks one card
+// (deck-step) or ratchets through several (deck-ratchet).
+import { sfx, sfxOnce } from "./sound-fx.js";
 import { html, render, $ } from "../core/dom.js";
 import { pick, t } from "../core/i18n.js";
 import { srcset } from "../core/media.js";
@@ -117,8 +120,12 @@ function animate() {
   frame = requestAnimationFrame(tick);
 }
 
-const go = (delta) => { target = Math.round(target) + delta; animate(); };
-const goTo = (index) => { target = Math.round(target) + (wrap(index - Math.round(target) + N / 2) - N / 2); animate(); };
+const cue = (steps) => {
+  const n = Math.abs(Math.round(steps));
+  if (n) sfx(n > 1 ? "deck-ratchet" : "deck-step", { rate: 0.96 + Math.random() * 0.08 });
+};
+const go = (delta) => { cue(delta); target = Math.round(target) + delta; animate(); };
+const goTo = (index) => { const delta = wrap(index - Math.round(target) + N / 2) - N / 2; cue(delta); target = Math.round(target) + delta; animate(); };
 
 export function initDeck(section) {
   if (!section) return;
@@ -171,6 +178,7 @@ export function initDeck(section) {
       cardEl?.setAttribute("data-dragged", "");
       setTimeout(() => cardEl?.removeAttribute("data-dragged"), 0);
       target = Math.round(pos + (drag.v * 260) / PX_PER_CARD);            // throw
+      cue(target - Math.round(drag.pos));
       animate();
     }
     drag = null;
@@ -179,16 +187,23 @@ export function initDeck(section) {
   stage?.addEventListener("pointercancel", release);
 
   // Horizontal trackpad scrolling moves the deck too (vertical stays with the page).
-  let wheelTimer = 0;
+  let wheelTimer = 0, wheelFrom = null;
   stage?.addEventListener("wheel", (e) => {
     if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
     e.preventDefault();
     cancelAnimationFrame(frame);
+    wheelFrom ??= Math.round(pos);
     target = pos = pos + e.deltaX / (PX_PER_CARD * 1.4);
     place();
     clearTimeout(wheelTimer);
-    wheelTimer = setTimeout(() => { target = Math.round(pos); animate(); }, 120);
+    wheelTimer = setTimeout(() => { target = Math.round(pos); cue(target - wheelFrom); wheelFrom = null; animate(); }, 120);
   }, { passive: false });
 
   new ResizeObserver(() => place(true)).observe(stage);
+  const seen = new IntersectionObserver(([entry]) => {
+    if (!entry.isIntersecting) return;
+    seen.disconnect();
+    sfxOnce(section, "wheel-spin");
+  }, { threshold: 0.35 });
+  seen.observe(stage ?? section);
 }

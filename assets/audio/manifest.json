@@ -1,0 +1,274 @@
+{
+  "sampleRate": 48000,
+  "sfx": {
+    "pen": {
+      "file": "sfx/pen.mp3",
+      "seconds": 2.301,
+      "use": "loader: one signature stroke (the scratch lasts ~0.55 s, then a soft room tail; fade it out when the stroke ends)"
+    },
+    "erase": {
+      "file": "sfx/erase.mp3",
+      "seconds": 2.492,
+      "use": "loader: signature un-writes"
+    },
+    "brush": {
+      "file": "sfx/brush.mp3",
+      "seconds": 3.665,
+      "use": "loader: the cream scribble cover wipes away (includes a soft sub impact)"
+    },
+    "whoosh": {
+      "file": "sfx/whoosh.mp3",
+      "seconds": 2.581,
+      "use": "Tejo flies between spots / big camera-like moves"
+    },
+    "fall-in": {
+      "file": "sfx/fall-in.mp3",
+      "seconds": 2.853,
+      "use": "Tejo drops into the hero"
+    },
+    "land": {
+      "file": "sfx/land.mp3",
+      "seconds": 2.23,
+      "use": "Tejo lands (thud + small boing)"
+    },
+    "boing": {
+      "file": "sfx/boing.mp3",
+      "seconds": 2.214,
+      "use": "Tejo hops / is clicked"
+    },
+    "bubble-pop": {
+      "file": "sfx/bubble-pop.mp3",
+      "seconds": 1.882,
+      "use": "a speech bubble appears"
+    },
+    "ui-pop": {
+      "file": "sfx/ui-pop.mp3",
+      "seconds": 1.876,
+      "use": "buttons/pills appear, small UI confirmations"
+    },
+    "ui-pop-2": {
+      "file": "sfx/ui-pop-2.mp3",
+      "seconds": 1.868,
+      "use": "second UI pop (alternate with ui-pop)"
+    },
+    "text-reveal": {
+      "file": "sfx/text-reveal.mp3",
+      "seconds": 2.181,
+      "use": "big headline lines rise in (use sparingly: once per heading)"
+    },
+    "line-draw": {
+      "file": "sfx/line-draw.mp3",
+      "seconds": 2.468,
+      "use": "hairline rules / underlines draw in"
+    },
+    "type-1": {
+      "file": "sfx/type-1.mp3",
+      "seconds": 0.082,
+      "use": "typewriter tick for typed labels and the wordmark caret"
+    },
+    "type-2": {
+      "file": "sfx/type-2.mp3",
+      "seconds": 0.082,
+      "use": "typewriter tick variant"
+    },
+    "type-3": {
+      "file": "sfx/type-3.mp3",
+      "seconds": 0.082,
+      "use": "typewriter tick variant"
+    },
+    "whoosh-out": {
+      "file": "sfx/whoosh-out.mp3",
+      "seconds": 2.164,
+      "use": "content leaves quickly"
+    },
+    "section-sheet": {
+      "file": "sfx/section-sheet.mp3",
+      "seconds": 2.865,
+      "use": "a section sheet slides over the previous one (nav jumps between sections)"
+    },
+    "card-swish": {
+      "file": "sfx/card-swish.mp3",
+      "seconds": 2.124,
+      "use": "cards fly in (numbers cards, deck cards)"
+    },
+    "tick": {
+      "file": "sfx/tick.mp3",
+      "seconds": 1.857,
+      "use": "small mechanical tick + note"
+    },
+    "count-up": {
+      "file": "sfx/count-up.mp3",
+      "seconds": 3.846,
+      "use": "count-up numbers (1.2 s of accelerating ticks, ends with a bell)"
+    },
+    "wheel-spin": {
+      "file": "sfx/wheel-spin.mp3",
+      "seconds": 2.68,
+      "use": "the project deck spins in"
+    },
+    "deck-step": {
+      "file": "sfx/deck-step.mp3",
+      "seconds": 0.689,
+      "use": "deck next/prev (tick + clack)"
+    },
+    "deck-ratchet": {
+      "file": "sfx/deck-ratchet.mp3",
+      "seconds": 2.83,
+      "use": "deck jumps several cards / fast drag"
+    },
+    "swell": {
+      "file": "sfx/swell.mp3",
+      "seconds": 3.299,
+      "use": "reverse swell into a reveal (contact section opening)"
+    },
+    "dive": {
+      "file": "sfx/dive.mp3",
+      "seconds": 3.082,
+      "use": "scrolling down into the ocean footer"
+    },
+    "splash": {
+      "file": "sfx/splash.mp3",
+      "seconds": 2.676,
+      "use": "hitting the water in the footer"
+    },
+    "dot-pluck": {
+      "file": "sfx/dot-pluck.mp3",
+      "seconds": 2.758,
+      "use": "the dot of the i in the wordmark"
+    },
+    "shimmer": {
+      "file": "sfx/shimmer.mp3",
+      "seconds": 2.83,
+      "use": "CTA cards appear / copy-email success sparkle"
+    },
+    "ding": {
+      "file": "sfx/ding.mp3",
+      "seconds": 2.889,
+      "use": "Tejo winks / success"
+    },
+    "tejo-yawn": {
+      "file": "sfx/tejo-yawn.mp3",
+      "seconds": 2.717,
+      "use": "Tejo idle: yawn"
+    },
+    "tejo-wiggle": {
+      "file": "sfx/tejo-wiggle.mp3",
+      "seconds": 2.305,
+      "use": "Tejo idle: wiggle"
+    },
+    "tejo-toss": {
+      "file": "sfx/tejo-toss.mp3",
+      "seconds": 2.13,
+      "use": "Tejo idle: tosses the packet"
+    },
+    "tejo-catch": {
+      "file": "sfx/tejo-catch.mp3",
+      "seconds": 1.875,
+      "use": "Tejo idle: catches the packet"
+    },
+    "tejo-flip": {
+      "file": "sfx/tejo-flip.mp3",
+      "seconds": 0.293,
+      "use": "Tejo idle: flips / twirl"
+    },
+    "tejo-tap": {
+      "file": "sfx/tejo-tap.mp3",
+      "seconds": 1.859,
+      "use": "Tejo dance step (play on each beat, vary playbackRate)"
+    },
+    "tejo-dizzy": {
+      "file": "sfx/tejo-dizzy.mp3",
+      "seconds": 3.108,
+      "use": "Tejo dizzy"
+    },
+    "tejo-sneeze": {
+      "file": "sfx/tejo-sneeze.mp3",
+      "seconds": 2.679,
+      "use": "Tejo sneeze (ah... ah... choo)"
+    },
+    "tejo-rush": {
+      "file": "sfx/tejo-rush.mp3",
+      "seconds": 2.427,
+      "use": "Tejo rushes in fast"
+    },
+    "tejo-slam": {
+      "file": "sfx/tejo-slam.mp3",
+      "seconds": 3.444,
+      "use": "Tejo slams to a stop (impact + rattle)"
+    },
+    "stamp": {
+      "file": "sfx/stamp.mp3",
+      "seconds": 2.142,
+      "use": "a heavy letter stamps in (play with playbackRate 1, 1.12, 1.26, 1.5, 1.68 for W-A-I-T-!)"
+    },
+    "tejo-pant": {
+      "file": "sfx/tejo-pant.mp3",
+      "seconds": 3.026,
+      "use": "Tejo out of breath"
+    },
+    "tejo-sweat": {
+      "file": "sfx/tejo-sweat.mp3",
+      "seconds": 2.424,
+      "use": "sweat drop flies off"
+    },
+    "tejo-pwease": {
+      "file": "sfx/tejo-pwease.mp3",
+      "seconds": 2.455,
+      "use": "Tejo begs: \"pwease?\" (voice starts ~0.75 s in)"
+    },
+    "heart": {
+      "file": "sfx/heart.mp3",
+      "seconds": 2.415,
+      "use": "a little heart floats up"
+    }
+  },
+  "notes": {
+    "note-0": {
+      "file": "sfx/note-0.mp3",
+      "use": "wordmark letter 1 (play 0.07 s apart, left to right)"
+    },
+    "note-1": {
+      "file": "sfx/note-1.mp3",
+      "use": "wordmark letter 2 (play 0.07 s apart, left to right)"
+    },
+    "note-2": {
+      "file": "sfx/note-2.mp3",
+      "use": "wordmark letter 3 (play 0.07 s apart, left to right)"
+    },
+    "note-3": {
+      "file": "sfx/note-3.mp3",
+      "use": "wordmark letter 4 (play 0.07 s apart, left to right)"
+    },
+    "note-4": {
+      "file": "sfx/note-4.mp3",
+      "use": "wordmark letter 5 (play 0.07 s apart, left to right)"
+    },
+    "note-5": {
+      "file": "sfx/note-5.mp3",
+      "use": "wordmark letter 6 (play 0.07 s apart, left to right)"
+    },
+    "note-6": {
+      "file": "sfx/note-6.mp3",
+      "use": "wordmark letter 7 (play 0.07 s apart, left to right)"
+    },
+    "note-7": {
+      "file": "sfx/note-7.mp3",
+      "use": "wordmark letter 8 (play 0.07 s apart, left to right)"
+    },
+    "note-8": {
+      "file": "sfx/note-8.mp3",
+      "use": "wordmark letter 9 (play 0.07 s apart, left to right)"
+    }
+  },
+  "music": {
+    "tejo-theme-loop": {
+      "file": "music/tejo-theme-loop.mp3",
+      "bpm": 108,
+      "key": "F major",
+      "bars": 16,
+      "loopSeconds": 35.555556,
+      "loopSamples48k": 1706667,
+      "use": "background music. Loop with Web Audio: loopStart = first non-silent sample (mp3 encoder delay), loopEnd = loopStart + loopSeconds."
+    }
+  }
+}

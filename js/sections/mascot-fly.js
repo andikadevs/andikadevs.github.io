@@ -3,8 +3,11 @@
 // On a fresh load it first says hello: drops in from above to the middle of the
 // screen, hops with a speech bubble, then flies back to its spot. Scrolling
 // during the welcome sends it home straight away, from wherever it is.
+// Sounds follow the flight: falling in, the whoosh home, landing, and a whoosh
+// whenever scrolling carries it off to the nav or back.
 import { onScroll } from "../ds/smooth-scroll.js";
 import { placeBubble } from "./mascot-bubble.js";
+import { sfx } from "./sound-fx.js";
 
 const clamp01 = (n) => Math.min(1, Math.max(0, n));
 const ease = (t) => t * t * (3 - 2 * t);                                   // smoothstep
@@ -14,6 +17,10 @@ const lerp = (a, b, t) => a + (b - a) * t;
 const mix = (a, b, t) => ({ x: lerp(a.x, b.x, t), y: lerp(a.y, b.y, t), size: lerp(a.size, b.size, t) });
 
 const DROP = 1100, HOLD = 1500, HOME = 1100;                                // welcome timeline, ms
+// The welcome's sounds, in ms on the same timeline. fall-in hits 0.66 s in and
+// the drop reaches the stage about 0.5 s in, so it starts a little early.
+const BEATS = [[-160, "fall-in"], [DROP + HOLD, "whoosh"], [DROP + HOLD + HOME - 60, "land", { volume: 0.6 }]];
+const panAt = (x, size) => ((x + size / 2) / innerWidth - 0.5) * 0.8;       // left/right follows the mascot
 
 export function initMascotFly(fly, anchor, dock, bubble, ready = Promise.resolve()) {
   if (!fly || !anchor || !dock) return;
@@ -54,7 +61,7 @@ export function initMascotFly(fly, anchor, dock, bubble, ready = Promise.resolve
   const apply = (pose, t) => write(pose, t, onSkyAt(pose));
 
   // ---- Welcome ------------------------------------------------------------
-  let intro = null;                                                        // { start, from? }
+  let intro = null;                                                        // { start, from?, beat }
   const stage = () => {
     const size = Math.min(Math.max(rest.width * 1.6, 200), innerWidth * 0.62, innerHeight * 0.52, 520);   // big for the hello; shrinks back on the way home
     return { x: innerWidth / 2 - size / 2, y: innerHeight / 2 - size / 2 + size * 0.12, size };
@@ -64,8 +71,14 @@ export function initMascotFly(fly, anchor, dock, bubble, ready = Promise.resolve
     const above = { ...s, y: -s.size * 1.4 };
     const hello = e >= DROP && e < DROP + HOLD;
     fly.classList.toggle("is-hello", hello);
+    while (BEATS[intro.beat] && e >= BEATS[intro.beat][0]) {
+      const [, name, options] = BEATS[intro.beat++];
+      sfx(name, options);
+    }
     if (bubble) {
+      const was = bubble.classList.contains("is-on");
       bubble.classList.toggle("is-on", hello && e < DROP + HOLD - 200);
+      if (!was && bubble.classList.contains("is-on")) sfx("bubble-pop");
       if (hello) placeBubble(bubble, s);
     }
     if (e < DROP) return mix(above, s, easeOutBack(clamp01(e / DROP)));
@@ -82,6 +95,7 @@ export function initMascotFly(fly, anchor, dock, bubble, ready = Promise.resolve
     const s = stage();
     intro.from = e < DROP ? mix({ ...s, y: -s.size * 1.4 }, s, easeOutBack(clamp01(e / DROP))) : s;
     intro.start = performance.now() - DROP - HOLD;
+    intro.beat = 1;                                                        // skip the fall-in, play the whoosh home
   };
 
   const place = () => {
@@ -90,10 +104,20 @@ export function initMascotFly(fly, anchor, dock, bubble, ready = Promise.resolve
   };
 
   const remeasure = () => { rest = null; place(); };
+  // Scrolling off the resting spot or out of the dock is a flight: one whoosh
+  // per trip (it can't restart for a moment), and a soft landing in the nav.
+  let lastT = scrollY < 4 ? 0 : null, flewAt = 0;                         // a fresh load starts at the resting spot
+  const flightSound = ({ x, size, t }) => {
+    const left = lastT !== null && ((lastT < 0.03 && t >= 0.03) || (lastT > 0.97 && t <= 0.97));
+    if (left && performance.now() - flewAt > 1200) { flewAt = performance.now(); sfx("whoosh", { volume: 0.55, pan: panAt(x, size) }); }
+    if (lastT !== null && lastT <= 0.98 && t > 0.98) sfx("land", { volume: 0.35, pan: panAt(x, size) });
+    lastT = t;
+  };
   onScroll(() => {
     if (scrollY > 4) cutToHome();
     if (intro) return;                                                     // the welcome's own loop is placing it
     const home = scrollPose(), onSky = onSkyAt(home);                      // read…
+    flightSound(home);
     return () => write(home, home.t, onSky);                               // …then write
   });
   addEventListener("resize", remeasure);
@@ -102,7 +126,7 @@ export function initMascotFly(fly, anchor, dock, bubble, ready = Promise.resolve
 
   const welcome = !matchMedia("(prefers-reduced-motion: reduce)").matches && scrollY < 4 && !location.hash;
   if (welcome) {
-    intro = { start: Infinity };                                          // waits above the screen until the loader is done
+    intro = { start: Infinity, beat: 0 };                                          // waits above the screen until the loader is done
     ready.then(() => { if (intro && intro.start === Infinity) intro.start = performance.now() + 700; });   // once the wipe has mostly cleared
     const tick = () => { place(); if (intro) requestAnimationFrame(tick); };
     requestAnimationFrame(tick);

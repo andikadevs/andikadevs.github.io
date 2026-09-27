@@ -14,7 +14,8 @@ export const strings = {
     "nav.experience": "Experience",
     "nav.contact": "Contact",
     "nav.theme": "Switch light or dark mode",
-    "nav.sound": "Mascot sounds",
+    "nav.sound": "Sounds",
+    "nav.music": "Music",
     "nav.lang": "Language",
     "a11y.skip": "Skip to content",
 
@@ -92,7 +93,8 @@ export const strings = {
     "nav.experience": "Pengalaman",
     "nav.contact": "Kontak",
     "nav.theme": "Ganti mode terang atau gelap",
-    "nav.sound": "Suara maskot",
+    "nav.sound": "Suara",
+    "nav.music": "Musik",
     "nav.lang": "Bahasa",
     "a11y.skip": "Langsung ke konten",
 

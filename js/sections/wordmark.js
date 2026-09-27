@@ -2,8 +2,27 @@
 // Its second "a" is a door: hover, tap or focus it and it turns into an "@",
 // and social cards spread out of it along an arc. They fold back in when the
 // pointer leaves (with a short grace period so you can reach them).
+// The first time it comes into view it sounds out its entrance (once per page
+// load, not on every rewind): a dive into the sea and a splash, one marimba
+// note per letter as they appear, a pluck for the i's dot, the underline
+// drawing in, and one type tick as the caret appears.
 import { html, render } from "../core/dom.js";
 import { profile } from "../data/profile.js";
+import { sfx, sfxOnce } from "./sound-fx.js";
+
+// Seconds after .is-in, matching the delays in site.css (.wm__letter: --i × 70 ms,
+// .wm__dot 0.55 s, .wm__bar 0.7 s, .wm__caret 1 s; the mark's packet lands ~0.8 s).
+const CUES = { splash: 0.8, dot: 0.55, bar: 0.7, caret: 1, letter: 0.07 };
+
+function playEntrance(svg) {
+  if (!sfxOnce(svg, "dive", { volume: 0.8 })) return;                  // muted or already heard: skip the rest too
+  sfx("splash", { volume: 0.8, delay: CUES.splash });
+  svg.querySelectorAll(".wm__letter").forEach((_, k) =>                // letters are in order, --i = 1…9
+    sfx(`note-${k}`, { volume: 0.7, delay: (k + 1) * CUES.letter, length: 0.35 }));
+  sfx("dot-pluck", { volume: 0.8, delay: CUES.dot });
+  sfx("line-draw", { volume: 0.8, delay: CUES.bar });
+  sfx("type-1", { delay: CUES.caret });
+}
 
 const ARC = { from: -152, to: -28, radius: 1.3 };      // degrees (0 = right, −90 = up), radius in wordmark heights; ends stay above the letters
 
@@ -28,7 +47,10 @@ export function initWordmark(wrapper) {
   const spread = wrapper?.querySelector("[data-wm-spread]");
   if (!svg) return;
 
-  new IntersectionObserver(([entry]) => svg.classList.toggle("is-in", entry.isIntersecting), { threshold: 0.35 }).observe(svg);
+  new IntersectionObserver(([entry]) => {
+    svg.classList.toggle("is-in", entry.isIntersecting);
+    if (entry.isIntersecting) playEntrance(svg);
+  }, { threshold: 0.35 }).observe(svg);
   if (!hit || !spread) return;
 
   const items = cards();

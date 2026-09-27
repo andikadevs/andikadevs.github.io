@@ -50,7 +50,7 @@
 
   <link rel="preload" href="fonts/bricolagegrotesque_v9_3y9K6as8bTXq_nANBjzKo3IeZx8z6up5BeSl9D4dj_x9PpZBMlGIInE.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="fonts/spacegrotesk_v22_V8mDoQDjQSkFtoMM3T6r8E7mPbF4Cw.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/app.css?v=c517949ebf">
+  <link rel="stylesheet" href="css/app.css?v=84759a4936">
   <!-- head:end -->
 
   <script src="js/theme.js"></script>
@@ -482,7 +482,7 @@
 }
   </script>
   <!-- jsonld:end -->
-  <script type="module" src="js/main.js?v=01ea3e9c48"></script>
+  <script type="module" src="js/main.js?v=f8f314b74b"></script>
 </head>
 <body>
   <!-- Loader (loader.js): my signature writes itself, then a scribble wipes the page in. -->
@@ -525,8 +525,11 @@
         <button type="button" data-lang="en" aria-pressed="true">EN</button>
         <button type="button" data-lang="id" aria-pressed="false">ID</button>
       </div>
-      <button class="icon-btn sound-toggle" type="button" data-sound-toggle aria-pressed="true" aria-label="Mascot sounds" data-i18n-attr="aria-label: nav.sound">
+      <button class="icon-btn sound-toggle" type="button" data-sound-toggle aria-pressed="true" aria-label="Sounds" data-i18n-attr="aria-label: nav.sound">
         <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" fill="currentColor" stroke="none"/><path class="ico-waves" d="M15.5 9a4.5 4.5 0 0 1 0 6M18.5 6.5a8 8 0 0 1 0 11"/><path class="ico-mute" d="M16 9.5l5 5M21 9.5l-5 5"/></svg>
+      </button>
+      <button class="icon-btn music-toggle" type="button" data-music-toggle aria-pressed="false" aria-label="Music" data-i18n-attr="aria-label: nav.music">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 17.5V5.5l10-2v12"/><circle cx="6.5" cy="17.5" r="2.5" fill="currentColor"/><circle cx="16.5" cy="15.5" r="2.5" fill="currentColor"/><path class="ico-off" d="M3.5 3.5l17 17"/></svg>
       </button>
       <button class="icon-btn theme-toggle" type="button" data-theme-toggle aria-label="Switch light or dark mode" data-i18n-attr="aria-label: nav.theme">
         <svg class="ico-sun" viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="5"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 1.5v2M12 20.5v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1.5 12h2M20.5 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/></g></svg>
@@ -592,7 +595,7 @@
             <span data-i18n="intro.text" data-split="scrub">I started as an intern at a Toyota dealership, writing Laravel. Today I run the platform behind a university's apps, build tools for Toploker.com, and keep a small studio going on the side, where I also design and build company profiles and portfolio sites.</span>
             <strong data-i18n="intro.strong" data-split="scrub">I like problems where a boring manual step is costing someone hours a week.</strong>
           </p>
-          <div class="intro__stats" data-reveal>
+          <div class="intro__stats" data-reveal data-count-group>
             <div class="stat"><span class="stat__value" data-count-up>3+</span><span class="stat__label" data-i18n="stat.years">Years shipping</span></div>
             <div class="stat"><span class="stat__value" data-count-up>25+</span><span class="stat__label" data-i18n="stat.projects">Projects shipped</span></div>
             <div class="stat"><span class="stat__value" data-count-up>11+</span><span class="stat__label" data-i18n="stat.sso">Apps on my SSO</span></div>
@@ -728,7 +731,7 @@
           </div>
         </div>
         <div class="hscroll__viewport" tabindex="0" role="region" aria-label="Numbers — scroll sideways" data-i18n-attr="aria-label: hl.row">
-          <div class="hscroll__track" data-highlights></div>
+          <div class="hscroll__track" data-highlights data-count-group></div>
         </div>
       </div>
     </section>

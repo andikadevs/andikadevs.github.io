@@ -6,9 +6,17 @@
 // class (.is-idle-<name>) whose main keyframes are named idle-<name>; the class
 // comes off when that animation ends. The moves use the individual translate /
 // rotate / scale properties, so they ride on top of the base float, not replace it.
+// Most moves have a sound from the kit (a boop's boing is played on the click, in mascot-chat.js).
+import { sfx } from "./sound-fx.js";
+
 const MOVES = ["hop", "twirl", "wiggle", "juggle", "sleepy", "wink", "shake", "stretch"];
 const HOVER = ["hop", "wiggle", "wink"];
 const pick = (list, not) => { const l = list.filter((m) => m !== not); return l[Math.floor(Math.random() * l.length)]; };
+const SOUND = {
+  hop: ["boing", { volume: 0.6 }], twirl: ["tejo-flip"], wiggle: ["tejo-wiggle"], juggle: ["tejo-toss"],
+  stretch: ["tejo-yawn"], wink: ["ding", { volume: 0.6 }],     // stretch is the one with the yawning eyes
+};
+const CATCH = 770;                                                    // ms: idle-juggle's packet lands back at 70% of 1.1 s
 const pause = () => 3500 + Math.random() * 4000;                       // 3.5–7.5 s between moves
 
 export function initMascotIdle(mascot) {
@@ -22,6 +30,8 @@ export function initMascotIdle(mascot) {
     clearTimeout(timer);
     current = move;
     mascot.classList.add(`is-idle-${move}`);
+    if (SOUND[move]) sfx(...SOUND[move]);
+    if (move === "juggle") setTimeout(() => { if (current === "juggle") sfx("tejo-catch"); }, CATCH);
     return true;
   };
   const schedule = () => {

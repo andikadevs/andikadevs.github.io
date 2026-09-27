@@ -1,6 +1,7 @@
 // Counts [data-count-up] numbers from 0 when they scroll into view.
 // Keeps any prefix/suffix around the number ("11+", "100K+", "3×").
-export function initCountUp(root = document, { duration = 1400 } = {}) {
+// onStart(el) runs as each one starts counting (main.js plays a sound per group).
+export function initCountUp(root = document, { duration = 1400, onStart } = {}) {
   const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const ease = (t) => 1 - Math.pow(1 - t, 4);
 
@@ -9,6 +10,7 @@ export function initCountUp(root = document, { duration = 1400 } = {}) {
     if (!match || reduced) return;
     const [, before, digits, after] = match;
     const target = Number(digits);
+    onStart?.(el);
     const start = performance.now();
     const step = (now) => {
       const t = Math.min(1, Math.max(0, (now - start) / duration));   // rAF time can precede `start`

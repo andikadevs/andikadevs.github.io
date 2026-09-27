@@ -54,6 +54,10 @@ html { cursor: var(--cursor); }
 .sound-toggle .ico-mute { display: none; }
 .sound-toggle[aria-pressed="false"] .ico-waves { display: none; }
 .sound-toggle[aria-pressed="false"] .ico-mute { display: inline; }
+/* Music toggle (music.js): a note, struck through while off. */
+.music-toggle .ico-off { display: none; }
+.music-toggle[aria-pressed="false"] .ico-off { display: inline; }
+.music-toggle[aria-pressed="false"] svg { opacity: 0.75; }
 
 /* ---- Nav extras ---------------------------------------------------------- */
 .nav-mark { display: block; width: 48px; aspect-ratio: 1; }   /* dock slot: the mascot flies in here */

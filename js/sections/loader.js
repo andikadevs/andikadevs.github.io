@@ -3,6 +3,10 @@
 // of each stroke, and then the cover — one giant scribble — thins out and pulls
 // away to reveal the page. Returns a promise that resolves as the reveal starts,
 // so the page's own entrances (reveals, the mascot's hello) play after it.
+// Each stroke scratches (the pen's tail fades when the stroke ends), the erase
+// rubs, the wipe brushes; silent unless the visitor has already interacted.
+import { sfx } from "./sound-fx.js";
+
 const DRAW = [0.28, 0.62];             // seconds for the shortest / longest stroke
 const HOLD = 350, ERASE = 800, WIPE = 1250;
 
@@ -22,13 +26,16 @@ export function initLoader(loader) {
     (async () => {
       for (const [i, path] of strokes.entries()) {                     // write, one stroke after another
         const seconds = DRAW[0] + (DRAW[1] - DRAW[0]) * (lengths[i] / longest);
+        const pen = sfx("pen", { volume: 0.8, rate: 0.94 + Math.random() * 0.12 });
         await wait(path.animate(
           [{ strokeDashoffset: 1, opacity: 1 }, { strokeDashoffset: 0, opacity: 1 }],
           { duration: seconds * 1000, easing: "cubic-bezier(0.45, 0.05, 0.55, 0.95)", fill: "forwards" },
         ));
+        pen?.stop(0.25);
       }
       await new Promise((r) => setTimeout(r, HOLD));
 
+      sfx("erase");
       const erase = strokes.map((path, i) => path.animate(               // un-write, from each stroke's start
         [{ strokeDashoffset: 0, opacity: 1 }, { opacity: 1, offset: 0.9 }, { strokeDashoffset: -1, opacity: 0 }],   // fade the last bit: round caps leave a dot
         { duration: ERASE, delay: i * 30, easing: "cubic-bezier(0.65, 0, 0.35, 1)", fill: "forwards" },
@@ -36,6 +43,7 @@ export function initLoader(loader) {
       await new Promise((r) => setTimeout(r, 350));
 
       resolve();                                                        // the page starts its entrance under the wipe
+      sfx("brush");
       await wait(cover.animate(
         [{ strokeDashoffset: 0, strokeWidth: "80%" }, { strokeDashoffset: -1, strokeWidth: "5%" }],
         { duration: WIPE, easing: "cubic-bezier(0.45, 0, 0.55, 1)", fill: "forwards" },

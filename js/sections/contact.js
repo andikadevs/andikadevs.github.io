@@ -2,12 +2,15 @@
 import { t, lang } from "../core/i18n.js";
 import { toast } from "../ds/toast.js";
 import { profile } from "../data/profile.js";
+import { sfx } from "./sound-fx.js";
 
 export function initCopyEmail(button) {
   button?.addEventListener("click", async () => {
     try {
       await navigator.clipboard.writeText(profile.email);
       toast(t("contact.copied"));
+      sfx("shimmer");
+      sfx("ding", { volume: 0.7, delay: 0.12 });                     // the sparkle, then the "done"
     } catch {
       location.href = `mailto:${profile.email}`;
     }

@@ -26,10 +26,21 @@ import { initMascotIdle } from "./sections/mascot-idle.js";
 import { initLoader } from "./sections/loader.js";
 import { initMascotChat } from "./sections/mascot-chat.js";
 import { initRobotVoice } from "./sections/robot-voice.js";
+import { initAudio } from "./core/audio.js";
+import { initSoundFx, sfxOnce } from "./sections/sound-fx.js";
+import { initMusic } from "./sections/music.js";
+import { initSoundCues } from "./sections/sound-cues.js";
 import { initPauseOffscreen } from "./ds/pause-offscreen.js";
 
 // Labels that roll on hover: nav links and button labels (after i18n has set their text).
 const ROLL = ".nav-link, .btn > [data-i18n]";
+
+// Sound first: its unlock listener must run before any click that plays a sound.
+initAudio();
+initSoundFx();
+
+// One count-up sound per group of numbers, not one per number.
+const countSound = (el) => sfxOnce(el.closest("[data-count-group]") ?? el, "count-up", { volume: 0.8 });
 
 // The loader plays first; entrances (reveals, the mascot's hello) wait for it.
 const pageReady = initLoader($("[data-loader]"));
@@ -41,7 +52,7 @@ function renderContent() {
   splitWords();
   pageReady.then(() => initReveal());
   watchScroll();
-  initCountUp();
+  initCountUp(document, { onStart: countSound });
 }
 
 function initLangSwitch(control) {
@@ -80,6 +91,8 @@ initMascots();
 initMascotFly($("[data-mascot-fly]"), $("[data-hero-anchor]"), $("[data-mascot-dock]"), $("[data-mascot-hello]"), pageReady);
 initMascotIdle($("[data-mascot-fly]"));
 initRobotVoice($("[data-sound-toggle]"));
+initMusic($("[data-music-toggle]"));
+initSoundCues($("[data-nav]"));
 initMascotChat($("[data-mascot-fly]"), $("[data-mascot-hello]"), pageReady);
 initPauseOffscreen();
 $("[data-year]").textContent = new Date().getFullYear();

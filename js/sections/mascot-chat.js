@@ -11,6 +11,7 @@ import { chatter } from "../data/chatter.js";
 import { placeBubble } from "./mascot-bubble.js";
 import { onScroll } from "../ds/smooth-scroll.js";
 import { babble, boop, sad } from "./robot-voice.js";
+import { sfx } from "./sound-fx.js";
 
 const gap = () => 7000 + Math.random() * 5000;                         // 7–12 s between lines
 const TYPE = 30;                                                        // ms per character as the bubble types
@@ -59,6 +60,7 @@ export function initMascotChat(fly, bubble, ready = Promise.resolve()) {
       if (shown >= line.length) clearInterval(typeTimer);
     }, TYPE);
     if (voice) babble(line, (line.length * TYPE) / 1000);
+    if (!bubble.classList.contains("is-on")) sfx("bubble-pop", { volume: 0.7 });
     bubble.classList.add("is-on");
     talking = true;
     clearTimeout(hideTimer);
@@ -98,6 +100,7 @@ export function initMascotChat(fly, bubble, ready = Promise.resolve()) {
   fly.addEventListener("click", () => {                                  // click, not press: counts as the activation sound needs
     const streak = chatter.streak[burst("boop")];
     streak ? sad() : boop();
+    sfx("boing", { rate: 0.94 + Math.random() * 0.12 });
     say(streak ? pick(streak) : from(chatter.boop), { force: true, voice: false });
   });
   fly.addEventListener("pointerenter", (event) => {
