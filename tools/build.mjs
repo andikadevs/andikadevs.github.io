@@ -119,7 +119,7 @@ function jsonld() {
       jobTitle: "Fullstack Developer",
       description: en["hero.lead"],
       url: `${SITE}/`, email: `mailto:${profile.email}`,
-      image: { "@type": "ImageObject", "@id": `${SITE}/#portrait`, url: abs("assets/img/andika.webp"), width: 720, height: 720, caption: profile.name },
+      image: { "@type": "ImageObject", "@id": `${SITE}/#portrait`, url: abs("assets/img/andika.webp"), width: 1254, height: 1254, caption: profile.name },
       hasOccupation: { "@type": "Occupation", name: "Fullstack Developer", occupationLocation: { "@type": "City", name: "Semarang" }, skills: "TypeScript, NestJS, Laravel, React, Next.js, PostgreSQL, Docker" },
       address: { "@type": "PostalAddress", addressLocality: "Semarang", addressRegion: "Central Java", addressCountry: "ID" },
       nationality: { "@type": "Country", name: "Indonesia" },
