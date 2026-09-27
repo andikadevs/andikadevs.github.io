@@ -2,7 +2,11 @@
 // nav's top-left corner, shrinking to nav size; there it stays as the home link.
 // On a fresh load it first says hello: drops in from above to the middle of the
 // screen, hops with a speech bubble, then flies back to its spot. Scrolling
-// during the welcome sends it home straight away, from wherever it is.
+// during the welcome sends it home straight away, from wherever it is. At the
+// end of the page it leaves the dock again and glides down into the footer
+// wordmark, where it becomes the wordmark's mark (the drawn one hides), so there
+// is only ever one of it. Both flights are tied to the scroll, so they run as
+// smoothly as the scroll itself and reverse when you scroll back.
 // Sounds follow the flight: falling in, the whoosh home, landing, and a whoosh
 // whenever scrolling carries it off to the nav or back.
 import { onScroll } from "../ds/smooth-scroll.js";
@@ -24,7 +28,7 @@ const panAt = (x, size) => ((x + size / 2) / innerWidth - 0.5) * 0.8;       // l
 
 export function initMascotFly(fly, anchor, dock, bubble, ready = Promise.resolve()) {
   if (!fly || !anchor || !dock) return;
-  const skies = [...document.querySelectorAll(".blueprint")];
+  const skies = [...document.querySelectorAll(".blueprint, .footer")];   // white over the sky and the sea
   const hero = anchor.closest(".hero");
 
   // Where the mascot rests, in page coordinates, measured without the hero's
@@ -38,12 +42,37 @@ export function initMascotFly(fly, anchor, dock, bubble, ready = Promise.resolve
     rest = { left: r.left + scrollX, top: r.top + scrollY, width: r.width };
   };
 
-  // Scroll pose: from the resting spot (t = 0) to the nav dock (t = 1).
+  // The footer wordmark's mark, in viewport pixels, as a pose for the mascot:
+  // both are the same drawing, so line up their rings (centre and radius),
+  // read from the SVGs' own geometry (viewBox + group transform + circle).
+  const wm = document.querySelector(".wm");
+  const ringOf = (svg) => {
+    const ring = svg?.querySelector(".mk-ring");
+    if (!ring) return null;
+    const m = ring.parentNode.transform?.baseVal.consolidate()?.matrix ?? { e: 0, f: 0 };
+    const vb = svg.viewBox.baseVal;
+    return { x: ring.cx.baseVal.value + m.e - vb.x, y: ring.cy.baseVal.value + m.f - vb.y, r: ring.r.baseVal.value, w: vb.width };
+  };
+  const own = ringOf(fly.querySelector("svg")), mark = ringOf(wm);
+  if (own && mark) wm.classList.add("has-tejo");
+  const footerPose = () => {
+    const box = wm.getBoundingClientRect(), k = box.width / mark.w;       // px per wordmark unit
+    const size = (mark.r * k) / (own.r / own.w);                           // same ring radius
+    return { x: box.left + mark.x * k - (own.x / own.w) * size, y: box.top + mark.y * k - (own.y / own.w) * size, size };
+  };
+  const FOOTER = 0.8;                                                      // of a screen: how long the glide down lasts
+
+  // Scroll pose: from the resting spot (t = 0) to the nav dock (t = 1), then,
+  // over the page's last FOOTER screens, from the dock into the wordmark (f = 0 → 1).
   const scrollPose = () => {
     if (!rest) measure();
     const d = dock.getBoundingClientRect();
     const t = ease(clamp01(scrollY / (innerHeight * 0.45)));
-    return { x: lerp(rest.left, d.left, t), y: lerp(rest.top, d.top, t), size: lerp(rest.width, d.width, t), t };
+    const home = { x: lerp(rest.left, d.left, t), y: lerp(rest.top, d.top, t), size: lerp(rest.width, d.width, t), t, f: 0 };
+    if (!own || !mark) return home;
+    const left = document.documentElement.scrollHeight - innerHeight - scrollY;
+    const f = easeInOut(clamp01(1 - left / (innerHeight * FOOTER)));
+    return f > 0 ? { ...mix(home, footerPose(), f), t, f } : home;
   };
 
   // Reads (layout) and writes (styles) are kept apart, so a scroll frame costs one layout.
@@ -51,11 +80,12 @@ export function initMascotFly(fly, anchor, dock, bubble, ready = Promise.resolve
     const cx = x + size / 2, cy = y + size / 2;
     return skies.some((el) => { const r = el.getBoundingClientRect(); return cx > r.left && cx < r.right && cy > r.top && cy < r.bottom; });
   };
-  const write = ({ x, y, size }, t, onSky) => {
+  const write = ({ x, y, size, f = 0 }, t, onSky) => {
     fly.style.width = `${rest.width}px`;
     fly.style.transform = `translate(${x.toFixed(1)}px, ${y.toFixed(1)}px) scale(${(size / rest.width).toFixed(4)})`;
     fly.classList.toggle("is-on-paper", !onSky);
-    fly.classList.toggle("is-docked", t > 0.98);
+    fly.classList.toggle("is-docked", t > 0.98 && f < 0.02);
+    fly.classList.toggle("is-in-footer", f > 0.6);                          // takes on the wordmark's colours
     fly.classList.add("is-placed");
   };
   const apply = (pose, t) => write(pose, t, onSkyAt(pose));

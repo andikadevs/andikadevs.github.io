@@ -23,7 +23,7 @@ I started as an intern at a Toyota dealership, writing Laravel. Today I run the 
 
 - Fullstack Developer & Analyst, Toploker.com (2024 — now): I build the systems Toploker runs on: OTO Management, SnapCRM, the jobs scraper, TopMatch and the CV catalog. Most of my week is spent finding the manual step nobody likes and making it go away.
 - Software Engineer, International Office, Universitas STEKOM (2024 — now): Developer on the international team. I built the international site and the campus platform around it: Passport for single sign-on, Depot for media, Conflow, Bio and Corpus.
-- Founder, Manggala Cloud (2024 — now): A small web and app studio in Semarang, running six services: the studio site, digital wedding invitations, birthday pages, an invitation editor with checkout, an affiliate portal, and the admin that runs it all.
+- Founder, Manggala Cloud (2025 — now): A small web and app studio in Semarang, running six services: the studio site, digital wedding invitations, birthday pages, an invitation editor with checkout, an affiliate portal, and the admin that runs it all.
 - Junior Software Engineer (Intern), Akastra Toyota (2023 — 2024): Where I learned to ship. Company sites, an OAuth2 SSO server, vehicle tracking, e-parking, a staging export panel and the MRS Genius APIs.
 
 ## Contact

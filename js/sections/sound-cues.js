@@ -4,7 +4,7 @@
 import { sfx, sfxOnce } from "./sound-fx.js";
 
 export function initSoundCues(nav) {
-  const headings = document.querySelectorAll("h2[data-split][data-reveal]");
+  const headings = document.querySelectorAll("h2[data-split][data-reveal], h2 > [data-reveal]:first-child");   // split headings, and ones revealed line by line
   const rise = new MutationObserver((changes) => changes.forEach(({ target }) => {
     if (target.classList.contains("is-in")) sfxOnce(target, "text-reveal", { volume: 0.8 });
   }));

@@ -50,7 +50,7 @@
 
   <link rel="preload" href="fonts/bricolagegrotesque_v9_3y9K6as8bTXq_nANBjzKo3IeZx8z6up5BeSl9D4dj_x9PpZBMlGIInE.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="fonts/spacegrotesk_v22_V8mDoQDjQSkFtoMM3T6r8E7mPbF4Cw.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/app.css?v=84759a4936">
+  <link rel="stylesheet" href="css/app.css?v=4291854f8e">
   <!-- head:end -->
 
   <script src="js/theme.js"></script>
@@ -482,7 +482,7 @@
 }
   </script>
   <!-- jsonld:end -->
-  <script type="module" src="js/main.js?v=f8f314b74b"></script>
+  <script type="module" src="js/main.js?v=b0e7cceae7"></script>
 </head>
 <body>
   <!-- Loader (loader.js): my signature writes itself, then a scribble wipes the page in. -->
@@ -673,33 +673,44 @@
     </section>
 
     <!-- ============ STUDIO: sheet 04 ============ -->
-    <section class="section studio-wrap" aria-labelledby="studio-title">
-      <div class="container">
-      <div class="studio" data-scroll>
-      <div class="nimbus">
-        <div class="stack nimbus__copy" data-reveal-group>
-          <p class="sheet" data-reveal><span class="sheet__no">04 / 06</span><span data-i18n="studio.label">On the side</span></p>
-          <h2 class="heading" id="studio-title" data-split data-reveal data-i18n="studio.title">I also run a small studio.</h2>
-          <p class="lead" data-reveal data-i18n="studio.body">Manggala Cloud builds websites and apps from Semarang. It runs six services, from digital wedding invitations to an affiliate portal. It's where I try ideas before I'd recommend them to anyone else.</p>
+    <section class="section studio" aria-labelledby="studio-title">
+      <div class="container studio__inner">
+        <div class="studio__top" data-reveal>
+          <p class="sheet"><span class="sheet__no">04 / 06</span><span data-i18n="studio.label">On the side</span></p>
+          <p class="studio__meta" data-i18n="studio.meta">Est. 2025 — Semarang</p>
+        </div>
+        <h2 class="studio__title" id="studio-title" data-reveal-group data-scroll>
+          <span class="studio__line" data-reveal data-i18n="studio.title.1">I also run</span>
+          <span class="studio__line studio__line--2" data-reveal><span data-i18n="studio.title.2">a </span><em data-i18n="studio.title.em">small</em><span data-i18n="studio.title.3"> studio.</span></span>
+        </h2>
+
+        <div class="studio__stage" data-reveal data-scroll data-studio>
+          <div class="studio__window">
+            <p class="studio__window-bar" aria-hidden="true"><i></i><i></i><i></i><span><img src="assets/logos/manggala-icon.svg" alt="" width="14" height="14">manggala.cloud</span></p>
+            <div class="studio__window-view" aria-hidden="true" data-studio-view>
+              <img src="assets/img/manggala-en.webp" srcset="assets/img/manggala-en-720.webp 720w, assets/img/manggala-en.webp 1280w" sizes="(min-width: 760px) 620px, 100vw" alt="" width="1280" height="800" loading="lazy" decoding="async" draggable="false" data-i18n-attr="src: studio.shot; srcset: studio.shotset">
+            </div>
+            <a class="studio__window-link" href="https://www.manggala.cloud" target="_blank" rel="noopener" aria-label="Open manggala.cloud" data-i18n-attr="aria-label: studio.open"></a>
+          </div>
+          <ul class="studio__services" aria-label="Manggala Cloud services" data-i18n-attr="aria-label: studio.services">
+            <li style="--x:2%; --y:6%; --r:-6deg; --depth:70px; --i:0" data-i18n="studio.svc.site">Studio site</li>
+            <li style="--x:80%; --y:10%; --r:5deg; --depth:40px; --i:1" data-i18n="studio.svc.wedding">Wedding invites</li>
+            <li style="--x:86%; --y:50%; --r:-4deg; --depth:90px; --i:2" data-i18n="studio.svc.birthday">Birthday pages</li>
+            <li style="--x:80%; --y:88%; --r:7deg; --depth:55px; --i:3" data-i18n="studio.svc.editor">Invite editor</li>
+            <li style="--x:0%; --y:86%; --r:4deg; --depth:85px; --i:4" data-i18n="studio.svc.affiliate">Affiliate portal</li>
+            <li style="--x:-6%; --y:46%; --r:-8deg; --depth:45px; --i:5" data-i18n="studio.svc.admin">Admin panel</li>
+          </ul>
+        </div>
+
+        <div class="studio__foot" data-reveal-group>
+          <p class="studio__lead" data-reveal data-i18n="studio.body">Manggala Cloud builds websites and apps from Semarang. It runs six services, from digital wedding invitations to an affiliate portal. It's where I try ideas before I'd recommend them to anyone else.</p>
           <div data-reveal>
             <a class="btn btn--brand" href="https://www.manggala.cloud" target="_blank" rel="noopener" data-magnetic><span data-i18n="studio.cta">Visit Manggala Cloud</span>
               <svg class="btn__icon btn__icon--diag" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12 12 4M5 4h7v7"/></svg></a>
           </div>
         </div>
       </div>
-
-      <img class="studio__logo" src="assets/logos/manggala.svg" alt="Manggala Cloud" width="1760" height="480" loading="lazy" decoding="async">
-
-      <ul class="studio__services" aria-label="Services" data-i18n-attr="aria-label: studio.services">
-        <li class="cloudlet" style="--x:4%; --y:8%; --i:0; --ml:2%; --mt:0px; --k:1.05" data-i18n="studio.svc.site">Studio site</li>
-        <li class="cloudlet" style="--x:1%; --y:44%; --i:1; --mr:0%; --mt:30px; --k:0.95" data-i18n="studio.svc.wedding">Wedding invites</li>
-        <li class="cloudlet" style="--x:6%; --y:78%; --i:2; --ml:12%; --mt:88px; --k:0.95" data-i18n="studio.svc.birthday">Birthday pages</li>
-        <li class="cloudlet" style="--r:4%; --y:6%; --i:3; --mr:6%; --mt:140px; --k:1.05" data-i18n="studio.svc.editor">Invite editor</li>
-        <li class="cloudlet" style="--r:1%; --y:42%; --i:4; --ml:0%; --mt:200px; --k:1" data-i18n="studio.svc.affiliate">Affiliate portal</li>
-        <li class="cloudlet" style="--r:6%; --y:80%; --i:5; --mr:10%; --mt:252px; --k:0.92" data-i18n="studio.svc.admin">Admin panel</li>
-      </ul>
-      </div>
-      </div>
+      <svg class="studio__word" viewBox="0 0 1000 150" preserveAspectRatio="xMidYMax meet" aria-hidden="true" data-scroll><text x="500" y="140" text-anchor="middle" textLength="1000" lengthAdjust="spacingAndGlyphs" font-size="180">MANGGALA</text></svg>
     </section>
 
     <!-- ============ EXPERIENCE: sheet 05 ============ -->

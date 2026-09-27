@@ -231,7 +231,7 @@ The recruitment product site for Toploker, aimed at HR teams, with pricing out i
 
 - **Fullstack Developer & Analyst**, Toploker.com (2024 — now). I build the systems Toploker runs on: OTO Management, SnapCRM, the jobs scraper, TopMatch and the CV catalog. Most of my week is spent finding the manual step nobody likes and making it go away. (Next.js, Laravel, Node.js, Redis)
 - **Software Engineer, International Office**, Universitas STEKOM (2024 — now). Developer on the international team. I built the international site and the campus platform around it: Passport for single sign-on, Depot for media, Conflow, Bio and Corpus. (NestJS, Bun, React, PostgreSQL)
-- **Founder**, Manggala Cloud (2024 — now). A small web and app studio in Semarang, running six services: the studio site, digital wedding invitations, birthday pages, an invitation editor with checkout, an affiliate portal, and the admin that runs it all. (Next.js, TanStack Start, PostgreSQL, TypeScript)
+- **Founder**, Manggala Cloud (2025 — now). A small web and app studio in Semarang, running six services: the studio site, digital wedding invitations, birthday pages, an invitation editor with checkout, an affiliate portal, and the admin that runs it all. (Next.js, TanStack Start, PostgreSQL, TypeScript)
 - **Junior Software Engineer (Intern)**, Akastra Toyota (2023 — 2024). Where I learned to ship. Company sites, an OAuth2 SSO server, vehicle tracking, e-parking, a staging export panel and the MRS Genius APIs. (Laravel, jQuery, MySQL, SQL Server)
 
 ## Education

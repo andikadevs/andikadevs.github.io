@@ -47,7 +47,7 @@
 }
 [data-theme="dark"] .blueprint { --cursor: url("../assets/img/cursors/sky.svg") 6 3, auto; --cursor-hover: url("../assets/img/cursors/sky-hover.svg") 6 3, pointer; }
 html { cursor: var(--cursor); }
-:is(a, button, [role="button"], label, summary, select, .mascot, .wm__hit, .cloudlet) { cursor: var(--cursor-hover); }
+:is(a, button, [role="button"], label, summary, select, .mascot, .wm__hit) { cursor: var(--cursor-hover); }
 .deck__stage, .deck__stage:active { cursor: url("../assets/img/cursors/drag.svg") 22 14, grab; }
 
 /* Sound toggle (robot-voice.js): speaker with waves when on, a cross when muted. */
@@ -135,6 +135,12 @@ html { cursor: var(--cursor); }
 .mascot-hello.is-left { transform-origin: 100% 100%; }
 .mascot-hello.is-below { translate: 0 0; transform-origin: 0 0; }   /* no room above (docked in the nav): hang below */
 .mascot-fly.is-on-paper { filter: drop-shadow(0 4px 12px rgb(31 59 109 / 0.35)); }   /* stays white on paper; the shadow gives it an edge */
+/* In the footer (mascot-fly.js) the mascot is the wordmark's mark: its colours, and no fill in the ring. */
+.mascot-fly.is-in-footer { --accent: var(--sky-300); color: var(--cream); filter: none; }
+.mascot-fly .mk-packet, .mascot-fly .mk-eye { transition: fill 0.7s ease; }   /* the packet's colour comes from --accent, which can't transition itself */
+.mascot-fly, .mascot-fly .mk-ring { transition-duration: 0.7s; }   /* both ways: into the footer and back out */
+.mascot-fly.is-in-footer .mk-ring { fill: transparent; }
+.wm.has-tejo .wm__mark { visibility: hidden; }
 .mascot svg { display: block; width: 100%; height: auto; overflow: visible; }
 .mascot .mk-eye { transform-box: fill-box; transform-origin: center; translate: var(--lx, 0) var(--ly, 0); transition: translate 0.25s var(--ease-out); }
 .mascot .mk-packet, .mascot .mk-stem { transform-box: fill-box; }
@@ -475,90 +481,110 @@ html { cursor: var(--cursor); }
 .hscroll__card.feature--brand p { opacity: 1; }   /* white on brand-strong must stay ≥ 4.5:1 */
 
 
-.studio-wrap { overflow-x: clip; }            /* the sky glow and drifting clouds may bleed, the page may not */
-/* ---- Studio (sheet 04): Manggala Cloud, as an actual cloud ---------------
-   No card: one big cloud floats on the page with the copy inside it, and the
-   six services drift around it as little clouds. Both use the same silhouette
-   (assets/img/cloud.svg) as a mask, stretched to fit whatever they hold. */
-.studio {
-  --cloud-top: var(--white);
-  --cloud-base: #dcecfb;
-  --cloud-ink: var(--sky-800);
-  --cloud-drop: drop-shadow(0 24px 30px rgb(63 143 214 / 0.26));
-  --cloud-shape: url("../assets/img/cloud.svg") center / 100% 100% no-repeat;
-  position: relative; container-type: inline-size;
-  display: grid; justify-items: center;
-  padding-block: clamp(24px, 4vw, 64px);
-}
-.studio::before {                               /* a patch of sky behind it, no edges */
-  content: ""; position: absolute; inset: -10% -6%; z-index: 0; pointer-events: none;
-  background: radial-gradient(50% 50% at 50% 55%, rgb(159 211 250 / 0.5), rgb(159 211 250 / 0.18) 55%, transparent 75%);
-}
-[data-theme="dark"] .studio {
-  --cloud-top: #e3ecfb; --cloud-base: #b3c7ea;
-  --cloud-drop: drop-shadow(0 0 44px rgb(190 215 255 / 0.3));
-}
-[data-theme="dark"] .studio::before { background: radial-gradient(50% 50% at 50% 55%, rgb(120 160 230 / 0.22), transparent 72%); }
+/* ---- Studio (sheet 04): Manggala Cloud -------------------------------------
+   Editorial, off the grid: the headline runs huge in two staggered lines; under
+   it the studio's own site, live in a browser window, tilts toward the pointer,
+   with the six services around it like tethered balloons, each at its own tilt
+   and depth. The copy sits under it as one block, and "MANGGALA" grounds the
+   section, set full width in faint solid type like the studio's own footer.
+   Depth comes from two inputs, combined per layer: scroll (--p, from
+   scroll-progress.js) and the pointer (--mx/--my, −1…1, from studio.js). */
+.studio { position: relative; overflow-x: clip; padding-bottom: 0; }
+.studio__inner { position: relative; z-index: 1; }
+.studio__top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: var(--space-3); margin-bottom: var(--space-6); }
+.studio__top .sheet { flex: none; }             /* the note wraps below it, the label never breaks */
+.studio__meta { margin: 0; font: 500 var(--text-xs) / 1.5 var(--font-mono); letter-spacing: var(--tracking-label); text-transform: uppercase; color: var(--fg-muted); }
 
-.nimbus, .cloudlet { position: relative; isolation: isolate; filter: var(--cloud-drop); color: var(--cloud-ink); }
-.nimbus::before, .cloudlet::before {
-  content: ""; position: absolute; inset: 0; z-index: -1;
-  background: linear-gradient(var(--cloud-top) 50%, var(--cloud-base));
-  -webkit-mask: var(--cloud-shape); mask: var(--cloud-shape);
+.studio__title {
+  position: relative; z-index: 3; margin: 0;
+  font: 800 clamp(3rem, 0.8rem + 8vw, 8.5rem) / 0.9 var(--font-display);
+  letter-spacing: -0.045em; font-variation-settings: "opsz" 96;
+  text-wrap: balance;
 }
-
-.nimbus {
-  z-index: 1; width: min(100%, 980px);
-  aspect-ratio: 5 / 3;                          /* the logo's own proportions, so the lobes stay round */
-  display: grid; align-content: center;
-  padding: 11% 16% 6%;
+.studio__line { display: block; }
+.studio__line--2 { text-align: right; }
+.studio__title em {                              /* "small" shrinks a little when you point at it */
+  display: inline-block; font-style: normal; color: var(--brand);
+  transition: scale var(--dur-base) var(--ease-spring), rotate var(--dur-base) var(--ease-spring);
 }
-.nimbus__copy { justify-items: center; text-align: center; gap: var(--space-5); max-width: 600px; margin-inline: auto; }
-.studio__logo { position: relative; z-index: 1; display: block; height: clamp(30px, 3vw, 40px); width: auto; margin-top: clamp(18px, 2.5vw, 32px); }   /* signed under the cloud */
-.nimbus .sheet { background: var(--sky-50); color: var(--cloud-ink); }
-.nimbus .sheet__no { color: inherit; }
-.nimbus .heading { color: var(--cloud-ink); }
-.nimbus .lead { color: rgb(17 28 54 / 0.8); max-width: 44ch; }
+.studio__title em:hover { scale: 0.86; rotate: -3deg; }
 
-/* The services: small clouds drifting around the big one. */
+.studio__stage {
+  --mx: 0; --my: 0;
+  position: relative; z-index: 2;
+  width: min(62vw, 820px); aspect-ratio: 800 / 440;
+  margin: var(--space-4) auto 0;
+  perspective: 1200px;
+}
+.studio__stage { container-type: inline-size; }
+.studio__window {                                /* the studio's site in a browser window: a screenshot, live on hover */
+  --w: clamp(280px, 64cqi, 620px);
+  position: absolute; left: 50%; top: 50%; z-index: 2;
+  width: var(--w); translate: -50% -50%;
+  border-radius: 14px; overflow: hidden;
+  background: var(--white); border: 1px solid rgb(17 28 54 / 0.12);
+  box-shadow: 0 40px 70px -26px rgb(17 28 54 / 0.45), 0 8px 20px rgb(17 28 54 / 0.1);
+  rotate: 4deg;                                  /* leans a little to the right */
+  transform: rotateX(calc(var(--my) * -9deg)) rotateY(calc(var(--mx) * 12deg));
+  transition: transform 0.5s var(--ease-out), rotate var(--dur-slow) var(--ease-spring), scale var(--dur-base) var(--ease-spring), box-shadow var(--dur-base) ease;
+}
+.studio__window:hover { rotate: 1.5deg; scale: 1.02; box-shadow: 0 50px 80px -26px rgb(17 28 54 / 0.5), 0 10px 24px rgb(17 28 54 / 0.12); }
+[data-theme="dark"] .studio__window { border-color: rgb(255 255 255 / 0.14); box-shadow: 0 40px 80px -26px rgb(0 0 0 / 0.7); }
+.studio__window-bar { display: flex; align-items: center; gap: 6px; margin: 0; padding: 10px 14px; background: var(--cream-2); border-bottom: 1px solid rgb(17 28 54 / 0.08); }
+.studio__window-bar i { width: 10px; height: 10px; border-radius: 50%; }
+.studio__window-bar i:first-child { background: #ff6b5e; } .studio__window-bar i:nth-child(2) { background: #ffc03d; } .studio__window-bar i:nth-child(3) { background: #3dcf62; }
+.studio__window-bar span { display: inline-flex; align-items: center; gap: 7px; margin-inline: auto; padding: 5px 14px; border-radius: var(--radius-pill); background: var(--white); font: 500 11px / 1 var(--font-mono); letter-spacing: 0.04em; color: rgb(17 28 54 / 0.65); }
+.studio__window-bar img { border-radius: 4px; }
+.studio__window-view {                           /* a 1440 × 900 window drawn at the card's width (--k from studio.js) */
+  position: relative; aspect-ratio: 1440 / 900; overflow: hidden;
+  background: linear-gradient(100deg, var(--cream-2) 30%, var(--cream) 50%, var(--cream-2) 70%) 0 0 / 300% 100%;
+  animation: preview-wait 1.4s linear infinite;
+}
+.studio__window-view.is-loaded { animation: none; }   /* the screenshot is in (studio.js) */
+.studio__window-view img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.studio__window-view iframe {
+  position: absolute; left: 0; top: 0; width: 1440px; height: 900px; border: 0;
+  transform-origin: 0 0; scale: var(--k, 0.36); pointer-events: none;
+  opacity: 0; transition: opacity 0.5s ease;
+}
+.studio__window-view.is-live iframe { opacity: 1; }   /* the live site fades in over the screenshot once it has loaded */
+@keyframes preview-wait { to { background-position: -150% 0; } }
+.studio__window-link { position: absolute; inset: 0; z-index: 1; border-radius: inherit; }
+.studio__window-link:focus-visible { outline: 3px solid var(--brand); outline-offset: 4px; }
+
 .studio__services { margin: 0; padding: 0; list-style: none; }
-.cloudlet {
-  padding: 30px 38px 20px;
-  font: 500 12px / 1 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap;
-  --cloud-drop: drop-shadow(0 12px 16px rgb(63 143 214 / 0.24));
-  transition: scale var(--dur-base) var(--ease-spring);
+.studio__services li {
+  padding: 10px 14px; border-radius: var(--radius-pill);
+  font: 500 11px / 1 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap;
+  color: var(--sky-800); background: var(--white); border: 1px solid rgb(63 143 214 / 0.3);
+  box-shadow: 0 10px 24px -10px rgb(63 143 214 / 0.5);
+  rotate: var(--r, 0deg);
+  transition: rotate var(--dur-base) var(--ease-spring), scale var(--dur-base) var(--ease-spring),
+    border-color var(--dur-fast) ease, color var(--dur-fast) ease, opacity var(--dur-slow) var(--ease-out);
 }
-.cloudlet:hover { scale: 1.08; }
-@media (min-width: 1100px) {
-  .studio__services { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
-  .cloudlet { position: absolute; left: var(--x, auto); right: var(--r, auto); top: var(--y); pointer-events: auto; }
+.studio__services li:hover { rotate: 0deg; scale: 1.1; border-color: var(--brand); color: var(--brand-strong); }   /* straightens up when you catch it */
+
+.studio__foot { display: grid; justify-items: center; gap: var(--space-5); margin: var(--space-8) auto 0; max-width: 46ch; text-align: center; }
+.studio__lead { margin: 0; font-size: var(--text-lg); line-height: 1.55; color: var(--fg-muted); }
+
+
+.studio__word {                                  /* the studio footer's trick: textLength fits it to the width exactly */
+  position: relative; z-index: 0; display: block; width: 100%; height: auto;
+  margin-top: var(--space-7); margin-bottom: -1.2%;
+  fill: var(--fg); fill-opacity: 0.06; pointer-events: none; user-select: none;
+  font-family: var(--font-display); font-weight: 800; letter-spacing: -0.04em;
 }
-@media (max-width: 1099px) {
-  .studio__services {
-    position: relative; z-index: 2; margin-top: var(--space-5);
-    display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 6px; max-width: 640px;
-  }
-  .cloudlet:nth-child(even) { margin-top: 18px; }
+
+/* Wide: the balloons float free round the cloud. */
+@media (min-width: 760px) {
+  .studio__services { position: absolute; inset: 0 -12%; pointer-events: none; }   /* round the icon, well clear of it */
+  .studio__services li { position: absolute; left: var(--x); top: var(--y); pointer-events: auto; }
 }
-/* Phones: the logo-shaped cloud keeps its true proportions (never wider than
-   520px) and holds the label and heading; the description and button follow on
-   the page just beneath it. The services cascade down in a loose zigzag, left
-   column anchored left and right column anchored right, so they never overflow. */
-@media (max-width: 760px) {
-  .studio { --cw: min(100cqw, 520px); }
-  .nimbus { width: var(--cw); aspect-ratio: auto; padding: calc(var(--cw) * 0.2) 0 0; }
-  .nimbus::before { inset: 0 0 auto; aspect-ratio: 5 / 3; }
-  .nimbus__copy { gap: var(--space-4); }
-  .nimbus .heading {                           /* inside the cloud's body; its box runs to the cloud's bottom edge */
-    font-size: clamp(1.55rem, 6.6vw, 2.2rem); max-width: 17ch; text-wrap: balance;
-    min-height: calc(var(--cw) * 0.4 - 58px);
-  }
-  .nimbus .lead { margin-top: var(--space-6); color: var(--fg); opacity: 0.82; }   /* on the page now, not the cloud */
-  .studio__services { position: relative; display: block; width: 100%; max-width: 440px; height: 330px; margin-top: var(--space-4); }
-  .cloudlet, .cloudlet:nth-child(n) {
-    position: absolute; left: var(--ml, auto); right: var(--mr, auto); top: var(--mt); margin: 0;
-    padding: 28px 16px 16px; font-size: calc(11px * var(--k, 1)); white-space: nowrap;
-  }
+@media (max-width: 759px) {
+  .studio__stage { width: 100%; margin-top: var(--space-6); aspect-ratio: auto; display: grid; justify-items: center; }
+  .studio__window { --w: 100%; position: relative; left: auto; top: auto; translate: none; rotate: 2deg; }
+  .studio__services { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px 10px; margin-top: var(--space-5); }
+  .studio__services li { rotate: calc(var(--r, 0deg) * 0.5); }
 }
 
 /* ---- Footer wordmark (built by tools/build_brand.py) ----------------------
@@ -653,10 +679,6 @@ html { cursor: var(--cursor); }
     rotate: 0deg;
   }
 
-  /* Studio band: the outlined word slides across while you read. */
-  .studio .bg-word { transform: translateX(calc((0.55 - var(--p, 0.5)) * 60%)); }
-  .studio__card { translate: 0 calc((0.5 - var(--p, 0.5)) * 80px); }
-
   /* Index rows draw their divider in on reveal. */
   .index-row[data-reveal] { transform: translateX(-24px); }
   .index-row[data-reveal].is-in { transform: none; }
@@ -698,8 +720,8 @@ html { cursor: var(--cursor); }
 
 /* Things that move with scroll while carrying a blur or shadow get their own
    compositor layer, so each frame moves a cached picture instead of repainting
-   the shadow (the hero headline's 40px glow, the studio cloud's drop-shadow). */
-.hero__center, .hero .cloud, .nimbus, .studio__services, .cloudlet, .contact__band .cloud { will-change: transform; }
+   the shadow (the hero headline's 40px glow). */
+.hero__center, .hero .cloud, .contact__band .cloud { will-change: transform; }
 
 /* ---- Footer: the sea ------------------------------------------------------
    Three wave layers roll along the horizon (masks sliding sideways), sun glints
@@ -921,10 +943,26 @@ html { cursor: var(--cursor); }
   .hero .cloud[data-cloud="3"] { transform: translateY(calc(var(--p, 0) * -40vh)) scale(calc(1 + var(--p, 0) * 0.4)); }
   .hero .cloudbank--back { transform: translateY(calc(var(--p, 0) * -34vh)); will-change: transform; }   /* rises slower: depth */
 
-  /* Studio: the little clouds bob on their own; the big one floats up a little with scroll. */
-  .cloudlet { animation: cloudlet-bob 5.5s ease-in-out infinite; animation-delay: calc(var(--i, 0) * -0.9s); }
-  .nimbus { translate: 0 calc((0.5 - var(--p, 0.5)) * 50px); }
-  @keyframes cloudlet-bob { 50% { transform: translateY(-9px); } }
+  /* Studio: every layer moves at its own depth. The headline's lines slide
+     apart, the window rises, each balloon has its own depth, and MANGGALA rises last. Balloons pop in on
+     reveal and then bob. */
+  .studio__line { translate: calc((var(--p, 0.5) - 0.5) * -40px) 0; }
+  .studio__line--2 { translate: calc((var(--p, 0.5) - 0.5) * 40px) 0; }
+  .studio__window { translate: -50% calc(-50% + (0.5 - var(--p, 0.5)) * 50px); }
+  .studio__services li {
+    translate: calc(var(--mx) * var(--depth, 50px) * 0.35) calc((0.5 - var(--p, 0.5)) * var(--depth, 50px) + var(--my) * var(--depth, 50px) * 0.25);
+    animation: balloon-bob 5.5s ease-in-out infinite; animation-delay: calc(var(--i, 0) * -0.9s);
+  }
+  .studio__stage:not(.is-in) .studio__services li { opacity: 0; scale: 0.4; }
+  .studio__stage.is-in .studio__services li { transition-delay: calc(0.45s + var(--i, 0) * 80ms), calc(0.45s + var(--i, 0) * 80ms), 0s, 0s, calc(0.45s + var(--i, 0) * 80ms); }
+  .studio__stage.is-in .studio__services li:hover { transition-delay: 0s; }
+  @keyframes balloon-bob { 50% { transform: translateY(-8px); } }
+  .studio__word { translate: 0 calc((0.5 - var(--p, 0.5)) * 50px); }
+  @media (max-width: 759px) {
+    .studio__services li { translate: none; }   /* in the wrapped rows, depth offsets would collide */
+    .studio__line, .studio__line--2 { translate: none; }   /* the lines already fill the width */
+    .studio__window { translate: 0 calc((0.5 - var(--p, 0.5)) * 24px); }   /* in the flow here, not centred */
+  }
 
   /* Figure drifts against the scroll on small screens; on desktop it's pinned. */
   @media (max-width: 959px) {

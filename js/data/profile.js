@@ -45,7 +45,7 @@ export const experience = [
     tags: ["NestJS", "Bun", "React", "PostgreSQL"],
   },
   {
-    period: { en: "2024 — now", id: "2024 — sekarang" },
+    period: { en: "2025 — now", id: "2025 — sekarang" },
     role: { en: "Founder", id: "Founder" },
     org: "Manggala Cloud",
     body: {
