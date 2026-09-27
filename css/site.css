@@ -63,7 +63,7 @@ html { cursor: var(--cursor); }
 .nav.is-scrolled .nav-pill__links .nav-link { color: var(--fg); }
 /* The active link sits on a little cloud: a rounded body (::before) with three
    puffs on top (::after), sized in px so any word length stays cloud-shaped. */
-.nav-pill__links { padding-block: 14px; margin-block: -14px; }   /* headroom so the puffs aren't clipped by the collapsing row */
+.nav-pill__links { padding: 14px 10px; margin: -14px -10px; }   /* room on every side so the cloud isn't clipped by the collapsing row */
 .nav-pill__links .nav-link { --cloud: var(--white); position: relative; isolation: isolate; border: 0; transition: color var(--dur-base) ease; }
 .nav.is-scrolled .nav-pill__links .nav-link { --cloud: var(--sky-100); }
 .nav-pill__links .nav-link::before, .nav-pill__links .nav-link::after {
