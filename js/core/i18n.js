@@ -22,11 +22,13 @@ export const pick = (value) =>
   value && typeof value === "object" && DEFAULT in value ? value[current] ?? value[DEFAULT] : value;
 
 function applyStatic(root = document) {
-  root.querySelectorAll("[data-i18n]").forEach((el) => { el.textContent = t(el.dataset.i18n); });
+  // A key missing from a stale cached strings.js keeps the HTML's own English text.
+  const has = (key) => key in strings[current] || key in strings[DEFAULT];
+  root.querySelectorAll("[data-i18n]").forEach((el) => { if (has(el.dataset.i18n)) el.textContent = t(el.dataset.i18n); });
   root.querySelectorAll("[data-i18n-attr]").forEach((el) => {
     el.dataset.i18nAttr.split(";").forEach((pair) => {
       const [attr, key] = pair.split(":").map((s) => s.trim());
-      el.setAttribute(attr, t(key));
+      if (has(key)) el.setAttribute(attr, t(key));
     });
   });
   document.documentElement.lang = current;

@@ -32,7 +32,7 @@ I started as an intern at a Toyota dealership, writing Laravel. Today I run the 
 - [GitHub](https://github.com/andikadevs): @andikadevs
 - [LinkedIn](https://www.linkedin.com/in/andikadwisaputra): in/andikadwisaputra
 - [Medium](https://medium.com/@andikads): @andikads
-- [Instagram](https://instagram.com/andikads__): @andikads__
+- [Instagram](https://instagram.com/andikadevs): @andikadevs
 - CV (PDF): https://andikadevs.github.io/assets/docs/cv-andika-dwi-saputra.pdf
 
 ## Optional

@@ -36,6 +36,12 @@ const abs = (p) => `${SITE}/${p.replace(/^\.?\//, "")}`;
 const hash = (text) => createHash("sha1").update(text).digest("hex").slice(0, 10);
 const jsVersion = () => hash(readdirSync(join(ROOT, "js"), { recursive: true }).filter((f) => f.endsWith(".js") || f.endsWith(".mjs")).sort().map((f) => read(`js/${f}`)).join(""));
 
+function importMap() {
+  const files = readdirSync(join(ROOT, "js"), { recursive: true }).filter((f) => f.endsWith(".js") && f !== "main.js" && f !== "theme.js").sort();
+  const imports = Object.fromEntries(files.map((f) => [`./js/${f}`, `./js/${f}?v=${hash(read(`js/${f}`))}`]));
+  return `\n  <script type="importmap">${JSON.stringify({ imports })}</script>\n  `;
+}
+
 function inject(html, name, content) {
   const re = new RegExp(`(<!-- ${name}:start -->)[\\s\\S]*?(<!-- ${name}:end -->)`);
   if (!re.test(html)) throw new Error(`index.html needs one <!-- ${name}:start --> … <!-- ${name}:end --> block`);
@@ -320,6 +326,9 @@ html = inject(html, "head", head());
 html = inject(html, "jsonld", jsonld());
 html = inject(html, "noscript", noscript());
 html = html.replace(/<script type="module" src="js\/main\.js(\?v=[^"]*)?"><\/script>/, `<script type="module" src="js/main.js?v=${jsVersion()}"></script>`);
+// Every imported module gets its own content hash too (via an import map), so a
+// changed strings.js or i18n.js is never served from a stale browser cache.
+html = inject(html, "importmap", importMap());
 write("index.html", html);
 write("sitemap.xml", sitemap());
 write("robots.txt", robots());

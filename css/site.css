@@ -124,7 +124,7 @@ html { cursor: var(--cursor); }
 .mascot-fly.is-hello .mk-packet { animation: packet-hop 0.6s var(--ease-bounce) 2; }
 .mascot-hello {
   position: fixed; left: 0; top: 0; z-index: 61; pointer-events: none;
-  padding: 0.7em 1.2em; border-radius: var(--radius-pill);
+  padding: 0.7em 1.2em; border-radius: 1.3em;   /* a pill on one line, a rounded box when it wraps, so no word sits in a curved end */
   background: var(--white); color: var(--sky-800);
   font: 600 18px / 1.25 var(--font-sans); width: max-content; max-width: min(15em, calc(100vw - 24px));   /* size set by mascot-bubble.js; long lines wrap */
   box-shadow: 0 12px 28px rgb(31 59 109 / 0.22);
@@ -696,7 +696,84 @@ html { cursor: var(--cursor); }
   .intro__photo { transform: translateY(calc((0.5 - var(--p, 0.5)) * 50px)) rotate(calc(-4deg + var(--p, 0.5) * 5deg)); }
 }
 
-/* ---- Contact (sheet 06) + footer ----------------------------------------- */
+/* ---- Hire (sheet 06): three services, how it works, one call to action ---- */
+/* White paper, entered through a bank of clouds in the Numbers' colour and left through Contact's. */
+.hire { overflow-x: clip; padding-top: calc(var(--section-y) + clamp(150px, 21vw, 320px)); }   /* clear the whole cloud bank, then the usual section space */
+.hire .cloudbank--top { --bank: var(--bg-sunken); }
+.hire__inner { position: relative; z-index: 2; display: grid; gap: var(--space-8); }
+.hire__lead { max-width: 600px; font-size: var(--text-lg); color: var(--fg-muted); }
+.hire__grid { display: grid; gap: var(--space-4); padding: 0; margin: 0; list-style: none; }
+@media (min-width: 860px) { .hire__grid { grid-template-columns: repeat(3, 1fr); } }
+.hire__card { gap: var(--space-3); }
+.hire__card-title { font: 800 var(--text-2xl) / 1.1 var(--font-display); letter-spacing: -0.02em; }
+.hire__card-text { opacity: 0.82; }
+.hire__proof { margin-top: auto; padding-top: var(--space-4); border-top: 1px solid currentColor; border-top-color: color-mix(in srgb, currentColor 22%, transparent); font: 500 var(--text-xs) / 1.4 var(--font-mono); letter-spacing: 0.04em; }
+.hire__proof span { opacity: 0.65; margin-right: 0.4em; }
+[data-theme="dark"] .hire .feature--white { background: var(--bg-raised); color: var(--fg); }
+
+/* How it works: four clouds drifting along a dotted trail, zig-zagging like a
+   flight path. Each bobs on its own beat; the last one is the sunny, blue one. */
+.hire__how { display: grid; gap: var(--space-5); margin-top: var(--space-8); }
+.hire__how-title { font-size: clamp(2.4rem, 0.6rem + 6vw, 6.5rem); }   /* the studio's two-line title, a size down */
+.hire__sky { position: relative; padding-top: 84px; }   /* room for the first cloud's puffs (on the wrapper: base.css resets list padding) */
+.hire__trail { display: none; }
+.hire__steps { position: relative; z-index: 1; display: grid; align-items: start; gap: var(--space-8); padding: 0; margin: 0; list-style: none; }
+.hire__cloud {
+  --cloud: var(--white); --ink-c: var(--ink);
+  position: relative; width: min(100%, 290px);
+  display: grid; gap: var(--space-2); padding: var(--space-5) var(--space-6);
+  border-radius: 999px; background: var(--cloud); color: var(--ink-c);
+  font-weight: 500; line-height: 1.35; text-align: center; justify-items: center;
+  filter: drop-shadow(0 16px 22px rgb(31 59 109 / 0.14));
+}
+.hire__cloud::before, .hire__cloud::after {      /* the puffs on top */
+  content: ""; position: absolute; z-index: -1; border-radius: 50%; background: var(--cloud);
+}
+.hire__cloud::before { width: 34%; aspect-ratio: 1; bottom: 42%; left: 14%; }
+.hire__cloud::after  { width: 44%; aspect-ratio: 1; bottom: 30%; right: 12%; }
+.hire__cloud:nth-child(even) { justify-self: end; }
+.hire__cloud:last-child { --cloud: var(--sky-200); --ink-c: var(--sky-800); }
+.hire__step-no { font: 600 var(--text-xs) / 1 var(--font-mono); letter-spacing: var(--tracking-label); color: var(--brand); }
+.hire__cloud:last-child .hire__step-no { color: var(--sky-800); }
+[data-theme="dark"] .hire__cloud { --cloud: #1f3663; --ink-c: var(--cream); filter: drop-shadow(0 16px 24px rgb(0 0 0 / 0.35)); }
+[data-theme="dark"] .hire__cloud:last-child { --cloud: var(--brand-strong); --ink-c: var(--white); }
+[data-theme="dark"] .hire__cloud:last-child .hire__step-no { color: var(--sky-100); }
+.hire__note { margin: 0; text-align: center; font-size: var(--text-sm); color: var(--fg-muted); }
+
+@media (min-width: 900px) {
+  .hire__sky { padding-top: 110px; }
+  .hire__steps { grid-template-columns: repeat(4, 1fr); gap: var(--space-5); }
+  .hire__cloud { width: 100%; justify-self: stretch; }
+  .hire__cloud:nth-child(even) { margin-top: 90px; }
+  .hire__trail {                                   /* dotted flight path through the clouds' middles */
+    display: block; position: absolute; inset: 0; width: 100%; height: 100%;
+    fill: none; stroke: var(--brand); stroke-width: 2; stroke-dasharray: 2 9; stroke-linecap: round; opacity: 0.45;
+    vector-effect: non-scaling-stroke; overflow: visible;
+  }
+  .hire__trail path { vector-effect: non-scaling-stroke; }
+}
+/* Parallax: as the sky scrolls through (--p 0 → 1, eased by Lenis) each cloud drifts
+   at its own depth, and the bob rides on top of it through one translate. */
+@property --bob { syntax: "<length>"; inherits: false; initial-value: 0px; }
+.hire__cloud:nth-child(1) { --depth: 140px; }
+.hire__cloud:nth-child(2) { --depth: -60px; }
+.hire__cloud:nth-child(3) { --depth: 200px; }
+.hire__cloud:nth-child(4) { --depth: -20px; }
+@media (prefers-reduced-motion: no-preference) {
+  .hire__cloud {
+    translate: 0 calc((var(--p, 0.5) - 0.5) * var(--depth, 0px) + var(--bob));
+    will-change: translate;
+  }
+  .hire__cloud.is-in { animation: cloud-bob 7s ease-in-out infinite alternate; animation-delay: calc(var(--i, 0) * -1.9s); }
+  .hire__cloud:hover { scale: 1.04; transition: scale 0.4s var(--ease-spring); }
+  .hire__trail { translate: 0 calc((var(--p, 0.5) - 0.5) * 60px); }   /* the path drifts least: it's furthest back */
+}
+@media (prefers-reduced-motion: no-preference) and (max-width: 899px) {
+  .hire__cloud:nth-child(n) { --depth: 0px; }                     /* stacked on phones: bob only, no overlap */
+}
+@keyframes cloud-bob { from { --bob: -6px; } to { --bob: 8px; } }
+
+/* ---- Contact (sheet 07) + footer ----------------------------------------- */
 .contact { background: var(--sky-900); }
 .contact__band {
   padding-block: clamp(230px, 27vw, 390px) clamp(160px, 18vw, 260px);   /* clear the cloud bank (≤ 300px) + breathing room */
@@ -706,7 +783,7 @@ html { cursor: var(--cursor); }
     var(--hero-from) 0%, var(--hero-mid) 30%, var(--hero-to) 64%,
     color-mix(in srgb, var(--hero-to) 50%, var(--horizon)) 84%, var(--horizon) 100%);
 }
-.contact__band .cloudbank--top { --bank: var(--bg-sunken); }
+.contact__band .cloudbank--top { --bank: var(--bg); }   /* blends out of the Hire section above */
 .contact__band > .container { position: relative; z-index: 2; }
 .contact__inner { display: grid; justify-items: center; text-align: center; gap: var(--space-5); }
 .contact__actions { justify-content: center; }

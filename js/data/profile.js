@@ -11,7 +11,7 @@ export const profile = {
     { label: "GitHub",    handle: "@andikadevs",          url: "https://github.com/andikadevs" },
     { label: "LinkedIn",  handle: "in/andikadwisaputra",  url: "https://www.linkedin.com/in/andikadwisaputra" },
     { label: "Medium",    handle: "@andikads",            url: "https://medium.com/@andikads" },
-    { label: "Instagram", handle: "@andikads__",          url: "https://instagram.com/andikads__" },
+    { label: "Instagram", handle: "@andikadevs",          url: "https://instagram.com/andikadevs" },
   ],
 };
 

@@ -249,5 +249,5 @@ Manggala Cloud builds websites and apps from Semarang. It runs six services, fro
 - GitHub: https://github.com/andikadevs
 - LinkedIn: https://www.linkedin.com/in/andikadwisaputra
 - Medium: https://medium.com/@andikads
-- Instagram: https://instagram.com/andikads__
+- Instagram: https://instagram.com/andikadevs
 - CV (PDF): https://andikadevs.github.io/assets/docs/cv-andika-dwi-saputra.pdf

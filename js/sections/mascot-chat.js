@@ -49,8 +49,8 @@ export function initMascotChat(fly, bubble, ready = Promise.resolve()) {
     bubble.style.width = bubble.style.height = "";
     text.textContent = line;
     placeBubble(bubble, { x: r.left, y: r.top, size: r.width }, [0.05, 14, 18]);   // chatty, not shouty
-    bubble.style.width = `${bubble.offsetWidth}px`;                    // hold the final size while typing
-    bubble.style.height = `${bubble.offsetHeight}px`;
+    bubble.style.width = `${bubble.offsetWidth + 1}px`;                // hold the final size while typing; +1 because offsetWidth
+    bubble.style.height = `${bubble.offsetHeight}px`;                  // rounds, and a pixel short rewraps the last word
     clearInterval(typeTimer);
     let shown = 0;
     text.textContent = "";
