@@ -30,7 +30,7 @@ export const strings = {
     "hero.ctaWork": "See the work",
     "hero.ctaCv": "Download CV",
 
-    "intro.text": "I started as an intern at a Toyota dealership, writing Laravel. Today I run the platform behind a university's apps, build tools for Toploker.com, and keep a small studio going on the side, where I also design and build company profiles and portfolio sites.",
+    "intro.text": "I started as an intern at a Toyota dealership, writing Laravel. Today I run the platform behind a university's apps, build tools for Toploker.com, and ship small products of my own on the side.",
     "intro.strong": "I like problems where a boring manual step is costing someone hours a week.",
     "intro.clients": "Built for",
     "stat.years": "Years shipping",
@@ -142,7 +142,7 @@ export const strings = {
     "hero.ctaWork": "Lihat karya",
     "hero.ctaCv": "Unduh CV",
 
-    "intro.text": "Saya memulai karier sebagai pemagang di dealer Toyota dengan Laravel. Kini saya mengelola platform di balik aplikasi-aplikasi kampus, membangun sistem untuk Toploker.com, serta menjalankan studio kecil tempat saya merancang dan membangun website company profile maupun portofolio.",
+    "intro.text": "Saya memulai karier sebagai pemagang di dealer Toyota dengan Laravel. Kini saya mengelola platform di balik aplikasi-aplikasi kampus, membangun sistem untuk Toploker.com, serta mengembangkan produk sendiri di sela waktu.",
     "intro.strong": "Saya paling bersemangat ketika menemukan pekerjaan manual yang menyita waktu tim berjam-jam setiap minggu.",
     "intro.clients": "Klien & institusi",
     "stat.years": "Tahun pengalaman",

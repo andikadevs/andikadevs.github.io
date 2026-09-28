@@ -6,7 +6,7 @@
 
 I build the software companies quietly run on: internal tools, single sign-on, media services, AI pipelines. Three-plus years, mostly for universities and hiring platforms in Indonesia.
 
-I started as an intern at a Toyota dealership, writing Laravel. Today I run the platform behind a university's apps, build tools for Toploker.com, and keep a small studio going on the side, where I also design and build company profiles and portfolio sites. I like problems where a boring manual step is costing someone hours a week.
+I started as an intern at a Toyota dealership, writing Laravel. Today I run the platform behind a university's apps, build tools for Toploker.com, and ship small products of my own on the side. I like problems where a boring manual step is costing someone hours a week.
 
 Built for: Universitas STEKOM, Toploker.com, Akastra Toyota, Kerja Malam, Digitek.
 
@@ -18,7 +18,6 @@ Built for: Universitas STEKOM, Toploker.com, Akastra Toyota, Kerja Malam, Digite
 - 11+ Apps on one login: Campus apps signing in through the SSO I built, STEKOM Passport.
 - 100K+ Leads handled: Managed and messaged over WhatsApp by SnapCRM.
 - 20+ h Saved every month: Manual work OTO Management took off Toploker's plate.
-- 6 Services, one studio: Manggala Cloud: site, invitations, birthdays, editor, affiliates, admin.
 - 3 Typed SDKs: TypeScript, Python and PHP clients for Passport and Depot.
 
 ## Case studies
@@ -231,7 +230,6 @@ The recruitment product site for Toploker, aimed at HR teams, with pricing out i
 
 - **Fullstack Developer & Analyst**, Toploker.com (2024 — now). I build the systems Toploker runs on: OTO Management, SnapCRM, the jobs scraper, TopMatch and the CV catalog. Most of my week is spent finding the manual step nobody likes and making it go away. (Next.js, Laravel, Node.js, Redis)
 - **Software Engineer, International Office**, Universitas STEKOM (2024 — now). Developer on the international team. I built the international site and the campus platform around it: Passport for single sign-on, Depot for media, Conflow, Bio and Corpus. (NestJS, Bun, React, PostgreSQL)
-- **Founder**, Manggala Cloud (2025 — now). A small web and app studio in Semarang, running six services: the studio site, digital wedding invitations, birthday pages, an invitation editor with checkout, an affiliate portal, and the admin that runs it all. (Next.js, TanStack Start, PostgreSQL, TypeScript)
 - **Junior Software Engineer (Intern)**, Akastra Toyota (2023 — 2024). Where I learned to ship. Company sites, an OAuth2 SSO server, vehicle tracking, e-parking, a staging export panel and the MRS Genius APIs. (Laravel, jQuery, MySQL, SQL Server)
 
 ## Education

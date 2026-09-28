@@ -44,6 +44,7 @@ export const experience = [
     },
     tags: ["NestJS", "Bun", "React", "PostgreSQL"],
   },
+  /* Hidden for now (agencies may read Manggala Cloud as a competitor); uncomment to restore.
   {
     period: { en: "2025 — now", id: "2025 — sekarang" },
     role: { en: "Founder", id: "Founder" },
@@ -54,6 +55,7 @@ export const experience = [
     },
     tags: ["Next.js", "TanStack Start", "PostgreSQL", "TypeScript"],
   },
+  */
   {
     period: { en: "2023 — 2024", id: "2023 — 2024" },
     role: { en: "Junior Software Engineer (Intern)", id: "Junior Software Engineer (Magang)" },
@@ -98,9 +100,11 @@ export const highlights = [
   { tone: "white", value: "20+ h", label: { en: "Operations", id: "Operasional" },
     title: { en: "Saved every month", id: "Dihemat setiap bulan" },
     body: { en: "Manual work OTO Management took off Toploker's plate.", id: "Pekerjaan manual yang kini ditangani OTO Management di Toploker." } },
+  /* Hidden with the Manggala Cloud section; uncomment to restore.
   { tone: "sky",   value: "6",     label: { en: "Studio", id: "Studio" },
     title: { en: "Services, one studio", id: "Layanan, satu studio" },
     body: { en: "Manggala Cloud: site, invitations, birthdays, editor, affiliates, admin.", id: "Manggala Cloud: website, undangan, ucapan, editor, afiliasi, dan admin." } },
+  */
   { tone: "brand", value: "3",     label: { en: "Developer tools", id: "Tools developer" },
     title: { en: "Typed SDKs", id: "SDK bertipe" },
     body: { en: "TypeScript, Python and PHP clients for Passport and Depot.", id: "Klien TypeScript, Python, dan PHP untuk Passport dan Depot." } },
