@@ -9,6 +9,8 @@ html {
   scroll-behavior: smooth;
   scroll-padding-top: 96px;
 }
+html.lenis { scroll-behavior: auto; }
+html.scroll-locked, body.scroll-locked { overflow: hidden !important; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 /* No visible scrollbars anywhere (page, dialogs, rows); scrolling still works. */
 * { scrollbar-width: none; }

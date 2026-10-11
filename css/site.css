@@ -399,7 +399,7 @@ html { cursor: var(--cursor); }
   width: clamp(240px, 30vw, 480px);
   margin: calc(clamp(240px, 30vw, 480px) * -0.28) 0 0 calc(clamp(240px, 30vw, 480px) * -0.5);
   padding: 0; border: 0; background: none;
-  will-change: transform, opacity, filter;
+  will-change: transform, opacity;
   transition: box-shadow var(--dur-base) ease;
 }
 .deck-card img { -webkit-user-drag: none; user-select: none; pointer-events: none; }
@@ -995,6 +995,8 @@ html { cursor: var(--cursor); }
   .intro__stats .stat__label { font-size: var(--text-xs); }
   .logo-row { gap: var(--space-5); }
   .logo-row img { height: 26px; }
+  .hero .cloud, .contact__band .cloud, .hero .cloudbank { will-change: auto; }
+  .ocean__bubbles i:nth-child(n+9) { display: none; }
 }
 
 /* ==========================================================================

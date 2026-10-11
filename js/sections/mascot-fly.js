@@ -34,12 +34,19 @@ export function initMascotFly(fly, anchor, dock, bubble, ready = Promise.resolve
   // Where the mascot rests, in page coordinates, measured without the hero's
   // scroll-lift, so the flight is one clean glide across the screen instead of
   // following the spot as it scrolls away.
-  let rest = null;
+  let rest = null, dockRect = null, skyRanges = [];
   const measure = () => {
     hero?.classList.add("is-measuring");
     const r = anchor.getBoundingClientRect();
     hero?.classList.remove("is-measuring");
     rest = { left: r.left + scrollX, top: r.top + scrollY, width: r.width };
+    const dr = dock.getBoundingClientRect();
+    dockRect = { left: dr.left, top: dr.top, width: dr.width };
+    const sy = scrollY, sx = scrollX;
+    skyRanges = skies.map((el) => {
+      const b = el.getBoundingClientRect();
+      return { left: b.left + sx, right: b.right + sx, top: b.top + sy, bottom: b.bottom + sy };
+    });
   };
 
   // The footer wordmark's mark, in viewport pixels, as a pose for the mascot:
@@ -65,8 +72,8 @@ export function initMascotFly(fly, anchor, dock, bubble, ready = Promise.resolve
   // Scroll pose: from the resting spot (t = 0) to the nav dock (t = 1), then,
   // over the page's last FOOTER screens, from the dock into the wordmark (f = 0 → 1).
   const scrollPose = () => {
-    if (!rest) measure();
-    const d = dock.getBoundingClientRect();
+    if (!rest || !dockRect) measure();
+    const d = dockRect;
     const t = ease(clamp01(scrollY / (innerHeight * 0.45)));
     const home = { x: lerp(rest.left, d.left, t), y: lerp(rest.top, d.top, t), size: lerp(rest.width, d.width, t), t, f: 0 };
     if (!own || !mark) return home;
@@ -77,8 +84,8 @@ export function initMascotFly(fly, anchor, dock, bubble, ready = Promise.resolve
 
   // Reads (layout) and writes (styles) are kept apart, so a scroll frame costs one layout.
   const onSkyAt = ({ x, y, size }) => {                                      // white over sky, shadowed over paper
-    const cx = x + size / 2, cy = y + size / 2;
-    return skies.some((el) => { const r = el.getBoundingClientRect(); return cx > r.left && cx < r.right && cy > r.top && cy < r.bottom; });
+    const cx = x + size / 2 + scrollX, cy = y + size / 2 + scrollY;
+    return skyRanges.some((r) => cx > r.left && cx < r.right && cy > r.top && cy < r.bottom);
   };
   const write = ({ x, y, size, f = 0 }, t, onSky) => {
     fly.style.width = `${rest.width}px`;
@@ -133,7 +140,7 @@ export function initMascotFly(fly, anchor, dock, bubble, ready = Promise.resolve
     apply(intro ? introPose(home) : home, intro ? 0 : home.t);
   };
 
-  const remeasure = () => { rest = null; place(); };
+  const remeasure = () => { rest = null; dockRect = null; skyRanges = []; place(); };
   // Scrolling off the resting spot or out of the dock is a flight: one whoosh
   // per trip (it can't restart for a moment), and a soft landing in the nav.
   let lastT = scrollY < 4 ? 0 : null, flewAt = 0;                         // a fresh load starts at the resting spot

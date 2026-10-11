@@ -28,8 +28,10 @@ const progressOf = (el, vh) => {
 };
 const last = new WeakMap();                     // skip writes when nothing changed
 const write = (el, name, value) => {
-  if (last.get(el)?.[name] === value) return;
-  last.set(el, { ...last.get(el), [name]: value });
+  let map = last.get(el);
+  if (!map) { map = {}; last.set(el, map); }
+  if (map[name] === value) return;
+  map[name] = value;
   el.style.setProperty(name, value);
 };
 const measure = (el, vh) => write(el, "--p", progressOf(el, vh));

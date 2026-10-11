@@ -78,6 +78,7 @@ function place(force = false) {
   const { width: w, height: h } = stage.getBoundingClientRect();
   const g = ring(w, h);
 
+  const allowBlur = !matchMedia("(max-width: 760px), (pointer: coarse)").matches;
   cards.forEach((el, i) => {
     const rel = wrap(i - pos + N / 2) - N / 2;       // shortest signed distance to the front
     const dist = Math.abs(rel);
@@ -88,7 +89,7 @@ function place(force = false) {
     const opacity = dist > VISIBLE ? 0 : 1 - (dist / VISIBLE) * 0.85;
     el.style.transform = `translate(${x.toFixed(1)}px, ${y.toFixed(1)}px) rotate(${(rel * STEP * TILT).toFixed(3)}rad) scale(${scale.toFixed(3)})`;
     el.style.opacity = opacity.toFixed(3);
-    el.style.filter = dist > 0.05 ? `blur(${(Math.min(dist, 3) * 1.1).toFixed(2)}px)` : "none";
+    el.style.filter = allowBlur && dist > 0.05 ? `blur(${(Math.min(dist, 3) * 1.1).toFixed(2)}px)` : "none";
     el.style.zIndex = String(100 - Math.round(dist * 10));
     el.style.visibility = opacity <= 0.001 ? "hidden" : "visible";
   });

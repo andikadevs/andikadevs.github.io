@@ -46,13 +46,16 @@ export function initHScroll(section) {
     const cards = [...track.children];
     springsFor(cards, springs);
     const push = clamp(-velocity * 0.35, -9, 9);   // lean into the direction of travel
+    let settled = Math.abs(push) < 0.01;
     cards.forEach((card, i) => {
       const sp = springs[i];
       sp.v = (sp.v + (push - sp.s) * sp.k) * sp.d;
       sp.s += sp.v;
       const still = Math.abs(sp.s) < 0.01 && Math.abs(sp.v) < 0.01;
+      if (!still) settled = false;
       card.style.transform = still ? "" : `skewX(${sp.s.toFixed(2)}deg) rotate(${(sp.s * 0.12).toFixed(2)}deg)`;
     });
+    return settled;
   };
 
   const size = () => {
@@ -66,33 +69,44 @@ export function initHScroll(section) {
   new ResizeObserver(size).observe(track);
   addEventListener("resize", size);
 
+  let visible = false, running = false;
+  const wake = () => {
+    if (visible && !running) {
+      running = true;
+      requestAnimationFrame(frame);
+    }
+  };
+
   onScroll(() => {
     if (!section.classList.contains("is-pinned")) return;
     const { top, height } = section.getBoundingClientRect();
     const p = clamp(-top / Math.max(height - innerHeight, 1), 0, 1);
     target = p * dist;
+    wake();
     return () => setMeta(p);
   });
 
   viewport.addEventListener("scroll", () => {
     const max = viewport.scrollWidth - viewport.clientWidth;
     setMeta(max > 0 ? viewport.scrollLeft / max : 0);
+    wake();
   }, { passive: true });
 
   if (reduced) { setMeta(0); return; }
 
   // One loop: ease the track toward its target (pinned) and feed the springs
   // with whichever movement is happening (pinned track or native row).
-  // It only runs while the section is on screen.
-  let visible = false, running = false;
+  // It only runs while the section is on screen and parks when settled.
   new IntersectionObserver(([entry]) => {
     visible = entry.isIntersecting;
-    if (visible && !running) { running = true; requestAnimationFrame(frame); }
+    if (visible) wake();
   }).observe(section);
+
   const frame = () => {
     if (!visible) { running = false; return; }
     let velocity;
-    if (section.classList.contains("is-pinned")) {
+    const isPinned = section.classList.contains("is-pinned");
+    if (isPinned) {
       x += (target - x) * 0.12;
       track.style.transform = `translate3d(${(-x).toFixed(2)}px, 0, 0)`;
       velocity = x - last;
@@ -101,7 +115,15 @@ export function initHScroll(section) {
       velocity = viewport.scrollLeft - lastRow;
       lastRow = viewport.scrollLeft;
     }
-    jiggle(velocity);
+    const settled = jiggle(velocity);
+    if (!isPinned && Math.abs(velocity) < 0.01 && settled) {
+      running = false;
+      return;
+    }
+    if (isPinned && Math.abs(target - x) < 0.05 && Math.abs(velocity) < 0.01 && settled) {
+      running = false;
+      return;
+    }
     requestAnimationFrame(frame);
   };
   setMeta(0);

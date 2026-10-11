@@ -5,6 +5,7 @@ import { onScroll } from "./smooth-scroll.js";
 
 export function initMarquees(root = document, { speed = 0.6 } = {}) {
   const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const isMobile = matchMedia("(max-width: 760px), (pointer: coarse)").matches;
 
   root.querySelectorAll(".marquee").forEach((marquee) => {
     const track = marquee.querySelector(".marquee__track");
@@ -13,7 +14,7 @@ export function initMarquees(root = document, { speed = 0.6 } = {}) {
     const clone = track.cloneNode(true);
     clone.setAttribute("aria-hidden", "true");
     marquee.append(clone);
-    if (reduced) return;
+    if (reduced || isMobile) return;
 
     marquee.classList.add("is-driven");
     let x = 0;

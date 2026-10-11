@@ -26,8 +26,14 @@ export function initPaintScenes(root = document) {
     new ResizeObserver(pin).observe(hold);
     addEventListener("resize", pin);
 
+    let visible = false;
+    new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+    }, { rootMargin: "30% 0px" }).observe(scene);
+
     let painted = "";
     onScroll(() => {
+      if (!visible) return;
       const { top, height } = run.getBoundingClientRect();
       // 0 when the run starts entering from the bottom, 1 when it has fully passed the top.
       const progress = clamp01((innerHeight - top) / (height + innerHeight * 0.0001)).toFixed(4);

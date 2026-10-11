@@ -472,6 +472,14 @@
 @keyframes drift { to { translate: var(--dx, 80px) 0; } }
 [data-theme="dark"] .cloud { --c: rgb(160 185 230 / 0.22); }
 [data-theme="dark"] .cloudbank--back { display: none; }
+@media (max-width: 760px) {
+  .cloud { filter: blur(var(--blur, 3px)); }
+  .firefly { box-shadow: 0 0 6px 2px rgb(255 236 150 / 0.55); }
+}
+
+[data-offscreen], [data-offscreen] *, [data-offscreen] *::before, [data-offscreen] *::after {
+  animation-play-state: paused !important;
+}
 
 /* A bank of clouds along a section edge that melts into --bank (the colour of
    the next section). Puffs overlap heavily and sit on a base that is already
