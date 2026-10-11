@@ -1064,61 +1064,72 @@ html { cursor: var(--cursor); }
   position: sticky;
   top: 0;
   z-index: 50;
-  background: color-mix(in srgb, var(--bg) 88%, transparent);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: color-mix(in srgb, var(--bg) 85%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--border);
 }
 
-.nav-back-link {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-  height: 38px;
-  padding: 0 var(--space-4);
-  border-radius: var(--radius-pill);
+/* Ensure the cloud navbar pill looks crisp and clean on the cream/navy page */
+.projects-page .nav .nav-pill,
+.projects-page .nav:not(.is-scrolled) .nav-pill {
+  background: color-mix(in srgb, var(--bg-raised) 70%, transparent);
   border: 1px solid var(--border);
-  background: var(--bg-raised);
-  font: 500 var(--text-xs) / 1 var(--font-mono);
-  letter-spacing: var(--tracking-label);
-  text-transform: uppercase;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: var(--shadow-sm);
+}
+
+.projects-page .nav-pill__links .nav-link,
+.projects-page .nav:not(.is-scrolled) .nav-pill__links .nav-link {
+  color: var(--fg);
+  --cloud: var(--sky-100);
+}
+[data-theme="dark"] .projects-page .nav-pill__links .nav-link,
+[data-theme="dark"] .projects-page .nav:not(.is-scrolled) .nav-pill__links .nav-link {
+  color: var(--fg);
+  --cloud: var(--sky-700);
+}
+
+.projects-page .nav-pill__links .nav-link[aria-current="true"],
+.projects-page .nav:not(.is-scrolled) .nav-pill__links .nav-link[aria-current="true"] {
+  color: var(--sky-800);
+}
+[data-theme="dark"] .projects-page .nav-pill__links .nav-link[aria-current="true"],
+[data-theme="dark"] .projects-page .nav:not(.is-scrolled) .nav-pill__links .nav-link[aria-current="true"] {
+  color: var(--white);
+}
+
+/* Tejo logo mark on the left */
+.projects-page .nav-mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-pill);
   color: var(--fg);
   text-decoration: none;
-  transition: border-color var(--dur-fast) ease, transform var(--dur-fast) var(--ease-spring), background-color var(--dur-fast) ease;
+  transition: transform var(--dur-fast) var(--ease-spring), color var(--dur-fast) ease;
 }
-.nav-back-link:hover {
-  border-color: var(--border-strong);
-  transform: translateX(-2px);
-  background: var(--bg-sunken);
+.projects-page .nav-mark:hover {
+  transform: scale(1.08);
+  color: var(--brand);
 }
-
-.projects-hero {
-  position: relative;
-  overflow: hidden;
-  padding-block: clamp(36px, 5vw, 64px) clamp(24px, 4vw, 48px);
-  border-bottom: 1px solid var(--border);
-  background:
-    radial-gradient(ellipse at 80% 0%, color-mix(in srgb, var(--brand) 7%, transparent), transparent 60%),
-    linear-gradient(180deg, var(--bg), color-mix(in srgb, var(--bg-sunken) 50%, var(--bg)));
+.projects-page .nav-mark svg {
+  width: 36px;
+  height: 36px;
 }
 
-.projects-hero__inner {
+.projects-main {
+  flex: 1;
+  padding-block: clamp(24px, 4vw, 44px) clamp(48px, 6vw, 80px);
+}
+
+.projects-controls {
   display: grid;
   gap: var(--space-4);
-}
-
-.projects-hero__title {
-  font: 800 clamp(2.2rem, 1.6rem + 2.5vw, 4rem) / 1.08 var(--font-display);
-  letter-spacing: var(--tracking-tight);
-  margin: 0;
-}
-
-.projects-hero__lead {
-  font-size: var(--text-base);
-  color: var(--fg-muted);
-  max-width: 62ch;
-  line-height: var(--leading-body);
-  margin: 0;
+  padding-bottom: var(--space-2);
 }
 
 .projects-toolbar {
@@ -1127,7 +1138,6 @@ html { cursor: var(--cursor); }
   align-items: center;
   justify-content: space-between;
   gap: var(--space-3);
-  margin-top: var(--space-2);
 }
 
 .projects-search-bar {
@@ -1220,6 +1230,10 @@ html { cursor: var(--cursor); }
   letter-spacing: 0.08em;
   text-transform: uppercase;
   cursor: pointer;
+  transition: background var(--dur-fast) ease, color var(--dur-fast) ease, border-color var(--dur-fast) ease, transform var(--dur-fast) var(--ease-spring);
+}
+.projects-filter-chips .chip--filter:hover {
+  transform: translateY(-1px);
 }
 
 .projects-filter-chips .chip--filter .chip__count {
@@ -1256,17 +1270,13 @@ html { cursor: var(--cursor); }
   text-underline-offset: 3px;
 }
 
-.projects-main {
-  flex: 1;
-  padding-block: clamp(24px, 4vw, 56px);
-}
-
 /* ---- Project Card Grid -------------------------------------------------- */
 .projects-grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--space-5);
   margin-top: var(--space-4);
+  perspective: 1200px;
 }
 @media (min-width: 680px) {
   .projects-grid {
@@ -1289,12 +1299,38 @@ html { cursor: var(--cursor); }
   border: 1px solid var(--border);
   overflow: hidden;
   box-shadow: var(--shadow-sm);
-  transition: transform var(--dur-base) var(--ease-spring), box-shadow var(--dur-base) ease, border-color var(--dur-fast) ease;
+  transform: perspective(1000px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(var(--ty, 0px));
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: transform 0.14s cubic-bezier(0.2, 0, 0, 1), box-shadow var(--dur-base) ease, border-color var(--dur-fast) ease;
 }
 .project-card:hover {
-  transform: translateY(-4px);
+  --ty: -5px;
   box-shadow: var(--shadow-md);
   border-color: var(--border-strong);
+}
+
+/* Dynamic light sheen */
+.project-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(circle 380px at var(--gx, 50%) var(--gy, 50%), rgb(255 255 255 / 0.12), transparent 70%);
+  opacity: 0;
+  transition: opacity var(--dur-fast) ease;
+  z-index: 5;
+}
+.project-card:hover::after {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-card {
+    transform: none !important;
+    transition: none !important;
+  }
 }
 
 /* Screenshot image visual */

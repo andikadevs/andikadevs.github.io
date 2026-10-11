@@ -1,5 +1,6 @@
-// Projects page controller: interactive search, discipline filtering,
-// view-mode switching (grid vs table), and case-study dialog integration.
+// Projects page controller: fully interactive archive with Blueprint DS design system,
+// sound effects, 3D card tilt parallax, real-time search & discipline filtering,
+// view switching (grid/table), night sky canvas, and case-study dialog integration.
 import { html, render, $, $$ } from "./core/dom.js";
 import { initI18n, setLang, lang, t, pick } from "./core/i18n.js";
 import { projects, DISCIPLINES } from "./data/projects.js";
@@ -7,6 +8,17 @@ import { initProjectDialog } from "./sections/project-dialog.js";
 import { initThemeToggle } from "./ds/theme-toggle.js";
 import { srcset } from "./core/media.js";
 import { syncSegmented } from "./ds/segmented.js";
+
+// Interactive Blueprint DS modules
+import { initAudio } from "./core/audio.js";
+import { initSoundFx, sfx } from "./sections/sound-fx.js";
+import { initRobotVoice } from "./sections/robot-voice.js";
+import { initMusic } from "./sections/music.js";
+import { initSoundCues } from "./sections/sound-cues.js";
+import { initMagnetic } from "./ds/magnetic.js";
+import { initNightSky } from "./ds/night-sky.js";
+import { initSmoothScroll } from "./ds/smooth-scroll.js";
+import { rollify } from "./ds/text-roll.js";
 
 const gridEl = $("[data-projects-grid]");
 const metaEl = $("[data-projects-meta]");
@@ -96,7 +108,7 @@ function renderCard(p, index, total) {
               <span>${pick(metric.label)}</span>
             </div>
           ` : html`<span></span>`}
-          <button class="project-card__cta" type="button" data-project="${p.slug}">
+          <button class="project-card__cta" type="button" data-project="${p.slug}" data-magnetic>
             <span>${t("projects.viewCase")}</span>
             <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg>
           </button>
@@ -169,11 +181,21 @@ function renderEmpty() {
       </div>
       <h3 class="projects-empty__title">${t("projects.emptyTitle")}</h3>
       <p class="projects-empty__desc">${t("projects.emptyDesc")}</p>
-      <button class="btn btn--light" type="button" data-reset-filters>
+      <button class="btn btn--light" type="button" data-reset-filters data-magnetic>
         <span>${t("projects.clearFilters")}</span>
       </button>
     </div>
   `;
+}
+
+function resetAllFilters() {
+  sfx("step", { volume: 0.5 });
+  activeDiscipline = "all";
+  searchQuery = "";
+  if (searchInput) searchInput.value = "";
+  if (clearBtn) clearBtn.classList.remove("is-visible");
+  renderFilterChips();
+  updateView();
 }
 
 function updateView() {
@@ -183,16 +205,7 @@ function updateView() {
   if (items.length === 0) {
     render(gridEl, renderEmpty());
     const resetBtn = gridEl.querySelector("[data-reset-filters]");
-    if (resetBtn) {
-      resetBtn.addEventListener("click", () => {
-        activeDiscipline = "all";
-        searchQuery = "";
-        if (searchInput) searchInput.value = "";
-        if (clearBtn) clearBtn.classList.remove("is-visible");
-        renderFilterChips();
-        updateView();
-      });
-    }
+    if (resetBtn) resetBtn.addEventListener("click", resetAllFilters);
   } else if (viewMode === "table") {
     render(gridEl, renderTable(items));
   } else {
@@ -212,20 +225,17 @@ function updateView() {
 
   const resetMeta = metaEl.querySelector("[data-reset-meta]");
   if (resetMeta) {
-    resetMeta.addEventListener("click", () => {
-      activeDiscipline = "all";
-      searchQuery = "";
-      if (searchInput) searchInput.value = "";
-      if (clearBtn) clearBtn.classList.remove("is-visible");
-      renderFilterChips();
-      updateView();
-    });
+    resetMeta.addEventListener("click", resetAllFilters);
   }
 
   // Update total badge in nav
   if (totalBadge) {
     totalBadge.textContent = `${projects.length} ${t("projects.totalBadge")}`;
   }
+
+  // Wire DS text roll and magnetic pull onto dynamic buttons and chips
+  rollify(".chip--filter > span, [data-view] > span, .project-card__cta > span");
+  initMagnetic(gridEl);
 }
 
 function renderFilterChips() {
@@ -246,7 +256,7 @@ function renderFilterChips() {
   ];
 
   chipsEl.innerHTML = chips.map((c) => `
-    <button class="chip chip--filter" type="button" data-filter="${c.key}" aria-pressed="${String(c.key === activeDiscipline)}">
+    <button class="chip chip--filter" type="button" data-filter="${c.key}" data-magnetic aria-pressed="${String(c.key === activeDiscipline)}">
       <span>${c.label}</span>
       <span class="chip__count">${c.count}</span>
     </button>
@@ -254,11 +264,14 @@ function renderFilterChips() {
 
   $$("[data-filter]", chipsEl).forEach((btn) => {
     btn.addEventListener("click", () => {
+      sfx("step", { volume: 0.6 });
       activeDiscipline = btn.dataset.filter;
       renderFilterChips();
       updateView();
     });
   });
+
+  initMagnetic(chipsEl);
 }
 
 function initSearch() {
@@ -282,6 +295,7 @@ function initSearch() {
 
   if (clearBtn) {
     clearBtn.addEventListener("click", () => {
+      sfx("step", { volume: 0.5 });
       searchInput.value = "";
       searchInput.focus();
       onSearch();
@@ -302,6 +316,7 @@ function initViewToggle() {
   viewSwitchEl.addEventListener("click", (e) => {
     const btn = e.target.closest("button[data-view]");
     if (!btn || btn.dataset.view === viewMode) return;
+    sfx("step", { volume: 0.7 });
     viewMode = btn.dataset.view;
     try { localStorage.setItem("projects_view", viewMode); } catch { /* ignore */ }
     updateButtons();
@@ -323,21 +338,90 @@ function initLangSwitch(control) {
   document.addEventListener("langchange", sync);
 }
 
-// Accessibility: Enter / Space triggers click on cards or table rows
-gridEl.addEventListener("keydown", (e) => {
-  if (e.key === "Enter" || e.key === " ") {
-    const el = e.target.closest("[data-project]");
-    if (el && el.tagName !== "BUTTON" && el.tagName !== "A") {
-      e.preventDefault();
-      el.click();
-    }
-  }
-});
+// 3D Card Tilt with smooth pointer parallax and interactive audio cues
+function initCardInteractions() {
+  if (!gridEl) return;
 
-// Initial setup
+  if (matchMedia("(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)").matches) {
+    let currentCard = null;
+
+    gridEl.addEventListener("pointerover", (e) => {
+      const card = e.target.closest(".project-card");
+      if (card !== currentCard) {
+        if (currentCard) {
+          currentCard.style.removeProperty("--rx");
+          currentCard.style.removeProperty("--ry");
+          currentCard.style.removeProperty("--gx");
+          currentCard.style.removeProperty("--gy");
+        }
+        currentCard = card;
+        if (card && e.pointerType === "mouse") {
+          sfx("ui-pop", { volume: 0.35, rate: 0.95 + Math.random() * 0.15 });
+        }
+      }
+    });
+
+    gridEl.addEventListener("pointermove", (e) => {
+      if (!currentCard) return;
+      const rect = currentCard.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const px = (x / rect.width) * 2 - 1;
+      const py = (y / rect.height) * 2 - 1;
+
+      const rx = (-py * 5).toFixed(2);
+      const ry = (px * 5).toFixed(2);
+      currentCard.style.setProperty("--rx", `${rx}deg`);
+      currentCard.style.setProperty("--ry", `${ry}deg`);
+      currentCard.style.setProperty("--gx", `${((x / rect.width) * 100).toFixed(1)}%`);
+      currentCard.style.setProperty("--gy", `${((y / rect.height) * 100).toFixed(1)}%`);
+    }, { passive: true });
+
+    gridEl.addEventListener("pointerout", (e) => {
+      if (currentCard && !currentCard.contains(e.relatedTarget)) {
+        currentCard.style.removeProperty("--rx");
+        currentCard.style.removeProperty("--ry");
+        currentCard.style.removeProperty("--gx");
+        currentCard.style.removeProperty("--gy");
+        currentCard = null;
+      }
+    });
+  }
+
+  // Sound cue on clicking card or case study trigger
+  gridEl.addEventListener("click", (e) => {
+    const trigger = e.target.closest("[data-project]");
+    if (trigger) {
+      sfx("section-sheet", { volume: 0.75 });
+    }
+  });
+
+  // Keyboard accessibility: Enter or Space triggers click on cards or table rows
+  gridEl.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      const el = e.target.closest("[data-project]");
+      if (el && el.tagName !== "BUTTON" && el.tagName !== "A") {
+        e.preventDefault();
+        el.click();
+      }
+    }
+  });
+}
+
+// ---- Startup & Core Lifecycle -----------------------------------------------
+
+// Unlock audio bus and sound FX
+initAudio();
+initSoundFx();
+
+// Initial text rolls
+rollify(".nav-link");
+
+// Listeners first so language change re-renders properly
 document.addEventListener("langchange", () => {
   renderFilterChips();
   updateView();
+  rollify(".nav-link");
 });
 
 $$("[data-lang-switch]").forEach(initLangSwitch);
@@ -347,8 +431,16 @@ renderFilterChips();
 initSearch();
 initViewToggle();
 updateView();
+initCardInteractions();
 
+// Global Blueprint DS features
+initSmoothScroll();
+initNightSky();
+initMagnetic(document);
 initThemeToggle($("[data-theme-toggle]"));
+initRobotVoice($("[data-sound-toggle]"));
+initMusic($("[data-music-toggle]"));
+initSoundCues($("[data-nav]"));
 initProjectDialog($("[data-project-dialog]"));
 
 $("[data-year]").textContent = new Date().getFullYear();

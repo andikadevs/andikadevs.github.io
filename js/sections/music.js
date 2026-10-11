@@ -7,7 +7,7 @@
 import { bus, isUnlocked, isMuted, setMuted, running, onAudioChange, glide } from "../core/audio.js";
 
 const KEY = "music";
-const FILE = "assets/audio/music/tejo-theme-loop.mp3";
+const FILE = new URL("../../assets/audio/music/tejo-theme-loop.mp3", import.meta.url).href;
 const LOOP = 35.555556;                // 16 bars at 108 BPM
 const IN = 1.5, OUT = 0.6, AWAY = 0.3; // fade seconds: start, stop, tab hidden
 

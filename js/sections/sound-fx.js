@@ -7,7 +7,7 @@
 // sfxOnce() is for scroll-triggered moments: once per element per page load.
 import { bus, canPlay, isUnlocked, isMuted, whenRunning, duck, onAudioChange, glide } from "../core/audio.js";
 
-const ROOT = "assets/audio/";
+const ROOT = new URL("../../assets/audio/", import.meta.url).href;
 const PRELOAD = ["pen", "erase", "brush", "fall-in", "whoosh", "land", "bubble-pop", "boing"];   // the loader and Tejo's hello
 const BIG = new Set(["brush", "fall-in", "whoosh", "wheel-spin", "deck-ratchet", "section-sheet", "count-up", "dive", "splash"]);
 const GAP = 60, MAX = 8;
