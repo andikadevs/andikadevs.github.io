@@ -39,5 +39,8 @@ export function renderAbout() {
   render($("[data-education]"), education.map(school));
   render($("[data-highlights]"), highlights.map(highlight));
   render($("[data-clients]"), clients.map(logo));
-  render($("[data-socials]"), profile.socials.map(social));
+  render($("[data-socials]"), [
+    html`<li><a href="projects/"><span data-i18n="work.all">${pick({ en: "Browse all projects", id: "Lihat semua proyek" })}</span></a></li>`,
+    ...profile.socials.map(social),
+  ]);
 }
