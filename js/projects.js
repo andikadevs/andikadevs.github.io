@@ -19,6 +19,8 @@ import { initMagnetic } from "./ds/magnetic.js";
 import { initNightSky } from "./ds/night-sky.js";
 import { initSmoothScroll } from "./ds/smooth-scroll.js";
 import { rollify } from "./ds/text-roll.js";
+import { initMascots } from "./sections/mascot.js";
+import { initMascotIdle } from "./sections/mascot-idle.js";
 
 const gridEl = $("[data-projects-grid]");
 const metaEl = $("[data-projects-meta]");
@@ -441,5 +443,7 @@ initRobotVoice($("[data-sound-toggle]"));
 initMusic($("[data-music-toggle]"));
 initSoundCues($("[data-nav]"));
 initProjectDialog($("[data-project-dialog]"));
+initMascots();
+initMascotIdle($(".mascot"));
 
 $("[data-year]").textContent = new Date().getFullYear();
