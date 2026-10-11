@@ -32,7 +32,8 @@ function applyStatic(root = document) {
     });
   });
   document.documentElement.lang = current;
-  document.title = t("meta.title");
+  const titleKey = document.head.querySelector('meta[name="page-title-key"]')?.content ?? "meta.title";
+  document.title = t(titleKey);
   applyHead();
 }
 
@@ -46,10 +47,12 @@ function applyHead() {
   url.hash = "";
   set('link[rel="canonical"]', "href", url.href);
   set('meta[property="og:url"]', "content", url.href);
+  const titleKey = document.head.querySelector('meta[name="page-title-key"]')?.content ?? "meta.title";
+  const descKey = document.head.querySelector('meta[name="page-desc-key"]')?.content ?? "meta.description";
   for (const [selector, key] of [
-    ['meta[name="description"]', "meta.description"], ['meta[property="og:description"]', "meta.description"],
-    ['meta[name="twitter:description"]', "meta.description"], ['meta[property="og:title"]', "meta.title"],
-    ['meta[name="twitter:title"]', "meta.title"], ['meta[property="og:image:alt"]', "meta.ogAlt"], ['meta[name="twitter:image:alt"]', "meta.ogAlt"],
+    ['meta[name="description"]', descKey], ['meta[property="og:description"]', descKey],
+    ['meta[name="twitter:description"]', descKey], ['meta[property="og:title"]', titleKey],
+    ['meta[name="twitter:title"]', titleKey], ['meta[property="og:image:alt"]', "meta.ogAlt"], ['meta[name="twitter:image:alt"]', "meta.ogAlt"],
   ]) set(selector, "content", t(key));
   set('meta[property="og:locale"]', "content", LOCALE[current]);
   set('meta[property="og:locale:alternate"]', "content", LOCALE[current === "en" ? "id" : "en"]);

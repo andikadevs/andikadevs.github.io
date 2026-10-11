@@ -11,7 +11,14 @@ const PREFIX = "#project/";
 const bySlug = new Map(projects.map((p) => [p.slug, p]));
 let openSlug = null;
 
-const view = (p) => html`
+const resolvePath = (path) => {
+  if (!path || path.startsWith("http") || path.startsWith("/") || path.startsWith("./") || path.startsWith("../")) return path;
+  return location.pathname.includes("/projects") ? `../${path}` : path;
+};
+
+const view = (p) => {
+  const coverPath = resolvePath(p.cover);
+  return html`
   <button class="icon-btn dialog__close" type="button" data-dialog-close aria-label="${t("work.close")}">${close()}</button>
   <article class="case">
     <header class="case__head">
@@ -27,7 +34,7 @@ const view = (p) => html`
         : html`<p class="label label--muted">${t("work.private")}</p>`}
     </header>
 
-    <img class="case__cover" src="${p.cover}" srcset="${srcset(p.cover)}" sizes="(min-width: 960px) 820px, 100vw" alt="${pick(p.title)} — main screen" width="1600" height="848">
+    <img class="case__cover" src="${coverPath}" srcset="${srcset(coverPath)}" sizes="(min-width: 960px) 820px, 100vw" alt="${pick(p.title)} — main screen" width="1600" height="848">
 
     <div class="case__metrics">
       ${p.metrics.map((m) => html`<div class="stat"><span class="stat__value">${m.value}</span><span class="stat__label">${pick(m.label)}</span></div>`)}
@@ -39,8 +46,12 @@ const view = (p) => html`
       <section><h3 class="label label--muted">${t("work.stack")}</h3><div class="cluster">${p.stack.map((s) => html`<span class="chip">${s}</span>`)}</div></section>
     </div>
 
-    ${p.gallery.length ? html`<div class="case__gallery">${p.gallery.map((src, i) => html`<img src="${src}" srcset="${srcset(src)}" sizes="(min-width: 760px) 410px, 100vw" alt="${pick(p.title)} — screen ${i + 2}" loading="lazy" decoding="async" width="1600" height="848">`)}</div>` : ""}
+    ${p.gallery.length ? html`<div class="case__gallery">${p.gallery.map((src, i) => {
+      const gSrc = resolvePath(src);
+      return html`<img src="${gSrc}" srcset="${srcset(gSrc)}" sizes="(min-width: 760px) 410px, 100vw" alt="${pick(p.title)} — screen ${i + 2}" loading="lazy" decoding="async" width="1600" height="848">`;
+    })}</div>` : ""}
   </article>`;
+};
 
 export function initProjectDialog(dialog) {
   if (!dialog) return;

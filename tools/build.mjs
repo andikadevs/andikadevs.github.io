@@ -185,16 +185,18 @@ function noscript() {
 
 // ---- sitemap, robots, manifest ----------------------------------------------
 function sitemap() {
-  const alt = `    <xhtml:link rel="alternate" hreflang="en" href="${SITE}/"/>\n    <xhtml:link rel="alternate" hreflang="id" href="${SITE}/?lang=id"/>\n    <xhtml:link rel="alternate" hreflang="x-default" href="${SITE}/"/>`;
+  const alt = (prefix = "") => `    <xhtml:link rel="alternate" hreflang="en" href="${SITE}/${prefix}"/>\n    <xhtml:link rel="alternate" hreflang="id" href="${SITE}/${prefix}?lang=id"/>\n    <xhtml:link rel="alternate" hreflang="x-default" href="${SITE}/${prefix}"/>`;
   const images = [OG_IMAGE.url, abs("assets/img/andika.webp"), ...projects.map((p) => abs(p.cover))]
     .map((u) => `    <image:image><image:loc>${u}</image:loc></image:image>`).join("\n");
-  const url = (loc, withImages) => `  <url>\n    <loc>${loc}</loc>\n    <lastmod>${TODAY}</lastmod>\n${alt}\n${withImages ? images + "\n" : ""}  </url>`;
+  const url = (loc, withImages, prefix = "") => `  <url>\n    <loc>${loc}</loc>\n    <lastmod>${TODAY}</lastmod>\n${alt(prefix)}\n${withImages ? images + "\n" : ""}  </url>`;
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
-${url(`${SITE}/`, true)}
-${url(`${SITE}/?lang=id`, false)}
+${url(`${SITE}/`, true, "")}
+${url(`${SITE}/?lang=id`, false, "")}
+${url(`${SITE}/projects/`, true, "projects/")}
+${url(`${SITE}/projects/?lang=id`, false, "projects/")}
 </urlset>
 `;
 }
@@ -330,6 +332,12 @@ html = html.replace(/<script type="module" src="js\/main\.js(\?v=[^"]*)?"><\/scr
 // changed strings.js or i18n.js is never served from a stale browser cache.
 html = inject(html, "importmap", importMap());
 write("index.html", html);
+let projHtml = read("projects/index.html");
+const cssHash = hash(read("css/app.css"));
+const projJsHash = hash(read("js/projects.js"));
+projHtml = projHtml.replace(/href="\.\.\/css\/app\.css(\?v=[^"]*)?"/, `href="../css/app.css?v=${cssHash}"`);
+projHtml = projHtml.replace(/src="\.\.\/js\/projects\.js(\?v=[^"]*)?"/, `src="../js/projects.js?v=${projJsHash}"`);
+write("projects/index.html", projHtml);
 write("sitemap.xml", sitemap());
 write("robots.txt", robots());
 write("manifest.webmanifest", manifest());
