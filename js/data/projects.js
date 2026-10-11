@@ -70,8 +70,8 @@ export const projects = [
       id: "Website berkecepatan tinggi berbasis Astro dan Tailwind CSS 4 dengan tata letak editorial elegan yang menampilkan proyek residensial dan komersial dari sketsa konsep hingga serah terima kunci.",
     },
     metrics: [
-      { value: "Design & Build", label: { en: "Residential & commercial", id: "Residensial & komersial" } },
-      { value: "Astro", label: { en: "Fast static delivery", id: "Performa statis cepat" } },
+      { value: "Design & Build", label: { en: "Studio", id: "Studio" } },
+      { value: "Astro", label: { en: "Fast static", id: "Performa statis" } },
     ],
   },
   {
@@ -98,8 +98,8 @@ export const projects = [
       id: "Routing berbasis bahasa memastikan setiap halaman memiliki versi EN dan ID yang utuh. Akses berbasis peran melalui NextAuth membatasi setiap unit pada berita, agenda, dan data mitranya sendiri. Berita ditarik langsung dari API portal kampus, sehingga tidak perlu diinput dua kali.",
     },
     metrics: [
-      { value: "EN / ID", label: { en: "Bilingual, i18n routing", id: "Dwibahasa dengan routing i18n" } },
-      { value: "RBAC", label: { en: "Per-department admin", id: "Admin per unit" } },
+      { value: "EN / ID", label: { en: "Bilingual i18n", id: "Dwibahasa i18n" } },
+      { value: "RBAC", label: { en: "Per-unit admin", id: "Admin per unit" } },
     ],
   },
   {
@@ -126,7 +126,7 @@ export const projects = [
       id: "Authorization Code dengan PKCE, verifikasi ID token, serta logout RP-initiated dan back-channel, sehingga satu kali logout benar-benar mengakhiri sesi di semua aplikasi. Dengan SDK yang tersedia, tim lain dapat mengintegrasikan aplikasinya dalam hitungan jam.",
     },
     metrics: [
-      { value: "11+", label: { en: "Apps on single sign-on", id: "Aplikasi terhubung ke SSO" } },
+      { value: "11+ Apps", label: { en: "SSO ecosystem", id: "Ekosistem SSO" } },
       { value: "3 SDKs", label: { en: "TypeScript, Python, PHP", id: "TypeScript, Python, PHP" } },
     ],
   },
@@ -154,7 +154,7 @@ export const projects = [
       id: "Front end Next.js di atas API Laravel, dengan WebSocket yang mengirim perubahan ke setiap pengguna yang sedang membuka halaman. Broadcast dan proses berat berjalan di antrean Redis agar aplikasi tetap responsif, dan file diambil langsung dari Google Drive.",
     },
     metrics: [
-      { value: "20+ h", label: { en: "Manual work saved monthly", id: "Jam kerja manual dihemat per bulan" } },
+      { value: "20+ h", label: { en: "Saved monthly", id: "Hemat bulanan" } },
       { value: "Live", label: { en: "WebSocket updates", id: "Pembaruan via WebSocket" } },
     ],
   },
@@ -210,8 +210,8 @@ export const projects = [
       id: "Tujuh tahap dari penelusuran sumber hingga naskah terformat, diakhiri pemeriksaan integritas. Setiap sumber diberi kode pendek yang konsisten, sehingga sitasi terbaca langsung dari penanda di teks. Peneliti juga dapat menggunakan pustaka Zotero mereka sendiri.",
     },
     metrics: [
-      { value: "7", label: { en: "Pipeline stages", id: "Tahap pipeline" } },
-      { value: "6", label: { en: "Citation styles", id: "Gaya sitasi" } },
+      { value: "7 Stages", label: { en: "Pipeline", id: "Pipeline" } },
+      { value: "6 Styles", label: { en: "Citations", id: "Sitasi" } },
     ],
   },
   /* Hidden for now: uncomment to restore.
@@ -268,7 +268,7 @@ export const projects = [
       id: "Client memperoleh presigned URL lalu mengunggah langsung ke S3, sehingga file besar tidak pernah melewati API. Pemrosesan lanjutan berjalan di BullMQ, dan URL akses berumur pendek memungkinkan akses dicabut tanpa memindahkan file.",
     },
     metrics: [
-      { value: "0 bytes", label: { en: "Through the API on upload", id: "Melewati API saat unggah" } },
+      { value: "0 bytes", label: { en: "API overhead", id: "Beban API" } },
       { value: "3 SDKs", label: { en: "TypeScript, Python, PHP", id: "TypeScript, Python, PHP" } },
     ],
   },
@@ -296,8 +296,8 @@ export const projects = [
       id: "Setiap endpoint didefinisikan sekali sebagai skema Zod, yang sekaligus menghasilkan validasi dan dokumentasi OpenAPI, sehingga dokumentasi selalu sesuai dengan perilaku API. Endpoint yang sama juga tersedia sebagai tool MCP.",
     },
     metrics: [
-      { value: "OpenAPI", label: { en: "Docs generated from schema", id: "Dokumentasi dari skema" } },
-      { value: "MCP", label: { en: "Usable by AI agents", id: "Dapat digunakan agen AI" } },
+      { value: "OpenAPI", label: { en: "Auto schema", id: "Skema otomatis" } },
+      { value: "MCP", label: { en: "AI agents", id: "Agen AI" } },
     ],
   },
   {
@@ -324,7 +324,7 @@ export const projects = [
       id: "Puppeteer yang berjalan terjadwal, klasifikasi Gemini, validasi Zod untuk setiap data, dan dashboard yang menampilkan log setiap sesi secara langsung, sehingga penyebab kegagalan selalu terlihat.",
     },
     metrics: [
-      { value: "Gemini", label: { en: "Post classification", id: "Klasifikasi unggahan" } },
+      { value: "Gemini AI", label: { en: "Classification", id: "Klasifikasi" } },
       { value: "Live", label: { en: "Per-run logs", id: "Log per sesi" } },
     ],
   },
@@ -352,8 +352,8 @@ export const projects = [
       id: "Konten cukup ditulis sekali lalu masuk antrean sesuai jadwal, tanpa perlu ada yang berjaga. Peran memisahkan penulis dan penerbit, dan tampilan kalender menunjukkan apa saja yang terbit minggu depan.",
     },
     metrics: [
-      { value: "Queue", label: { en: "Scheduled publishing", id: "Publikasi terjadwal" } },
-      { value: "Drive", label: { en: "Import into media library", id: "Impor ke media library" } },
+      { value: "Queue", label: { en: "Scheduled posts", id: "Jadwal konten" } },
+      { value: "Drive", label: { en: "Media import", id: "Impor media" } },
     ],
   },
   {
@@ -380,7 +380,7 @@ export const projects = [
       id: "Laravel dengan Octane dan Inertia, sehingga terasa seperti SPA namun tetap di-deploy sebagai satu aplikasi. Preset tema memberi setiap unit halaman yang sesuai identitas visualnya tanpa perlu desainer.",
     },
     metrics: [
-      { value: "Teams", label: { en: "Separate workspaces", id: "Workspace terpisah" } },
+      { value: "Teams", label: { en: "Workspaces", id: "Workspace" } },
       { value: "0", label: { en: "SaaS fees", id: "Biaya langganan" } },
     ],
   },

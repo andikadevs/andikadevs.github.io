@@ -54,7 +54,7 @@ Company profile and portfolio for a design & build contractor in Jakarta and Tas
 
 **What I did.** A fast, content-driven site built on Astro and Tailwind CSS 4 with high-contrast typography and editorial layouts that showcase residential and commercial builds from conceptual sketches to handover.
 
-**Results.** Design & Build (Residential & commercial); Astro (Fast static delivery).
+**Results.** Design & Build (Studio); Astro (Fast static).
 
 ### STEKOM International
 
@@ -71,7 +71,7 @@ The official international site of Universitas STEKOM. Real English and Indonesi
 
 **What I did.** Locale-aware routing so every page has a proper EN and ID version. Role-based access through NextAuth, so each department only touches its own news, agendas and partner data. News is pulled from the existing campus portal API instead of being typed in twice.
 
-**Results.** EN / ID (Bilingual, i18n routing); RBAC (Per-department admin).
+**Results.** EN / ID (Bilingual i18n); RBAC (Per-unit admin).
 
 ### STEKOM Passport
 
@@ -88,7 +88,7 @@ An OpenID Connect provider for the whole campus. One login for every internal ap
 
 **What I did.** Authorization Code with PKCE, ID-token verification, and both RP-initiated and back-channel logout, so logging out once really ends the session everywhere. The SDKs mean another team can plug in an existing app in an afternoon.
 
-**Results.** 11+ (Apps on single sign-on); 3 SDKs (TypeScript, Python, PHP).
+**Results.** 11+ Apps (SSO ecosystem); 3 SDKs (TypeScript, Python, PHP).
 
 ### OTO Management
 
@@ -105,7 +105,7 @@ Toploker's operational backbone: ads, revenue recaps, invoices and broadcasts in
 
 **What I did.** A Next.js front end on a Laravel API, with WebSockets pushing changes to everyone who has the page open. Broadcasts and heavy jobs run on Redis queues so the app never stalls, and assets come straight from Google Drive.
 
-**Results.** 20+ h (Manual work saved monthly); Live (WebSocket updates).
+**Results.** 20+ h (Saved monthly); Live (WebSocket updates).
 
 ### SnapCRM
 
@@ -139,7 +139,7 @@ A multi-agent pipeline that drafts academic manuscripts from real sources, and r
 
 **What I did.** Seven stages from retrieval to formatted output, ending in an integrity gate. Sources get stable short refs so citations are parsed straight from the model's markers. Researchers can ground drafts in their own Zotero library.
 
-**Results.** 7 (Pipeline stages); 6 (Citation styles).
+**Results.** 7 Stages (Pipeline); 6 Styles (Citations).
 
 ### Depot
 
@@ -156,7 +156,7 @@ One multi-tenant media service for every campus app: presigned uploads, backgrou
 
 **What I did.** The client gets a presigned URL and uploads straight to S3, so no large file passes through the API. Processing runs on BullMQ, and short-lived signed URLs mean access can be revoked without moving anything.
 
-**Results.** 0 bytes (Through the API on upload); 3 SDKs (TypeScript, Python, PHP).
+**Results.** 0 bytes (API overhead); 3 SDKs (TypeScript, Python, PHP).
 
 ### PDDikti API & MCP
 
@@ -173,7 +173,7 @@ A typed, documented read-only API over Indonesia's higher-education dataset, als
 
 **What I did.** Each endpoint is defined once as a Zod schema, which generates both the validation and the OpenAPI docs, so they can't drift apart. The same surface is served as MCP tools.
 
-**Results.** OpenAPI (Docs generated from schema); MCP (Usable by AI agents).
+**Results.** OpenAPI (Auto schema); MCP (AI agents).
 
 ### Jobs Scraper
 
@@ -190,7 +190,7 @@ Watches Instagram accounts by region, scrapes vacancy posts, and lets Gemini sor
 
 **What I did.** Puppeteer on a schedule, Gemini classification, Zod validation on every record, and a dashboard that streams each run's logs live, so a failed run can actually be explained.
 
-**Results.** Gemini (Post classification); Live (Per-run logs).
+**Results.** Gemini AI (Classification); Live (Per-run logs).
 
 ### Conflow
 
@@ -207,7 +207,7 @@ Write, schedule and publish social posts across channels from one dashboard, wit
 
 **What I did.** Posts are written once and queued for their time slot, so nothing depends on someone being awake. Roles separate drafting from publishing, and a calendar answers the “what's next week” question.
 
-**Results.** Queue (Scheduled publishing); Drive (Import into media library).
+**Results.** Queue (Scheduled posts); Drive (Media import).
 
 ### Bio
 
@@ -224,7 +224,7 @@ A self-hosted link-in-bio builder for campus teams: drag-and-drop pages, themes,
 
 **What I did.** Laravel with Octane and Inertia, so it feels like an SPA but deploys as one app. Themed presets give every team an on-brand page without needing a designer.
 
-**Results.** Teams (Separate workspaces); 0 (SaaS fees).
+**Results.** Teams (Workspaces); 0 (SaaS fees).
 
 ## Experience
 
