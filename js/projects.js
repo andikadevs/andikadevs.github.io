@@ -201,6 +201,9 @@ function resetAllFilters() {
 function updateView() {
   const items = getFilteredProjects();
 
+  gridEl.classList.toggle("is-table-view", viewMode === "table");
+  gridEl.classList.toggle("is-grid-view", viewMode === "grid");
+
   // Render cards or table or empty state
   if (items.length === 0) {
     render(gridEl, renderEmpty());
@@ -228,14 +231,12 @@ function updateView() {
     resetMeta.addEventListener("click", resetAllFilters);
   }
 
-  // Update total badge in nav
+  // Update total badge in nav if present
   if (totalBadge) {
     totalBadge.textContent = `${projects.length} ${t("projects.totalBadge")}`;
   }
 
-  // Wire DS text roll and magnetic pull onto dynamic buttons and chips
-  rollify(".chip--filter > span, [data-view] > span, .project-card__cta > span");
-  initMagnetic(gridEl);
+  rollify(".project-card__cta > span");
 }
 
 function renderFilterChips() {
@@ -256,7 +257,7 @@ function renderFilterChips() {
   ];
 
   chipsEl.innerHTML = chips.map((c) => `
-    <button class="chip chip--filter" type="button" data-filter="${c.key}" data-magnetic aria-pressed="${String(c.key === activeDiscipline)}">
+    <button class="chip chip--filter" type="button" data-filter="${c.key}" aria-pressed="${String(c.key === activeDiscipline)}">
       <span>${c.label}</span>
       <span class="chip__count">${c.count}</span>
     </button>
@@ -270,8 +271,6 @@ function renderFilterChips() {
       updateView();
     });
   });
-
-  initMagnetic(chipsEl);
 }
 
 function initSearch() {
