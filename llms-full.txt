@@ -39,6 +39,23 @@ The modern job portal for Indonesia: real-time vacancy search, multi-filter disc
 
 **Results.** 3K+ (Active vacancies); Verified (Curated & fraud-free).
 
+### Sofwanland
+
+- Category: Architecture & contractor site
+- Client: Sofwanland
+- Year: 2026
+- Link: https://sowanland.com 
+- Stack: Astro, Tailwind CSS 4, TypeScript, HTML5, Cloudflare
+- Areas: Web
+
+Company profile and portfolio for a design & build contractor in Jakarta and Tasikmalaya: architectural showcase, service catalog, and project consultation.
+
+**The problem.** Prospective homeowners and commercial clients need to evaluate build quality, understand transparent RAB budgeting, and review past real-world projects before requesting a consultation.
+
+**What I did.** A fast, content-driven site built on Astro and Tailwind CSS 4 with high-contrast typography and editorial layouts that showcase residential and commercial builds from conceptual sketches to handover.
+
+**Results.** Design & Build (Residential & commercial); Astro (Fast static delivery).
+
 ### STEKOM International
 
 - Category: University website

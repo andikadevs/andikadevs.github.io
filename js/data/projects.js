@@ -47,6 +47,34 @@ export const projects = [
     ],
   },
   {
+    slug: "sowanland",
+    short: "Sofwanland",
+    client: "Sofwanland",
+    year: 2026,
+    url: "https://sowanland.com",
+    ...img("sowanland", "hero", "services", "portfolio", "branding"),
+    disciplines: ["web"],
+    stack: ["Astro", "Tailwind CSS 4", "TypeScript", "HTML5", "Cloudflare"],
+    title: { en: "Sofwanland", id: "Sofwanland" },
+    category: { en: "Architecture & contractor site", id: "Website arsitektur & kontraktor" },
+    summary: {
+      en: "Company profile and portfolio for a design & build contractor in Jakarta and Tasikmalaya: architectural showcase, service catalog, and project consultation.",
+      id: "Website profil dan portofolio kontraktor design & build di Jakarta dan Tasikmalaya: showcase karya arsitektur, katalog layanan, dan konsultasi proyek.",
+    },
+    problem: {
+      en: "Prospective homeowners and commercial clients need to evaluate build quality, understand transparent RAB budgeting, and review past real-world projects before requesting a consultation.",
+      id: "Calon klien pembangunan rumah dan bangunan komersial membutuhkan bukti kualitas fisik, kejelasan proses anggaran (RAB), dan portofolio riil sebelum mantap berkonsultasi.",
+    },
+    approach: {
+      en: "A fast, content-driven site built on Astro and Tailwind CSS 4 with high-contrast typography and editorial layouts that showcase residential and commercial builds from conceptual sketches to handover.",
+      id: "Website berkecepatan tinggi berbasis Astro dan Tailwind CSS 4 dengan tata letak editorial elegan yang menampilkan proyek residensial dan komersial dari sketsa konsep hingga serah terima kunci.",
+    },
+    metrics: [
+      { value: "Design & Build", label: { en: "Residential & commercial", id: "Residensial & komersial" } },
+      { value: "Astro", label: { en: "Fast static delivery", id: "Performa statis cepat" } },
+    ],
+  },
+  {
     slug: "stekom-international",
     short: "International",
     client: "Universitas STEKOM",
