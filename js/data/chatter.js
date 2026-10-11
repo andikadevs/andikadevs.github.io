@@ -107,8 +107,8 @@ export const chatter = {
       id: ["Itu dia. Aslinya lebih keren. Sedikit lebih tinggi.", "Dia mulai dari magang. Aku mulai dari huruf.", "Baca pelan-pelan. Dia tahu kalau kamu cuma skimming."],
     },
     work: {
-      en: ["Go on, drag the cards. They like it.", "Twelve projects. I was there for all of them. Floating.", "Open one. The case studies are the good bit."],
-      id: ["Ayo, geser kartunya. Mereka suka kok.", "Dua belas proyek. Aku ikut semuanya. Sambil melayang.", "Buka salah satu. Studi kasusnya yang paling seru."],
+      en: ["Go on, drag the cards. They like it.", "Eleven projects. I was there for all of them. Floating.", "Open one. The case studies are the good bit."],
+      id: ["Ayo, geser kartunya. Mereka suka kok.", "Sebelas proyek. Aku ikut semuanya. Sambil melayang.", "Buka salah satu. Studi kasusnya yang paling seru."],
     },
     experience: {
       en: ["His CV. Mine is one line: “stood here”.", "All those jobs, and he still has me working weekends.", "Every one of these came with a deadline. I watched."],

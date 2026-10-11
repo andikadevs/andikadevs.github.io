@@ -22,6 +22,23 @@ Built for: Universitas STEKOM, Toploker.com, Akastra Toyota, Kerja Malam, Digite
 
 ## Case studies
 
+### Toploker.com
+
+- Category: Job portal & platform
+- Client: Toploker.com
+- Year: 2026
+- Link: https://toploker.com 
+- Stack: Next.js, React 19, TypeScript, Tailwind CSS, Laravel, MySQL, Redis
+- Areas: Web, Backend, API
+
+The modern job portal for Indonesia: real-time vacancy search, multi-filter discovery, verified employers, and applicant profile with CV management.
+
+**The problem.** Job boards in Indonesia are often cluttered with spam, unverified listings with hidden salary info, and slow navigation on mobile. Job seekers struggle to track applications, while employers deal with irrelevant applicant pools.
+
+**What I did.** A fast Next.js platform with live search and multi-filtering, transparent salary badges, and verified fraud-free tags. Built an interactive split-view search, CV upload with profile strength indicators, and direct 1-click applications.
+
+**Results.** 3K+ (Active vacancies); Verified (Curated & fraud-free).
+
 ### STEKOM International
 
 - Category: University website
@@ -107,23 +124,6 @@ A multi-agent pipeline that drafts academic manuscripts from real sources, and r
 
 **Results.** 7 (Pipeline stages); 6 (Citation styles).
 
-### Kerja Malam
-
-- Category: Job portal · PWA
-- Client: Kerja Malam
-- Year: 2025
-- Link: https://kerjamalam.com 
-- Stack: React 19, TanStack Start, Vite, Bun, Tailwind CSS 4, Zod
-- Areas: Web
-
-A job board for night-shift, part-time and freelance work in Indonesia. Light enough for a cheap phone, and it still works offline.
-
-**The problem.** The people looking for this work are on mid-range Android phones with patchy data. Most job boards are too heavy to load, and lose the listing you were reading the moment the signal drops.
-
-**What I did.** A small JavaScript payload on TanStack Start, search filters kept in the URL so results survive a refresh and can be shared, and a full PWA so saved listings stay readable offline.
-
-**Results.** PWA (Installable, works offline); 4 (Filters at once).
-
 ### Depot
 
 - Category: Media service
@@ -208,23 +208,6 @@ A self-hosted link-in-bio builder for campus teams: drag-and-drop pages, themes,
 **What I did.** Laravel with Octane and Inertia, so it feels like an SPA but deploys as one app. Themed presets give every team an on-brand page without needing a designer.
 
 **Results.** Teams (Separate workspaces); 0 (SaaS fees).
-
-### TopMatch
-
-- Category: HR SaaS landing
-- Client: Toploker.com
-- Year: 2025
-- Link: https://match.toploker.com 
-- Stack: Next.js 16, React 19, Tailwind CSS, Framer Motion, Lenis
-- Areas: Web
-
-The recruitment product site for Toploker, aimed at HR teams, with pricing out in the open.
-
-**The problem.** Toploker's usual audience is job seekers. TopMatch sells to hiring managers, who want to know what it does, what it costs and who uses it, fast.
-
-**What I did.** One page built around one decision: value, services, plans, call to action. Motion guides the eye through pricing instead of decorating it, and it's statically generated so ads land on a fast page.
-
-**Results.** Static (Fast for paid traffic); Open (Published pricing).
 
 ## Experience
 

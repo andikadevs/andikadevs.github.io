@@ -17,8 +17,35 @@ export const DISCIPLINES = {
   devops:     { en: "DevOps",     id: "DevOps" },
 };
 
-// `short` labels the project's node in the hero orbit.
 export const projects = [
+  {
+    slug: "toploker",
+    short: "Toploker",
+    client: "Toploker.com",
+    year: 2026,
+    url: "https://toploker.com",
+    ...img("toploker", "hero", "jobs", "profile"),
+    disciplines: ["web", "backend", "api"],
+    stack: ["Next.js", "React 19", "TypeScript", "Tailwind CSS", "Laravel", "MySQL", "Redis"],
+    title: { en: "Toploker.com", id: "Toploker.com" },
+    category: { en: "Job portal & platform", id: "Portal kerja & platform" },
+    summary: {
+      en: "The modern job portal for Indonesia: real-time vacancy search, multi-filter discovery, verified employers, and applicant profile with CV management.",
+      id: "Portal lowongan kerja modern di Indonesia: pencarian loker real-time, filter multi-kriteria, lowongan terverifikasi, dan profil pelamar lengkap dengan manajemen CV.",
+    },
+    problem: {
+      en: "Job boards in Indonesia are often cluttered with spam, unverified listings with hidden salary info, and slow navigation on mobile. Job seekers struggle to track applications, while employers deal with irrelevant applicant pools.",
+      id: "Banyak portal lowongan kerja dipenuhi spam, postingan tidak terverifikasi dengan info gaji tersembunyi, dan navigasi yang lambat di ponsel. Pencari kerja sulit melacak lamaran, sementara perusahaan menerima banyak pelamar yang tidak relevan.",
+    },
+    approach: {
+      en: "A fast Next.js platform with live search and multi-filtering, transparent salary badges, and verified fraud-free tags. Built an interactive split-view search, CV upload with profile strength indicators, and direct 1-click applications.",
+      id: "Platform Next.js yang cepat dengan pencarian instan dan multi-filter, badge transparansi gaji, serta penanda loker terverifikasi tanpa calo. Dilengkapi tampilan split-view interaktif, manajemen CV dengan indikator kelengkapan profil, dan sistem lamaran 1 klik.",
+    },
+    metrics: [
+      { value: "3K+", label: { en: "Active vacancies", id: "Lowongan aktif" } },
+      { value: "Verified", label: { en: "Curated & fraud-free", id: "Terverifikasi tanpa calo" } },
+    ],
+  },
   {
     slug: "stekom-international",
     short: "International",
@@ -159,6 +186,7 @@ export const projects = [
       { value: "6", label: { en: "Citation styles", id: "Gaya sitasi" } },
     ],
   },
+  /* Hidden for now: uncomment to restore.
   {
     slug: "kerja-malam",
     short: "Kerja Malam",
@@ -187,6 +215,7 @@ export const projects = [
       { value: "4", label: { en: "Filters at once", id: "Filter sekaligus" } },
     ],
   },
+  */
   {
     slug: "depot",
     short: "Depot",
@@ -327,6 +356,7 @@ export const projects = [
       { value: "0", label: { en: "SaaS fees", id: "Biaya langganan" } },
     ],
   },
+  /* Hidden for now: uncomment to restore.
   {
     slug: "topmatch",
     short: "TopMatch",
@@ -355,4 +385,5 @@ export const projects = [
       { value: "Open", label: { en: "Published pricing", id: "Harga transparan" } },
     ],
   },
+  */
 ];
