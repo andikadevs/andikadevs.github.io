@@ -7,7 +7,7 @@ I started as an intern at a Toyota dealership, writing Laravel. Today I run the 
 ## Work
 
 - [Toploker.com](https://andikadevs.github.io/#project/toploker): Job portal & platform, Toploker.com, 2026. The modern job portal for Indonesia: real-time vacancy search, multi-filter discovery, verified employers, and applicant profile with CV management.
-- [Sofwanland](https://andikadevs.github.io/#project/sowanland): Architecture & contractor site, Sofwanland, 2026. Company profile and portfolio for a design & build contractor in Jakarta and Tasikmalaya: architectural showcase, service catalog, and project consultation.
+- [Sofwanland](https://andikadevs.github.io/#project/sofwanland): Architecture & contractor site, Sofwanland, 2026. Company profile and portfolio for a design & build contractor in Jakarta and Tasikmalaya: architectural showcase, service catalog, and project consultation.
 - [STEKOM International](https://andikadevs.github.io/#project/stekom-international): University website, Universitas STEKOM, 2026. The official international site of Universitas STEKOM. Real English and Indonesian pages, plus an admin where each department runs its own content.
 - [STEKOM Passport](https://andikadevs.github.io/#project/stekom-passport): Identity & SSO, Universitas STEKOM, 2026. An OpenID Connect provider for the whole campus. One login for every internal app, with typed SDKs for TypeScript, Python and PHP.
 - [OTO Management](https://andikadevs.github.io/#project/oto-management): Internal system, Toploker.com, 2024. Toploker's operational backbone: ads, revenue recaps, invoices and broadcasts in one place, updating live.

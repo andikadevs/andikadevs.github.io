@@ -44,7 +44,7 @@ The modern job portal for Indonesia: real-time vacancy search, multi-filter disc
 - Category: Architecture & contractor site
 - Client: Sofwanland
 - Year: 2026
-- Link: https://sowanland.com 
+- Link: https://sofwanland.com 
 - Stack: Astro, Tailwind CSS 4, TypeScript, HTML5, Cloudflare
 - Areas: Web
 
