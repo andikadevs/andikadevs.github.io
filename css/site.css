@@ -65,26 +65,25 @@ html { cursor: var(--cursor); }
 .nav:not(.is-scrolled) .nav-pill { background: rgb(10 35 70 / 0.26); }   /* white links ≥ 4.5:1 over the lightest sky */
 .nav-pill__links .nav-link { color: var(--white); }
 .nav.is-scrolled .nav-pill__links .nav-link { color: var(--fg); }
-/* The active link sits on a little cloud: a rounded body (::before) with three
-   puffs on top (::after), sized in px so any word length stays cloud-shaped. */
+/* The active link sits on a little cloud: a single unified cumulus silhouette
+   rendered via SVG mask so hover and active states are 100% seamless with zero internal layers. */
 .nav-pill__links { padding: 14px 10px; margin: -14px -10px; }   /* room on every side so the cloud isn't clipped by the collapsing row */
 .nav-pill__links .nav-link { --cloud: var(--white); position: relative; isolation: isolate; border: 0; transition: color var(--dur-base) ease; }
 .nav.is-scrolled .nav-pill__links .nav-link { --cloud: var(--sky-100); }
-.nav-pill__links .nav-link::before, .nav-pill__links .nav-link::after {
+[data-theme="dark"] .nav.is-scrolled .nav-pill__links .nav-link { --cloud: var(--sky-700); }
+.nav-pill__links .nav-link::before {
   content: ""; position: absolute; z-index: -1; pointer-events: none;
-  opacity: 0; scale: 0.6; transition: opacity var(--dur-base) ease, scale var(--dur-base) var(--ease-spring);
+  inset: -6px -3px 1px;
+  background: var(--cloud);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 42' preserveAspectRatio='none'%3E%3Cpath fill='%23000' d='M 12 14 C 12 6, 26 2, 34 8 C 40 -1, 60 -1, 66 8 C 74 2, 88 6, 88 14 C 95 14, 100 19, 100 27 C 100 35, 95 40, 86 40 L 14 40 C 5 40, 0 35, 0 27 C 0 19, 5 14, 12 14 Z'/%3E%3C/svg%3E") 0 0 / 100% 100% no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 42' preserveAspectRatio='none'%3E%3Cpath fill='%23000' d='M 12 14 C 12 6, 26 2, 34 8 C 40 -1, 60 -1, 66 8 C 74 2, 88 6, 88 14 C 95 14, 100 19, 100 27 C 100 35, 95 40, 86 40 L 14 40 C 5 40, 0 35, 0 27 C 0 19, 5 14, 12 14 Z'/%3E%3C/svg%3E") 0 0 / 100% 100% no-repeat;
+  opacity: 0; scale: 0.6;
+  transition: opacity var(--dur-base) ease, scale var(--dur-base) var(--ease-spring);
 }
-.nav-pill__links .nav-link::before { inset: 7px -2px 2px; border-radius: var(--radius-pill); background: var(--cloud); }
-.nav-pill__links .nav-link::after {
-  inset: -4px 4px 45%;
-  background:
-    radial-gradient(circle at 26% 72%, var(--cloud) 0 10px, transparent 10.5px),
-    radial-gradient(circle at 50% 58%, var(--cloud) 0 12px, transparent 12.5px),
-    radial-gradient(circle at 74% 76%, var(--cloud) 0 9px, transparent 9.5px);
-}
-.nav-pill__links .nav-link:hover::before, .nav-pill__links .nav-link:hover::after { opacity: 0.3; scale: 0.9; }
+.nav-pill__links .nav-link:hover::before { opacity: 0.35; scale: 0.96; }
 .nav .nav-pill__links .nav-link[aria-current="true"] { color: var(--sky-800); }   /* dark ink on the cloud, in every nav state and theme */
-.nav-pill__links .nav-link[aria-current="true"]::before, .nav-pill__links .nav-link[aria-current="true"]::after { opacity: 1; scale: 1; }
+[data-theme="dark"] .nav .nav-pill__links .nav-link[aria-current="true"] { color: var(--white); }
+.nav-pill__links .nav-link[aria-current="true"]::before { opacity: 1; scale: 1; }
 .nav-pill__status { color: var(--fg); font: 500 var(--text-xs) / 1 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; }
 @keyframes caret-blink { 50% { opacity: 0; } }
 
@@ -1058,30 +1057,6 @@ html { cursor: var(--cursor); }
   display: flex;
   flex-direction: column;
   background: var(--bg);
-}
-
-/* Ensure the cloud navbar pill looks crisp and clean floating on the page */
-.projects-page .nav-pill {
-  background: color-mix(in srgb, var(--bg-raised) 70%, transparent);
-  border: 1px solid var(--border);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  box-shadow: var(--shadow-sm);
-}
-
-.projects-page .nav-pill__links .nav-link {
-  color: var(--fg);
-  --cloud: var(--sky-100);
-}
-[data-theme="dark"] .projects-page .nav-pill__links .nav-link {
-  --cloud: var(--sky-700);
-}
-
-.projects-page .nav-pill__links .nav-link[aria-current="true"] {
-  color: var(--sky-800);
-}
-[data-theme="dark"] .projects-page .nav-pill__links .nav-link[aria-current="true"] {
-  color: var(--white);
 }
 
 .projects-main {
