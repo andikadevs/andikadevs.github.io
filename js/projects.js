@@ -358,51 +358,25 @@ function initLangSwitch(control) {
   document.addEventListener("langchange", sync);
 }
 
-// 3D Card Tilt with smooth pointer parallax and interactive audio cues
+// Card interactions: smooth hover sound cue and accessibility
 function initCardInteractions() {
   if (!gridEl) return;
 
-  if (matchMedia("(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)").matches) {
+  if (matchMedia("(hover: hover) and (pointer: fine)").matches) {
     let currentCard = null;
 
     gridEl.addEventListener("pointerover", (e) => {
       const card = e.target.closest(".project-card");
-      if (card !== currentCard) {
-        if (currentCard) {
-          currentCard.style.removeProperty("--rx");
-          currentCard.style.removeProperty("--ry");
-          currentCard.style.removeProperty("--gx");
-          currentCard.style.removeProperty("--gy");
-        }
+      if (card && card !== currentCard) {
         currentCard = card;
-        if (card && e.pointerType === "mouse") {
-          sfx("ui-pop", { volume: 0.35, rate: 0.95 + Math.random() * 0.15 });
+        if (e.pointerType === "mouse") {
+          sfx("ui-pop", { volume: 0.25, rate: 0.95 + Math.random() * 0.15 });
         }
       }
     });
 
-    gridEl.addEventListener("pointermove", (e) => {
-      if (!currentCard) return;
-      const rect = currentCard.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const px = (x / rect.width) * 2 - 1;
-      const py = (y / rect.height) * 2 - 1;
-
-      const rx = (-py * 5).toFixed(2);
-      const ry = (px * 5).toFixed(2);
-      currentCard.style.setProperty("--rx", `${rx}deg`);
-      currentCard.style.setProperty("--ry", `${ry}deg`);
-      currentCard.style.setProperty("--gx", `${((x / rect.width) * 100).toFixed(1)}%`);
-      currentCard.style.setProperty("--gy", `${((y / rect.height) * 100).toFixed(1)}%`);
-    }, { passive: true });
-
     gridEl.addEventListener("pointerout", (e) => {
       if (currentCard && !currentCard.contains(e.relatedTarget)) {
-        currentCard.style.removeProperty("--rx");
-        currentCard.style.removeProperty("--ry");
-        currentCard.style.removeProperty("--gx");
-        currentCard.style.removeProperty("--gy");
         currentCard = null;
       }
     });
