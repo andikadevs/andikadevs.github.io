@@ -161,7 +161,7 @@ export const projects = [
   {
     slug: "snapcrm",
     short: "SnapCRM",
-    client: "Universitas STEKOM & Toploker.com",
+    client: "Universitas STEKOM",
     year: 2024,
     url: null,
     ...img("automations", "dashboard", "flows"),

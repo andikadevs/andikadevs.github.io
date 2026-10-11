@@ -110,7 +110,7 @@ Toploker's operational backbone: ads, revenue recaps, invoices and broadcasts in
 ### SnapCRM
 
 - Category: WhatsApp automation
-- Client: Universitas STEKOM & Toploker.com
+- Client: Universitas STEKOM
 - Year: 2024
 - Link: https://andikadevs.github.io/#project/snapcrm (internal system, not public)
 - Stack: Node.js, Laravel, TypeScript, MySQL, Docker
