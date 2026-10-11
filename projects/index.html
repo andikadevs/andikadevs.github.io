@@ -41,10 +41,10 @@
 
   <link rel="preload" href="../fonts/bricolagegrotesque_v9_3y9K6as8bTXq_nANBjzKo3IeZx8z6up5BeSl9D4dj_x9PpZBMlGIInE.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="../fonts/spacegrotesk_v22_V8mDoQDjQSkFtoMM3T6r8E7mPbF4Cw.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="../css/app.css?v=7bba578da2">
+  <link rel="stylesheet" href="../css/app.css?v=0211255261">
 
   <script src="../js/theme.js"></script>
-  <script type="module" src="../js/projects.js?v=82b102a5cf"></script>
+  <script type="module" src="../js/projects.js?v=4d87246c0e"></script>
 </head>
 <body class="projects-page">
   <!-- ============ NAV ============ -->
@@ -53,25 +53,25 @@
       <a class="nav-mark mascot" href="../" aria-label="andikadevs — Home" data-magnetic>
         <svg class="hero__mark-icon" aria-hidden="true" viewBox="0 0 947 947">
           <g transform="translate(109.3 837.9)">
-            <circle class="mk-ring" cx="364" cy="-364" r="267" fill="none" stroke="currentColor" stroke-width="194"/>
-            <circle class="mk-eye" cx="291" cy="-383" r="58" fill="var(--bg)"/>
-            <circle class="mk-eye" cx="444" cy="-383" r="58" fill="var(--bg)"/>
-            <rect class="mk-stem" x="534" y="-452" width="194" height="452" rx="97" fill="currentColor"/>
+            <circle class="mk-ring" cx="364" cy="-364" r="267" fill="#ffffff" stroke="#ffffff" stroke-width="194"/>
+            <circle class="mk-eye" cx="291" cy="-383" r="58" fill="#060606"/>
+            <circle class="mk-eye" cx="444" cy="-383" r="58" fill="#060606"/>
+            <rect class="mk-stem" x="534" y="-452" width="194" height="452" rx="97" fill="#ffffff"/>
             <circle class="mk-packet" cx="631" cy="-627" r="121" fill="var(--coral, #fc9073)"/>
           </g>
         </svg>
       </a>
     </div>
 
-    <nav class="nav-pill" aria-label="Main" data-scroll-page>
-      <div class="nav-pill__links">
-        <a class="nav-link" href="../#about" data-i18n="nav.about">About</a>
-        <a class="nav-link" href="./" aria-current="true" data-i18n="nav.work">Work</a>
-        <a class="nav-link" href="../#experience" data-i18n="nav.experience">Experience</a>
-        <a class="nav-link" href="../#hire" data-i18n="nav.hire">Hire me</a>
-        <a class="nav-link" href="../#contact" data-i18n="nav.contact">Contact</a>
-      </div>
-    </nav>
+    <!-- Center Search Bar Pill -->
+    <div class="nav-pill nav-search-pill" role="search">
+      <svg class="projects-search-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+      </svg>
+      <input class="projects-search-input" type="search" placeholder="Search projects by name, stack, or client..." data-projects-search data-i18n-attr="placeholder: projects.search" autocomplete="off" spellcheck="false" aria-label="Search projects">
+      <kbd class="nav-search__kbd" aria-hidden="true">/</kbd>
+      <button class="projects-search-clear" type="button" data-search-clear aria-label="Clear search">×</button>
+    </div>
 
     <div class="nav__side nav__side--end">
       <div class="segmented" role="group" aria-label="Language" data-i18n-attr="aria-label: nav.lang" data-lang-switch>
@@ -99,13 +99,7 @@
         <!-- Interactive Controls Bar -->
         <div class="projects-controls">
           <div class="projects-toolbar">
-            <div class="projects-search-bar">
-              <svg class="projects-search-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-              </svg>
-              <input class="projects-search-input" type="search" placeholder="Search projects by name, stack, or client..." data-projects-search data-i18n-attr="placeholder: projects.search" autocomplete="off" spellcheck="false" aria-label="Search projects">
-              <button class="projects-search-clear" type="button" data-search-clear aria-label="Clear search">×</button>
-            </div>
+            <div class="projects-filter-chips" role="group" aria-label="Filter by discipline" data-i18n-attr="aria-label: projects.filterAria" data-filter-chips></div>
 
             <div class="projects-view-toggle">
               <div class="segmented" role="group" aria-label="View mode" data-i18n-attr="aria-label: projects.viewMode" data-view-switch>
@@ -120,8 +114,6 @@
               </div>
             </div>
           </div>
-
-          <div class="projects-filter-chips" role="group" aria-label="Filter by discipline" data-i18n-attr="aria-label: projects.filterAria" data-filter-chips></div>
         </div>
 
         <div class="projects-meta-bar" data-projects-meta></div>

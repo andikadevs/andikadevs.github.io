@@ -302,6 +302,25 @@ function initSearch() {
       onSearch();
     });
   }
+
+  // Global shortcut: '/' or Cmd/Ctrl+K focuses search
+  window.addEventListener("keydown", (e) => {
+    if (
+      (e.key === "/" && !["INPUT", "TEXTAREA"].includes(document.activeElement?.tagName)) ||
+      ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k")
+    ) {
+      e.preventDefault();
+      searchInput.focus();
+      searchInput.select();
+    }
+  });
+
+  const mascotEl = $(".nav-mark.mascot");
+  if (mascotEl) {
+    mascotEl.addEventListener("click", () => {
+      sfx("whoosh", { volume: 0.6 });
+    });
+  }
 }
 
 function initViewToggle() {
