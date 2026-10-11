@@ -1,11 +1,10 @@
 // Projects page controller: interactive search, discipline filtering,
-// responsive card grid, i18n and case-study dialog integration.
+// view-mode switching (grid vs table), and case-study dialog integration.
 import { html, render, $, $$ } from "./core/dom.js";
 import { initI18n, setLang, lang, t, pick } from "./core/i18n.js";
 import { projects, DISCIPLINES } from "./data/projects.js";
 import { initProjectDialog } from "./sections/project-dialog.js";
 import { initThemeToggle } from "./ds/theme-toggle.js";
-import { external } from "./sections/icons.js";
 import { srcset } from "./core/media.js";
 import { syncSegmented } from "./ds/segmented.js";
 
@@ -15,9 +14,13 @@ const chipsEl = $("[data-filter-chips]");
 const searchInput = $("[data-projects-search]");
 const clearBtn = $("[data-search-clear]");
 const totalBadge = $("[data-total-count]");
+const viewSwitchEl = $("[data-view-switch]");
 
 let activeDiscipline = "all";
 let searchQuery = "";
+let viewMode = (() => {
+  try { return localStorage.getItem("projects_view") || "grid"; } catch { return "grid"; }
+})();
 
 // Image path resolver for /projects/ subpath
 const assetSrc = (path) => `../${path}`;
@@ -46,65 +49,115 @@ function getFilteredProjects() {
   });
 }
 
-function renderCard(p) {
+function renderCard(p, index, total) {
   const coverUrl = assetSrc(p.cover);
+  const numStr = String(index + 1).padStart(2, "0");
+  const totStr = String(total).padStart(2, "0");
+  const metric = p.metrics && p.metrics.length ? p.metrics[0] : null;
+  const primaryDiscipline = p.disciplines[0];
+  const tags = p.stack.slice(0, 4);
+  const remaining = p.stack.length - tags.length;
+
   return html`
     <article class="project-card" data-slug="${p.slug}">
-      <div class="project-card__media" data-project="${p.slug}" role="button" tabindex="0" aria-label="${t("work.open")}: ${pick(p.title)}">
-        <div class="shot">
-          <img src="${coverUrl}" srcset="${srcset(coverUrl)}" sizes="(min-width: 1120px) 380px, (min-width: 680px) 46vw, 92vw" alt="${pick(p.title)} — preview" width="1600" height="848" loading="lazy" decoding="async">
+      <div class="project-card__visual" data-project="${p.slug}" tabindex="0" role="button" aria-label="${t("work.open")}: ${pick(p.title)}">
+        <img class="project-card__img" src="${coverUrl}" srcset="${srcset(coverUrl)}" sizes="(min-width: 1080px) 380px, (min-width: 680px) 46vw, 92vw" alt="${pick(p.title)} — preview" width="1600" height="848" loading="lazy" decoding="async">
+        <div class="project-card__badges">
+          <span class="project-card__badge-discipline">${pick(DISCIPLINES[primaryDiscipline])}</span>
+          <span class="project-card__badge-year">${p.year}</span>
         </div>
       </div>
 
       <div class="project-card__body">
-        <div class="project-card__top">
-          <div class="cluster">
-            ${p.disciplines.map((d) => html`<span class="chip">${pick(DISCIPLINES[d])}</span>`)}
-          </div>
-          <span class="label label--muted">${p.year}</span>
+        <div class="project-card__meta-line">
+          <span>${numStr} / ${totStr}</span>
+          <span>${p.client}</span>
         </div>
 
-        <div class="project-card__headline">
-          <h2 class="project-card__title">
-            <a href="#project/${p.slug}" data-project="${p.slug}">${pick(p.title)}</a>
-          </h2>
-          <span class="project-card__category">${pick(p.category)} · ${p.client}</span>
-        </div>
+        <h2 class="project-card__title">
+          <a href="#project/${p.slug}" data-project="${p.slug}">
+            <span>${pick(p.title)}</span>
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11 11 5M5 5h6v6"/></svg>
+          </a>
+        </h2>
 
+        <p class="project-card__category">${pick(p.category)}</p>
         <p class="project-card__summary">${pick(p.summary)}</p>
 
-        <div class="project-card__stack">
-          ${p.stack.map((s) => html`<span class="chip">${s}</span>`)}
+        <div class="project-card__tags">
+          ${tags.map((s) => html`<span class="project-tag">${s}</span>`)}
+          ${remaining > 0 ? html`<span class="project-tag project-tag--more">+${remaining}</span>` : ""}
         </div>
 
-        ${p.metrics && p.metrics.length ? html`
-          <div class="project-card__metrics">
-            ${p.metrics.map((m) => html`
-              <div class="project-card__metric">
-                <span class="project-card__metric-val">${m.value}</span>
-                <span class="project-card__metric-lbl">${pick(m.label)}</span>
-              </div>
-            `)}
-          </div>
-        ` : ""}
-
         <div class="project-card__footer">
-          <button class="btn btn--light" type="button" data-project="${p.slug}">
+          ${metric ? html`
+            <div class="project-card__metric">
+              <strong>${metric.value}</strong>
+              <span>${pick(metric.label)}</span>
+            </div>
+          ` : html`<span></span>`}
+          <button class="project-card__cta" type="button" data-project="${p.slug}">
             <span>${t("projects.viewCase")}</span>
-            <svg class="btn__icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg>
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg>
           </button>
-
-          ${p.url ? html`
-            <a class="btn btn--glass" href="${p.url}" target="_blank" rel="noopener" aria-label="${t("work.visit")} ${pick(p.title)}">
-              <span>${t("work.visit")}</span>
-              ${external()}
-            </a>
-          ` : html`
-            <span class="label label--muted">${t("work.private")}</span>
-          `}
         </div>
       </div>
     </article>
+  `;
+}
+
+function renderTable(items) {
+  return html`
+    <div class="projects-table-wrapper">
+      <table class="projects-table">
+        <thead>
+          <tr>
+            <th style="width: 44px">#</th>
+            <th style="width: 56px"></th>
+            <th>${t("projects.colProject")}</th>
+            <th>${t("projects.colClient")}</th>
+            <th>${t("projects.colDiscipline")}</th>
+            <th>${t("projects.colStack")}</th>
+            <th>${t("projects.colYear")}</th>
+            <th style="text-align: right"></th>
+          </tr>
+        </thead>
+        <tbody>
+          ${items.map((p, i) => {
+            const coverUrl = assetSrc(p.cover);
+            const numStr = String(i + 1).padStart(2, "0");
+            return html`
+              <tr data-project="${p.slug}" tabindex="0" role="button" aria-label="${t("work.open")}: ${pick(p.title)}">
+                <td style="font: 500 11px / 1 var(--font-mono); color: var(--fg-subtle)">${numStr}</td>
+                <td>
+                  <span class="projects-table__thumb">
+                    <img src="${coverUrl}" alt="" loading="lazy" decoding="async">
+                  </span>
+                </td>
+                <td>
+                  <div class="projects-table__title">${pick(p.title)}</div>
+                  <div class="projects-table__cat">${pick(p.category)}</div>
+                </td>
+                <td style="font-size: var(--text-sm); color: var(--fg)">${p.client}</td>
+                <td>
+                  <span class="chip" style="height: 22px; font-size: 10px; padding: 0 8px">${p.disciplines.map((d) => pick(DISCIPLINES[d])).join(", ")}</span>
+                </td>
+                <td>
+                  <div class="projects-table__stack">${p.stack.slice(0, 4).join(" · ")}</div>
+                </td>
+                <td style="font: 500 12px / 1 var(--font-mono); color: var(--fg-muted)">${p.year}</td>
+                <td style="text-align: right">
+                  <span class="project-card__cta">
+                    <span>${t("projects.viewCase")}</span>
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg>
+                  </span>
+                </td>
+              </tr>
+            `;
+          })}
+        </tbody>
+      </table>
+    </div>
   `;
 }
 
@@ -126,7 +179,7 @@ function renderEmpty() {
 function updateView() {
   const items = getFilteredProjects();
 
-  // Render cards or empty state
+  // Render cards or table or empty state
   if (items.length === 0) {
     render(gridEl, renderEmpty());
     const resetBtn = gridEl.querySelector("[data-reset-filters]");
@@ -140,8 +193,10 @@ function updateView() {
         updateView();
       });
     }
+  } else if (viewMode === "table") {
+    render(gridEl, renderTable(items));
   } else {
-    render(gridEl, html`${items.map(renderCard)}`);
+    render(gridEl, html`${items.map((p, i) => renderCard(p, i, items.length))}`);
   }
 
   // Update meta bar (results counter + reset link)
@@ -176,7 +231,6 @@ function updateView() {
 function renderFilterChips() {
   if (!chipsEl) return;
 
-  // Compute counts per discipline
   const counts = { all: projects.length };
   Object.keys(DISCIPLINES).forEach((key) => {
     counts[key] = projects.filter((p) => p.disciplines.includes(key)).length;
@@ -235,6 +289,28 @@ function initSearch() {
   }
 }
 
+function initViewToggle() {
+  if (!viewSwitchEl) return;
+
+  const updateButtons = () => {
+    $$("button[data-view]", viewSwitchEl).forEach((btn) => {
+      btn.setAttribute("aria-pressed", String(btn.dataset.view === viewMode));
+    });
+    syncSegmented(viewSwitchEl);
+  };
+
+  viewSwitchEl.addEventListener("click", (e) => {
+    const btn = e.target.closest("button[data-view]");
+    if (!btn || btn.dataset.view === viewMode) return;
+    viewMode = btn.dataset.view;
+    try { localStorage.setItem("projects_view", viewMode); } catch { /* ignore */ }
+    updateButtons();
+    updateView();
+  });
+
+  updateButtons();
+}
+
 function initLangSwitch(control) {
   const sync = () => {
     $$("button", control).forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.lang === lang())));
@@ -247,6 +323,17 @@ function initLangSwitch(control) {
   document.addEventListener("langchange", sync);
 }
 
+// Accessibility: Enter / Space triggers click on cards or table rows
+gridEl.addEventListener("keydown", (e) => {
+  if (e.key === "Enter" || e.key === " ") {
+    const el = e.target.closest("[data-project]");
+    if (el && el.tagName !== "BUTTON" && el.tagName !== "A") {
+      e.preventDefault();
+      el.click();
+    }
+  }
+});
+
 // Initial setup
 document.addEventListener("langchange", () => {
   renderFilterChips();
@@ -258,6 +345,7 @@ initI18n();
 
 renderFilterChips();
 initSearch();
+initViewToggle();
 updateView();
 
 initThemeToggle($("[data-theme-toggle]"));

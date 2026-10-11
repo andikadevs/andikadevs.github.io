@@ -41,10 +41,10 @@
 
   <link rel="preload" href="../fonts/bricolage-grotesque-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="../fonts/space-grotesk-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="../css/app.css?v=3df318d1e4">
+  <link rel="stylesheet" href="../css/app.css?v=5bf42804b5">
 
   <script src="../js/theme.js"></script>
-  <script type="module" src="../js/projects.js?v=9250e37cce"></script>
+  <script type="module" src="../js/projects.js?v=a74e8ff83d"></script>
 </head>
 <body class="projects-page">
   <!-- ============ NAV ============ -->
@@ -85,12 +85,27 @@
         <p class="projects-hero__lead" data-i18n="projects.lead">A complete archive of systems, web platforms, APIs, AI pipelines, and client products I’ve engineered.</p>
 
         <div class="projects-controls">
-          <div class="projects-search-bar">
-            <svg class="projects-search-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-            </svg>
-            <input class="projects-search-input" type="search" placeholder="Search projects by name, stack, or client..." data-projects-search data-i18n-attr="placeholder: projects.search" autocomplete="off" spellcheck="false" aria-label="Search projects">
-            <button class="projects-search-clear" type="button" data-search-clear aria-label="Clear search">×</button>
+          <div class="projects-toolbar">
+            <div class="projects-search-bar">
+              <svg class="projects-search-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+              </svg>
+              <input class="projects-search-input" type="search" placeholder="Search projects by name, stack, or client..." data-projects-search data-i18n-attr="placeholder: projects.search" autocomplete="off" spellcheck="false" aria-label="Search projects">
+              <button class="projects-search-clear" type="button" data-search-clear aria-label="Clear search">×</button>
+            </div>
+
+            <div class="projects-view-toggle">
+              <div class="segmented" role="group" aria-label="View mode" data-i18n-attr="aria-label: projects.viewMode" data-view-switch>
+                <button type="button" data-view="grid" aria-pressed="true">
+                  <svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true" style="margin-right:4px"><rect x="1" y="1" width="6" height="6" rx="1.5"/><rect x="9" y="1" width="6" height="6" rx="1.5"/><rect x="1" y="9" width="6" height="6" rx="1.5"/><rect x="9" y="9" width="6" height="6" rx="1.5"/></svg>
+                  <span data-i18n="projects.viewGrid">Grid</span>
+                </button>
+                <button type="button" data-view="table" aria-pressed="false">
+                  <svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true" style="margin-right:4px"><rect x="1" y="2" width="14" height="3" rx="1"/><rect x="1" y="7" width="14" height="3" rx="1"/><rect x="1" y="12" width="14" height="3" rx="1"/></svg>
+                  <span data-i18n="projects.viewTable">Table</span>
+                </button>
+              </div>
+            </div>
           </div>
 
           <div class="projects-filter-chips" role="group" aria-label="Filter by discipline" data-i18n-attr="aria-label: projects.filterAria" data-filter-chips></div>
