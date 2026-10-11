@@ -9,7 +9,8 @@
   const save = (value) => { try { localStorage.setItem(KEY, value); } catch { /* private mode */ } };
   const apply = (value) => { root.dataset.theme = value; };
 
-  apply(read() === "dark" ? "dark" : "light");
+  const query = new URLSearchParams(location.search).get("theme");
+  apply(query === "dark" || query === "light" ? query : (read() === "dark" ? "dark" : "light"));
 
   window.theme = {
     get: () => root.dataset.theme,
