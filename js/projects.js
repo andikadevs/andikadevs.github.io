@@ -217,20 +217,22 @@ function updateView() {
     render(gridEl, html`${items.map((p, i) => renderCard(p, i, items.length))}`);
   }
 
-  // Update meta bar (results counter + reset link)
-  const isFiltered = activeDiscipline !== "all" || searchQuery.trim().length > 0;
-  const countText = items.length === 1
-    ? t("projects.resultsSingle")
-    : t("projects.results").replace("{n}", items.length);
+  // Update meta bar (results counter + reset link) if present
+  if (metaEl) {
+    const isFiltered = activeDiscipline !== "all" || searchQuery.trim().length > 0;
+    const countText = items.length === 1
+      ? t("projects.resultsSingle")
+      : t("projects.results").replace("{n}", items.length);
 
-  metaEl.innerHTML = `
-    <span>${countText}</span>
-    ${isFiltered ? `<button class="reset-link" type="button" data-reset-meta>${t("projects.clearFilters")}</button>` : ""}
-  `;
+    metaEl.innerHTML = `
+      <span>${countText}</span>
+      ${isFiltered ? `<button class="reset-link" type="button" data-reset-meta>${t("projects.clearFilters")}</button>` : ""}
+    `;
 
-  const resetMeta = metaEl.querySelector("[data-reset-meta]");
-  if (resetMeta) {
-    resetMeta.addEventListener("click", resetAllFilters);
+    const resetMeta = metaEl.querySelector("[data-reset-meta]");
+    if (resetMeta) {
+      resetMeta.addEventListener("click", resetAllFilters);
+    }
   }
 
   // Update total badge in nav if present

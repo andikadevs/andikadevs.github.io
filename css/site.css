@@ -1357,7 +1357,7 @@ html { cursor: var(--cursor); }
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--space-5);
-  margin-top: var(--space-4);
+  margin-top: 0;
   perspective: 1200px;
 }
 @media (min-width: 680px) {
