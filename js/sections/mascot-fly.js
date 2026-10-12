@@ -26,7 +26,7 @@ const DROP = 1100, HOLD = 1500, HOME = 1100;                                // w
 const BEATS = [[-160, "fall-in"], [DROP + HOLD, "whoosh"], [DROP + HOLD + HOME - 60, "land", { volume: 0.6 }]];
 const panAt = (x, size) => ((x + size / 2) / innerWidth - 0.5) * 0.8;       // left/right follows the mascot
 
-export function initMascotFly(fly, anchor, dock, bubble, ready = Promise.resolve()) {
+export function initMascotFly(fly, anchor, dock, bubble, ready = Promise.resolve(), { arrive = false } = {}) {
   if (!fly || !anchor || !dock) return;
   const skies = [...document.querySelectorAll(".blueprint, .footer")];   // white over the sky and the sea
   const hero = anchor.closest(".hero");
@@ -87,7 +87,9 @@ export function initMascotFly(fly, anchor, dock, bubble, ready = Promise.resolve
     const cx = x + size / 2 + scrollX, cy = y + size / 2 + scrollY;
     return skyRanges.some((r) => cx > r.left && cx < r.right && cy > r.top && cy < r.bottom);
   };
+  let shown = null;                                                         // the pose last drawn, where a guided flight starts from
   const write = ({ x, y, size, f = 0 }, t, onSky) => {
+    shown = { x, y, size };
     fly.style.width = `${rest.width}px`;
     fly.style.transform = `translate(${x.toFixed(1)}px, ${y.toFixed(1)}px) scale(${(size / rest.width).toFixed(4)})`;
     fly.classList.toggle("is-on-paper", !onSky);
@@ -135,8 +137,36 @@ export function initMascotFly(fly, anchor, dock, bubble, ready = Promise.resolve
     intro.beat = 1;                                                        // skip the fall-in, play the whoosh home
   };
 
+  // ---- Guided flights (tejo-guide.js) ---------------------------------------
+  // Between the homepage and the projects page Tejo lives in the nav corner:
+  // leaving, he flies from wherever he is up to the dock (and stays); arriving
+  // back, he starts in the dock and flies down to his spot. Both on a gentle arc.
+  let flight = null;                                                       // { start, from, dur, toDock }
+  const dockPose = () => { if (!dockRect) measure(); return { x: dockRect.left, y: dockRect.top, size: dockRect.width }; };
+  const flightPose = (home) => {
+    const k = clamp01((performance.now() - flight.start) / flight.dur), e = easeInOut(k);
+    const to = flight.toDock ? dockPose() : home;
+    const pose = mix(flight.from, to, e);
+    pose.y -= Math.sin(Math.PI * e) * Math.min(innerHeight * 0.12, 110);   // the arc
+    if (k >= 1 && !flight.toDock) { flight = null; sfx("land", { volume: 0.5, pan: panAt(to.x, to.size) }); }
+    return pose;
+  };
+  const launch = (from, toDock, dur, delay = 0) => {
+    flight = { start: performance.now() + delay, from, dur, toDock };
+    const tick = () => { place(); if (flight) requestAnimationFrame(tick); };
+    requestAnimationFrame(tick);
+    setTimeout(() => sfx("whoosh", { volume: 0.6, pan: panAt(from.x, from.size) }), delay);
+  };
+  addEventListener("pageshow", (event) => { if (event.persisted) { flight = null; place(); } });   // back from the bfcache mid-trip: drop the hold
+  fly.addEventListener("tejo:dock", (event) => {                          // leaving for the projects page
+    intro = null;
+    bubble?.classList.remove("is-on");
+    launch(shown ?? scrollPose(), true, event.detail ?? 600);
+  });
+
   const place = () => {
     const home = scrollPose();
+    if (flight) return apply(flightPose(home), flight?.toDock ? 1 : home.t);
     apply(intro ? introPose(home) : home, intro ? 0 : home.t);
   };
 
@@ -152,7 +182,7 @@ export function initMascotFly(fly, anchor, dock, bubble, ready = Promise.resolve
   };
   onScroll(() => {
     if (scrollY > 4) cutToHome();
-    if (intro) return;                                                     // the welcome's own loop is placing it
+    if (intro || flight) return;                                           // the welcome's (or a flight's) own loop is placing it
     const home = scrollPose(), onSky = onSkyAt(home);                      // read…
     flightSound(home);
     return () => write(home, home.t, onSky);                               // …then write
@@ -161,8 +191,11 @@ export function initMascotFly(fly, anchor, dock, bubble, ready = Promise.resolve
   new ResizeObserver(remeasure).observe(anchor);
   document.fonts?.ready.then(remeasure);
 
-  const welcome = !matchMedia("(prefers-reduced-motion: reduce)").matches && scrollY < 4 && !location.hash;
-  if (welcome) {
+  const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const welcome = !reduced && !arrive && scrollY < 4 && !location.hash;
+  if (arrive && !reduced) {
+    launch(dockPose(), false, 1100, 250);                                    // walked back from the projects page: out of the corner, home
+  } else if (welcome) {
     intro = { start: Infinity, beat: 0 };                                          // waits above the screen until the loader is done
     ready.then(() => { if (intro && intro.start === Infinity) intro.start = performance.now() + 700; });   // once the wipe has mostly cleared
     const tick = () => { place(); if (intro) requestAnimationFrame(tick); };

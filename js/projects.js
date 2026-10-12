@@ -21,6 +21,14 @@ import { initSmoothScroll } from "./ds/smooth-scroll.js";
 import { rollify } from "./ds/text-roll.js";
 import { initMascots } from "./sections/mascot.js";
 import { initMascotIdle } from "./sections/mascot-idle.js";
+import { initMascotChat } from "./sections/mascot-chat.js";
+import { arrival, sayGuide, move, initTejoGuide } from "./sections/tejo-guide.js";
+import { initReveal } from "./ds/reveal.js";
+import { splitWords } from "./ds/split-text.js";
+import { initScrollProgress, watchScroll } from "./ds/scroll-progress.js";
+import { initWordmark } from "./sections/wordmark.js";
+import { initClock } from "./sections/contact.js";
+import { initPauseOffscreen } from "./ds/pause-offscreen.js";
 
 const gridEl = $("[data-projects-grid]");
 const metaEl = $("[data-projects-meta]");
@@ -73,6 +81,7 @@ function renderCard(p, index, total) {
   const remaining = p.stack.length - tags.length;
 
   return html`
+    <div class="project-card-wrap" data-reveal style="--i:${index % 3}">
     <article class="project-card" data-slug="${p.slug}">
       <div class="project-card__visual" data-project="${p.slug}" tabindex="0" role="button" aria-label="${t("work.open")}: ${pick(p.title)}">
         <img class="project-card__img" src="${coverUrl}" srcset="${srcset(coverUrl)}" sizes="(min-width: 1080px) 380px, (min-width: 680px) 46vw, 92vw" alt="${pick(p.title)} — preview" width="1600" height="848" loading="lazy" decoding="async">
@@ -117,6 +126,7 @@ function renderCard(p, index, total) {
         </div>
       </div>
     </article>
+    </div>
   `;
 }
 
@@ -241,6 +251,7 @@ function updateView() {
   }
 
   rollify(".project-card__cta > span");
+  initReveal(gridEl);                                   // fresh cards unclip in, a column at a time
 }
 
 function renderFilterChips() {
@@ -418,6 +429,8 @@ document.addEventListener("langchange", () => {
   renderFilterChips();
   updateView();
   rollify(".nav-link");
+  splitWords();
+  initReveal();
 });
 
 $$("[data-lang-switch]").forEach(initLangSwitch);
@@ -438,7 +451,19 @@ initRobotVoice($("[data-sound-toggle]"));
 initMusic($("[data-music-toggle]"));
 initSoundCues($("[data-nav]"));
 initProjectDialog($("[data-project-dialog]"));
+initScrollProgress();
+watchScroll();
+initWordmark($("[data-wordmark]"));
+initClock($("[data-clock]"));
+initPauseOffscreen();
 initMascots();
-initMascotIdle($(".mascot"));
+initMascotIdle($("[data-mascot]"));
+// Tejo lives in the nav here, so it chats as docked: corner lines plus the projects set.
+initMascotChat($("[data-mascot]"), $("[data-mascot-hello]"));
+initTejoGuide($("[data-mascot]"));
+if (arrival() === "home") setTimeout(() => {          // he led you here, and he's already in his corner: hop, and say so
+  move($("[data-mascot]"), "hop");
+  sayGuide($("[data-mascot]"), "atProjects");
+}, 450);
 
 $("[data-year]").textContent = new Date().getFullYear();

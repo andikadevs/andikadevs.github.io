@@ -100,8 +100,13 @@ export const chatter = {
     ],
   },
 
-  // docked, about the section you're reading (keys = nav section ids)
+  // docked, about the section you're reading (keys = nav section ids, or the
+  // page's <body data-chatter> on pages without section links)
   sections: {
+    projects: {
+      en: ["The whole archive. I dusted every card myself.", "Press / to search. I learned that shortcut the hard way.", "Open a case study. I wrote none of them, but I approve.", "Some of these have a live preview. Go poke the real thing.", "This is the archive. I'm the archivist. Unpaid."],
+      id: ["Ini arsip lengkapnya. Kartunya aku lap satu-satu.", "Tekan / buat cari. Aku belajar shortcut itu dengan susah payah.", "Buka studi kasusnya. Bukan aku yang nulis, tapi aku setuju.", "Beberapa ada pratinjau langsungnya. Coba pegang yang asli.", "Ini arsip. Aku arsiparisnya. Nggak digaji."],
+    },
     about: {
       en: ["That's him. Better in person. Slightly taller.", "He started as an intern. I started as a letter.", "Read this bit slowly. He'll know if you skimmed."],
       id: ["Itu dia. Aslinya lebih keren. Sedikit lebih tinggi.", "Dia mulai dari magang. Aku mulai dari huruf.", "Baca pelan-pelan. Dia tahu kalau kamu cuma skimming."],
@@ -179,6 +184,13 @@ export const chatter = {
   // the theme toggle
   toDark: { en: ["Lights out! Finally, a nap.", "Ooh, night shift."], id: ["Lampu mati! Akhirnya bisa tidur.", "Wah, shift malam."] },
   toLight: { en: ["Aaah, my eyes!", "Good morning, apparently."], id: ["Aduh, silau!", "Selamat pagi, katanya."] },
+  // walking you between the homepage and the projects page (tejo-guide.js)
+  guide: {
+    toProjects: { en: ["Follow me!", "This way!", "Come on, this way!"], id: ["Ikut aku!", "Lewat sini!", "Ayo, lewat sini!"] },
+    toHome: { en: ["Home? This way!", "Follow me home!", "Shortcut home!"], id: ["Pulang? Lewat sini!", "Ikut aku pulang!", "Jalan pintas pulang!"] },
+    atProjects: { en: ["Here we are: every project, one room.", "Welcome to the archive. Touch everything.", "Made it! Search with / if you're in a hurry."], id: ["Sampai: semua proyek, satu ruangan.", "Selamat datang di arsip. Pegang aja semuanya.", "Sampai! Tekan / kalau buru-buru."] },
+    atHome: { en: ["Back home! I kept your seat warm.", "Home again. Nothing moved. I checked.", "Welcome back. Same sky, same me."], id: ["Sudah pulang! Kursimu aku jagain.", "Pulang lagi. Nggak ada yang berubah. Udah aku cek.", "Selamat datang lagi. Langitnya sama, aku juga."] },
+  },
   // the language switch (said in the new language)
   lang: { en: ["Oh, English now? Fancy.", "Switching languages. I'm bilingual, you know."], id: ["Wah, bahasa Indonesia. Lebih santai.", "Oke, sekarang pakai bahasa Indonesia. Aku bisa kok."] },
 };

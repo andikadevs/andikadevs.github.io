@@ -41,22 +41,24 @@ export function initMascotChat(fly, bubble, ready = Promise.resolve()) {
     return line;
   };
   const hush = () => { clearTimeout(hideTimer); clearInterval(typeTimer); talking = false; bubble.classList.remove("is-on"); };
-  // Speak: the bubble is sized and placed for the whole line, then the text types
-  // itself in; with a voice, the chirps run over exactly that typing time.
+  // Speak: the text types itself in; with a voice, the chirps run over exactly
+  // that typing time. The whole line is always in the bubble, the untyped rest
+  // just invisible, so the bubble is sized by the full line from the first
+  // letter and stays right even if the web font swaps in mid-line (a pixel
+  // size fixed up front left the text spilling out when that happened).
+  const rest = document.createElement("span");
+  rest.className = "mascot-hello__rest";
+  const draw = (line, shown) => { rest.textContent = line.slice(shown); text.replaceChildren(line.slice(0, shown), rest); };
   const say = (line, { force = false, voice = true } = {}) => {
     if (!line || (talking && !force)) return;
     const r = fly.getBoundingClientRect();
-    bubble.style.width = bubble.style.height = "";
-    text.textContent = line;
-    placeBubble(bubble, { x: r.left, y: r.top, size: r.width }, [0.05, 14, 18]);   // chatty, not shouty
-    bubble.style.width = `${bubble.offsetWidth + 1}px`;                // hold the final size while typing; +1 because offsetWidth
-    bubble.style.height = `${bubble.offsetHeight}px`;                  // rounds, and a pixel short rewraps the last word
     clearInterval(typeTimer);
     let shown = 0;
-    text.textContent = "";
+    draw(line, shown);
+    placeBubble(bubble, { x: r.left, y: r.top, size: r.width }, [0.05, 14, 18]);   // chatty, not shouty
     typeTimer = setInterval(() => {
       shown += 1;
-      text.textContent = line.slice(0, shown);
+      draw(line, shown);
       if (shown >= line.length) clearInterval(typeTimer);
     }, TYPE);
     if (voice) babble(line, (line.length * TYPE) / 1000);
@@ -75,7 +77,7 @@ export function initMascotChat(fly, bubble, ready = Promise.resolve()) {
     if (Date.now() - lastActive > STILL && !stillSaid) { stillSaid = true; return from(chatter.idle); }
     const r = Math.random();
     if (fly.classList.contains("is-docked")) {
-      const section = chatter.sections[document.querySelector('.nav-link[aria-current="true"]')?.hash.slice(1)];
+      const section = chatter.sections[document.querySelector('.nav-link[aria-current="true"]')?.hash.slice(1) ?? document.body.dataset.chatter];
       if (section && r < 0.5) return from(section);
       return r < 0.62 ? from(chatter.time[timeOfDay()]) : from(chatter.docked);
     }
@@ -103,6 +105,7 @@ export function initMascotChat(fly, bubble, ready = Promise.resolve()) {
     sfx("boing", { rate: 0.94 + Math.random() * 0.12 });
     say(streak ? pick(streak) : from(chatter.boop), { force: true, voice: false });
   });
+  fly.addEventListener("tejo:say", (event) => say(event.detail, { force: true }));   // asked for by tejo-guide.js
   fly.addEventListener("pointerenter", (event) => {
     if (event.pointerType === "mouse" && Math.random() < 0.35 && !quiet()) say(from(chatter.hover), { voice: false });
   });

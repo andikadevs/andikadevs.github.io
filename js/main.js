@@ -26,6 +26,7 @@ import { initMascotFly } from "./sections/mascot-fly.js";
 import { initMascotIdle } from "./sections/mascot-idle.js";
 import { initLoader } from "./sections/loader.js";
 import { initMascotChat } from "./sections/mascot-chat.js";
+import { arrival, sayGuide, initTejoGuide } from "./sections/tejo-guide.js";
 import { initRobotVoice } from "./sections/robot-voice.js";
 import { initAudio } from "./core/audio.js";
 import { initSoundFx, sfxOnce } from "./sections/sound-fx.js";
@@ -44,7 +45,11 @@ initSoundFx();
 const countSound = (el) => sfxOnce(el.closest("[data-count-group]") ?? el, "count-up", { volume: 0.8 });
 
 // The loader plays first; entrances (reveals, the mascot's hello) wait for it.
-const pageReady = initLoader($("[data-loader]"));
+// Walked back from the projects page with Tejo, it's the same visit: no loader
+// (the inline script in index.html already hid it before the first paint).
+const guided = arrival() === "projects";
+if (guided) $("[data-loader]")?.remove();
+const pageReady = guided ? Promise.resolve() : initLoader($("[data-loader]"));
 
 function renderContent() {
   rollify(ROLL);
@@ -90,11 +95,13 @@ initClock($("[data-clock]"));
 initWordmark($("[data-wordmark]"));
 initStudio($("[data-studio]"));
 initMascots();
-initMascotFly($("[data-mascot-fly]"), $("[data-hero-anchor]"), $("[data-mascot-dock]"), $("[data-mascot-hello]"), pageReady);
+initMascotFly($("[data-mascot-fly]"), $("[data-hero-anchor]"), $("[data-mascot-dock]"), $("[data-mascot-hello]"), pageReady, { arrive: guided });
 initMascotIdle($("[data-mascot-fly]"));
 initRobotVoice($("[data-sound-toggle]"));
 initMusic($("[data-music-toggle]"));
 initSoundCues($("[data-nav]"));
 initMascotChat($("[data-mascot-fly]"), $("[data-mascot-hello]"), pageReady);
+initTejoGuide($("[data-mascot-fly]"));
+if (guided) setTimeout(() => sayGuide($("[data-mascot-fly]"), "atHome"), 1450);   // once he's flown down from the corner
 initPauseOffscreen();
 $("[data-year]").textContent = new Date().getFullYear();

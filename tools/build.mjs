@@ -9,6 +9,7 @@
 //   index.html  <!-- jsonld --> Person / WebSite / ProfilePage / Organization / projects ItemList
 //   index.html  <!-- noscript --> plain-HTML project list for crawlers without JS
 //   sitemap.xml, robots.txt, llms.txt, llms-full.txt, manifest.webmanifest
+//   projects/index.html <!-- footer --> the homepage footer, its projects link pointing home
 //   projects/<slug>/preview/index.html   iframe page for every project or demo with a `preview` URL
 //
 // No dependencies: Node's own fs and the ES-module data files in js/data.
@@ -359,6 +360,12 @@ html = html.replace(/<script type="module" src="js\/main\.js(\?v=[^"]*)?"><\/scr
 html = inject(html, "importmap", importMap());
 write("index.html", html);
 let projHtml = read("projects/index.html");
+// The footer (sea, wordmark, links) is the homepage's own, copied in so it's written
+// once; its "Browse all projects" link becomes the way home.
+const footer = html.match(/ *<footer class="footer">[\s\S]*?<\/footer>/)[0]
+  .replace(/<a href="projects\/"><span data-i18n="work\.all">[^<]*<\/span><\/a>/, `<a href="../"><span data-i18n="projects.home">Home</span></a>`);
+if (!footer.includes('href="../"')) throw new Error("footer: the projects link to rewrite is gone");
+projHtml = inject(projHtml, "footer", footer);
 const cssHash = hash(read("css/app.css"));
 const projJsHash = hash(read("js/projects.js"));
 projHtml = projHtml.replace(/href="\.\.\/css\/app\.css(\?v=[^"]*)?"/, `href="../css/app.css?v=${cssHash}"`);

@@ -84,6 +84,12 @@ html { cursor: var(--cursor); }
 .nav .nav-pill__links .nav-link[aria-current="true"] { color: var(--sky-800); }   /* dark ink on the cloud, in every nav state and theme */
 [data-theme="dark"] .nav .nav-pill__links .nav-link[aria-current="true"] { color: var(--white); }
 .nav-pill__links .nav-link[aria-current="true"]::before { opacity: 1; scale: 1; }
+/* The one link that leaves the page: set apart from the section links by a hairline. */
+.nav-pill__links .nav-link--page { margin-left: var(--space-3); }
+.nav-pill__links .nav-link--page::after {
+  content: ""; position: absolute; left: calc(-1 * var(--space-2) - 1px); top: 28%; bottom: 28%;
+  width: 1px; background: currentColor; opacity: 0.35;
+}
 .nav-pill__status { color: var(--fg); font: 500 var(--text-xs) / 1 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; }
 @keyframes caret-blink { 50% { opacity: 0; } }
 
@@ -125,12 +131,13 @@ html { cursor: var(--cursor); }
   position: fixed; left: 0; top: 0; z-index: 61; pointer-events: none;
   padding: 0.7em 1.2em; border-radius: 1.3em;   /* a pill on one line, a rounded box when it wraps, so no word sits in a curved end */
   background: var(--white); color: var(--sky-800);
-  font: 600 18px / 1.25 var(--font-sans); width: max-content; max-width: min(15em, calc(100vw - 24px));   /* size set by mascot-bubble.js; long lines wrap */
+  font: 600 18px / 1.25 var(--font-sans); width: max-content; max-width: min(15em, calc(100vw - 24px));   /* sized by its text (font size from mascot-bubble.js); long lines wrap */
   box-shadow: 0 12px 28px rgb(31 59 109 / 0.22);
   translate: 0 -100%; opacity: 0; scale: 0.6; transform-origin: 0 100%;   /* anchored at its bottom-left, by the tail */
   transition: opacity 0.3s ease, scale 0.45s var(--ease-spring);
 }
 .mascot-hello.is-on { opacity: 1; scale: 1; }
+.mascot-hello__rest { visibility: hidden; }   /* the part of the line not typed yet: holds its space (mascot-chat.js) */
 .mascot-hello.is-left { transform-origin: 100% 100%; }
 .mascot-hello.is-below { translate: 0 0; transform-origin: 0 0; }   /* no room above (docked in the nav): hang below */
 .mascot-fly.is-on-paper { filter: drop-shadow(0 4px 12px rgb(31 59 109 / 0.35)); }   /* stays white on paper; the shadow gives it an edge */
@@ -349,6 +356,15 @@ html { cursor: var(--cursor); }
 .deck:focus-visible { outline: 2px solid var(--white); outline-offset: 8px; border-radius: var(--radius-lg); }
 
 .deck__info { position: relative; z-index: 200; display: flex; flex-direction: column; justify-content: center; gap: var(--space-6); }
+/* The panel's last line: how to move the deck, and the way to every project. */
+.deck__foot {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-3) var(--space-5);
+  max-width: 36rem; padding-top: var(--space-4); border-top: 1px solid rgb(255 255 255 / 0.25);
+}
+.deck__all { display: inline-flex; align-items: center; gap: var(--space-2); color: var(--white); }
+.deck__all > span { text-decoration: underline; text-decoration-color: rgb(255 255 255 / 0.4); text-underline-offset: 5px; transition: text-decoration-color var(--dur-base) ease; }
+.deck__all:hover > span { text-decoration-color: var(--white); }
+.deck__all:hover .btn__icon { transform: translateX(3px); }
 .deck__count { display: flex; align-items: center; gap: 0.2em; font: 300 clamp(2.4rem, 5vw, 4.2rem) / 1 var(--font-display); letter-spacing: -0.04em; font-variant-numeric: tabular-nums; }
 .deck__count i { width: 2px; height: 0.8em; background: currentColor; rotate: 15deg; margin-inline: 0.18em; opacity: 0.7; }
 .deck__count [data-deck-current] { font-weight: 800; }
@@ -989,7 +1005,7 @@ html { cursor: var(--cursor); }
 @media (max-width: 760px) {
   .hero .cloud { --o: 0.4; }
   .hero .cloud[data-cloud="2"]:nth-of-type(2) { top: -3%; }
-  .nav { inset-block-start: var(--space-3); gap: var(--space-2); grid-template-columns: auto 1fr auto; }
+  .nav { inset-block-start: var(--space-3); gap: var(--space-2); grid-template-columns: auto minmax(0, 1fr) auto;   /* the search gives way, never the controls */ }
   .nav__side:first-child { display: flex; }
   .intro__stats .stat__label { font-size: var(--text-xs); }
   .logo-row { gap: var(--space-5); }
@@ -1051,56 +1067,21 @@ html { cursor: var(--cursor); }
   .contact__band .cloud { transform: translateY(calc((0.5 - var(--p, 0.5)) * 120px)); }
 }
 
-/* ---- Dedicated Projects Page (/projects/) ------------------------------- */
-.projects-page {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  background: var(--bg);
+/* ---- Projects page (/projects/) -------------------------------------------
+   Built from the homepage's pieces: a sky hero (like Work) that melts into the
+   paper through a cloud bank, the archive on paper, then the contact sky and the
+   sea footer. Only layout lives here; the cards, chips and buttons are the DS's. */
+.projects-hero {
+  padding-block: clamp(150px, 15vw, 190px) clamp(190px, 22vw, 300px);
+  overflow: hidden;
 }
+.projects-hero .cloudbank { height: clamp(120px, 15vw, 230px); }
+.projects-hero .cloudbank--back { opacity: 0.6; bottom: 10%; }
+.projects-hero__inner { position: relative; z-index: 2; display: grid; justify-items: center; text-align: center; gap: var(--space-5); }
+.btn:hover .btn__icon--back { transform: translateX(-3px); }
+.projects-hero__lead { max-width: 40ch; font-size: var(--text-lg); color: var(--white); }
 
-.projects-main {
-  flex: 1;
-  padding-top: clamp(84px, 8.5vw, 104px);
-  padding-bottom: clamp(48px, 6vw, 80px);
-}
-
-.projects-head {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: var(--space-3);
-  max-width: 680px;
-  margin-bottom: clamp(28px, 3.5vw, 40px);
-}
-
-.projects-head .sheet {
-  display: inline-flex;
-  flex-direction: row !important;
-  align-items: center !important;
-  gap: 8px !important;
-  text-align: left !important;
-  border-radius: var(--radius-pill);
-}
-
-.projects-head .sheet::before {
-  display: block !important;
-}
-
-.projects-title {
-  margin: 0;
-  font: 800 var(--text-3xl) / 1.05 var(--font-display);
-  letter-spacing: var(--tracking-tight);
-  color: var(--fg);
-}
-
-.projects-lead {
-  margin: 0;
-  font-size: var(--text-base);
-  line-height: var(--leading-body);
-  color: var(--fg-muted);
-  max-width: 58ch;
-}
+.projects-main { padding-block: 0 var(--space-9); }
 
 /* Tejo in header: matching beranda */
 .projects-page .nav-mark.mascot {
@@ -1126,8 +1107,24 @@ html { cursor: var(--cursor); }
   filter: drop-shadow(0 4px 14px rgb(0 0 0 / 0.55));
 }
 
+/* Centre of the projects nav: a round way home, then the search, sharing its glass. */
+.nav-center { display: flex; align-items: center; justify-content: center; gap: var(--space-2); min-width: 0; }
+.nav-center .nav-search-pill { flex: 0 1 540px; margin-inline: 0; }
+.nav-home {
+  display: grid; place-items: center; flex: none;
+  width: 52px; height: 52px; border-radius: 50%;
+  background: color-mix(in srgb, var(--bg) 78%, transparent); color: var(--fg);
+  border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(14px) saturate(1.3); -webkit-backdrop-filter: blur(14px) saturate(1.3);
+  transition: transform var(--dur-fast) var(--ease-spring), border-color var(--dur-fast) ease;
+}
+.nav-home:hover  { transform: scale(1.06); border-color: var(--border-strong); }
+.nav-home:active { transform: scale(0.94); }
+.nav-home svg { width: 19px; height: 19px; }
+@media (max-width: 760px) { .nav-home { width: 42px; height: 42px; } .nav-home svg { width: 17px; height: 17px; } }   /* matches the search's height there */
+
 .projects-page .nav {
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: auto minmax(0, 1fr) auto;
   gap: var(--space-4);
 }
 
@@ -1139,6 +1136,7 @@ html { cursor: var(--cursor); }
   gap: var(--space-3);
   height: 52px;
   width: min(100%, 540px);
+  min-width: 0;
   margin-inline: auto;
   padding: 0 18px;
   border-radius: var(--radius-pill);
@@ -1236,7 +1234,7 @@ html { cursor: var(--cursor); }
 @media (max-width: 760px) {
   .projects-page .nav {
     inset-block-start: var(--space-3);
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: auto minmax(0, 1fr) auto;
     gap: 8px;
     padding-inline: 12px;
   }
@@ -1284,145 +1282,26 @@ html { cursor: var(--cursor); }
   .nav-search-pill .nav-search__kbd {
     display: none !important;
   }
-  .projects-main {
-    padding-top: clamp(88px, 11vw, 104px);
-    padding-bottom: 48px;
-  }
-  .projects-head {
-    gap: 8px;
-    margin-bottom: 24px;
-  }
   .project-card__body {
     padding: 14px 16px 16px;
   }
 }
 
-.projects-view-toggle {
-  display: flex;
-  align-items: center;
+.projects-toolbar {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-4);
+  margin-top: calc(-1 * var(--space-6));                    /* tucks up under the cloud bank */
+  position: relative; z-index: 2;
 }
-
-.projects-view-toggle .segmented {
-  --seg-count: 2;
-  position: relative;
-  display: inline-grid;
-  grid-auto-flow: column;
-  grid-auto-columns: 1fr;
-  padding: 2px;
-  border-radius: var(--radius-pill);
-  background: var(--bg-raised);
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow-sm);
-  height: 34px;
-  box-sizing: border-box;
-  align-items: center;
+.projects-filters { gap: var(--space-2); }
+@media (max-width: 760px) {                                 /* one swipeable row instead of four wrapped ones */
+  .projects-filters { flex-wrap: nowrap; overflow-x: auto; margin-inline: calc(-1 * var(--gutter)); padding-inline: var(--gutter); }
+  .projects-filters .chip--filter { flex: none; }
 }
-
-.projects-view-toggle .segmented button {
-  position: relative;
-  z-index: 1;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  min-width: 76px;
-  height: 28px;
-  padding: 0 12px;
-  border: 0;
-  background: transparent;
-  border-radius: var(--radius-pill);
-  font: 500 11px / 1 var(--font-mono);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--fg-muted);
-  cursor: pointer;
-  white-space: nowrap;
-  transition: color var(--dur-base) ease;
-}
-
-.projects-view-toggle .segmented button svg {
-  flex-shrink: 0;
-  width: 14px;
-  height: 14px;
-}
-
-.projects-view-toggle .segmented button[aria-pressed="true"] {
-  color: var(--fg-inverse);
-}
-
-.projects-filter-chips {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--space-2);
-  margin-top: 0;
-}
-
-.projects-filter-chips .chip--filter {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  height: 34px;
-  box-sizing: border-box;
-  padding: 0 var(--space-3);
-  border-radius: var(--radius-pill);
-  font: 500 11px / 1 var(--font-mono);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  cursor: pointer;
-  background: var(--bg-raised);
-  border: 1px solid var(--border);
-  color: var(--fg-muted);
-  transition: background var(--dur-fast) ease, color var(--dur-fast) ease, border-color var(--dur-fast) ease;
-}
-.projects-filter-chips .chip--filter:hover {
-  border-color: var(--border-strong);
-  color: var(--fg);
-}
-.projects-filter-chips .chip--filter[aria-pressed="true"] {
-  background: var(--ink);
-  color: var(--fg-inverse);
-  border-color: var(--ink);
-}
-[data-theme="dark"] .projects-filter-chips .chip--filter[aria-pressed="true"] {
-  background: var(--cream);
-  color: var(--bg);
-  border-color: var(--cream);
-}
-
-.projects-filter-chips .chip--filter .chip__count {
-  font-size: 10px;
-  padding: 1px 6px;
-  border-radius: var(--radius-pill);
-  background: color-mix(in srgb, currentColor 14%, transparent);
-}
-
-.projects-meta-bar {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  gap: var(--space-3);
-  padding-block: var(--space-4);
-  font: 500 var(--text-xs) / 1 var(--font-mono);
-  letter-spacing: var(--tracking-label);
-  text-transform: uppercase;
-  color: var(--fg-muted);
-  border-bottom: 0;
-}
-
-.projects-meta-bar .reset-link {
-  color: var(--brand);
-  background: none;
-  border: 0;
-  padding: 0;
-  font: inherit;
-  text-transform: inherit;
-  letter-spacing: inherit;
-  cursor: pointer;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
+.projects-filters .chip__count { opacity: 0.55; }
+.projects-view { --seg-count: 2; }
+.projects-view button { min-width: 72px; }
+.projects-meta { display: flex; flex-wrap: wrap; gap: var(--space-4); align-items: center; min-height: 20px; margin-block: var(--space-5); }
+.projects-meta .reset-link { font: inherit; letter-spacing: inherit; text-transform: inherit; color: var(--brand); text-decoration: underline; text-underline-offset: 3px; }
 
 /* ---- Project Card Grid -------------------------------------------------- */
 .projects-grid {
@@ -1480,7 +1359,7 @@ html { cursor: var(--cursor); }
 /* Screenshot image visual */
 .project-card__visual {
   position: relative;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 15 / 8;                     /* the screenshots' own shape (~1.83–1.89), so cover barely crops */
   overflow: hidden;
   background: var(--bg-sunken);
   border-bottom: 0;
@@ -1721,6 +1600,7 @@ html { cursor: var(--cursor); }
 .project-card:hover .project-card__cta svg {
   transform: translateX(3px);
 }
+.project-card-wrap > .project-card { height: 100%; }   /* the wrapper carries the reveal, so the card keeps its own hover transition */
 
 /* ---- Project Directory Table View --------------------------------------- */
 .projects-grid.is-table-view,
@@ -1844,3 +1724,16 @@ html { cursor: var(--cursor); }
 /* ---- Live preview (/projects/<slug>/preview/, written by tools/build.mjs) -- */
 .preview-page { height: 100svh; overflow: hidden; }
 .preview-frame { display: block; width: 100%; height: 100%; border: 0; background: var(--white); }
+
+/* ---- Home ⇄ projects: one continuous place, Tejo leading (tejo-guide.js) ---
+   The page swap is a cross-document view transition: the old page fades into
+   the new one, and the nav's tools (same on both pages) stay put. Tejo waits
+   in the nav corner on both sides, so he seems to carry straight across. */
+.is-guided .loader { display: none; }
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition { navigation: auto; }
+  .nav__side--end { view-transition-name: nav-tools; }
+  ::view-transition-old(root) { animation: none; }      /* stays solid underneath, so no blank canvas shows through mid-fade */
+  ::view-transition-new(root) { animation: page-in 0.5s var(--ease-out) both; }
+}
+@keyframes page-in { from { opacity: 0; } }        /* fades only: moving the whole page would bare the empty canvas at its edge */
