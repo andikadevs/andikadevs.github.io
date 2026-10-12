@@ -9,15 +9,16 @@
 //   index.html  <!-- jsonld --> Person / WebSite / ProfilePage / Organization / projects ItemList
 //   index.html  <!-- noscript --> plain-HTML project list for crawlers without JS
 //   sitemap.xml, robots.txt, llms.txt, llms-full.txt, manifest.webmanifest
+//   projects/<slug>/preview/index.html   iframe page for every project or demo with a `preview` URL
 //
 // No dependencies: Node's own fs and the ES-module data files in js/data.
-import { readFileSync, readdirSync, writeFileSync } from "node:fs";
+import { mkdirSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { profile, experience, education, highlights, clients } from "../js/data/profile.js";
-import { projects, DISCIPLINES } from "../js/data/projects.js";
+import { projects, demos, DISCIPLINES } from "../js/data/projects.js";
 import { strings } from "../js/data/strings.js";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
@@ -27,7 +28,7 @@ const OG_IMAGE = { url: `${SITE}/assets/img/og.jpg`, width: 1200, height: 630 };
 const en = strings.en;
 
 const read = (p) => readFileSync(join(ROOT, p), "utf8");
-const write = (p, s) => { writeFileSync(join(ROOT, p), s); console.log("  wrote", p, `(${(Buffer.byteLength(s) / 1024).toFixed(1)} KB)`); };
+const write = (p, s) => { mkdirSync(dirname(join(ROOT, p)), { recursive: true }); writeFileSync(join(ROOT, p), s); console.log("  wrote", p, `(${(Buffer.byteLength(s) / 1024).toFixed(1)} KB)`); };
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 const abs = (p) => `${SITE}/${p.replace(/^\.?\//, "")}`;
 
@@ -320,6 +321,31 @@ ${profile.socials.map((s) => `- ${s.label}: ${s.url}`).join("\n")}
 `;
 }
 
+// ---- live preview pages ------------------------------------------------------
+// The project's own site in a full-viewport iframe. GitHub Pages
+// can't proxy, so the framed site must allow this domain (frame-ancestors).
+function previewPage(p) {
+  const up = "../../../";
+  return `<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>${esc(p.title.en)} — Live preview · andikadevs</title>
+  <meta name="robots" content="noindex">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="${up}assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="${up}assets/img/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="stylesheet" href="${up}css/app.css?v=${hash(read("css/app.css"))}">
+  <script src="${up}js/theme.js"></script>
+</head>
+<body class="preview-page">
+  <iframe class="preview-frame" src="${esc(p.preview)}" title="${esc(p.title.en)} — live site" allow="fullscreen; clipboard-write"></iframe>
+</body>
+</html>
+`;
+}
+
 // ---- run ---------------------------------------------------------------------
 console.log("build:");
 buildCss();
@@ -338,6 +364,7 @@ const projJsHash = hash(read("js/projects.js"));
 projHtml = projHtml.replace(/href="\.\.\/css\/app\.css(\?v=[^"]*)?"/, `href="../css/app.css?v=${cssHash}"`);
 projHtml = projHtml.replace(/src="\.\.\/js\/projects\.js(\?v=[^"]*)?"/, `src="../js/projects.js?v=${projJsHash}"`);
 write("projects/index.html", projHtml);
+for (const p of [...projects, ...demos].filter((p) => p.preview)) write(`projects/${p.slug}/preview/index.html`, previewPage(p));
 write("sitemap.xml", sitemap());
 write("robots.txt", robots());
 write("manifest.webmanifest", manifest());

@@ -2,6 +2,10 @@
 // anything a visitor reads is an { en, id } pair.
 // Order here is the order in the Work stack and the hero.
 
+// `preview` (optional): a site the visitor can browse inside an iframe at
+// projects/<slug>/preview/. tools/build.mjs writes that page. The site must
+// allow framing (no X-Frame-Options; CSP frame-ancestors lets this domain in).
+
 // First shot is the cover; the rest become the case-study gallery.
 const img = (dir, cover, ...gallery) => {
   const path = (name) => `assets/projects/${dir}/${name}.webp`;
@@ -52,6 +56,7 @@ export const projects = [
     client: "Sofwanland",
     year: 2026,
     url: "https://sofwanland.com",
+    preview: "https://sofwanland.andikads.my.id",
     ...img("sofwanland", "hero", "services", "portfolio", "branding"),
     disciplines: ["web"],
     stack: ["Astro", "Tailwind CSS 4", "TypeScript", "HTML5", "Cloudflare"],
@@ -414,4 +419,19 @@ export const projects = [
     ],
   },
   */
+];
+
+// Preview-only demos: no case study, just a live preview page at
+// projects/<slug>/preview/ (same rules as `preview` above).
+export const demos = [
+  {
+    slug: "meridian",
+    title: { en: "Meridian", id: "Meridian" },
+    preview: "https://landing-017.manggalacloud.workers.dev/",
+  },
+  {
+    slug: "paud",
+    title: { en: "PAUD", id: "PAUD" },
+    preview: "https://landing-018.manggalacloud.workers.dev/",
+  },
 ];

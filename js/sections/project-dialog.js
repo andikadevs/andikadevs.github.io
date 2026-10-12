@@ -3,7 +3,7 @@
 import { html, render, $ } from "../core/dom.js";
 import { t, pick } from "../core/i18n.js";
 import { projects, DISCIPLINES } from "../data/projects.js";
-import { external, close } from "./icons.js";
+import { arrow, external, close } from "./icons.js";
 import { lockScroll, unlockScroll } from "../ds/smooth-scroll.js";
 import { srcset } from "../core/media.js";
 
@@ -30,7 +30,10 @@ const view = (p) => {
         <div><dt class="label label--muted">${t("work.year")}</dt><dd>${p.year}</dd></div>
       </dl>
       ${p.url
-        ? html`<a class="btn" href="${p.url}" target="_blank" rel="noopener">${t("work.visit")} ${external()}</a>`
+        ? html`<div class="cluster">
+            <a class="btn" href="${p.url}" target="_blank" rel="noopener">${t("work.visit")} ${external()}</a>
+            ${p.preview ? html`<a class="btn btn--ghost" href="${resolvePath(`projects/${p.slug}/preview/`)}">${t("work.preview")} ${arrow()}</a>` : ""}
+          </div>`
         : html`<p class="label label--muted">${t("work.private")}</p>`}
     </header>
 
