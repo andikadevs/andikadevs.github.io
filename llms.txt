@@ -36,5 +36,6 @@ I started as an intern at a Toyota dealership, writing Laravel. Today I run the 
 
 ## Optional
 
+- [All Projects Archive](https://andikadevs.github.io/projects/)
 - [Full text of every case study](https://andikadevs.github.io/llms-full.txt)
 - [Sitemap](https://andikadevs.github.io/sitemap.xml)

@@ -178,6 +178,50 @@ function jsonld() {
   return `  <script type="application/ld+json">\n${json}\n  </script>`;
 }
 
+function jsonldProjects() {
+  const person = `${SITE}/#person`;
+  const graph = [
+    {
+      "@type": "WebSite", "@id": `${SITE}/#website`,
+      url: `${SITE}/`, name: "andikadevs", alternateName: profile.name, description: en["meta.description"],
+      inLanguage: ["en", "id"], publisher: { "@id": person },
+    },
+    {
+      "@type": "CollectionPage", "@id": `${SITE}/projects/#webpage`,
+      url: `${SITE}/projects/`, name: "All Projects — Andika Dwi Saputra (andikadevs)",
+      description: "Explore all client systems, internal platforms, AI workflows, and open-source tools built by Andika Dwi Saputra.",
+      isPartOf: { "@id": `${SITE}/#website` },
+      about: { "@id": person },
+      primaryImageOfPage: { "@type": "ImageObject", url: OG_IMAGE.url, width: OG_IMAGE.width, height: OG_IMAGE.height },
+      inLanguage: "en", dateModified: TODAY,
+    },
+    {
+      "@type": "BreadcrumbList", "@id": `${SITE}/projects/#breadcrumb`,
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: `${SITE}/` },
+        { "@type": "ListItem", position: 2, name: "Projects", item: `${SITE}/projects/` },
+      ],
+    },
+    {
+      "@type": "ItemList", "@id": `${SITE}/projects/#work`, name: "All projects archive", numberOfItems: projects.length,
+      itemListElement: projects.map((p, i) => ({
+        "@type": "ListItem", position: i + 1,
+        item: {
+          "@type": "CreativeWork", "@id": `${SITE}/#project/${p.slug}`,
+          name: p.title.en, headline: p.category.en, description: p.summary.en,
+          url: p.url ?? `${SITE}/#project/${p.slug}`,
+          image: abs(p.cover),
+          dateCreated: String(p.year), creator: { "@id": person },
+          keywords: [...p.stack, ...p.disciplines.map((d) => DISCIPLINES[d].en)].join(", "),
+          sourceOrganization: { "@type": "Organization", name: p.client },
+        },
+      })),
+    },
+  ];
+  const json = JSON.stringify({ "@context": "https://schema.org", "@graph": graph }, null, 2).replace(/</g, "\\u003c");
+  return `  <script type="application/ld+json">\n${json}\n  </script>`;
+}
+
 // ---- noscript fallback -----------------------------------------------------
 function noscript() {
   const items = projects.map((p) =>
@@ -187,18 +231,29 @@ function noscript() {
 
 // ---- sitemap, robots, manifest ----------------------------------------------
 function sitemap() {
-  const alt = (prefix = "") => `    <xhtml:link rel="alternate" hreflang="en" href="${SITE}/${prefix}"/>\n    <xhtml:link rel="alternate" hreflang="id" href="${SITE}/${prefix}?lang=id"/>\n    <xhtml:link rel="alternate" hreflang="x-default" href="${SITE}/${prefix}"/>`;
-  const images = [OG_IMAGE.url, abs("assets/img/andika.webp"), ...projects.map((p) => abs(p.cover))]
-    .map((u) => `    <image:image><image:loc>${u}</image:loc></image:image>`).join("\n");
-  const url = (loc, withImages, prefix = "") => `  <url>\n    <loc>${loc}</loc>\n    <lastmod>${TODAY}</lastmod>\n${alt(prefix)}\n${withImages ? images + "\n" : ""}  </url>`;
+  const images = (urls) => urls
+    .map((u) => `    <image:image>\n      <image:loc>${u}</image:loc>\n    </image:image>`)
+    .join("\n");
+  const homeImages = [OG_IMAGE.url, abs("assets/img/andika.webp"), ...projects.map((p) => abs(p.cover))];
+  const projectImages = [OG_IMAGE.url, ...projects.map((p) => abs(p.cover))];
+
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
-${url(`${SITE}/`, true, "")}
-${url(`${SITE}/?lang=id`, false, "")}
-${url(`${SITE}/projects/`, true, "projects/")}
-${url(`${SITE}/projects/?lang=id`, false, "projects/")}
+  <url>
+    <loc>${SITE}/</loc>
+    <lastmod>${TODAY}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+${images(homeImages)}
+  </url>
+  <url>
+    <loc>${SITE}/projects/</loc>
+    <lastmod>${TODAY}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+${images(projectImages)}
+  </url>
 </urlset>
 `;
 }
@@ -260,6 +315,7 @@ ${socials}
 
 ## Optional
 
+- [All Projects Archive](${SITE}/projects/)
 - [Full text of every case study](${SITE}/llms-full.txt)
 - [Sitemap](${SITE}/sitemap.xml)
 `;
@@ -271,7 +327,7 @@ function llmsFull() {
 - Category: ${p.category.en}
 - Client: ${p.client}
 - Year: ${p.year}
-- Link: ${p.url ?? `${SITE}/#project/${p.slug}`} ${p.url ? "" : "(internal system, not public)"}
+- Link: ${p.url ?? `${SITE}/#project/${p.slug}`} ${p.url ? "" : "(internal system, not public)"}${p.preview ? `\n- Live preview: ${SITE}/projects/${p.slug}/preview/` : ""}
 - Stack: ${p.stack.join(", ")}
 - Areas: ${p.disciplines.map((d) => DISCIPLINES[d].en).join(", ")}
 
@@ -327,12 +383,16 @@ ${profile.socials.map((s) => `- ${s.label}: ${s.url}`).join("\n")}
 // can't proxy, so the framed site must allow this domain (frame-ancestors).
 function previewPage(p) {
   const up = "../../../";
+  const coverUrl = p.cover ? abs(p.cover) : OG_IMAGE.url;
+  const desc = p.summary ? p.summary.en : `Live interactive preview of ${p.title.en} built by ${profile.name} (andikadevs).`;
   return `<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>${esc(p.title.en)} — Live preview · andikadevs</title>
+  <meta name="description" content="${esc(desc)}">
+  <meta name="author" content="${esc(profile.name)}">
   <meta name="robots" content="noindex">
   <meta name="color-scheme" content="light dark">
   <link rel="icon" href="${up}assets/img/favicon.svg" type="image/svg+xml">
@@ -366,6 +426,7 @@ const footer = html.match(/ *<footer class="footer">[\s\S]*?<\/footer>/)[0]
   .replace(/<a href="projects\/"><span data-i18n="work\.all">[^<]*<\/span><\/a>/, `<a href="../"><span data-i18n="projects.home">Home</span></a>`);
 if (!footer.includes('href="../"')) throw new Error("footer: the projects link to rewrite is gone");
 projHtml = inject(projHtml, "footer", footer);
+projHtml = inject(projHtml, "jsonld", jsonldProjects());
 const cssHash = hash(read("css/app.css"));
 const projJsHash = hash(read("js/projects.js"));
 projHtml = projHtml.replace(/href="\.\.\/css\/app\.css(\?v=[^"]*)?"/, `href="../css/app.css?v=${cssHash}"`);
