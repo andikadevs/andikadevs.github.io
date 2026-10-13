@@ -4,5 +4,5 @@ export function initPauseOffscreen(root = document) {
   const io = new IntersectionObserver((entries) => entries.forEach((e) => {
     e.target.toggleAttribute("data-offscreen", !e.isIntersecting);
   }), { rootMargin: "120px 0px" });
-  root.querySelectorAll("[data-pause-offscreen], [data-hero], [data-night], .ocean, [data-studio], .hire__sky").forEach((el) => io.observe(el));
+  root.querySelectorAll("[data-pause-offscreen], [data-hero], [data-night], .ocean, [data-studio], .hire__sky, .cloudbank").forEach((el) => io.observe(el));
 }

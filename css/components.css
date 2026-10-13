@@ -477,19 +477,27 @@
   .firefly { box-shadow: 0 0 6px 2px rgb(255 236 150 / 0.55); }
 }
 
-[data-offscreen], [data-offscreen] *, [data-offscreen] *::before, [data-offscreen] *::after {
+[data-offscreen], [data-offscreen]::before, [data-offscreen]::after,
+[data-offscreen] *, [data-offscreen] *::before, [data-offscreen] *::after {
   animation-play-state: paused !important;
 }
 
 /* A bank of clouds along a section edge that melts into --bank (the colour of
    the next section). Puffs overlap heavily and sit on a base that is already
    solid under them, so the bank reads as one continuous cloud, not blobs on a band.
-   A softer, larger back layer adds depth behind it. */
+   The puffs live on ::before and drift and breathe very slowly over the still base
+   (::after is left free for pages). A softer, larger back layer adds depth behind
+   it, moving on its own slower rhythm. */
 .cloudbank {
   position: absolute; left: -6%; right: -6%; bottom: -1px; z-index: 1; pointer-events: none;
   height: clamp(150px, 21vw, 320px);
   --bank: var(--bg);
   --puff: radial-gradient(closest-side, var(--bank) 72%, transparent 100%);
+  background: linear-gradient(transparent 38%, var(--bank) 62%);
+}
+.cloudbank::before {
+  content: ""; position: absolute; inset: 0;
+  transform-origin: 50% 100%;
   background:
     var(--puff) -2% 62% / 22% 78% no-repeat,
     var(--puff) 11% 38% / 20% 84% no-repeat,
@@ -499,22 +507,35 @@
     var(--puff) 63% 34% / 22% 86% no-repeat,
     var(--puff) 76% 56% / 24% 80% no-repeat,
     var(--puff) 89% 36% / 22% 86% no-repeat,
-    var(--puff) 102% 60% / 22% 78% no-repeat,
-    linear-gradient(transparent 38%, var(--bank) 62%);
+    var(--puff) 102% 60% / 22% 78% no-repeat;
+  /* One transform-only animation: composited everywhere (Safari included), so
+     it never repaints. Uneven stops keep the drift and swell out of step. */
+  animation: bank-breathe var(--breathe, 28s) ease-in-out infinite alternate;
+}
+@keyframes bank-breathe {
+  0%   { transform: translateX(-0.8%) scaleY(0.98); }
+  35%  { transform: translateX(-0.1%) scaleY(1.03); }
+  70%  { transform: translateX(0.5%) scaleY(0.99); }
+  100% { transform: translateX(0.8%) scaleY(1.02); }
 }
 .cloudbank--back {
   --bank: rgb(255 255 255 / 0.38);
   --puff: radial-gradient(closest-side, var(--bank) 50%, transparent 100%);
   bottom: 14%; height: clamp(140px, 19vw, 280px); z-index: 0;
+  background: none;
+  translate: 0 calc(var(--p, 0) * 40px);
+}
+.cloudbank--back::before {
+  --breathe: 37s;
+  animation-direction: alternate-reverse;
   background:
     var(--puff) 4% 50% / 30% 90% no-repeat,
     var(--puff) 30% 30% / 32% 100% no-repeat,
     var(--puff) 58% 46% / 30% 92% no-repeat,
     var(--puff) 86% 28% / 32% 100% no-repeat;
-  translate: 0 calc(var(--p, 0) * 40px);
 }
 .cloudbank--top { top: -1px; bottom: auto; transform: scaleY(-1); }
-@media (prefers-reduced-motion: reduce) { .cloud { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .cloud, .cloudbank::before { animation: none; } }
 
 /* ---- Night sky (night-sky.js) -------------------------------------------
    Only in dark mode: a twinkling starfield, the occasional shooting star, and
