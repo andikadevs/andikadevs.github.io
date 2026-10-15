@@ -1,23 +1,23 @@
 # Andika Dwi Saputra (andikadevs)
 
-> Fullstack developer in Semarang, Indonesia. I build the software companies quietly run on: internal tools, single sign-on, media services, AI pipelines. Three-plus years, mostly for universities and hiring platforms in Indonesia. Open to remote roles.
+> Fullstack developer and software engineer in Semarang, Indonesia. I build the software companies quietly run on: internal tools, single sign-on, media services, AI pipelines. Three-plus years, mostly for universities and hiring platforms in Indonesia. Open to remote roles.
 
 I started as an intern at a Toyota dealership, writing Laravel. Today I run the platform behind a university's apps, build tools for Toploker.com, and ship small products of my own on the side. I like problems where a boring manual step is costing someone hours a week.
 
 ## Work
 
-- [Toploker.com](https://andikadevs.github.io/#project/toploker): Job portal & platform, Toploker.com, 2026. The modern job portal for Indonesia: real-time vacancy search, multi-filter discovery, verified employers, and applicant profile with CV management.
-- [Sofwanland](https://andikadevs.github.io/#project/sofwanland): Architecture & contractor site, Sofwanland, 2026. Company profile and portfolio for a design & build contractor in Jakarta and Tasikmalaya: architectural showcase, service catalog, and project consultation.
-- [STEKOM International](https://andikadevs.github.io/#project/stekom-international): University website, Universitas STEKOM, 2026. The official international site of Universitas STEKOM. Real English and Indonesian pages, plus an admin where each department runs its own content.
-- [STEKOM Passport](https://andikadevs.github.io/#project/stekom-passport): Identity & SSO, Universitas STEKOM, 2026. An OpenID Connect provider for the whole campus. One login for every internal app, with typed SDKs for TypeScript, Python and PHP.
-- [OTO Management](https://andikadevs.github.io/#project/oto-management): Internal system, Toploker.com, 2024. Toploker's operational backbone: ads, revenue recaps, invoices and broadcasts in one place, updating live.
-- [SnapCRM](https://andikadevs.github.io/#project/snapcrm): WhatsApp automation, Universitas STEKOM, 2024. A CRM that turns large lead lists into WhatsApp conversations, with broadcasts and auto-reply flows.
-- [Corpus](https://andikadevs.github.io/#project/corpus): AI research pipeline, Universitas STEKOM, 2026. A multi-agent pipeline that drafts academic manuscripts from real sources, and refuses to ship a citation it can't trace back.
-- [Depot](https://andikadevs.github.io/#project/depot): Media service, Universitas STEKOM, 2026. One multi-tenant media service for every campus app: presigned uploads, background thumbnails and transcodes, signed delivery, HMAC webhooks.
-- [PDDikti API & MCP](https://andikadevs.github.io/#project/pddikti-api): Open-source API, Open source, 2026. A typed, documented read-only API over Indonesia's higher-education dataset, also exposed as an MCP server so AI agents can query it.
-- [Jobs Scraper](https://andikadevs.github.io/#project/jobs-scraper): AI data pipeline, Toploker.com, 2026. Watches Instagram accounts by region, scrapes vacancy posts, and lets Gemini sort real jobs from noise before anything hits the database.
-- [Conflow](https://andikadevs.github.io/#project/conflow): Content scheduling, Universitas STEKOM, 2026. Write, schedule and publish social posts across channels from one dashboard, with a media library that imports from Google Drive.
-- [Bio](https://andikadevs.github.io/#project/bio): Link-in-bio builder, Universitas STEKOM, 2026. A self-hosted link-in-bio builder for campus teams: drag-and-drop pages, themes, QR codes and analytics that stay on campus servers.
+- [Toploker.com](https://andikadevs.space/#project/toploker): Job portal & platform, Toploker.com, 2026. The modern job portal for Indonesia: real-time vacancy search, multi-filter discovery, verified employers, and applicant profile with CV management.
+- [Sofwanland](https://andikadevs.space/#project/sofwanland): Architecture & contractor site, Sofwanland, 2026. Company profile and portfolio for a design & build contractor in Jakarta and Tasikmalaya: architectural showcase, service catalog, and project consultation.
+- [STEKOM International](https://andikadevs.space/#project/stekom-international): University website, Universitas STEKOM, 2026. The official international site of Universitas STEKOM. Real English and Indonesian pages, plus an admin where each department runs its own content.
+- [STEKOM Passport](https://andikadevs.space/#project/stekom-passport): Identity & SSO, Universitas STEKOM, 2026. An OpenID Connect provider for the whole campus. One login for every internal app, with typed SDKs for TypeScript, Python and PHP.
+- [OTO Management](https://andikadevs.space/#project/oto-management): Internal system, Toploker.com, 2024. Toploker's operational backbone: ads, revenue recaps, invoices and broadcasts in one place, updating live.
+- [SnapCRM](https://andikadevs.space/#project/snapcrm): WhatsApp automation, Universitas STEKOM, 2024. A CRM that turns large lead lists into WhatsApp conversations, with broadcasts and auto-reply flows.
+- [Corpus](https://andikadevs.space/#project/corpus): AI research pipeline, Universitas STEKOM, 2026. A multi-agent pipeline that drafts academic manuscripts from real sources, and refuses to ship a citation it can't trace back.
+- [Depot](https://andikadevs.space/#project/depot): Media service, Universitas STEKOM, 2026. One multi-tenant media service for every campus app: presigned uploads, background thumbnails and transcodes, signed delivery, HMAC webhooks.
+- [PDDikti API & MCP](https://andikadevs.space/#project/pddikti-api): Open-source API, Open source, 2026. A typed, documented read-only API over Indonesia's higher-education dataset, also exposed as an MCP server so AI agents can query it.
+- [Jobs Scraper](https://andikadevs.space/#project/jobs-scraper): AI data pipeline, Toploker.com, 2026. Watches Instagram accounts by region, scrapes vacancy posts, and lets Gemini sort real jobs from noise before anything hits the database.
+- [Conflow](https://andikadevs.space/#project/conflow): Content scheduling, Universitas STEKOM, 2026. Write, schedule and publish social posts across channels from one dashboard, with a media library that imports from Google Drive.
+- [Bio](https://andikadevs.space/#project/bio): Link-in-bio builder, Universitas STEKOM, 2026. A self-hosted link-in-bio builder for campus teams: drag-and-drop pages, themes, QR codes and analytics that stay on campus servers.
 
 ## Experience
 
@@ -32,10 +32,10 @@ I started as an intern at a Toyota dealership, writing Laravel. Today I run the 
 - [LinkedIn](https://www.linkedin.com/in/andikadwisaputra): in/andikadwisaputra
 - [Medium](https://medium.com/@andikads): @andikads
 - [Instagram](https://instagram.com/andikadevs): @andikadevs
-- CV (PDF): https://andikadevs.github.io/assets/docs/cv-andika-dwi-saputra.pdf
+- CV (PDF): https://andikadevs.space/assets/docs/cv-andika-dwi-saputra.pdf
 
 ## Optional
 
-- [All Projects Archive](https://andikadevs.github.io/projects/)
-- [Full text of every case study](https://andikadevs.github.io/llms-full.txt)
-- [Sitemap](https://andikadevs.github.io/sitemap.xml)
+- [All Projects Archive](https://andikadevs.space/projects/)
+- [Full text of every case study](https://andikadevs.space/llms-full.txt)
+- [Sitemap](https://andikadevs.space/sitemap.xml)

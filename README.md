@@ -13,7 +13,7 @@ ES modules need a server; opening `index.html` from the file system won't load t
 
 ## Deploy (GitHub Pages)
 
-Live at **https://andikadevs.github.io/**: this folder is the `andikadevs/andikadevs.github.io`
+Live at **https://andikadevs.space/**: this folder is the `andikadevs/andikadevs.github.io`
 repo, served by GitHub Pages from `main` (root). Push to `main` and it redeploys.
 
 All paths are relative, so the site also works under a sub-path. `.nojekyll` stops Jekyll

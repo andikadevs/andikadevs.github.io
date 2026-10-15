@@ -1,4 +1,4 @@
-# andikadevs.github.io — everyone is welcome, search engines and AI assistants alike.
+# andikadevs.space — everyone is welcome, search engines and AI assistants alike.
 User-agent: *
 Allow: /
 
@@ -12,4 +12,4 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
-Sitemap: https://andikadevs.github.io/sitemap.xml
+Sitemap: https://andikadevs.space/sitemap.xml

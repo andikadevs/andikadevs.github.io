@@ -67,7 +67,7 @@ const og = `<!doctype html><html><head><link rel="stylesheet" href="${fontsCss}"
     <p class="eyebrow">Hi, I’m</p>
     <h1><span>Andika</span><span class="light">Dwi Saputra</span></h1>
     <div class="dim"></div>
-    <p class="role">Fullstack developer <b>· andikadevs.github.io</b></p>
+    <p class="role">Fullstack developer <b>· andikadevs.space</b></p>
   </div>
   <span class="glow"></span>
   <div class="mark">${heroMark}</div>

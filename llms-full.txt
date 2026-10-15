@@ -1,6 +1,6 @@
 # Andika Dwi Saputra (andikadevs): full profile
 
-> Fullstack developer in Semarang, Indonesia, open to remote roles. This file is the complete text of https://andikadevs.github.io/ in plain Markdown. An Indonesian version of the site is at https://andikadevs.github.io/?lang=id.
+> Fullstack developer and software engineer in Semarang, Indonesia, open to remote roles. This file is the complete text of https://andikadevs.space/ in plain Markdown. An Indonesian version of the site is at https://andikadevs.space/?lang=id.
 
 ## About
 
@@ -45,7 +45,7 @@ The modern job portal for Indonesia: real-time vacancy search, multi-filter disc
 - Client: Sofwanland
 - Year: 2026
 - Link: https://sofwanland.com 
-- Live preview: https://andikadevs.github.io/projects/sofwanland/preview/
+- Live preview: https://andikadevs.space/projects/sofwanland/preview/
 - Stack: Astro, Tailwind CSS 4, TypeScript, HTML5, Cloudflare
 - Areas: Web
 
@@ -96,7 +96,7 @@ An OpenID Connect provider for the whole campus. One login for every internal ap
 - Category: Internal system
 - Client: Toploker.com
 - Year: 2024
-- Link: https://andikadevs.github.io/#project/oto-management (internal system, not public)
+- Link: https://andikadevs.space/#project/oto-management (internal system, not public)
 - Stack: Next.js, Laravel 11, MySQL, Redis, WebSockets, Docker
 - Areas: Backend, Web, Automation
 
@@ -113,7 +113,7 @@ Toploker's operational backbone: ads, revenue recaps, invoices and broadcasts in
 - Category: WhatsApp automation
 - Client: Universitas STEKOM
 - Year: 2024
-- Link: https://andikadevs.github.io/#project/snapcrm (internal system, not public)
+- Link: https://andikadevs.space/#project/snapcrm (internal system, not public)
 - Stack: Node.js, Laravel, TypeScript, MySQL, Docker
 - Areas: Automation, Backend, API
 
@@ -130,7 +130,7 @@ A CRM that turns large lead lists into WhatsApp conversations, with broadcasts a
 - Category: AI research pipeline
 - Client: Universitas STEKOM
 - Year: 2026
-- Link: https://andikadevs.github.io/#project/corpus (internal system, not public)
+- Link: https://andikadevs.space/#project/corpus (internal system, not public)
 - Stack: NestJS 11, Bun, React 19, PostgreSQL, DeepSeek, Zotero API, Pandoc
 - Areas: AI, Backend
 
@@ -181,7 +181,7 @@ A typed, documented read-only API over Indonesia's higher-education dataset, als
 - Category: AI data pipeline
 - Client: Toploker.com
 - Year: 2026
-- Link: https://andikadevs.github.io/#project/jobs-scraper (internal system, not public)
+- Link: https://andikadevs.space/#project/jobs-scraper (internal system, not public)
 - Stack: Bun, React 19, PostgreSQL, Puppeteer, Gemini, WebSocket
 - Areas: Automation, AI, Backend
 
@@ -249,4 +249,4 @@ Manggala Cloud builds websites and apps from Semarang. It runs six services, fro
 - LinkedIn: https://www.linkedin.com/in/andikadwisaputra
 - Medium: https://medium.com/@andikads
 - Instagram: https://instagram.com/andikadevs
-- CV (PDF): https://andikadevs.github.io/assets/docs/cv-andika-dwi-saputra.pdf
+- CV (PDF): https://andikadevs.space/assets/docs/cv-andika-dwi-saputra.pdf

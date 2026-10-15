@@ -23,7 +23,7 @@ import { projects, demos, DISCIPLINES } from "../js/data/projects.js";
 import { strings } from "../js/data/strings.js";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
-const SITE = "https://andikadevs.github.io";
+const SITE = "https://andikadevs.space";
 const TODAY = new Date().toISOString().slice(0, 10);
 // Google wants a full DateTime with timezone for dateModified; a bare date is flagged invalid.
 const NOW = new Date().toISOString().replace(/\.\d{3}Z$/, "Z");
@@ -126,15 +126,19 @@ function jsonld() {
     {
       "@type": "Person", "@id": person,
       name: profile.name, alternateName: "andikadevs", givenName: "Andika", familyName: "Dwi Saputra",
-      jobTitle: "Fullstack Developer",
+      jobTitle: ["Fullstack Developer", "Software Engineer"],
       description: en["hero.lead"],
       url: `${SITE}/`, email: `mailto:${profile.email}`,
       image: { "@type": "ImageObject", "@id": `${SITE}/#portrait`, url: abs("assets/img/andika.webp"), width: 1254, height: 1254, caption: profile.name },
-      hasOccupation: { "@type": "Occupation", name: "Fullstack Developer", occupationLocation: { "@type": "City", name: "Semarang" }, skills: "TypeScript, NestJS, Laravel, React, Next.js, PostgreSQL, Docker" },
+      hasOccupation: ["Fullstack Developer", "Software Engineer"].map((name) => ({
+        "@type": "Occupation", name, occupationalCategory: "15-1252.00 Software Developers",
+        occupationLocation: { "@type": "Country", name: "Indonesia" },
+        skills: "TypeScript, JavaScript, PHP, NestJS, Laravel, React, Next.js, Node.js, PostgreSQL, Redis, Docker, REST APIs",
+      })),
       address: { "@type": "PostalAddress", addressLocality: "Semarang", addressRegion: "Central Java", addressCountry: "ID" },
       nationality: { "@type": "Country", name: "Indonesia" },
       knowsLanguage: ["en", "id", "jv"],
-      knowsAbout: ["TypeScript", "NestJS", "Laravel", "React", "Next.js", "PostgreSQL", "Redis", "Docker", "OpenID Connect", "Single sign-on", "Web development", "Web design", "Company profile websites", "Portfolio websites", "AI pipelines"],
+      knowsAbout: ["Full-stack development", "Software engineering", "Backend development", "Frontend development", "API design", "TypeScript", "JavaScript", "PHP", "Node.js", "NestJS", "Laravel", "React", "Next.js", "PostgreSQL", "Redis", "Docker", "OpenID Connect", "Single sign-on", "Web development", "Web design", "Company profile websites", "Portfolio websites", "AI pipelines"],
       worksFor: [
         { "@type": "Organization", name: "Toploker.com", url: "https://toploker.com" },
         { "@type": "CollegeOrUniversity", name: "Universitas STEKOM", url: "https://stekom.ac.id" },
@@ -190,8 +194,8 @@ function jsonldProjects() {
     },
     {
       "@type": "CollectionPage", "@id": `${SITE}/projects/#webpage`,
-      url: `${SITE}/projects/`, name: "All Projects — Andika Dwi Saputra (andikadevs)",
-      description: "Explore all client systems, internal platforms, AI workflows, and open-source tools built by Andika Dwi Saputra.",
+      url: `${SITE}/projects/`, name: en["projects.meta.title"],
+      description: en["projects.meta.description"],
       isPartOf: { "@id": `${SITE}/#website` },
       about: { "@id": person },
       primaryImageOfPage: { "@type": "ImageObject", url: OG_IMAGE.url, width: OG_IMAGE.width, height: OG_IMAGE.height },
@@ -260,7 +264,7 @@ ${images(projectImages)}
 `;
 }
 
-const robots = () => `# andikadevs.github.io — everyone is welcome, search engines and AI assistants alike.
+const robots = () => `# andikadevs.space — everyone is welcome, search engines and AI assistants alike.
 User-agent: *
 Allow: /
 
@@ -278,7 +282,7 @@ Sitemap: ${SITE}/sitemap.xml
 `;
 
 const manifest = () => JSON.stringify({
-  name: `${profile.name} — Fullstack Developer`,
+  name: `${profile.name} — Fullstack Developer & Software Engineer`,
   short_name: "andikadevs",
   description: en["meta.description"],
   start_url: "./", scope: "./", display: "standalone", lang: "en",
@@ -297,7 +301,7 @@ function llms() {
   const work = projects.map((p) => `- [${p.title.en}](${SITE}/#project/${p.slug}): ${p.category.en}, ${p.client}, ${p.year}. ${p.summary.en}`).join("\n");
   return `# ${profile.name} (andikadevs)
 
-> Fullstack developer in Semarang, Indonesia. ${en["hero.lead"]} Open to remote roles.
+> Fullstack developer and software engineer in Semarang, Indonesia. ${en["hero.lead"]} Open to remote roles.
 
 ${en["intro.text"]} ${en["intro.strong"]}
 
@@ -343,7 +347,7 @@ ${p.summary.en}
 `;
   return `# ${profile.name} (andikadevs): full profile
 
-> Fullstack developer in Semarang, Indonesia, open to remote roles. This file is the complete text of ${SITE}/ in plain Markdown. An Indonesian version of the site is at ${SITE}/?lang=id.
+> Fullstack developer and software engineer in Semarang, Indonesia, open to remote roles. This file is the complete text of ${SITE}/ in plain Markdown. An Indonesian version of the site is at ${SITE}/?lang=id.
 
 ## About
 

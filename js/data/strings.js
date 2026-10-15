@@ -4,8 +4,8 @@
 
 export const strings = {
   en: {
-    "meta.title": "Andika Dwi Saputra — Fullstack Developer in Indonesia",
-    "meta.description": "Andika Dwi Saputra (andikadevs), fullstack developer in Indonesia: SSO, internal tools, AI pipelines, and well-designed company profile and portfolio sites.",
+    "meta.title": "Andika Dwi Saputra — Fullstack Developer & Software Engineer",
+    "meta.description": "Andika Dwi Saputra (andikadevs), fullstack developer and software engineer in Indonesia. TypeScript, NestJS, Laravel, Next.js: SSO, internal tools, AI pipelines.",
     "meta.ogAlt": "Hi, I’m Andika Dwi Saputra, fullstack developer — the andikadevs mascot says hello",
     "work.shot": "Screenshot",
 
@@ -76,8 +76,8 @@ export const strings = {
     "projects.colDiscipline": "Discipline",
     "projects.colStack": "Tech Stack",
     "projects.colYear": "Year",
-    "projects.meta.title": "All Projects — Andika Dwi Saputra (andikadevs)",
-    "projects.meta.description": "Explore all client systems, internal platforms, AI workflows, and open-source tools built by Andika Dwi Saputra.",
+    "projects.meta.title": "Projects by Andika Dwi Saputra — Fullstack Developer",
+    "projects.meta.description": "Case studies by Andika Dwi Saputra, fullstack developer and software engineer: client systems, internal platforms, AI workflows and open-source tools.",
     "work.close": "Close",
     "work.client": "Client",
     "work.year": "Year",
@@ -145,8 +145,8 @@ export const strings = {
   },
 
   id: {
-    "meta.title": "Andika Dwi Saputra — Fullstack Developer di Indonesia",
-    "meta.description": "Andika Dwi Saputra (andikadevs), fullstack developer di Indonesia: SSO, sistem internal, pipeline AI, serta website company profile dan portofolio.",
+    "meta.title": "Andika Dwi Saputra — Fullstack Developer & Software Engineer",
+    "meta.description": "Andika Dwi Saputra (andikadevs), fullstack developer dan software engineer di Indonesia. TypeScript, NestJS, Laravel, Next.js: SSO, sistem internal, pipeline AI.",
     "meta.ogAlt": "Halo, saya Andika Dwi Saputra, fullstack developer — maskot andikadevs menyapa",
     "work.shot": "Tangkapan layar",
 
@@ -217,8 +217,8 @@ export const strings = {
     "projects.colDiscipline": "Bidang",
     "projects.colStack": "Teknologi",
     "projects.colYear": "Tahun",
-    "projects.meta.title": "Semua Proyek — Andika Dwi Saputra (andikadevs)",
-    "projects.meta.description": "Jelajahi seluruh sistem klien, platform internal, alur kerja AI, dan karya open-source yang dibangun oleh Andika Dwi Saputra.",
+    "projects.meta.title": "Proyek Andika Dwi Saputra — Fullstack Developer",
+    "projects.meta.description": "Studi kasus karya Andika Dwi Saputra, fullstack developer dan software engineer: sistem klien, platform internal, alur kerja AI, dan karya open-source.",
     "work.close": "Tutup",
     "work.client": "Klien",
     "work.year": "Tahun",
