@@ -25,6 +25,8 @@ import { strings } from "../js/data/strings.js";
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const SITE = "https://andikadevs.github.io";
 const TODAY = new Date().toISOString().slice(0, 10);
+// Google wants a full DateTime with timezone for dateModified; a bare date is flagged invalid.
+const NOW = new Date().toISOString().replace(/\.\d{3}Z$/, "Z");
 const OG_IMAGE = { url: `${SITE}/assets/img/og.jpg`, width: 1200, height: 630 };
 const en = strings.en;
 
@@ -157,7 +159,7 @@ function jsonld() {
       mainEntity: { "@id": person }, about: { "@id": person },
       primaryImageOfPage: { "@type": "ImageObject", url: OG_IMAGE.url, width: OG_IMAGE.width, height: OG_IMAGE.height, caption: en["meta.ogAlt"] },
       image: { "@id": `${SITE}/#portrait` },
-      inLanguage: "en", dateModified: TODAY,
+      inLanguage: "en", dateModified: NOW,
     },
     {
       "@type": "ItemList", "@id": `${SITE}/#work`, name: "Selected work", numberOfItems: projects.length,
@@ -193,7 +195,7 @@ function jsonldProjects() {
       isPartOf: { "@id": `${SITE}/#website` },
       about: { "@id": person },
       primaryImageOfPage: { "@type": "ImageObject", url: OG_IMAGE.url, width: OG_IMAGE.width, height: OG_IMAGE.height },
-      inLanguage: "en", dateModified: TODAY,
+      inLanguage: "en", dateModified: NOW,
     },
     {
       "@type": "BreadcrumbList", "@id": `${SITE}/projects/#breadcrumb`,
